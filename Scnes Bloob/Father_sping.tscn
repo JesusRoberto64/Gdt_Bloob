@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="Father_sping" type="DampedSpringJoint2D"]
+disable_collision = false
+stiffness = 0.1
+damping = 16.0

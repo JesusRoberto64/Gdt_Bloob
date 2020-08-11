@@ -1,10 +1,17 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 9.87284
 
 [node name="Vertex" type="RigidBody2D"]
+mass = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+node_a = NodePath("..")
+disable_collision = false
+length = 1.0
+stiffness = 0.1
+damping = 16.0
