@@ -1,29 +1,103 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scnes Bloob/Bloob 001.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Debug.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 214.898, 54.1588 )
 
+[sub_resource type="CircleShape2D" id=2]
+
 [node name="World" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Bloob 001" parent="." instance=ExtResource( 1 )]
+position = Vector2( 288.074, 82.089 )
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
 position = Vector2( 224.409, 523.007 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
 shape = SubResource( 1 )
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
 position = Vector2( 655.316, 584.832 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
 shape = SubResource( 1 )
 
-[node name="Bloob 001" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288.074, 82.089 )
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1086.83, 632.778 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1518.83, 656.778 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
+shape = SubResource( 1 )
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1778.83, 412.778 )
+rotation = -1.57079
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D5"]
+shape = SubResource( 1 )
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1508, -11.2897 )
+rotation = -3.14159
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D6"]
+shape = SubResource( 1 )
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1504.43, 352.197 )
+rotation = -3.14159
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D7"]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 819.907, 224.769 )
+current = true
+zoom = Vector2( 2, 2 )
+
+[node name="Debug" type="CanvasLayer" parent="."]
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Debug"]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="RigidBody2D" parent="."]
+position = Vector2( 556, 222 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
+shape = SubResource( 2 )

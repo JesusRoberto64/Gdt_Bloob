@@ -1,16 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Bloob 001.gd" type="Script" id=1]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 25.4975
 
 [node name="Bloob 001" type="RigidBody2D"]
 position = Vector2( 422.074, 170.089 )
-mass = 0.5
+mass = 40.0
+physics_material_override = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
