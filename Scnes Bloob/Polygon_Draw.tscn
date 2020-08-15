@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Gradient" id=1]
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[node name="Polygon_Draw" type="Polygon2D"]
+modulate = Color( 1, 1, 1, 0.54902 )
+texture = SubResource( 2 )
+polygon = PoolVector2Array( 471.431, 152.02, 419.301, 241.086, 337.081, 296.27, 157.475, 308.998, 129.191, 283.542, 136.262, 246.772, 160.145, 227.082, 180.809, 210.047, 205.977, 189.297, 225.946, 172.834, 246.063, 156.249, 271.926, 134.927, 294.125, 116.626, 324.288, 122.647, 350.943, 127.968, 379.229, 133.614, 406.155, 138.989, 431.45, 144.039 )

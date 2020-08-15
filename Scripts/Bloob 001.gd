@@ -17,6 +17,11 @@ var spring_conected = true
 var impulse: Vector2 = Vector2.ZERO
 var force: float = 1850
 var total_force: Vector2
+
+var polygon_draw = preload("res://Scnes Bloob/Polygon_Draw.tscn")
+var poly_inst: Polygon2D = null
+var poly_array: PoolVector2Array = []
+
 func _ready():
 	
 	father_Node_Path = self.get_path()
@@ -114,19 +119,51 @@ func _process(_delta):
 			if pin_point2 is PinJoint2D:
 				pin_point2.node_a = orbit.get_path()
 				if orbit_count == 1:
-					#pin_point2.node_b = orbit_bodies[orbit_bodies.size() -1].get_path()
+					pin_point2.node_b = orbit_bodies[orbit_bodies.size() -1].get_path()
 					pass
 				else:
-					#pin_point2.node_b = orbit_bodies[orbit_count-1].get_path()
+					pin_point2.node_b = orbit_bodies[orbit_count-1].get_path()
 					pass
 				
 				pass
-			
+		#vertex new logic
+		poly_inst = polygon_draw.instance()
+		get_parent().add_child(poly_inst)
+		
+		print(orbit_bodies.size())
+		
+		for poly_vertex in orbit_bodies:
+			var point = poly_vertex.position
+			poly_array.append(point)
+		
+		print(poly_array.size())
+		
+		#poly_inst.set_polygon(poly_array)
+		print(poly_inst.polygon[0])
 		spring_conected = false
+		pass
 	
-	#vertex new logic
 	
-	
+	poly_inst.polygon[0] = orbit_bodies[0].position
+	poly_inst.polygon[1] = orbit_bodies[11].position
+	poly_inst.polygon[2] = orbit_bodies[6].position
+	poly_inst.polygon[3] = orbit_bodies[17].position
+	poly_inst.polygon[4] = orbit_bodies[1].position
+	poly_inst.polygon[5] = orbit_bodies[12].position
+	poly_inst.polygon[6] = orbit_bodies[7].position
+	poly_inst.polygon[7] = orbit_bodies[2].position
+	poly_inst.polygon[8] = orbit_bodies[13].position
+	poly_inst.polygon[9] = orbit_bodies[8].position
+	poly_inst.polygon[10] = orbit_bodies[3].position
+	poly_inst.polygon[11] = orbit_bodies[14].position
+	poly_inst.polygon[12] = orbit_bodies[9].position
+	poly_inst.polygon[13] = orbit_bodies[4].position
+	poly_inst.polygon[14] = orbit_bodies[15].position
+	poly_inst.polygon[15] = orbit_bodies[10].position
+	poly_inst.polygon[16] = orbit_bodies[5].position
+	poly_inst.polygon[17] = orbit_bodies[16].position
+	#poly_inst.set_uv(poly_array)
+	#poly_inst.position = position
 	
 	pass
 

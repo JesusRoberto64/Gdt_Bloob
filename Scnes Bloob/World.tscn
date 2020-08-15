@@ -118,6 +118,10 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D7"]
 shape = SubResource( 1 )
 
+[node name="Polygon2D" type="Polygon2D" parent="Walls"]
+modulate = Color( 1, 1, 1, 0.682353 )
+polygon = PoolVector2Array( 10.6718, 468.692, 439.754, 469.752, 441.873, 531.201, 868.837, 530.141, 873.075, 578.876, 1302.16, 578.877, 1302.16, 604.304, 1727, 601.125, 1722.76, 407.244, 1291.02, 407.419, 1291.73, 296.403, 1725.18, 294.282, 1725.18, 195.994, 1833.37, 195.287, 1832.66, 627.329, 1732.96, 627.329, 1733.67, 710.06, 1305.87, 712.182, 1301.63, 688.14, 871.706, 686.726, 870.292, 639.35, 438.957, 638.643, 440.371, 577.124, 9.74294, 577.124 )
+
 [node name="Debug" type="CanvasLayer" parent="."]
 script = ExtResource( 2 )
 
@@ -138,6 +142,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Debug"]
+visible = false
 modulate = Color( 1, 1, 1, 0.607843 )
 position = Vector2( 491.083, 289.268 )
 scale = Vector2( 1.06006, 1.04785 )
@@ -146,7 +151,6 @@ texture = ExtResource( 6 )
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
 motion_scale = Vector2( 0.7, 0.7 )
 motion_mirroring = Vector2( 2024, 2024 )
 
@@ -154,6 +158,7 @@ motion_mirroring = Vector2( 2024, 2024 )
 texture = ExtResource( 7 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
 motion_scale = Vector2( 0.9, 0.9 )
 motion_mirroring = Vector2( 2024, 2024 )
 
@@ -168,6 +173,8 @@ motion_mirroring = Vector2( 2024, 2024 )
 texture = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
+z_index = 1
 tile_set = SubResource( 2 )
 format = 1
 tile_data = PoolIntArray( -458740, 536870913, 0, -393181, 1610612737, 0, 262136, 0, 0, 458768, 0, 0, 720929, 536870913, 0, 786468, 536870913, 0, 917537, 1, 0, 1441798, 536870912, 0 )
