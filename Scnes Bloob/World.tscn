@@ -1,11 +1,45 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scnes Bloob/Bloob 001.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Debug.gd" type="Script" id=2]
-[ext_resource path="res://Art/backgrund_blanc.png" type="Texture" id=3]
+[ext_resource path="res://Art/backgrund_blanc2.png" type="Texture" id=3]
+[ext_resource path="res://Art/back.png" type="Texture" id=4]
+[ext_resource path="res://Art/Foreground.png" type="Texture" id=5]
+[ext_resource path="res://Art/Fore lens.png" type="Texture" id=6]
+[ext_resource path="res://Art/backgrund_invis.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 214.898, 54.1588 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "Foreground.png 0"
+0/texture = ExtResource( 5 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 89, 1173, 873, 724 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "Foreground.png 1"
+1/texture = ExtResource( 5 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 688, 183, 765, 482 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
 
 [node name="World" type="Node2D"]
 
@@ -14,6 +48,7 @@ position = Vector2( 288.074, 82.089 )
 
 [node name="Camera2D" type="Camera2D" parent="Bloob 001"]
 current = true
+smoothing_enabled = true
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -70,8 +105,8 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D6"]
-shape = SubResource( 1 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D6"]
+polygon = PoolVector2Array( 191.814, -102.417, 132.35, -145.836, 54.0088, -117.519, 31.3165, -105.167, -57.3685, -136.396, -285.786, -89.202, -145.148, 3.29728, -1.20715, 44.59, 239.008, -23.1322 )
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="Walls"]
 position = Vector2( 1504.43, 352.197 )
@@ -87,13 +122,52 @@ shape = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="Debug"]
+modulate = Color( 0, 0, 0, 1 )
 margin_right = 40.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Label2" type="Label" parent="Debug"]
+margin_left = 5.0
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Debug"]
+modulate = Color( 1, 1, 1, 0.607843 )
+position = Vector2( 491.083, 289.268 )
+scale = Vector2( 1.06006, 1.04785 )
+texture = ExtResource( 6 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 visible = false
-position = Vector2( 242.452, 143.675 )
+motion_scale = Vector2( 0.7, 0.7 )
+motion_mirroring = Vector2( 2024, 2024 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource( 7 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 0.9 )
+motion_mirroring = Vector2( 2024, 2024 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 3 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 1.01, 1.01 )
+motion_mirroring = Vector2( 2024, 2024 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource( 4 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 2 )
+format = 1
+tile_data = PoolIntArray( -458740, 536870913, 0, -393181, 1610612737, 0, 262136, 0, 0, 458768, 0, 0, 720929, 536870913, 0, 786468, 536870913, 0, 917537, 1, 0, 1441798, 536870912, 0 )

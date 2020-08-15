@@ -124,6 +124,8 @@ func _process(_delta):
 			
 		spring_conected = false
 	
+	#vertex new logic
+	
 	
 	
 	pass
@@ -153,3 +155,5 @@ func radian_formula(angle: int, radio: float)-> Vector2: # make fuction orbit cr
 	vec_pos.y = position.y + sin(angle)*radio
 	return vec_pos
 	pass
+
+
