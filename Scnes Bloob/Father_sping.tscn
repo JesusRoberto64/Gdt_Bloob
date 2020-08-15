@@ -2,6 +2,6 @@
 
 [node name="Father_sping" type="DampedSpringJoint2D"]
 bias = 0.9
-length = 20.0
+disable_collision = false
 stiffness = 0.2
 damping = 16.0

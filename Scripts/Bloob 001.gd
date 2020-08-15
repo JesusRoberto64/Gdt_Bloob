@@ -4,7 +4,7 @@ var circle_limit = 360# 360 int number to limit orbiet bodies
 var angle_const = 20# var of angle between orbits int 10 
 var orbit_bodies : Array# decalre array to orbit bodies
 var father_shape : CircleShape2D
-var Radius : float = 110 # 112
+var Radius : float = 50 # 110
 
 var vertex = preload("res://Scnes Bloob/Vertex.tscn")
 var faher_spring = preload("res://Scnes Bloob/Father_sping.tscn")
@@ -15,7 +15,7 @@ var orbit_count: int = 0
 var spring_conected = true
 
 var impulse: Vector2 = Vector2.ZERO
-var force: float = 1550
+var force: float = 1850
 var total_force: Vector2
 func _ready():
 	

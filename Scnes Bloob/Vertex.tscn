@@ -4,7 +4,6 @@
 friction = 0.2
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 20.1169
 
 [node name="Vertex" type="RigidBody2D"]
 mode = 2
