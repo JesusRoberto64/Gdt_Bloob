@@ -3,12 +3,13 @@
 [sub_resource type="CircleShape2D" id=1]
 
 [node name="vertex2" type="RigidBody2D"]
+mode = 2
+gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 
-[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
-rotation = -1.06692
-scale = Vector2( 1, 0.765591 )
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("..")
 disable_collision = false
+softness = 9.0

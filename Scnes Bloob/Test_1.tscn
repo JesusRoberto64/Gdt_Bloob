@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/rigidbody_movement.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/rigidbody_movement.gd" type="Script" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -25,7 +25,7 @@ scale = Vector2( 9.889, 1 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2( 444.365, 346.672 )
+position = Vector2( 1010.69, 322.131 )
 scale = Vector2( 0.5, 1 )
 collision_layer = 2
 collision_mask = 3
@@ -39,13 +39,11 @@ scale = Vector2( 9.889, 1 )
 shape = SubResource( 2 )
 
 [node name="Blob" type="RigidBody2D" parent="."]
-position = Vector2( 456.214, 87.4382 )
-script = ExtResource( 1 )
+position = Vector2( 494.569, 190.063 )
+mass = 10.0
+gravity_scale = 0.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Blob"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 3 )
-
-[node name="Springs" type="Node2D" parent="Blob"]
-
-[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
