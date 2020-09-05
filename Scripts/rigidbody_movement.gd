@@ -1,11 +1,11 @@
 extends RigidBody2D
 
 var vertexPref = preload("res://Prefabs/pref_vertex.tscn")
-var polygonPref = preload("res://Prefabs/pref_PolygonTexture.tscn")
-var numberOfVertex = 50
+var polygonPref = preload("res://Prefabs/pref_BlobTexture.tscn")
+var numberOfVertex = 25
 var polygonObj = null
 var vertices = []
-var radius = 100
+var radius = 50
 var moveForce = 75.0
 var vertexRadius = 0.0
 # Called when the node enters the scene tree for the first time.
