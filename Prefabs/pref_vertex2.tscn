@@ -1,7 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="SegmentShape2D" id=1]
 resource_local_to_scene = true
+b = Vector2( 10, 10 )
 
 [node name="vertex2" type="RigidBody2D"]
 mode = 2
@@ -12,6 +13,5 @@ shape = SubResource( 1 )
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 node_a = NodePath("..")
-bias = 0.5
 disable_collision = false
 softness = 10.0
