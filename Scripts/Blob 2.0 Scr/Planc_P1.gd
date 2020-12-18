@@ -1,5 +1,6 @@
 extends Node2D
 
+
 var points = 12
 var radius = 50.0 # 
 var circunferenceMultiplier = 0.2
