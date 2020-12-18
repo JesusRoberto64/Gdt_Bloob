@@ -157,11 +157,11 @@ func _process(delta):
 	
 	#SHIRNK MECNIC  ================
 	
-#	if Input.is_action_pressed("shrink"):
-#		shink()
-#
-#	if Input.is_action_pressed("grow"):
-#		grow()
+	if Input.is_action_pressed("shrink"):
+		shink()
+
+	if Input.is_action_pressed("grow"):
+		grow()
 	
 	pass
 
@@ -269,7 +269,27 @@ func vec_movement(move_vec):
 	return _move_vec
 	pass
 
+func shink():
+	radius -= 1
+	radius = clamp(radius,15,75)
+	area = radius * radius * PI
+	circunference = radius * 2.0 * PI * circunferenceMultiplier
+	length = circunference * 1.15 / float(points)
+	
+	var item_expulse_inst = item_pulled.instance()
+	item_expulse_inst.position = findCentroid()
+	item_expulse_inst.can_collide = false
+	item_expulse_inst.direction = item_direct
+	get_parent().add_child(item_expulse_inst)
+	pass
 
+func grow():
+	radius += 3
+	radius = clamp(radius,15,75)
+	area = radius * radius * PI
+	circunference = radius * 2.0 * PI * circunferenceMultiplier
+	length = circunference * 1.15 / float(points)
+	pass
 
 
 

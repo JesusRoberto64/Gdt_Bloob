@@ -13,6 +13,9 @@ script = ExtResource( 1 )
 curve = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
 script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="Camera2D"]
+[connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]
