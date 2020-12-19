@@ -1,5 +1,9 @@
 extends Node2D
 
+#STATE MACHINE
+enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
+
+var cur_state = STATE.MOVING
 
 var points = 12
 var radius = 50.0 # 
@@ -32,13 +36,17 @@ var is_Stop = true
 var inertia = true
 var friction_mult = 0.94 # 1 is toal friction
 # Camera 
-onready var camera = $Camera2D
+var camera: Camera2D
 # implement ITEM ========
 var item_direct = Vector2.ZERO
 
-func verletIntegrate(i,delta):
+#STATE MACHINE
+onready var Movement_ctrl = $Movement
+onready var Graphics_ctrl = $Graphics
+
+func verletIntegrate(i):
 	var temp = blob[i].position
-	var vel =  (blob[i].position - blobOld[i])
+	#var vel =  (blob[i].position - blobOld[i])
 	blob[i].position = (blob[i].position + (blob[i].position - blobOld[i])*friction_mult)
 	blobOld[i] = temp
 	pass
@@ -50,6 +58,8 @@ func setDistance(currentPoint,anchor,distance):
 	pass
 
 func _ready():
+	Movement_ctrl.cur_state = cur_state
+	camera = $Camera2D
 	drag = float(move_accel) / max_speed
 	resetBlob()
 	pass 
@@ -97,13 +107,13 @@ func updateSprite():
 	pass
 
 func getCurArea ():
-	var area = 0.0
+	var new_area = 0.0
 	var j = points - 1
 	for i in range(points):
-		area += (blob[j].position.x + blob[i].position.x) * (blob[j].position.y - blob[i].position.y)
+		new_area += (blob[j].position.x + blob[i].position.x) * (blob[j].position.y - blob[i].position.y)
 		j = i
 		pass
-	return abs(area / 2.0)
+	return abs(new_area / 2.0)
 	pass
 
 func _draw():
@@ -113,19 +123,22 @@ func _draw():
 		drawPoints = Geometry.convex_hull_2d(bakedPoints)
 		pass
 	# darw line
-	draw_polyline(drawPoints, Color.black, 10.0, true)
-	draw_polygon(drawPoints,[Color(0.0,1.0,0.0,1.0)])
+	var state_line = Graphics_ctrl.line_color
+	draw_polyline(drawPoints, state_line, 10.0, true)
+	
+	var state_color = Graphics_ctrl.fill_color
+	draw_polygon(drawPoints,[state_color])
 	#collison_area.polygon = drawPoints
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("exit"):
 		get_tree().quit()
 	if Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
 	
 	is_Stop = true
-	var cur_move_vec = Vector2.ZERO
+	var cur_move_vec = Vector2.ZERO # nbegining
 	if Input.is_action_pressed("ui_right"):
 		cur_move_vec += Vector2.RIGHT
 		item_direct = Vector2.LEFT #the opsite
@@ -147,13 +160,16 @@ func _process(delta):
 		is_Stop = false
 		pass
 	
+	# State machine logic.
+	Movement_ctrl.cur_state = cur_state
+	Graphics_ctrl.cur_state = cur_state
+	
 	move_vec = vec_movement(cur_move_vec)
 	
 	#Camera
-	
 	var cam_cent = findCentroid()
-	cam_cent.x = round(cam_cent.x)
-	cam_cent.y = round(cam_cent.y)
+	#cam_cent.x = round(cam_cent.x)
+	#cam_cent.y = round(cam_cent.y)
 	camera.position = cam_cent
 	
 	#SHIRNK MECNIC  ================
@@ -167,16 +183,16 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
-	
 	for i in range(points):
 		# match
 		if inertia:
-			verletIntegrate(i,delta)
-		
-		velocity += move_accel*delta*move_vec - velocity * Vector2(drag,drag) + gravity
+			verletIntegrate(i)
+		#velocity += move_accel*delta*move_vec - velocity * Vector2(drag,drag) + gravity #OLD SYSTEM
+		velocity += Movement_ctrl.movement(move_accel,delta,move_vec,velocity,drag,gravity)
 		blob[i].move_and_slide(velocity,Vector2.ZERO,false,1, 0.785398,false)
-	
-	for iterate in range(iterations):
+		
+		pass
+	for _iterate in range(iterations):
 		for i in range(points):
 			var segment = blob[i].position
 			var nextIndex = i + 1
@@ -188,7 +204,6 @@ func _physics_process(delta):
 			if toNext.length() > length:
 				toNext = toNext.normalized() * length
 				var offset = (segment - nextSegment) - toNext
-				
 				acumulatedDisplacements[(i * 3)] -= offset.x / 2.0
 				acumulatedDisplacements[(i * 3) + 1] -= offset.y / 2.0
 				acumulatedDisplacements[(i * 3) + 2] += 1.0
@@ -197,7 +212,6 @@ func _physics_process(delta):
 				acumulatedDisplacements[(nextIndex * 3) +  2] += 1.0
 				pass
 			pass
-		
 		var deltaArea = 0.0
 		var curArea = getCurArea()
 		if curArea < area * 2.0:
@@ -227,15 +241,12 @@ func _physics_process(delta):
 				var move_y = acumulatedDisplacements[(i * 3) + 1] #/ acumulatedDisplacements[(i * 3) + 2]
 				var mov_div = Vector2(mov_x,move_y / acumulatedDisplacements[(i * 3) + 2]) 
 				# checked
-				
 				mov_div = blob[i].move_and_slide(mov_div,Vector2.ZERO,false,1, 0.785398,false)
-				
 				pass
 		for i in range(points * 3):
 			acumulatedDisplacements[i] = 0
 			pass
 		pass
-	
 	updateSprite()
 	update()
 	pass
@@ -291,15 +302,6 @@ func grow():
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
 	pass
-
-
-
-
-
-
-
-
-
 
 
 
