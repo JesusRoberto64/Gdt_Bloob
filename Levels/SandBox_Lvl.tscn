@@ -18,6 +18,9 @@ position = Vector2( 688.651, 186.465 )
 position = Vector2( 792.478, 269.104 )
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 506.428, 281.682 )
+position = Vector2( 427.232, 242.084 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Planc_P1" parent="PlayerHolder" instance=ExtResource( 1 )]
