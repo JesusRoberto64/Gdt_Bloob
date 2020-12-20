@@ -122,13 +122,14 @@ func _draw():
 	if Geometry.triangulate_polygon(drawPoints).empty():
 		drawPoints = Geometry.convex_hull_2d(bakedPoints)
 		pass
-	# darw line
-	var state_line = Graphics_ctrl.line_color
-	draw_polyline(drawPoints, state_line, 10.0, true)
 	
 	var state_color = Graphics_ctrl.fill_color
 	draw_polygon(drawPoints,[state_color])
 	#collison_area.polygon = drawPoints
+	
+	# darw line
+	var state_line = Graphics_ctrl.line_color
+	draw_polyline(drawPoints, state_line, 6.0, true)
 	pass
 
 func _process(_delta):
@@ -247,6 +248,12 @@ func _physics_process(delta):
 			acumulatedDisplacements[i] = 0
 			pass
 		pass
+	
+	#Camera
+	#var cam_cent = findCentroid()
+	#cam_cent.x = round(cam_cent.x)
+	#cam_cent.y = round(cam_cent.y)
+	#camera.position = cam_cent
 	updateSprite()
 	update()
 	pass
@@ -296,7 +303,7 @@ func shink():
 	pass
 
 func grow():
-	radius += 3
+	radius += 0.5
 	radius = clamp(radius,15,75)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier

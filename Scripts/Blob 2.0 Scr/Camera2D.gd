@@ -65,5 +65,6 @@ func direction_facing()-> bool:
 	
 
 func _on_Timer_timeout():
+	#print("movend")
 	state = CAM_STATE.CENTERED
 	pass 

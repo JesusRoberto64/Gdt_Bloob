@@ -17,8 +17,8 @@ func _process(_delta):
 		STATE.IDLE:
 			pass
 		STATE.MOVING:
-			fill_color = Color(0.0,1.0,0.0,1.0)
-			line_color = Color.black
+			fill_color = Color(0.0,1.0,0.0,0.5)
+			line_color = Color.greenyellow
 			pass
 		STATE.HURT:
 			pass
