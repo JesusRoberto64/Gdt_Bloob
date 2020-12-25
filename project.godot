@@ -93,6 +93,7 @@ grow={
 2d_physics/layer_2="Walls"
 2d_physics/layer_3="Item"
 2d_physics/layer_4="Non-grab"
+2d_physics/layer_5="Hazard"
 
 [physics]
 

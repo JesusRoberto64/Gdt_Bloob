@@ -43,6 +43,9 @@ var item_direct = Vector2.ZERO
 #STATE MACHINE
 onready var Movement_ctrl = $Movement
 onready var Graphics_ctrl = $Graphics
+onready var State_timer = $StateTimer
+
+signal dead
 
 func verletIntegrate(i):
 	var temp = blob[i].position
@@ -295,10 +298,16 @@ func shink():
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
 	
+	if radius <= 15:
+		return
 	var item_expulse_inst = item_pulled.instance()
 	item_expulse_inst.position = findCentroid()
 	item_expulse_inst.can_collide = false
 	item_expulse_inst.direction = item_direct
+	if cur_state == STATE.HURT:
+		get_parent().call_deferred("add_child",item_expulse_inst)
+		return
+		pass
 	get_parent().add_child(item_expulse_inst)
 	pass
 
@@ -310,5 +319,25 @@ func grow():
 	length = circunference * 1.15 / float(points)
 	pass
 
+func hurt():
+	if cur_state == STATE.DYING:
+		return
+	if cur_state == STATE.HURT:
+		if radius <= 15:
+			emit_signal("dead")
+			set_visible(false)
+			cur_state = STATE.DYING
+		return
+	cur_state = STATE.HURT
+	shink()
+	shink()
+	shink()
+	shink()
+	State_timer.start()
 
-
+func _on_StateTimer_timeout():
+	if cur_state == STATE.DYING:
+		return
+	cur_state = STATE.MOVING
+	
+	pass # Replace with function body.

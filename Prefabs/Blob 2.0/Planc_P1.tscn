@@ -26,4 +26,8 @@ script = ExtResource( 3 )
 
 [node name="Graphics" type="Node2D" parent="."]
 script = ExtResource( 4 )
+
+[node name="StateTimer" type="Timer" parent="."]
+wait_time = 0.5
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]
+[connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]

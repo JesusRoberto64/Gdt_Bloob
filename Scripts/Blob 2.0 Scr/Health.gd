@@ -32,9 +32,7 @@ func _physics_process(delta):
 	pass
 
 func _draw():
-	
 	draw_circle(Vector2.ZERO,15,col)
-	
 	pass
 
 func _on_Timer_timeout():

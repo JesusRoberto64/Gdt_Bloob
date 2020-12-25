@@ -8,7 +8,7 @@ func _ready():
 	pass
 
 func movement(move_accel,delta,move_vec,velocity,drag,gravity):
-	#velocity += move_accel*delta*move_vec - velocity * Vector2(drag,drag) + gravity
+	
 	var _movement = Vector2.ZERO
 	match cur_state:
 		STATE.IDLE:
@@ -17,6 +17,7 @@ func movement(move_accel,delta,move_vec,velocity,drag,gravity):
 			_movement = move_accel*delta*move_vec - velocity * Vector2(drag,drag) + gravity
 			pass
 		STATE.HURT:
+			_movement = Vector2.ZERO
 			pass
 		STATE.PUPPET:
 			pass

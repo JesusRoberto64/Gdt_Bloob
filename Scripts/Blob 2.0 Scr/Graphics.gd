@@ -21,6 +21,8 @@ func _process(_delta):
 			line_color = Color.greenyellow
 			pass
 		STATE.HURT:
+			fill_color = Color.red
+			line_color = Color.black
 			pass
 		STATE.PUPPET:
 			pass
