@@ -10,6 +10,9 @@ _data = {
 [node name="Wall_poly" type="StaticBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -0.388718, 51.6057, -47.217, 0.0151443, 0.404984, -46.0195 )

@@ -10,7 +10,7 @@ func Transition_out():
 	$AnimationPlayer.play("fade_to_normal")
 	
 func Transition_in():
-	print("trna in")
+	
 	$ColorRect.show()
 	$AnimationPlayer.play("fade_to_black")
 

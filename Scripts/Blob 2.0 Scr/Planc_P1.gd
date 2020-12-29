@@ -6,7 +6,7 @@ enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
 var cur_state = STATE.MOVING
 
 var points = 12
-var radius = 50.0 # 
+var radius = 15.0 # 
 var circunferenceMultiplier = 0.2
 
 var area = radius * radius * PI
@@ -46,6 +46,7 @@ onready var Graphics_ctrl = $Graphics
 onready var State_timer = $StateTimer
 
 signal dead
+signal door
 
 func verletIntegrate(i):
 	var temp = blob[i].position
@@ -182,7 +183,8 @@ func _process(_delta):
 		shink()
 
 	if Input.is_action_pressed("grow"):
-		grow()
+		#grow()
+		pass
 	
 	pass
 
@@ -341,3 +343,9 @@ func _on_StateTimer_timeout():
 	cur_state = STATE.MOVING
 	
 	pass # Replace with function body.
+
+func enter_door():
+	emit_signal("door")
+	#print("open the door")
+	set_visible(false)
+	pass
