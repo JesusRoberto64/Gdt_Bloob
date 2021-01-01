@@ -5,14 +5,14 @@ enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
 
 var cur_state = STATE.MOVING
 
-var points = 12
+var points = 10 # 12 maximo
 var radius = 15.0 # 
 var circunferenceMultiplier = 0.2
 
 var area = radius * radius * PI
 var circunference = radius *2.0* PI * circunferenceMultiplier
 var length =  circunference *1.15 / float(points)
-var iterations = 40 # 25 minimo  maomenos 80 maximo
+var iterations = 25 # 25 minimo  maomenos 80 maximo
 
 var blob = []
 var blobOld = []
@@ -47,6 +47,10 @@ onready var State_timer = $StateTimer
 
 signal dead
 signal door
+
+# CORE health 
+const growth_mult = 1
+var bodies_health = []
 
 func verletIntegrate(i):
 	var temp = blob[i].position
@@ -294,14 +298,19 @@ func vec_movement(move_vec):
 	pass
 
 func shink():
-	radius -= 1
-	radius = clamp(radius,15,75)
+	
+	if radius < 15:
+		#print("regreso")
+		#print(radius, "en return")
+		return
+	
+	radius -= growth_mult
+	radius = clamp(radius,14,76)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
 	
-	if radius <= 15:
-		return
+	
 	var item_expulse_inst = item_pulled.instance()
 	item_expulse_inst.position = findCentroid()
 	item_expulse_inst.can_collide = false
@@ -311,30 +320,51 @@ func shink():
 		return
 		pass
 	get_parent().add_child(item_expulse_inst)
+	print(radius, "radouis in shirink")
 	pass
 
-func grow():
-	radius += 0.5
-	radius = clamp(radius,15,75)
+func grow(body):
+	if !bodies_health.has(body):
+		bodies_health.append(body)
+		bodies_health.push_front(body)
+		pass
+	else:
+		return
+	
+	if bodies_health.size() >= 5:
+		bodies_health.resize(5)
+	
+	radius += growth_mult
+	radius = clamp(radius,14,76)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
+	print(radius, "en grow")
+	pass
+
+func grow_debug():
+	radius += growth_mult
+	radius = clamp(radius,14,76)
+	area = radius * radius * PI
+	circunference = radius * 2.0 * PI * circunferenceMultiplier
+	length = circunference * 1.15 / float(points)
+	print(radius, "en grow")
 	pass
 
 func hurt():
-	if cur_state == STATE.DYING:
+	#shink()
+	if cur_state == STATE.DYING or cur_state == STATE.HURT:
 		return
-	if cur_state == STATE.HURT:
-		if radius <= 15:
-			emit_signal("dead")
-			set_visible(false)
-			cur_state = STATE.DYING
-		return
+	
 	cur_state = STATE.HURT
+	if radius <= 14:
+		emit_signal("dead")
+		set_visible(false)
+		cur_state = STATE.DYING
 	shink()
 	shink()
 	shink()
-	shink()
+	#shink()
 	State_timer.start()
 
 func _on_StateTimer_timeout():

@@ -23,6 +23,10 @@ config/icon="res://icon.png"
 
 Vars="*res://Scripts/Blob 2.0 Scr/Vars.gd"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/stretch/mode="viewport"

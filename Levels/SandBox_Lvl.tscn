@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/UI & Menus/button_X.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Prefabs/Items/Door .tscn" type="PackedScene" id=12]
 [ext_resource path="res://Art/UI & Menus/youwin.png" type="Texture" id=13]
+[ext_resource path="res://Prefabs/Enemies/Hazard.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -34,37 +35,27 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1752.25, 1196.3, 0, 0, 0, 0, 1682.84, 1214.95, 0, 0, 0, 0, 1684.98, 1178.64, 0, 0, 0, 0, 2190.67, 1183.22 )
 }
 
-[sub_resource type="Curve2D" id=14]
+[sub_resource type="Curve2D" id=5]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 7389.49, 1520.85, 0, 0, 0, 0, 7218.44, 1524.42, 0, 0, 0, 0, 7182.8, 1356.93, 0, 0, 0, 0, 6770.16, 953.793, 0, 0, 0, 0, 6354.16, 861.793, 0, 0, 0, 0, 6059.47, 642.197, 0, 0, 0, 0, 5902.16, 725.793, 0, 0, 0, 0, 5829.16, 939.97, 0, 0, 0, 0, 6054.16, 1161.79, 0, 0, 0, 0, 5800.88, 1268.07, 0, 0, 0, 0, 5966.16, 1517.79, 0, 0, 0, 0, 5667.59, 1720.39, 0, 0, 0, 0, 5351.59, 1668.39, 0, 0, 0, 0, 5327.59, 1428.39, 0, 0, 0, 0, 5291.59, 1236.39, 0, 0, 0, 0, 5095.59, 1192.39, 0, 0, 0, 0, 4935.59, 1384.39 )
 }
 
-[sub_resource type="Curve2D" id=15]
+[sub_resource type="Curve2D" id=6]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 7230.97, 1263.08, 0, 0, 0, 0, 6947.87, 1045.78, 0, 0, 0, 0, 6582.28, 964.872, 0, 0, 0, 0, 6495.38, 874.973, 0, 0, 0, 0, 6306.16, 765.793, 0, 0, 0, 0, 6122.16, 637.793, 0, 0, 0, 0, 5926.16, 813.793, 0, 0, 0, 0, 5999.49, 1054.26, 0, 0, 0, 0, 5882.02, 1251.1, 0, 0, 0, 0, 5916.95, 1371.74, 0, 0, 0, 0, 5929.65, 1692.4, 0, 0, 0, 0, 5693.91, 1794.57, 0, 0, 0, 0, 5459.78, 1768.59, 0, 0, 0, 0, 5173.62, 1737.55, 0, 0, 0, 0, 5070.85, 1556.75, 0, 0, 0, 0, 4985.18, 1292.17, 0, 0, 0, 0, 4705.17, 1207.94, 0, 0, 0, 0, 4420.43, 1192.82, 0, 0, 0, 0, 4279.31, 1200.38, 0, 0, 0, 0, 4158.36, 1202.9, 0, 0, 0, 0, 4087.81, 1210.46, 0, 0, 0, 0, 4017.25, 1212.98 )
 }
 
-[sub_resource type="Curve2D" id=5]
+[sub_resource type="Curve2D" id=7]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 2405.49, 2975.2, 0, 0, 0, 0, 2546.76, 2941.57, 0, 0, 0, 0, 2758.91, 2852.87, 0, 0, 0, 0, 2889.01, 2786.41, 0, 0, 0, 0, 3045.99, 2789.23, 0, 0, 0, 0, 3198.75, 2819.32, 0, 0, 0, 0, 3331.93, 2858.91, 0, 0, 0, 0, 3473.93, 2940.91, 0, 0, 0, 0, 3569.83, 3035.1, 0, 0, 0, 0, 3675.29, 3107.18, 0, 0, 0, 0, 3800.76, 3171.25, 0, 0, 0, 0, 3939.58, 3211.3, 0, 0, 0, 0, 4118.91, 3200.01, 0, 0, 0, 0, 4284.19, 3155.51, 0, 0, 0, 0, 4460.06, 3089.83, 0, 0, 0, 0, 4574.63, 2969.98, 0, 0, 0, 0, 4722.52, 2814.96, 0, 0, 0, 0, 4936.33, 2806.05, 0, 0, 0, 0, 5156.57, 2909.02 )
 }
 
-[sub_resource type="Curve2D" id=6]
+[sub_resource type="Curve2D" id=8]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1691.4, 3005.08, 0, 0, 0, 0, 1866.87, 2981.77, 0, 0, 0, 0, 2064.13, 2975.07, 0, 0, 0, 0, 2256.76, 3009.87, 0, 0, 0, 0, 2392.37, 3025.19, 0, 0, 0, 0, 2581.16, 3067.14, 0, 0, 0, 0, 2764.04, 3174.35, 0, 0, 0, 0, 2924.41, 3197.52, 0, 0, 0, 0, 3116.84, 3201.08, 0, 0, 0, 0, 3285.5, 3116.66, 0, 0, 0, 0, 3400.66, 3020.38, 0, 0, 0, 0, 3612.51, 2898.98, 0, 0, 0, 0, 3773.73, 2829.69, 0, 0, 0, 0, 3940.6, 2804.23, 0, 0, 0, 0, 4080.61, 2795.74, 0, 0, 0, 0, 4295.57, 2822.61, 0, 0, 0, 0, 4495.55, 2846.71, 0, 0, 0, 0, 4704.03, 2997.57, 0, 0, 0, 0, 4854.03, 3005.57, 0, 0, 0, 0, 5032.03, 2997.57, 0, 0, 0, 0, 5258.79, 2926.45, 0, 0, 0, 0, 5561.43, 2915.14, 0, 0, 0, 0, 5830.13, 2867.05, 0, 0, 0, 0, 6008.32, 2844.43, 0, 0, 0, 0, 6208.03, 2833.57, 0, 0, 0, 0, 6420.03, 2927.57, 0, 0, 0, 0, 6632.03, 2971.57, 0, 0, 0, 0, 6882.03, 3013.57, 0, 0, 0, 0, 7074.64, 3016.96, 0, 0, 0, 0, 7221.72, 3033.93, 0, 0, 0, 0, 7311.17, 3021.94, 0, 0, 0, 0, 7414.05, 3022.62, 0, 0, 0, 0, 7481.07, 3033.27, 0, 0, 0, 0, 7530.01, 3042.41, 0, 0, 0, 0, 7567.91, 3042.71, 0, 0, 0, 0, 7617.69, 3048.07, 0, 0, 0, 0, 7742.7, 2976.56, 0, 0, 0, 0, 7854.48, 2890.93, 0, 0, 0, 0, 8059.03, 2836.23, 0, 0, 0, 0, 8158.92, 2919.47, 0, 0, 0, 0, 8089.95, 3107.37, 0, 0, 0, 0, 7949.62, 3185.86, 0, 0, 0, 0, 7816.43, 3131.15, 0, 0, 0, 0, 7861.62, 2993.2, 0, 0, 0, 0, 8040, 2931.37, 0, 0, 0, 0, 7966.27, 3031.26, 0, 0, 0, 0, 7897.29, 3057.42 )
 }
 
-[sub_resource type="ShaderMaterial" id=7]
-
-[sub_resource type="Curve2D" id=8]
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Curve2D" id=9]
-_data = {
-"points": PoolVector2Array(  )
-}
+[sub_resource type="ShaderMaterial" id=9]
 
 [sub_resource type="Curve2D" id=10]
 _data = {
@@ -76,16 +67,25 @@ _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Environment" id=12]
+[sub_resource type="Curve2D" id=12]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=13]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Environment" id=14]
 background_mode = 4
-glow_enabled = true
 glow_intensity = 7.15
 glow_strength = 0.67
 glow_hdr_threshold = 0.16
 glow_hdr_luminance_cap = 8.35
 glow_hdr_scale = 1.57
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=15]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -129,22 +129,22 @@ curve = SubResource( 4 )
 item_type = 0
 
 [node name="Path2D" parent="Node2D/Path Item6" index="0"]
-curve = SubResource( 14 )
+curve = SubResource( 5 )
 
 [node name="Path Item7" parent="Node2D" instance=ExtResource( 11 )]
 
 [node name="Path2D" parent="Node2D/Path Item7" index="0"]
-curve = SubResource( 15 )
+curve = SubResource( 6 )
 
 [node name="Path Item" parent="." instance=ExtResource( 11 )]
 
 [node name="Path2D" parent="Path Item" index="0"]
-curve = SubResource( 5 )
+curve = SubResource( 7 )
 
 [node name="Pt Helth" parent="." instance=ExtResource( 11 )]
 
 [node name="Path2D" parent="Pt Helth" index="0"]
-curve = SubResource( 6 )
+curve = SubResource( 8 )
 
 [node name="PlayerHolder" type="Node2D" parent="."]
 position = Vector2( 1466.62, 3003.81 )
@@ -155,7 +155,7 @@ __meta__ = {
 [node name="Planc_P1" parent="PlayerHolder" instance=ExtResource( 1 )]
 
 [node name="TileMap2" type="TileMap" parent="."]
-material = SubResource( 7 )
+material = SubResource( 9 )
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 200, 200 )
 collision_layer = 2
@@ -170,7 +170,7 @@ is_curved = true
 polygon = PoolVector2Array( 1257.6, 1010.22, 1526.8, 1104.41, 2275.62, 1361.79, 2468.17, 1380.67, 2754.25, 1425.64, 2766.85, 1032.54, 2685.05, 1044.88, 2478.02, 1205.54, 2360.92, 1218, 2195.03, 1174.99, 2060.77, 1080.2, 1652.79, 872.581, 1441.12, 716.351, 1126.79, 595.371, 701.37, 601.721, 347.272, 592.41, 345.59, 637.819, 226.967, 792.938, 230.967, 1020.94, 357.593, 1129.6, 649.895, 1149.76, 1052, 1012.6 )
 
 [node name="Path2D" parent="Wall_poly4" index="2"]
-curve = SubResource( 8 )
+curve = SubResource( 10 )
 
 [node name="Wall_poly6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1881.25, -351.28 )
@@ -180,7 +180,7 @@ is_curved = true
 polygon = PoolVector2Array( 1257.6, 1010.22, 1526.8, 1104.41, 1966.34, 1425.44, 2074.7, 1453.16, 2284.54, 1417.57, 2588.88, 1348.16, 3245.63, 1318.8, 3335.86, 1225.52, 3256.49, 1038.21, 3100.92, 984.234, 2685.05, 1044.88, 2478.02, 1205.54, 2360.92, 1218, 2195.03, 1174.99, 2060.77, 1080.2, 1652.79, 872.581, 1441.12, 716.351, 1126.79, 595.371, 701.37, 601.721, 347.272, 592.41, 226.967, 792.938, 230.967, 1020.94, 359.295, 1208.94, 649.461, 1206.57, 943.107, 1194.39, 1051.41, 1163.75, 1111.48, 1111.33, 1129.9, 1059.1, 1183.31, 1014.8 )
 
 [node name="Path2D" parent="Wall_poly6" index="2"]
-curve = SubResource( 9 )
+curve = SubResource( 11 )
 
 [node name="Wall_poly7" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2203.33, 343.728 )
@@ -190,7 +190,7 @@ is_curved = true
 polygon = PoolVector2Array( 1257.6, 1010.22, 1526.8, 1104.41, 1966.34, 1425.44, 2074.7, 1453.16, 2284.54, 1417.57, 2460.83, 1283.41, 2354.88, 1118.13, 2075.19, 1050.33, 1609.02, 940.144, 1392.89, 766.392, 1171.2, 626.277, 1111.27, 599.307, 1033.63, 606.246, 914.712, 651.436, 521.744, 929.571, 455.818, 1007.48, 485.784, 1085.39, 551.71, 1148.32, 650.697, 1171.96, 1052, 1012.6 )
 
 [node name="Path2D" parent="Wall_poly7" index="2"]
-curve = SubResource( 10 )
+curve = SubResource( 12 )
 
 [node name="Wall_poly5" parent="." instance=ExtResource( 3 )]
 position = Vector2( 4984.46, 2438.07 )
@@ -200,10 +200,10 @@ is_curved = true
 polygon = PoolVector2Array( 2344.32, 870.523, 2472.47, 894.551, 2525.86, 1017.36, 2576.58, 1057.4, 2616.63, 1004.01, 2654.01, 953.283, 2659.73, 880.344, 2662.25, 636.559, 2042.25, 651.108, 1745.36, 727.231, 1441.12, 716.351, 1126.79, 595.371, 701.37, 601.721, 394.967, 636.938, 226.967, 792.938, 227.264, 1054.73, 2082.69, 937.265 )
 
 [node name="Path2D" parent="Wall_poly5" index="2"]
-curve = SubResource( 11 )
+curve = SubResource( 13 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 12 )
+environment = SubResource( 14 )
 
 [node name="SceneManager" parent="." instance=ExtResource( 5 )]
 
@@ -235,7 +235,7 @@ scale = Vector2( 1.07071, 1.07071 )
 texture = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MenuScreen/Menu controller"]
-anims/Intro = SubResource( 13 )
+anims/Intro = SubResource( 15 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 4048.22, 2045.85 )
@@ -253,10 +253,13 @@ texture = ExtResource( 7 )
 
 [node name="Door " parent="." instance=ExtResource( 12 )]
 position = Vector2( 1888.1, 677.012 )
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_intro" flags=6]
+
+[node name="Hazard" parent="." instance=ExtResource( 14 )]
+position = Vector2( 1732.04, 2864.76 )
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran"]
-[connection signal="door" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_win" flags=6]
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_intro" flags=6]
 [connection signal="door" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran" flags=6]
+[connection signal="door" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_win" flags=6]
 
 [editable path="Node2D/Path Item2"]
 
