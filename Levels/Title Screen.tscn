@@ -49,8 +49,8 @@ reference_path = "res://Levels/SandBox_Lvl.tscn"
 start_focused = true
 [connection signal="finished" from="Audio_btn" to="SceneManager" method="_on_Audio_btn_finished"]
 [connection signal="path_info" from="TextureButton" to="SceneManager" method="triger_tran"]
-[connection signal="pressed" from="TextureButton" to="SceneManager" method="start_tran" flags=6]
 [connection signal="pressed" from="TextureButton" to="Audio_btn" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="TextureButton" to="SceneManager" method="start_tran" flags=6]
 
 [editable path="SceneManager"]
 

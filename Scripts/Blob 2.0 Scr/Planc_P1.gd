@@ -52,6 +52,9 @@ signal door
 const growth_mult = 1
 var bodies_health = []
 
+signal hud_sync(amount)
+onready var health_var = $CanvasLayer/Health_HUD
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -66,6 +69,9 @@ func setDistance(currentPoint,anchor,distance):
 	pass
 
 func _ready():
+	#connect hud 
+	connect("hud_sync",health_var,"update_display")
+	emit_signal("hud_sync",radius)
 	Movement_ctrl.cur_state = cur_state
 	camera = $Camera2D
 	drag = float(move_accel) / max_speed
@@ -183,7 +189,8 @@ func _process(_delta):
 	
 	#SHIRNK MECNIC  ================
 	
-	if Input.is_action_pressed("shrink"):
+	if Input.is_action_just_pressed("shrink"):
+		
 		shink()
 
 	if Input.is_action_pressed("grow"):
@@ -310,6 +317,7 @@ func shink():
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
 	
+	emit_signal("hud_sync",radius)
 	
 	var item_expulse_inst = item_pulled.instance()
 	item_expulse_inst.position = findCentroid()
@@ -320,7 +328,7 @@ func shink():
 		return
 		pass
 	get_parent().add_child(item_expulse_inst)
-	print(radius, "radouis in shirink")
+	
 	pass
 
 func grow(body):
@@ -339,7 +347,9 @@ func grow(body):
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
-	print(radius, "en grow")
+	
+	emit_signal("hud_sync",radius)
+	
 	pass
 
 func grow_debug():
