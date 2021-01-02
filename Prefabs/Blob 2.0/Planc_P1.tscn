@@ -37,6 +37,10 @@ script = ExtResource( 4 )
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="Turbo" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
 
@@ -57,3 +61,4 @@ __meta__ = {
 position = Vector2( 41, -69 )
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
+[connection signal="timeout" from="Turbo" to="." method="_on_Turbo_timeout"]

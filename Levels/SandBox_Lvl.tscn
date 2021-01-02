@@ -197,7 +197,7 @@ position = Vector2( 4984.46, 2438.07 )
 is_curved = true
 
 [node name="CollisionPolygon2D" parent="Wall_poly5" index="0"]
-polygon = PoolVector2Array( 2344.32, 870.523, 2472.47, 894.551, 2525.86, 1017.36, 2576.58, 1057.4, 2616.63, 1004.01, 2654.01, 953.283, 2659.73, 880.344, 2662.25, 636.559, 2042.25, 651.108, 1745.36, 727.231, 1441.12, 716.351, 1126.79, 595.371, 701.37, 601.721, 394.967, 636.938, 226.967, 792.938, 227.264, 1054.73, 2082.69, 937.265 )
+polygon = PoolVector2Array( 2344.32, 870.523, 2472.47, 894.551, 2525.86, 1017.36, 2576.58, 1057.4, 2616.63, 1004.01, 2654.01, 953.283, 2659.73, 880.344, 2662.25, 636.559, 2047.57, 650.868, 701.37, 601.721, 394.967, 636.938, 226.967, 792.938, 227.264, 1054.73, 2082.69, 937.265 )
 
 [node name="Path2D" parent="Wall_poly5" index="2"]
 curve = SubResource( 13 )
@@ -255,10 +255,10 @@ position = Vector2( 1888.1, 677.012 )
 
 [node name="Hazard" parent="." instance=ExtResource( 14 )]
 position = Vector2( 1732.04, 2864.76 )
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_intro" flags=6]
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran"]
-[connection signal="door" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_win" flags=6]
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_intro" flags=6]
 [connection signal="door" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran" flags=6]
+[connection signal="door" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_win" flags=6]
 
 [editable path="Node2D/Path Item2"]
 

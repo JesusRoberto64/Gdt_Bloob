@@ -27,8 +27,8 @@ var coll_Point = preload("res://Prefabs/Blob 2.0/Collision_Point.tscn")
 var item_pulled = preload("res://Prefabs/Blob 2.0/Health.tscn")
 
 ##CONTROL IMPLMETATION 
-export var move_accel = 550
-export var max_speed = 1500
+export var move_accel = 750 #550
+export var max_speed = 1500 #1500
 var drag = 1
 var velocity: Vector2
 var move_vec =  Vector2.ZERO
@@ -54,6 +54,10 @@ var bodies_health = []
 
 signal hud_sync(amount)
 onready var health_var = $CanvasLayer/Health_HUD
+
+# Shrink feel
+var is_Turbo = true
+onready var turbo_Realace = $Turbo
 
 func verletIntegrate(i):
 	var temp = blob[i].position
@@ -189,10 +193,25 @@ func _process(_delta):
 	
 	#SHIRNK MECNIC  ================
 	
-	if Input.is_action_just_pressed("shrink"):
-		
-		shink()
-
+	move_accel = 550
+	if Input.is_action_pressed("shrink"):
+		if is_Turbo:
+			shink()
+			shink()
+			shink()
+			is_Turbo = false
+			turbo_Realace.start()
+			pass
+		#max_speed = 2500
+#		if radius > 15:
+#			move_accel = 2100
+#		else:
+#			move_accel = 900
+#			#move_accel = lerp(move_accel,550,0.1)
+		move_accel = 2100
+		pass
+	print(move_accel)
+	
 	if Input.is_action_pressed("grow"):
 		#grow()
 		pass
@@ -389,3 +408,8 @@ func enter_door():
 	#print("open the door")
 	set_visible(false)
 	pass
+
+
+func _on_Turbo_timeout():
+	is_Turbo = true
+	pass # Replace with function body.
