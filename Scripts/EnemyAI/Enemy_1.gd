@@ -17,10 +17,10 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):	
+func _process(_delta):	
 	FollowPlayer()
 	RaycastToPlayer()
-	if(bodyDetected):
+	if(bodyDetected and canSeePlayerFlag):
 		var dir = (get_transform().origin - player.get_transform().origin).normalized()
 		player.add_central_force (dir*pullForce)
 		pass
@@ -28,13 +28,13 @@ func _process(delta):
 	pass
 
 func RaycastToPlayer():
-	var dir = self.get_position().direction_to(Vector2.ZERO)
+	#var dir = self.get_position().direction_to(Vector2.ZERO)
 	raycast.get_parent().look_at(player.get_global_position())
 	var detectedObject = raycast.get_collider()
 	if(detectedObject != player):
-		canSeePlayerFlag = false
-		#if(bodyDetectedflag):
-		#	OnBodyExited()
+		if(canSeePlayerFlag):
+			canSeePlayerFlag = false
+			OnBodyExited()
 	else:
 		canSeePlayerFlag = true
 		pass
@@ -47,7 +47,7 @@ func FollowPlayer():
 
 #Detect when player enters the vision's area
 func _on_Area2D_body_entered(body):
-	if(player == body and canSeePlayerFlag == true):
+	if(player == body):
 		bodyDetected = true
 	pass # Replace with function body.
 
@@ -57,3 +57,7 @@ func _on_Area2D_body_exited(body):
 		bodyDetected = false
 		player.set_applied_force(Vector2.ZERO)
 	pass # Replace with function body.
+
+func OnBodyExited():
+	#print("Player Outside of vision")
+	player.set_applied_force(Vector2.ZERO)
