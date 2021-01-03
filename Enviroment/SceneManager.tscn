@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Contoles & UI/SceneManager.gd" type="Script" id=1]
+[ext_resource path="res://Enviroment/TransitionScreen.tscn" type="PackedScene" id=2]
+
+[node name="SceneManager" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="TransitionScreen" parent="." instance=ExtResource( 2 )]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="tran_in" from="TransitionScreen" to="." method="_on_TransitionScreen_tran_in"]
+[connection signal="tran_out" from="TransitionScreen" to="." method="_on_TransitionScreen_tran_out"]
+
+[editable path="TransitionScreen"]
