@@ -196,15 +196,15 @@ func _process(_delta):
 	move_accel = 900
 	if Input.is_action_pressed("shrink"):
 		if is_Turbo:
-			shink()
-			shink()
+			#shink()
+			#shink()
 			shink()
 			is_Turbo = false
 			turbo_Realace.start()
 			pass
 		#max_speed = 2500
 		if radius > 15:
-			move_accel = 2100
+			move_accel = 1800
 		else:
 			#move_accel = 900
 			move_accel = lerp(move_accel,900,0.1)

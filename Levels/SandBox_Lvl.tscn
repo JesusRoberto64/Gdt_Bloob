@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/UI & Menus/button_X.png" type="Texture" id=2]
@@ -52,7 +52,7 @@ _data = {
 
 [sub_resource type="Curve2D" id=8]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 1691.4, 3005.08, 0, 0, 0, 0, 1866.87, 2981.77, 0, 0, 0, 0, 2064.13, 2975.07, 0, 0, 0, 0, 2256.76, 3009.87, 0, 0, 0, 0, 2392.37, 3025.19, 0, 0, 0, 0, 2581.16, 3067.14, 0, 0, 0, 0, 2764.04, 3174.35, 0, 0, 0, 0, 2924.41, 3197.52, 0, 0, 0, 0, 3116.84, 3201.08, 0, 0, 0, 0, 3285.5, 3116.66, 0, 0, 0, 0, 3400.66, 3020.38, 0, 0, 0, 0, 3612.51, 2898.98, 0, 0, 0, 0, 3773.73, 2829.69, 0, 0, 0, 0, 3940.6, 2804.23, 0, 0, 0, 0, 4080.61, 2795.74, 0, 0, 0, 0, 4295.57, 2822.61, 0, 0, 0, 0, 4495.55, 2846.71, 0, 0, 0, 0, 4704.03, 2997.57, 0, 0, 0, 0, 4854.03, 3005.57, 0, 0, 0, 0, 5032.03, 2997.57, 0, 0, 0, 0, 5258.79, 2926.45, 0, 0, 0, 0, 5561.43, 2915.14, 0, 0, 0, 0, 5830.13, 2867.05, 0, 0, 0, 0, 6008.32, 2844.43, 0, 0, 0, 0, 6208.03, 2833.57, 0, 0, 0, 0, 6420.03, 2927.57, 0, 0, 0, 0, 6632.03, 2971.57, 0, 0, 0, 0, 6882.03, 3013.57, 0, 0, 0, 0, 7074.64, 3016.96, 0, 0, 0, 0, 7221.72, 3033.93, 0, 0, 0, 0, 7311.17, 3021.94, 0, 0, 0, 0, 7414.05, 3022.62, 0, 0, 0, 0, 7481.07, 3033.27, 0, 0, 0, 0, 7530.01, 3042.41, 0, 0, 0, 0, 7567.91, 3042.71, 0, 0, 0, 0, 7617.69, 3048.07, 0, 0, 0, 0, 7742.7, 2976.56, 0, 0, 0, 0, 7854.48, 2890.93, 0, 0, 0, 0, 8059.03, 2836.23, 0, 0, 0, 0, 8158.92, 2919.47, 0, 0, 0, 0, 8089.95, 3107.37, 0, 0, 0, 0, 7949.62, 3185.86, 0, 0, 0, 0, 7816.43, 3131.15, 0, 0, 0, 0, 7861.62, 2993.2, 0, 0, 0, 0, 8040, 2931.37, 0, 0, 0, 0, 7966.27, 3031.26, 0, 0, 0, 0, 7897.29, 3057.42 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1691.4, 3005.08, 0, 0, 0, 0, 1866.87, 2981.77, 0, 0, 0, 0, 2064.13, 2975.07, 0, 0, 0, 0, 2256.76, 3009.87, 0, 0, 0, 0, 2392.37, 3025.19, 0, 0, 0, 0, 2581.16, 3067.14, 0, 0, 0, 0, 2764.04, 3174.35, 0, 0, 0, 0, 2924.41, 3197.52, 0, 0, 0, 0, 3116.84, 3201.08, 0, 0, 0, 0, 3285.5, 3116.66, 0, 0, 0, 0, 3400.66, 3020.38, 0, 0, 0, 0, 3612.51, 2898.98, 0, 0, 0, 0, 3773.73, 2829.69, 0, 0, 0, 0, 3940.6, 2804.23, 0, 0, 0, 0, 4080.61, 2795.74, 0, 0, 0, 0, 4295.57, 2822.61, 0, 0, 0, 0, 4495.55, 2846.71, 0, 0, 0, 0, 4704.03, 2997.57, 0, 0, 0, 0, 4854.03, 3005.57, 0, 0, 0, 0, 5032.03, 2997.57, 0, 0, 0, 0, 5258.79, 2926.45, 0, 0, 0, 0, 5561.43, 2915.14, 0, 0, 0, 0, 5830.13, 2867.05, 0, 0, 0, 0, 6008.32, 2844.43, 0, 0, 0, 0, 6208.03, 2833.57, 0, 0, 0, 0, 6420.03, 2927.57, 0, 0, 0, 0, 6632.03, 2971.57, 0, 0, 0, 0, 6882.03, 3013.57, 0, 0, 0, 0, 7074.64, 3016.96, 0, 0, 0, 0, 7221.72, 3033.93, 0, 0, 0, 0, 7311.17, 3021.94, 0, 0, 0, 0, 7414.05, 3022.62, 0, 0, 0, 0, 7481.07, 3033.27, 0, 0, 0, 0, 7530.01, 3042.41, 0, 0, 0, 0, 7567.91, 3042.71, 0, 0, 0, 0, 7617.69, 3048.07, 0, 0, 0, 0, 8574.5, 2892.78, 0, 0, 0, 0, 8641.13, 2574.81, 0, 0, 0, 0, 8523.42, 2094.39, 0, 0, 0, 0, 8736.87, 1893.43, 0, 0, 0, 0, 8769.39, 1595.31, 0, 0, 0, 0, 8690.69, 1375.49, 0, 0, 0, 0, 8772.07, 775.721, 0, 0, 0, 0, 8796.73, 523.719, 0, 0, 0, 0, 8857.5, 273.821, 0, 0, 0, 0, 8883.86, 205.072, 0, 0, 0, 0, 8922.45, 146.571, 0, 0, 0, 0, 8963.86, 77.0718, 0, 0, 0, 0, 9028.36, 30.88, 0, 0, 0, 0, 9103.86, 1.07178, 0, 0, 0, 0, 9187.35, 2.89612, 0, 0, 0, 0, 9315.86, -10.9282, 0, 0, 0, 0, 9395.96, -16.9567, 0, 0, 0, 0, 9549.03, -16.693, 0, 0, 0, 0, 9645.13, -46.0594, 0, 0, 0, 0, 9738.57, -67.4169, 0, 0, 0, 0, 9818.66, -62.0776, 0, 0, 0, 0, 9901.42, -64.7473, 0, 0, 0, 0, 9920.11, -14.0233, 0, 0, 0, 0, 9938.8, 28.6916, 0, 0, 0, 0, 9805.31, 50.049, 0, 0, 0, 0, 9722.55, 52.7187, 0, 0, 0, 0, 9631.86, 93.0718, 0, 0, 0, 0, 9523.86, 129.072, 0, 0, 0, 0, 9509.89, 252.463, 0, 0, 0, 0, 9515.86, 345.072, 0, 0, 0, 0, 9467.51, 434.691, 0, 0, 0, 0, 9407.86, 521.072, 0, 0, 0, 0, 9480.22, 625.394, 0, 0, 0, 0, 9535.86, 697.072, 0, 0, 0, 0, 9518.37, 913.568, 0, 0, 0, 0, 9527.86, 1073.07, 0, 0, 0, 0, 9463.27, 1205.98, 0, 0, 0, 0, 9371.86, 1357.07, 0, 0, 0, 0, 9450.56, 1710.28, 0, 0, 0, 0, 9518.98, 1925.07, 0, 0, 0, 0, 9459.04, 2074.74, 0, 0, 0, 0, 9378.52, 2235.78, 0, 0, 0, 0, 9338.98, 2353.07, 0, 0, 0, 0, 9327.66, 2536.67, 0, 0, 0, 0, 9330.98, 2793.07, 0, 0, 0, 0, 9342.98, 2877.07, 0, 0, 0, 0, 9365.8, 2922.31, 0, 0, 0, 0, 9414.98, 3017.07 )
 }
 
 [sub_resource type="ShaderMaterial" id=9]
@@ -77,12 +77,37 @@ _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Curve2D" id=16]
+[sub_resource type="Curve2D" id=14]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Environment" id=14]
+[sub_resource type="Curve2D" id=17]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=18]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=19]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=20]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=21]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 9392.54, 367.594, 0, 0, 0, 0, 9576.88, 532.871, 0, 0, 0, 0, 9373.47, 626.104, 0, 0, 0, 0, 9407.62, 698.695, 0, 0, 0, 0, 9547.22, 753.239, 0, 0, 0, 0, 9527.62, 824.695, 0, 0, 0, 0, 9367.11, 979.964, 0, 0, 0, 0, 9384.07, 1077.43, 0, 0, 0, 0, 9422.21, 1145.24, 0, 0, 0, 0, 9530.27, 1306.28, 0, 0, 0, 0, 9534.51, 1395.27, 0, 0, 0, 0, 9362.88, 1448.25, 0, 0, 0, 0, 9358.64, 1509.69, 0, 0, 0, 0, 9538.75, 1619.88, 0, 0, 0, 0, 9542.2, 1699.73, 0, 0, 0, 0, 9364.21, 2093.85, 0, 0, 0, 0, 9474.4, 2339.65, 0, 0, 0, 0, 9330.31, 2687.15, 0, 0, 0, 0, 9474.4, 2784.62 )
+}
+
+[sub_resource type="Environment" id=15]
 background_mode = 4
 glow_intensity = 7.15
 glow_strength = 0.67
@@ -90,7 +115,7 @@ glow_hdr_threshold = 0.16
 glow_hdr_luminance_cap = 8.35
 glow_hdr_scale = 1.57
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -152,7 +177,7 @@ curve = SubResource( 7 )
 curve = SubResource( 8 )
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 5333.53, 2845.07 )
+position = Vector2( 9441.74, 3514.06 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -213,14 +238,64 @@ position = Vector2( 7800.02, 2372.02 )
 is_curved = true
 
 [node name="CollisionPolygon2D" parent="Wall_poly8" index="0"]
-polygon = PoolVector2Array( 2344.32, 870.523, 2472.47, 894.551, 2525.86, 1017.36, 2576.58, 1057.4, 2616.63, 1004.01, 2654.01, 953.283, 2659.73, 880.344, 2662.25, 636.559, 2047.57, 650.868, 1287.37, 516.561, 701.37, 601.721, 399.06, 557.626, 363.361, 819.543, 227.264, 1054.73, 2082.69, 937.265 )
+polygon = PoolVector2Array( 1313.47, 706.118, 1103.03, 677.336, 1086.04, 601.826, 399.06, 557.626, 363.361, 819.543, 227.264, 1054.73, 1257.47, 790.118 )
 one_way_collision_margin = 4.9
 
 [node name="Path2D" parent="Wall_poly8" index="2"]
-curve = SubResource( 16 )
+curve = SubResource( 14 )
+
+[node name="speedsection" type="Node2D" parent="."]
+
+[node name="Wall_poly" parent="speedsection" instance=ExtResource( 3 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="speedsection/Wall_poly" index="0"]
+polygon = PoolVector2Array( 8652.54, 3049.45, 8863.86, 1405.49, 8745.78, 1248.36, 8750.02, 1176.32, 8868.73, 1155.03, 8901.01, 398.697, 9034.2, 89.5032, 9390.96, 75.2327, 9224.47, 3095.82 )
+
+[node name="Path2D" parent="speedsection/Wall_poly" index="2"]
+curve = SubResource( 17 )
+
+[node name="Wall_poly2" parent="speedsection" instance=ExtResource( 3 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="speedsection/Wall_poly2" index="0"]
+polygon = PoolVector2Array( 8534.4, 2682.41, 8596, 2454.96, 8570.91, 2314, 8420, 2250.96, 8488.76, 1852.52, 8673.35, 1810.01, 8698.78, 1648.97, 8586.04, 1576.93, 8691.08, 985.565, 8711.86, 865.49, 8766.67, 242.957, 8788.81, -8.08166, 8101.52, 60.5896, 8091.44, 2661.07, 8276.3, 2728.91 )
+
+[node name="Wall_poly3" parent="speedsection" instance=ExtResource( 3 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="speedsection/Wall_poly3" index="0"]
+polygon = PoolVector2Array( 8096.43, 106.793, 8133.81, -181.533, 9876.99, -351.444, 9888.99, -131.444 )
+
+[node name="Path2D" parent="speedsection/Wall_poly3" index="2"]
+curve = SubResource( 18 )
+
+[node name="Wall_poly4" parent="speedsection" instance=ExtResource( 3 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="speedsection/Wall_poly4" index="0"]
+polygon = PoolVector2Array( 9571.57, 3209.96, 10022.2, 3251.03, 10353.3, -371.57, 10302.4, -445.11, 9861.19, -357.428, 9830.08, -131.154, 10008.3, -85.8993, 10033.7, 55.5221, 9600.42, 143.527 )
+
+[node name="Path2D" parent="speedsection/Wall_poly4" index="2"]
+curve = SubResource( 19 )
+
+[node name="Wall_poly5" parent="speedsection" instance=ExtResource( 3 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="speedsection/Wall_poly5" index="0"]
+polygon = PoolVector2Array( 9460.54, 3957.68, 9975.67, 3739.75, 10054.1, 2966.45, 9584.14, 2643.42, 9527.47, 2898.93, 9604.32, 3487.68, 9574.29, 3646.22, 9371.11, 3681.15, 9308.25, 3549.83, 9386.65, 3211.29, 9224.24, 2892.33, 9219.2, 3125.55, 9100.42, 3768.02 )
+
+[node name="Path2D" parent="speedsection/Wall_poly5" index="2"]
+curve = SubResource( 20 )
+
+[node name="Path Item" parent="speedsection" instance=ExtResource( 11 )]
+item_type = 0
+
+[node name="Path2D" parent="speedsection/Path Item" index="0"]
+curve = SubResource( 21 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 14 )
+environment = SubResource( 15 )
 
 [node name="SceneManager" parent="." instance=ExtResource( 5 )]
 
@@ -251,7 +326,7 @@ scale = Vector2( 1.07071, 1.07071 )
 texture = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MenuScreen/Menu controller"]
-anims/Intro = SubResource( 15 )
+anims/Intro = SubResource( 16 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 4048.22, 2045.85 )
@@ -269,6 +344,9 @@ texture = ExtResource( 7 )
 
 [node name="Door " parent="." instance=ExtResource( 12 )]
 position = Vector2( 1888.1, 677.012 )
+
+[node name="Door 2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 7904.5, 2877.04 )
 
 [node name="Hazard" parent="." instance=ExtResource( 14 )]
 position = Vector2( 1732.04, 2864.76 )
@@ -302,3 +380,15 @@ position = Vector2( 1732.04, 2864.76 )
 [editable path="Wall_poly5"]
 
 [editable path="Wall_poly8"]
+
+[editable path="speedsection/Wall_poly"]
+
+[editable path="speedsection/Wall_poly2"]
+
+[editable path="speedsection/Wall_poly3"]
+
+[editable path="speedsection/Wall_poly4"]
+
+[editable path="speedsection/Wall_poly5"]
+
+[editable path="speedsection/Path Item"]
