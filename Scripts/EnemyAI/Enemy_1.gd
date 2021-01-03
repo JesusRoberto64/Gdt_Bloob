@@ -94,4 +94,6 @@ func _on_Area2D_body_exited(body):
 
 func OnBodyExited():
 	#print("Player Outside of vision")
-	player.set_applied_force(Vector2.ZERO)
+	#player.set_applied_force(Vector2.ZERO)
+	player.get_parent().gravity = Vector2.ZERO
+	pass
