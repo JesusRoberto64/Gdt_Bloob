@@ -6,7 +6,7 @@ enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
 var cur_state = STATE.MOVING
 
 var points = 10 # 12 maximo
-var radius = 15.0 # 
+var radius = 25.0 # 
 var circunferenceMultiplier = 0.2
 
 var area = radius * radius * PI
@@ -59,6 +59,9 @@ onready var health_var = $CanvasLayer/Health_HUD
 var is_Turbo = true
 onready var turbo_Realace = $Turbo
 
+# Area enies detection 
+onready var area_enemies = $Area2D
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -80,6 +83,7 @@ func _ready():
 	camera = $Camera2D
 	drag = float(move_accel) / max_speed
 	resetBlob()
+	
 	pass 
 
 func findCentroid():
@@ -186,11 +190,15 @@ func _process(_delta):
 	move_vec = vec_movement(cur_move_vec)
 	
 	#Camera
-	var cam_cent = findCentroid()
-	#cam_cent.x = round(cam_cent.x)
-	#cam_cent.y = round(cam_cent.y)
-	camera.position = cam_cent
-	
+	if !cur_state == STATE.DYING:
+		var cam_cent = findCentroid()
+		#cam_cent.x = round(cam_cent.x)
+		#cam_cent.y = round(cam_cent.y)
+		camera.position = cam_cent
+	# enemies detection 
+	area_enemies.position = findCentroid()
+	#print(area_enemies.position)
+	#print(position, "deberia")
 	#SHIRNK MECNIC  ================
 	
 	move_accel = 900

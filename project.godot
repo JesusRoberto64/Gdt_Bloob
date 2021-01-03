@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot- Bloob"
-run/main_scene="res://Levels/SandBox_Lvl.tscn"
+run/main_scene="res://Levels/ProtoLvl.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -98,6 +98,7 @@ grow={
 2d_physics/layer_3="Item"
 2d_physics/layer_4="Non-grab"
 2d_physics/layer_5="Hazard"
+2d_physics/layer_6="CenterPlanc"
 
 [physics]
 
