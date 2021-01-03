@@ -1,5 +1,5 @@
 extends Node2D
-enum States {IDLE, MOVE, FOLLOW, RETURN}
+enum States {IDLE, MOVE, FOLLOW, PREPARE}
 onready var rng = RandomNumberGenerator.new()
 onready var positioner = get_node("../Positioner")
 onready var timer = get_node("Base/Timer")
@@ -12,15 +12,17 @@ var bodyDetected = false
 var bodyDetectedflag = false
 var areaShape = null
 var target = null
-var waitTimer = 0.0
 var canSeePlayerFlag = true
 var path = []
+var waitAttackTimer =  0.0
+var playerLastPosition
 
 export var currentState = States.IDLE
 export var pullForce = 20
 export var patrolSpeed = 70
-export var pursueSpeed = 80
+export var pursueSpeed = 400
 export var idleWaitTime = 2
+export var prepareAttackTime = 3
 
 func _ready():	
 	rng.randomize()
@@ -33,10 +35,8 @@ func _process(delta):
 	#raycast.set_cast_to(player.global_transform.origin)
 	#raycast.force_raycast_update ( )
 	RaycastToPlayer()
-	
 	if(bodyDetected and canSeePlayerFlag):
 		FollowPlayer(delta)
-		#FollowPlayer(delta)
 		pass
 	else:
 		if(target == null):
@@ -56,13 +56,11 @@ func RaycastToPlayer():
 	raycast.get_parent().look_at(player.get_global_position())
 	var detectedObject = raycast.get_collider()
 	if(detectedObject != player):
-		
-		if(canSeePlayerFlag):
-			canSeePlayerFlag = false
-			OnBodyExited()
-			bodyDetectedflag = false
-		#if(bodyDetectedflag):
-		#	OnBodyExited()
+		if(bodyDetectedflag and (currentState == States.FOLLOW or currentState == States.PREPARE)):
+			if(canSeePlayerFlag):
+				canSeePlayerFlag = false
+				OnBodyExited()
+				bodyDetectedflag = false
 	else:
 		canSeePlayerFlag = true
 		pass
@@ -93,7 +91,7 @@ func Patrol(delta):
 		elif (dist <= 0.5):
 			self.set_global_position(path[0])
 			break
-		if(dist > dist_to_end):
+		if(dist_to_end <= 2):
 			currentState = States.IDLE
 			if(timer.is_stopped()):
 				timer.start(idleWaitTime)	
@@ -103,8 +101,54 @@ func Patrol(delta):
 		pass
 	pass
 
+func FollowPlayer(_delta):
+	if(bodyDetectedflag):
+		waitAttackTimer += _delta
+		if waitAttackTimer >= prepareAttackTime:
+			if playerLastPosition == null:
+				playerLastPosition = player.get_global_position()
+			AttackPlayer(_delta)
+			pass
+		else:	
+			base.look_at(player.get_global_position())
+			currentState = States.PREPARE			
+			pass
+	else:
+		if(timer.is_stopped()):
+			timer.start(idleWaitTime)	
+		pass	
+	pass
 
-func FollowPlayer(delta):
+
+func AttackPlayer(var delta):
+	currentState = States.FOLLOW
+	path = nav2d.get_simple_path(self.get_global_position(), playerLastPosition, true)
+	path.remove(0)
+	var dist = pursueSpeed * delta
+	var last_pos = self.get_global_position()
+	for _i in range(path.size()):
+		
+		var dist_to_end = last_pos.distance_to(path[0])
+		
+		if(dist <= dist_to_end):
+			
+			self.set_global_position(last_pos.linear_interpolate(path[0], dist/dist_to_end))
+			break
+		elif (dist <= 0.0):
+			self.set_global_position(path[0])
+			break
+		if(dist > dist_to_end):
+			currentState = States.IDLE
+			if(timer.is_stopped()):
+				timer.start(idleWaitTime)
+				
+		dist -= dist_to_end
+		last_pos = path[0]
+		path.remove(0)
+		pass
+	pass
+
+func FollowPlayer2(delta):
 	#bodyDetectedflag helps to detect if the player has just left the field of vision of the enemy
 	#While inside the field of vision the flag is true and the enemy follows the player
 	#If the player leaves then the flag changes from true to false and starts an idle time.
@@ -160,13 +204,16 @@ func _on_Area2D_body_exited(body):
 	pass # Replace with function body.
 
 func OnBodyExited():
-	bodyDetectedflag = false
-	currentState = States.IDLE
-	#print("Player Outside of vision")
-	player.set_applied_force(Vector2.ZERO)
-	timer.stop()
+	if currentState != States.FOLLOW:
+		bodyDetectedflag = false
+		currentState = States.IDLE
+		player.set_applied_force(Vector2.ZERO)
+		timer.stop()
+	pass
 
 func _on_Timer_timeout():
 	target = null
 	bodyDetected = false
+	playerLastPosition = null
+	waitAttackTimer = 0.0
 	pass # Replace with function body.
