@@ -5,14 +5,14 @@ enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
 
 var cur_state = STATE.MOVING
 
-var points = 12
+var points = 10 # 12 maximo
 var radius = 15.0 # 
 var circunferenceMultiplier = 0.2
 
 var area = radius * radius * PI
 var circunference = radius *2.0* PI * circunferenceMultiplier
 var length =  circunference *1.15 / float(points)
-var iterations = 40 # 25 minimo  maomenos 80 maximo
+var iterations = 25 # 25 minimo  maomenos 80 maximo
 
 var blob = []
 var blobOld = []
@@ -27,8 +27,8 @@ var coll_Point = preload("res://Prefabs/Blob 2.0/Collision_Point.tscn")
 var item_pulled = preload("res://Prefabs/Blob 2.0/Health.tscn")
 
 ##CONTROL IMPLMETATION 
-export var move_accel = 550
-export var max_speed = 1500
+export var move_accel = 550 #550
+export var max_speed = 1000 #1500
 var drag = 1
 var velocity: Vector2
 var move_vec =  Vector2.ZERO
@@ -48,6 +48,17 @@ onready var State_timer = $StateTimer
 signal dead
 signal door
 
+# CORE health 
+const growth_mult = 1
+var bodies_health = []
+
+signal hud_sync(amount)
+onready var health_var = $CanvasLayer/Health_HUD
+
+# Shrink feel
+var is_Turbo = true
+onready var turbo_Realace = $Turbo
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -62,6 +73,9 @@ func setDistance(currentPoint,anchor,distance):
 	pass
 
 func _ready():
+	#connect hud 
+	connect("hud_sync",health_var,"update_display")
+	emit_signal("hud_sync",radius)
 	Movement_ctrl.cur_state = cur_state
 	camera = $Camera2D
 	drag = float(move_accel) / max_speed
@@ -127,13 +141,13 @@ func _draw():
 		drawPoints = Geometry.convex_hull_2d(bakedPoints)
 		pass
 	
+	# darw line
+	var state_line = Graphics_ctrl.line_color
+	draw_polyline(drawPoints, state_line, 14.0, true)
+	
 	var state_color = Graphics_ctrl.fill_color
 	draw_polygon(drawPoints,[state_color])
 	#collison_area.polygon = drawPoints
-	
-	# darw line
-	var state_line = Graphics_ctrl.line_color
-	draw_polyline(drawPoints, state_line, 6.0, true)
 	pass
 
 func _process(_delta):
@@ -179,9 +193,25 @@ func _process(_delta):
 	
 	#SHIRNK MECNIC  ================
 	
+	move_accel = 900
 	if Input.is_action_pressed("shrink"):
-		shink()
-
+		if is_Turbo:
+			#shink()
+			#shink()
+			shink()
+			is_Turbo = false
+			turbo_Realace.start()
+			pass
+		#max_speed = 2500
+		if radius > 15:
+			move_accel = 1800
+		else:
+			#move_accel = 900
+			move_accel = lerp(move_accel,900,0.1)
+		#move_accel = 900
+		pass
+	
+	
 	if Input.is_action_pressed("grow"):
 		#grow()
 		pass
@@ -294,14 +324,20 @@ func vec_movement(move_vec):
 	pass
 
 func shink():
-	radius -= 1
-	radius = clamp(radius,15,75)
+	
+	if radius < 15:
+		#print("regreso")
+		#print(radius, "en return")
+		return
+	
+	radius -= growth_mult
+	radius = clamp(radius,14,76)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
 	
-	if radius <= 15:
-		return
+	emit_signal("hud_sync",radius)
+	
 	var item_expulse_inst = item_pulled.instance()
 	item_expulse_inst.position = findCentroid()
 	item_expulse_inst.can_collide = false
@@ -311,30 +347,53 @@ func shink():
 		return
 		pass
 	get_parent().add_child(item_expulse_inst)
+	
 	pass
 
-func grow():
-	radius += 0.5
-	radius = clamp(radius,15,75)
+func grow(body):
+	if !bodies_health.has(body):
+		bodies_health.append(body)
+		bodies_health.push_front(body)
+		pass
+	else:
+		return
+	
+	if bodies_health.size() >= 3:
+		bodies_health.resize(3)
+	
+	radius += growth_mult
+	radius = clamp(radius,14,76)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
+	
+	emit_signal("hud_sync",radius)
+	
+	pass
+
+func grow_debug():
+	radius += growth_mult
+	radius = clamp(radius,14,76)
+	area = radius * radius * PI
+	circunference = radius * 2.0 * PI * circunferenceMultiplier
+	length = circunference * 1.15 / float(points)
+	print(radius, "en grow")
 	pass
 
 func hurt():
-	if cur_state == STATE.DYING:
+	#shink()
+	if cur_state == STATE.DYING or cur_state == STATE.HURT:
 		return
-	if cur_state == STATE.HURT:
-		if radius <= 15:
-			emit_signal("dead")
-			set_visible(false)
-			cur_state = STATE.DYING
-		return
+	
 	cur_state = STATE.HURT
+	if radius <= 14:
+		emit_signal("dead")
+		set_visible(false)
+		cur_state = STATE.DYING
 	shink()
 	shink()
 	shink()
-	shink()
+	#shink()
 	State_timer.start()
 
 func _on_StateTimer_timeout():
@@ -349,3 +408,8 @@ func enter_door():
 	#print("open the door")
 	set_visible(false)
 	pass
+
+
+func _on_Turbo_timeout():
+	is_Turbo = true
+	pass # Replace with function body.

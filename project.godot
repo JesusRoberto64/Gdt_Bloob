@@ -16,12 +16,16 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot- Bloob"
-run/main_scene="res://Levels/Title Screen.tscn"
+run/main_scene="res://Levels/SandBox_Lvl.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Vars="*res://Scripts/Blob 2.0 Scr/Vars.gd"
+
+[debug]
+
+settings/fps/force_fps=70
 
 [display]
 
