@@ -5,7 +5,7 @@ enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
 
 var cur_state = STATE.MOVING
 
-var points = 10 # 12 maximo
+var points = 11 # 12 maximo
 var radius = 25.0 # 
 var circunferenceMultiplier = 0.2
 
