@@ -18,7 +18,6 @@ var waitAttackTimer =  0.0
 var playerLastPosition
 
 export var currentState = States.IDLE
-export var pullForce = 20
 export var patrolSpeed = 70
 export var pursueSpeed = 400
 export var idleWaitTime = 2
@@ -26,7 +25,7 @@ export var prepareAttackTime = 3
 
 func _ready():	
 	rng.randomize()
-	player = get_node("/root/Main/Blob")
+	player = get_tree().get_nodes_in_group("Player")[0]
 	areaShape = get_parent().get_shape()
 	pass # Replace with function body.
 
@@ -79,17 +78,17 @@ func Patrol(delta):
 	
 	#var dir = self.get_global_position().direction_to(player.get_global_position())
 	#self.translate(dir*delta*patrolSpeed)
-	path = nav2d.get_simple_path(self.get_global_position(), positioner.get_global_position(), true)
+	path = nav2d.get_simple_path(self.get_position(), positioner.get_position(), true)
 	path.remove(0)
 	var dist = patrolSpeed * delta
-	var last_pos = self.get_global_position()
+	var last_pos = self.get_position()
 	for _i in range(path.size()):
 		var dist_to_end = last_pos.distance_to(path[0])
 		if(dist <= dist_to_end):
-			self.set_global_position(last_pos.linear_interpolate(path[0], dist/dist_to_end))
+			self.set_position(last_pos.linear_interpolate(path[0], dist/dist_to_end))
 			break
 		elif (dist <= 0.5):
-			self.set_global_position(path[0])
+			self.set_position(path[0])
 			break
 		if(dist_to_end <= 2):
 			currentState = States.IDLE
@@ -106,11 +105,12 @@ func FollowPlayer(_delta):
 		waitAttackTimer += _delta
 		if waitAttackTimer >= prepareAttackTime:
 			if playerLastPosition == null:
-				playerLastPosition = player.get_global_position()
+				playerLastPosition = positioner.get_position()
 			AttackPlayer(_delta)
 			pass
-		else:	
-			base.look_at(player.get_global_position())
+		else:
+			positioner.set_global_position(player.get_global_position()) 	
+			base.look_at(positioner.get_global_position())
 			currentState = States.PREPARE			
 			pass
 	else:
@@ -122,20 +122,20 @@ func FollowPlayer(_delta):
 
 func AttackPlayer(var delta):
 	currentState = States.FOLLOW
-	path = nav2d.get_simple_path(self.get_global_position(), playerLastPosition, true)
+	path = nav2d.get_simple_path(self.get_position(), playerLastPosition, true)
 	path.remove(0)
 	var dist = pursueSpeed * delta
-	var last_pos = self.get_global_position()
+	var last_pos = self.get_position()
 	for _i in range(path.size()):
 		
 		var dist_to_end = last_pos.distance_to(path[0])
 		
 		if(dist <= dist_to_end):
 			
-			self.set_global_position(last_pos.linear_interpolate(path[0], dist/dist_to_end))
+			self.set_position(last_pos.linear_interpolate(path[0], dist/dist_to_end))
 			break
 		elif (dist <= 0.0):
-			self.set_global_position(path[0])
+			self.set_position(path[0])
 			break
 		if(dist > dist_to_end):
 			currentState = States.IDLE
@@ -147,41 +147,6 @@ func AttackPlayer(var delta):
 		path.remove(0)
 		pass
 	pass
-
-func FollowPlayer2(delta):
-	#bodyDetectedflag helps to detect if the player has just left the field of vision of the enemy
-	#While inside the field of vision the flag is true and the enemy follows the player
-	#If the player leaves then the flag changes from true to false and starts an idle time.
-	#When the idle time ends then the bodyDetected variable returns to false and the enemy choses to return to a new position
-	if(bodyDetectedflag):
-		base.look_at(player.get_global_position())
-		#var dir = self.get_global_position().direction_to(player.get_global_position())
-		#self.translate(dir*delta*patrolSpeed)
-		path = nav2d.get_simple_path(self.get_global_position(), player.get_global_position(), true)
-		path.remove(0)
-		var dist = pursueSpeed * delta
-		var last_pos = self.get_global_position()
-		for _i in range(path.size()):
-			var dist_to_end = last_pos.distance_to(path[0])
-			if(dist <= dist_to_end):
-				self.set_global_position(last_pos.linear_interpolate(path[0], dist/dist_to_end))
-				break
-			elif (dist <= 0.0):
-				self.set_global_position(path[0])
-				break
-			dist -= dist_to_end
-			last_pos = path[0]
-			path.remove(0)
-			pass
-	
-		var pullDir = (get_global_transform().origin - player.get_global_transform().origin).normalized()
-		player.add_central_force (pullDir*pullForce)
-	else:
-		if(timer.is_stopped()):
-			timer.start(idleWaitTime)	
-		pass
-	pass
-
 
 
 #Detect when player enters the vision's area
@@ -207,7 +172,7 @@ func OnBodyExited():
 	if currentState != States.FOLLOW:
 		bodyDetectedflag = false
 		currentState = States.IDLE
-		player.set_applied_force(Vector2.ZERO)
+		player.get_parent().gravity = Vector2.ZERO
 		timer.stop()
 	pass
 

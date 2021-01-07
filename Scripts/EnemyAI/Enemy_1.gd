@@ -20,7 +20,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-func _process(delta):
+func _process(_delta):
 	FollowPlayer()
 	RaycastToPlayer()
 #	if(bodyDetected):
@@ -31,11 +31,10 @@ func _process(delta):
 	
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if(bodyDetected and canSeePlayerFlag):
 		var dir = (get_transform().origin - player.get_transform().origin).normalized()
-		#player.add_central_force (dir*pullForce)
-		#player.get_parent()
+		
 		if player.get_global_position().x > position.x:
 			dir.x *= -1
 			pass
@@ -45,7 +44,7 @@ func _physics_process(delta):
 		#print(dir)
 		player.get_parent().gravity = Vector2(dir*pullForce)
 		pass
-	#print(bodyDetected)
+	
 	
 	pass
 
@@ -53,7 +52,7 @@ func RaycastToPlayer():
 
 	if player == null:
 		return
-	var dir = self.get_position().direction_to(Vector2.ZERO)
+	#var dir = self.get_position().direction_to(Vector2.ZERO)
 	raycast.get_parent().look_at(player.get_global_position())
 	var detectedObject = raycast.get_collider()
 	if(detectedObject != player):
