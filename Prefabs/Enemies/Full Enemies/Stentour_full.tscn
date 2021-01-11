@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Prefabs/Enemies/Enemy_Movement_Area.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Enemies/Stentour.tscn" type="PackedScene" id=2]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 423.126, -332, 439.126, 332, -412.345, 330.375, -416.874, -324 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -416.874, -324, -412.345, 330.375, 439.126, 332, 423.126, -332 ) ]
+
+[node name="Navigation2D" type="Navigation2D"]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+navpoly = SubResource( 1 )
+
+[node name="Movement_Area" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 0 )
+
+[node name="Sentour" parent="Movement_Area/CollisionShape2D" index="1" instance=ExtResource( 2 )]
+
+[editable path="Movement_Area"]
