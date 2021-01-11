@@ -13,8 +13,15 @@
 [ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Prefabs/Items/Door .tscn" type="PackedScene" id=12]
 [ext_resource path="res://Art/UI & Menus/youwin.png" type="Texture" id=13]
+<<<<<<< HEAD
+[ext_resource path="res://Prefabs/Enemies/Full Enemies/Hazard.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Prefabs/Enemies/Full Enemies/Vorticella.tscn" type="PackedScene" id=15]
+=======
 [ext_resource path="res://Prefabs/Enemies/Hazard.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Prefabs/Enemies/Vorticella.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Prefabs/Enemies/Full elements/Vorticella.tscn" type="PackedScene" id=15]
+>>>>>>> 51c4c33fe6e776143efe7f87af6655c86a6c42e5
+
+
 
 [sub_resource type="Curve2D" id=1]
 _data = {
