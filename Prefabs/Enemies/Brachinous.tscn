@@ -6,11 +6,16 @@
 
 [node name="Brachinous" type="Node2D"]
 script = ExtResource( 1 )
+pursueSpeed = 500
 
 [node name="Base" type="Node2D" parent="."]
 
-[node name="Kinematic Body" type="KinematicBody2D" parent="Base"]
+[node name="Kinematic Body" type="KinematicBody2D" parent="Base" groups=[
+"Hazard",
+]]
 rotation = 1.5708
+collision_layer = 16
+collision_mask = 19
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Base/Kinematic Body"]
 scale = Vector2( 2, 2 )
@@ -18,8 +23,8 @@ shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="Base"]
 rotation = 1.5708
-collision_layer = 2
-collision_mask = 2
+collision_layer = 0
+collision_mask = 32
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Base/Area2D"]
 polygon = PoolVector2Array( 0, 0, 150, -400, -150, -400 )
@@ -32,9 +37,7 @@ polygon = PoolVector2Array( 0, 0, 150, -400, -150, -400 )
 rotation = -1.5708
 enabled = true
 cast_to = Vector2( 0, 600 )
-collision_mask = 4
-[connection signal="body_entered" from="Base/Area2D" to="Base/Kinematic Body" method="_on_Area2D_body_entered"]
+collision_mask = 34
 [connection signal="body_entered" from="Base/Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Base/Area2D" to="Base/Kinematic Body" method="_on_Area2D_body_exited"]
 [connection signal="body_exited" from="Base/Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="Base/Timer" to="." method="_on_Timer_timeout"]
