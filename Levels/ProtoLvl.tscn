@@ -4,29 +4,14 @@
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enviroment/Demo_tileset2.res" type="TileSet" id=3]
 [ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=4]
-<<<<<<< HEAD
-[ext_resource path="res://Prefabs/Enemies/Full Enemies/Vorticella.tscn" type="PackedScene" id=5]
-=======
-<<<<<<< Updated upstream
 [ext_resource path="res://Prefabs/Enemies/Vorticella.tscn" type="PackedScene" id=5]
->>>>>>> 51c4c33fe6e776143efe7f87af6655c86a6c42e5
 [ext_resource path="res://Prefabs/Items/Fountain.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Items/Caja.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Enviroment/Wall_poly.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Art/UI & Menus/button_X.png" type="Texture" id=9]
 [ext_resource path="res://Art/UI & Menus/cpntrolinvert.png" type="Texture" id=10]
 [ext_resource path="res://Art/UI & Menus/Fonts/bahnschrift.ttf" type="DynamicFontData" id=11]
-<<<<<<< HEAD
-[ext_resource path="res://Prefabs/Enemies/Single Enemies/Brachinous.tscn" type="PackedScene" id=12]
-=======
-
-=======
-[ext_resource path="res://Prefabs/Enemies/Full elements/Vorticella.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/Enemies/Single elements/Enemy_Movement_Area.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Prefabs/Enemies/Single elements/Stentour.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Prefabs/Enemies/Single elements/Brachinous.tscn" type="PackedScene" id=8]
->>>>>>> Stashed changes
->>>>>>> 51c4c33fe6e776143efe7f87af6655c86a6c42e5
+[ext_resource path="res://Prefabs/Enemies/Brachinous.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
