@@ -2,9 +2,16 @@
 
 [ext_resource path="res://Scripts/BlobWall.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/rigidbody_movement.gd" type="Script" id=2]
+<<<<<<< HEAD
 [ext_resource path="res://Prefabs/Enemies/Full Enemies/Vorticella.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Enemies/Single Enemies/Enemy_Movement_Area.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Enemies/Single Enemies/Brachinous.tscn" type="PackedScene" id=5]
+=======
+[ext_resource path="res://Prefabs/Enemies/Full elements/Vorticella.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Enemies/Single elements/Enemy_Movement_Area.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Enemies/Single elements/Brachinous.tscn" type="PackedScene" id=5]
+
+>>>>>>> 51c4c33fe6e776143efe7f87af6655c86a6c42e5
 
 
 
