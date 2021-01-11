@@ -27,9 +27,14 @@ curve = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+process_mode = 0
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
 script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="Camera2D"]
+one_shot = true
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource( 3 )

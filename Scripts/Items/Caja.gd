@@ -1,4 +1,6 @@
-extends StaticBody2D
+extends RigidBody2D
+
+export(bool) var is_key = false
 
 onready var collision_pol = $CollisionPolygon2D
 onready var graphic_pol = $Polygon2D
@@ -8,15 +10,19 @@ export(bool) var is_curved
 export(float) var splineLength = 15#12.0
 
 func _ready():
-	#var pol = collision_pol.polygon
-	#var cur = curve.curve.tessellate()
+	add_to_group("Push")
+	if is_key:
+		add_to_group("keyes")
+	
 	if is_curved:
 		update_sprite()
 		graphic_pol.polygon = path.curve.tessellate()
 	else:
 		graphic_pol.polygon = collision_pol.polygon
 		pass
-	pass
+	
+	graphic_pol.color.a = 2/mass
+	graphic_pol.color.a = clamp(graphic_pol.color.a,0.0,0.9)
 
 func getpoint(i):
 	var pointCount = path.curve.get_point_count()
@@ -57,17 +63,11 @@ func _draw():
 	
 	if Geometry.triangulate_polygon(drawPoints).empty():
 		drawPoints = Geometry.convex_hull_2d(bakedPoints)
-		
 		pass
 	
 	draw_polyline(drawPoints,Color.black,8.0,false)
 	
-	
-	
+	draw_polygon(drawPoints,[Color(0.5,0.5,1.0,1.0)])
 	pass
-
-
-
-
 
 

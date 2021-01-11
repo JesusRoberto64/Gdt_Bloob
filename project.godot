@@ -99,9 +99,11 @@ grow={
 2d_physics/layer_4="Non-grab"
 2d_physics/layer_5="Hazard"
 2d_physics/layer_6="CenterPlanc"
+2d_physics/layer_7="Gatetop"
 
 [physics]
 
+common/physics_jitter_fix=2.0
 2d/default_gravity=0
 
 [rendering]

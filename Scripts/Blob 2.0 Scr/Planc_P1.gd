@@ -5,8 +5,8 @@ enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
 
 var cur_state = STATE.MOVING
 
-var points = 10 # 12 maximo
-var radius = 25.0 # 
+var points = 11 # 12 maximo
+export var radius = 17.0 # 
 var circunferenceMultiplier = 0.2
 
 var area = radius * radius * PI
@@ -194,7 +194,8 @@ func _process(_delta):
 		var cam_cent = findCentroid()
 		#cam_cent.x = round(cam_cent.x)
 		#cam_cent.y = round(cam_cent.y)
-		camera.position = cam_cent
+		#camera.position = cam_cent
+		
 	# enemies detection 
 	area_enemies.position = findCentroid()
 	#print(area_enemies.position)
@@ -212,7 +213,7 @@ func _process(_delta):
 			pass
 		#max_speed = 2500
 		if radius > 15:
-			move_accel = 1800
+			move_accel = 1200#1800
 		else:
 			#move_accel = 900
 			move_accel = lerp(move_accel,900,0.1)
@@ -222,6 +223,8 @@ func _process(_delta):
 	
 	if Input.is_action_pressed("grow"):
 		#grow()
+#		for i in blob.size():
+#			blob[i].can_push = true
 		pass
 	
 	pass
@@ -297,6 +300,7 @@ func _physics_process(delta):
 	#cam_cent.x = round(cam_cent.x)
 	#cam_cent.y = round(cam_cent.y)
 	#camera.position = cam_cent
+	#print(cam_cent, " seted")
 	updateSprite()
 	update()
 	pass
@@ -421,3 +425,11 @@ func enter_door():
 func _on_Turbo_timeout():
 	is_Turbo = true
 	pass # Replace with function body.
+
+func unlock_ability(abilty: String):
+	# a match logic
+	if abilty == "push_Hazard":
+		for i in blob.size():
+				blob[i].can_push = true
+		
+		pass

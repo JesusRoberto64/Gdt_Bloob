@@ -178,7 +178,7 @@ curve = SubResource( 7 )
 curve = SubResource( 8 )
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 9464.9, 3489.11 )
+position = Vector2( 8306.42, -626.147 )
 __meta__ = {
 "_edit_group_": true
 }
