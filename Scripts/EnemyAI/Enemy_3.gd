@@ -151,7 +151,6 @@ func AttackPlayer(var delta):
 
 #Detect when player enters the vision's area
 func _on_Area2D_body_entered(body):
-	
 	if(player == body):
 		#print("Player Detected")
 		bodyDetected = true
