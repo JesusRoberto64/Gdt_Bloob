@@ -11,6 +11,8 @@ onready var timer = $Timer
 # push object force
 var push = 0.5
 const factor = 0.1
+# puede mepujar rojos
+var can_push = false
 
 func _ready():
 	connect("area_size",get_parent(),"grow")
@@ -36,9 +38,10 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		#collision.collider.apply_central_impulse(-collision.normal*push)
 		if collision.collider.is_in_group("Push"):
-			
 			collision.collider.apply_central_impulse(-collision.normal*push)
-	
+		if collision.collider.is_in_group("Gate"):
+			collision.collider.apply_central_impulse(Vector2.ZERO)
+			
 	pass
 
 func _on_Area2D_body_entered(body):
@@ -52,6 +55,11 @@ func _on_Area2D_body_entered(body):
 		is_hurt = true
 		timer.start()
 		update()
+		#body.mode = 0 # kinematic
+		if can_push:
+			body.call_deferred("set_mode",0)
+			body.update()
+			body.life_timer.start()
 		pass
 	
 	if body.is_in_group("Door"):

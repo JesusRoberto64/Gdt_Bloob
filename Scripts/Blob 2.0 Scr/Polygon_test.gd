@@ -62,6 +62,8 @@ func _draw():
 	
 	draw_polyline(drawPoints,Color.black,8.0,false)
 	
+	
+	
 	pass
 
 

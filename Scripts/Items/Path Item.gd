@@ -26,6 +26,8 @@ func _ready():
 		var point = points.curve.get_point_position(i)
 		var ints_Iteme = selected_item.instance()
 		ints_Iteme.position = point
+		if item_type == ITEM.HEALTH:
+			ints_Iteme.is_life_infite = true
 		add_child(ints_Iteme)
 		pass
 	

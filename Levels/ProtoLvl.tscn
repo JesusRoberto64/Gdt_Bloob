@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=2]
@@ -7,17 +7,139 @@
 [ext_resource path="res://Prefabs/Enemies/Vorticella.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/Items/Fountain.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Items/Caja.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Prefabs/Items/Lock&KeyArea.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Enviroment/Wall_poly.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Art/UI & Menus/button_X.png" type="Texture" id=9]
+[ext_resource path="res://Art/UI & Menus/cpntrolinvert.png" type="Texture" id=10]
+[ext_resource path="res://Art/UI & Menus/Fonts/bahnschrift.ttf" type="DynamicFontData" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 2595.98, 2172.93, 0, 0, 0, 0, 2651.48, 2176.3, 0, 0, 0, 0, 2712.02, 2176.3, 0, 0, 0, 0, 2770.89, 2177.98, 0, 0, 0, 0, 2829.75, 2179.66, 0, 0, 0, 0, 2803.82, 3081.88, 0, 0, 0, 0, 2784, 3136, 0, 0, 0, 0, 2816, 3136, 0, 0, 0, 0, 2784, 3264, 0, 0, 0, 0, 2816, 3264, 0, 0, 0, 0, 3712, 3776, 0, 0, 0, 0, 3712, 3840, 0, 0, 0, 0, 3712, 3904, 0, 0, 0, 0, 3712, 3968, 0, 0, 0, 0, 3712, 4032, 0, 0, 0, 0, 3744, 3936, 0, 0, 0, 0, 3744, 3872, 0, 0, 0, 0, 3744, 3808, 0, 0, 0, 0, 3776, 3840, 0, 0, 0, 0, 3776, 3904, 0, 0, 0, 0, 3808, 3872, 0, 0, 0, 0, 4928, 3584, 0, 0, 0, 0, 4928, 3616, 0, 0, 0, 0, 4928, 3648, 0, 0, 0, 0, 4928, 3680, 0, 0, 0, 0, 4928, 3712, 0, 0, 0, 0, 4928, 3744, 0, 0, 0, 0, 4928, 3776, 0, 0, 0, 0, 4928, 3808, 0, 0, 0, 0, 5583.19, 3198.38, 0, 0, 0, 0, 5623.19, 3198.38, 0, 0, 0, 0, 6304, 2816, 0, 0, 0, 0, 6304, 2784, 0, 0, 0, 0, 6368, 2784, 0, 0, 0, 0, 6368, 2816 )
+"points": PoolVector2Array( 0, 0, 0, 0, -26, 3972, 0, 0, 0, 0, -4, 4070, 0, 0, 0, 0, 6, 4140, 0, 0, 0, 0, -4, 4292, 0, 0, 0, 0, -4, 4374, 0, 0, 0, 0, -10, 4487, 0, 0, 0, 0, -28, 4556, 0, 0, 0, 0, -76, 4575, 0, 0, 0, 0, -74, 4511, 0, 0, 0, 0, -83, 4463, 0, 0, 0, 0, -150, 4483, 0, 0, 0, 0, -132, 4539, 0, 0, 0, 0, -131, 4595, 0, 0, 0, 0, -195, 4585, 0, 0, 0, 0, -264, 4594, 0, 0, 0, 0, -236, 4528, 0, 0, 0, 0, -177, 4467, 0, 0, 0, 0, -163, 4405, 0, 0, 0, 0, -222, 4436, 0, 0, 0, 0, -264, 4414, 0, 0, 0, 0, -293, 4466, 0, 0, 0, 0, -280, 4559, 0, 0, 0, 0, -329, 4544, 0, 0, 0, 0, -373, 4529, 0, 0, 0, 0, -351, 4479, 0, 0, 0, 0, -325, 4426, 0, 0, 0, 0, -416, 4416, 0, 0, 0, 0, -565, 4409, 0, 0, 0, 0, -704, 4416, 0, 0, 0, 0, -837, 4407, 0, 0, 0, 0, -928, 4416, 0, 0, 0, 0, -1034, 4399, 0, 0, 0, 0, -1120, 4384, 0, 0, 0, 0, -1187, 4395, 0, 0, 0, 0, -1184, 4288, 0, 0, 0, 0, -1193, 4243, 0, 0, 0, 0, -1184, 4192, 0, 0, 0, 0, -1202, 4096, 0, 0, 0, 0, -1216, 4064, 0, 0, 0, 0, -1204, 4003, 0, 0, 0, 0, -1193, 3891 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 2600, 2331, 0, 0, 0, 0, 2673, 2279, 0, 0, 0, 0, 2767, 2243, 0, 0, 0, 0, 2853, 2226, 0, 0, 0, 0, 2948, 2209, 0, 0, 0, 0, 3126, 2212, 0, 0, 0, 0, 3202, 2242, 0, 0, 0, 0, 3200, 2436, 0, 0, 0, 0, 2573, 2532, 0, 0, 0, 0, 2523, 2633, 0, 0, 0, 0, 2542, 2140, 0, 0, 0, 0, 2724, 2119, 0, 0, 0, 0, 2849, 2111, 0, 0, 0, 0, 2988, 2099, 0, 0, 0, 0, 3136, 2075, 0, 0, 0, 0, 3220, 2056, 0, 0, 0, 0, 3219, 1970 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 2816, 3136, 0, 0, 0, 0, 2784, 3264, 0, 0, 0, 0, 3712, 3808, 0, 0, 0, 0, 3712, 3896, 0, 0, 0, 0, 3712, 3988, 0, 0, 0, 0, 4928, 3584, 0, 0, 0, 0, 4928, 3616, 0, 0, 0, 0, 4928, 3648, 0, 0, 0, 0, 4928, 3680, 0, 0, 0, 0, 4928, 3712, 0, 0, 0, 0, 4928, 3744, 0, 0, 0, 0, 4928, 3776, 0, 0, 0, 0, 4928, 3808, 0, 0, 0, 0, 5583.19, 3198.38, 0, 0, 0, 0, 5623.19, 3198.38, 0, 0, 0, 0, 6304, 2816, 0, 0, 0, 0, 6304, 2784, 0, 0, 0, 0, 6368, 2784, 0, 0, 0, 0, 6368, 2816 )
+}
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1920, 3936, 0, 0, 0, 0, 2080, 4032, 0, 0, 0, 0, 2272, 4064, 0, 0, 0, 0, 2496, 4096, 0, 0, 0, 0, 2784, 3968, 0, 0, 0, 0, 2880, 4096, 0, 0, 0, 0, 2976, 4224, 0, 0, 0, 0, 3264, 4000, 0, 0, 0, 0, 3488, 4064, 0, 0, 0, 0, 2400, 3680 )
+}
+
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=6]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=7]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=9]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=10]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=11]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="DynamicFont" id=12]
+size = 100
+font_data = ExtResource( 11 )
+
+[sub_resource type="Curve2D" id=13]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -1472, 384, 0, 0, 0, 0, -1408, 832, 0, 0, 0, 0, -1312, 1376, 0, 0, 0, 0, -1504, 1792, 0, 0, 0, 0, -1920, 1600, 0, 0, 0, 0, -2464, 1568, 0, 0, 0, 0, -2464, 992, 0, 0, 0, 0, 64, 992, 0, 0, 0, 0, 768, 1216, 0, 0, 0, 0, 1600, 1312, 0, 0, 0, 0, 1984, 1280, 0, 0, 0, 0, 2272, 1152, 0, 0, 0, 0, 2944, 1024, 0, 0, 0, 0, 3456, 1088, 0, 0, 0, 0, 3456, 1216, 0, 0, 0, 0, 3392, 768, 0, 0, 0, 0, 2208, 928, 0, 0, 0, 0, 1728, 704, 0, 0, 0, 0, 1408, -864, 0, 0, 0, 0, -128, -960 )
+}
+
+[sub_resource type="Curve2D" id=14]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -128, -928, 0, 0, 0, 0, 320, -768, 0, 0, 0, 0, 1248, -960, 0, 0, 0, 0, 1568, 608, 0, 0, 0, 0, 2176, 768, 0, 0, 0, 0, 2336, 1024, 0, 0, 0, 0, 2720, 1024, 0, 0, 0, 0, 3264, 992, 0, 0, 0, 0, 3872, 960, 0, 0, 0, 0, 4384, 832, 0, 0, 0, 0, 4352, -224, 0, 0, 0, 0, 5792, -96 )
+}
+
+[sub_resource type="Curve2D" id=15]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1888, -1120, 0, 0, 0, 0, 2688, -1088, 0, 0, 0, 0, 2784, 416 )
+}
+
+[sub_resource type="Curve2D" id=16]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=17]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=18]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=19]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=20]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=21]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=22]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=23]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=24]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=25]
+_data = {
+"points": PoolVector2Array(  )
 }
 
 [node name="ProtoLvl" type="Node2D"]
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 2688, 1600 )
+position = Vector2( -168, 3076 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -27,10 +149,20 @@ __meta__ = {
 [node name="Health" type="Node2D" parent="."]
 
 [node name="Fountain" parent="Health" instance=ExtResource( 6 )]
-position = Vector2( 2464, 2048 )
+position = Vector2( 4393, 3829 )
 
 [node name="Fountain2" parent="Health" instance=ExtResource( 6 )]
 position = Vector2( 1440, 2048 )
+
+[node name="Path Item" parent="Health" instance=ExtResource( 4 )]
+
+[node name="Path2D" parent="Health/Path Item" index="0"]
+curve = SubResource( 1 )
+
+[node name="Path Item2" parent="Health" instance=ExtResource( 4 )]
+
+[node name="Path2D" parent="Health/Path Item2" index="0"]
+curve = SubResource( 2 )
 
 [node name="Hazard" type="Node2D" parent="."]
 
@@ -38,9 +170,93 @@ position = Vector2( 1440, 2048 )
 item_type = 0
 
 [node name="Path2D" parent="Hazard/Path Item" index="0"]
-curve = SubResource( 1 )
+curve = SubResource( 3 )
+
+[node name="Path Item2" parent="Hazard" instance=ExtResource( 4 )]
+item_type = 0
+
+[node name="Path2D" parent="Hazard/Path Item2" index="0"]
+curve = SubResource( 4 )
 
 [node name="WallsPolygon" type="Node2D" parent="."]
+
+[node name="Wall_poly" parent="WallsPolygon" instance=ExtResource( 8 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly" index="0"]
+polygon = PoolVector2Array( 1664, 3968, 1728, 3936, 1728, 3776, 1728, 3712, 1696, 3680, 1664, 3680 )
+
+[node name="Polygon2D" parent="WallsPolygon/Wall_poly" index="1"]
+color = Color( 0.0588235, 0.0980392, 0.223529, 1 )
+
+[node name="Wall_poly2" parent="WallsPolygon" instance=ExtResource( 8 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly2" index="0"]
+polygon = PoolVector2Array( 1664, 4000, 1728, 4032, 1728, 4160, 1664, 4160 )
+
+[node name="Polygon2D" parent="WallsPolygon/Wall_poly2" index="1"]
+color = Color( 0.0588235, 0.0980392, 0.223529, 1 )
+
+[node name="Path2D" parent="WallsPolygon/Wall_poly2" index="2"]
+curve = SubResource( 5 )
+
+[node name="Wall_poly3" parent="WallsPolygon" instance=ExtResource( 8 )]
+position = Vector2( -1, 0 )
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly3" index="0"]
+polygon = PoolVector2Array( 2625, 2816, 2624, 2912, 2112, 2912, 2144, 2816 )
+
+[node name="Path2D" parent="WallsPolygon/Wall_poly3" index="2"]
+curve = SubResource( 6 )
+
+[node name="Wall_poly4" parent="WallsPolygon" instance=ExtResource( 8 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly4" index="0"]
+polygon = PoolVector2Array( 2720, 2816, 3296, 2816, 3296, 2912, 2720, 2912 )
+
+[node name="Path2D" parent="WallsPolygon/Wall_poly4" index="2"]
+curve = SubResource( 7 )
+
+[node name="Wall_poly5" parent="WallsPolygon" instance=ExtResource( 8 )]
+position = Vector2( 0, 1 )
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly5" index="0"]
+polygon = PoolVector2Array( 2656, 2656, 3296, 2688, 3295, 2824, 3058, 2822, 2970, 2825, 2967, 2779, 2655, 2700 )
+
+[node name="Path2D" parent="WallsPolygon/Wall_poly5" index="2"]
+curve = SubResource( 8 )
+
+[node name="Wall_poly6" parent="WallsPolygon" instance=ExtResource( 8 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly6" index="0"]
+polygon = PoolVector2Array( 2611, 2513, 2773, 2461, 2868, 2433, 2917, 2493, 2726, 2544, 2606, 2547 )
+
+[node name="Path2D" parent="WallsPolygon/Wall_poly6" index="2"]
+curve = SubResource( 9 )
+
+[node name="Wall_poly7" parent="WallsPolygon" instance=ExtResource( 8 )]
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly7" index="0"]
+polygon = PoolVector2Array( 2298, 2082, 3044, 2005, 3190, 2000, 3194, 2046, 3011, 2050, 2288, 2162 )
+
+[node name="Path2D" parent="WallsPolygon/Wall_poly7" index="2"]
+curve = SubResource( 10 )
+
+[node name="Wall_poly8" parent="WallsPolygon" instance=ExtResource( 8 )]
+position = Vector2( 112, 102 )
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly8" index="0"]
+polygon = PoolVector2Array( 2298, 2082, 3044, 2005, 3190, 2000, 3194, 2046, 3011, 2050, 2288, 2162 )
+
+[node name="Path2D" parent="WallsPolygon/Wall_poly8" index="2"]
+curve = SubResource( 11 )
 
 [node name="tilesLayers" type="Node2D" parent="."]
 
@@ -49,16 +265,117 @@ tile_set = ExtResource( 3 )
 cell_size = Vector2( 200, 200 )
 collision_layer = 2
 format = 1
-tile_data = PoolIntArray( 65539, 7, 0, 131075, 7, 0, 393225, -1610612732, 0, 393226, 4, 0, 393227, 4, 0, 393228, -536870909, 0, 393229, -536870909, 0, 393230, -536870909, 0, 393231, -536870909, 0, 393232, 1610612740, 0, 458754, 4, 0, 458755, 1073741825, 0, 458756, 1073741825, 0, 458757, 1073741825, 0, 458758, 1073741825, 0, 458759, 1073741825, 0, 458760, 1073741828, 0, 458761, -536870911, 0, 458762, -1610612729, 0, 458763, -1073741817, 0, 458768, 1610612741, 0, 524290, 5, 0, 524296, -2147483646, 0, 524297, -1073741816, 0, 524298, 8, 0, 524299, -1073741816, 0, 524304, 1610612741, 0, 589826, 5, 0, 589832, 0, 0, 589833, 1, 0, 589834, 1610612743, 0, 589835, -1073741818, 0, 589840, 1610612741, 0, 589848, -536870908, 0, 589849, 1073741828, 0, 589850, -2147483643, 0, 589851, -2147483643, 0, 589852, -2147483643, 0, 589853, -2147483643, 0, 589854, -2147483643, 0, 589855, -2147483644, 0, 655362, 4, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 4, 0, 655370, 536870916, 0, 655371, 4, 0, 655372, 1610612744, 0, 655374, 1610612742, 0, 655375, -2147483645, 0, 655376, 1610612740, 0, 655384, -536870911, 0, 655391, -2147483647, 0, 720906, 1073741828, 0, 720907, -536870909, 0, 720908, 1073741826, 0, 720910, 1610612738, 0, 720911, -536870909, 0, 720912, 536870916, 0, 720920, -536870911, 0, 720927, 1610612741, 0, 720928, 1073741828, 0, 720929, 1073741825, 0, 720930, 1073741825, 0, 720931, 1073741825, 0, 720932, 1073741825, 0, 720933, -2147483644, 0, 786442, 536870915, 0, 786448, 1073741827, 0, 786456, -536870911, 0, 786463, -1073741823, 0, 786464, -1610612735, 0, 786469, -2147483647, 0, 851978, 536870915, 0, 851984, 1073741827, 0, 851992, -536870911, 0, 851999, 1610612738, 0, 852000, -1610612734, 0, 852005, -2147483647, 0, 917514, 536870915, 0, 917520, 1073741827, 0, 917528, -536870911, 0, 917535, -536870906, 0, 917536, -536870910, 0, 917541, -2147483647, 0, 983050, 1073741828, 0, 983051, -2147483645, 0, 983052, -2147483645, 0, 983053, 1073741830, 0, 983054, -536870906, 0, 983055, -2147483645, 0, 983056, 1073741828, 0, 983064, -536870908, 0, 983065, 536870913, 0, 983066, -536870907, 0, 983067, 1073741830, 0, 983068, -536870906, 0, 983069, -536870907, 0, 983070, -536870907, 0, 983071, -536870908, 0, 983072, -1610612732, 0, 983073, 536870913, 0, 983074, 536870913, 0, 983075, 536870913, 0, 983076, 536870913, 0, 983077, -2147483644, 0, 1114106, 1073741828, 0, 1114107, 536870919, 0, 1114108, 536870919, 0, 1114109, 536870919, 0, 1114110, 536870919, 0, 1114111, 536870919, 0, 1048576, 1073741828, 0, 1048577, 1073741828, 0, 1048578, 536870919, 0, 1048579, 536870919, 0, 1048580, 536870919, 0, 1048581, 536870919, 0, 1048582, 536870919, 0, 1048583, 536870919, 0, 1048584, 1073741828, 0, 1048585, 1073741828, 0, 1048586, -2147483643, 0, 1048587, -2147483643, 0, 1048588, -2147483643, 0, 1048589, -2147483642, 0, 1048590, 536870918, 0, 1048591, -2147483643, 0, 1048592, -2147483643, 0, 1048593, 536870919, 0, 1048594, 1073741828, 0, 1048595, 536870916, 0, 1048596, 536870919, 0, 1048597, 536870919, 0, 1048598, 536870919, 0, 1048599, 536870919, 0, 1048600, 1073741828, 0, 1048601, -2147483644, 0, 1048602, 536870919, 0, 1048603, -2147483642, 0, 1048604, 536870918, 0, 1048605, 536870919, 0, 1048606, 1073741828, 0, 1179642, -2147483641, 0, 1114112, -536870904, 0, 1114113, -2147483642, 0, 1114120, -536870905, 0, 1114121, -2147483641, 0, 1114130, -536870905, 0, 1114131, 536870915, 0, 1114136, -536870904, 0, 1114137, -2147483642, 0, 1114142, 536870917, 0, 1245178, -2147483641, 0, 1179656, 536870918, 0, 1179657, -2147483642, 0, 1179666, -2147483646, 0, 1179667, 1073741826, 0, 1179678, 536870917, 0, 1310714, -2147483641, 0, 1245184, 1073741832, 0, 1245185, 1073741830, 0, 1245208, 1073741832, 0, 1245209, 1073741830, 0, 1245214, 536870917, 0, 1376250, 1073741828, 0, 1376251, 1073741831, 0, 1376252, 1073741831, 0, 1376253, 1073741831, 0, 1376254, 1073741831, 0, 1376255, 1073741831, 0, 1310720, 1073741828, 0, 1310721, 1073741828, 0, 1310722, 1073741831, 0, 1310723, 1073741831, 0, 1310724, 1073741831, 0, 1310725, 1073741831, 0, 1310726, 1073741831, 0, 1310727, 1073741831, 0, 1310728, 1073741830, 0, 1310738, 536870914, 0, 1310739, 1073741831, 0, 1310740, 1073741831, 0, 1310741, 1073741831, 0, 1310742, 1073741831, 0, 1310743, 1073741831, 0, 1310744, 1073741828, 0, 1310745, 1073741828, 0, 1310746, 1073741831, 0, 1310747, 1073741831, 0, 1310748, 1073741831, 0, 1310749, 1073741831, 0, 1310750, 1073741828, 0, 1376264, 1073741828, 0, 1376265, 536870913, 0, 1376266, 536870913, 0, 1376267, 536870913, 0, 1376268, 536870913, 0, 1376269, 536870913, 0, 1376270, 536870913, 0, 1376271, 536870913, 0, 1376272, 536870913, 0, 1376273, 536870913, 0, 1376274, 1073741828, 0, 1376275, 1073741828, 0 )
-
-[node name="SmallRoom" type="TileMap" parent="tilesLayers"]
-tile_set = ExtResource( 3 )
-cell_size = Vector2( 200, 200 )
-collision_layer = 2
-format = 1
-tile_data = PoolIntArray( 196610, 1610612740, 0, 196611, 1610612737, 0, 196612, 1610612737, 0, 196613, 1610612737, 0, 196614, 1610612737, 0, 196615, 1610612737, 0, 196616, 1610612740, 0, 262146, -1073741816, 0, 262152, 8, 0, 327682, 1610612744, 0, 327688, -1610612728, 0, 393218, 1610612740, 0, 393219, 1610612743, 0, 393220, 1610612743, 0, 393221, 1610612743, 0, 393222, 1610612743, 0, 393223, 1610612743, 0, 393224, 1610612740, 0 )
+tile_data = PoolIntArray( 65539, 7, 0, 131075, 7, 0, 393225, -1610612732, 0, 393226, 4, 0, 458754, 4, 0, 458755, 1073741825, 0, 458756, 1073741825, 0, 458757, 1073741825, 0, 458758, 1073741825, 0, 458759, 1073741825, 0, 458760, 1073741828, 0, 458761, -536870911, 0, 458762, -1610612729, 0, 458763, 1073741828, 0, 458764, 1073741828, 0, 458765, 1073741828, 0, 458766, 1073741828, 0, 458767, 1073741828, 0, 524290, 5, 0, 524296, -2147483646, 0, 524297, -1073741816, 0, 524298, 8, 0, 524299, 1073741825, 0, 524300, 1073741825, 0, 524301, 1073741825, 0, 524302, 1073741825, 0, 524303, 1073741825, 0, 524304, 1073741828, 0, 589826, 5, 0, 589832, 0, 0, 589833, 1, 0, 589834, 1610612743, 0, 589835, -1073741818, 0, 589840, 1610612741, 0, 589848, -536870908, 0, 589849, 1073741828, 0, 589850, -2147483643, 0, 589851, -2147483643, 0, 589852, -2147483643, 0, 589853, -2147483643, 0, 589854, -2147483643, 0, 589855, -2147483644, 0, 655362, 4, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 4, 0, 655369, 4, 0, 655370, 1073741828, 0, 655371, 1073741826, 0, 655376, 536870917, 0, 655384, -536870911, 0, 655391, -2147483647, 0, 720905, 4, 0, 720906, 536870915, 0, 720907, -2147483648, 0, 720908, 1073741830, 0, 720910, 536870914, 0, 720911, -536870910, 0, 720912, 536870917, 0, 720920, -536870911, 0, 720927, 1610612741, 0, 720928, 1073741828, 0, 720929, 1073741825, 0, 720930, 1073741825, 0, 720931, 1073741825, 0, 720932, 1073741825, 0, 720933, -2147483644, 0, 786442, 5, 0, 786443, 536870918, 0, 786444, 1073741826, 0, 786446, 1073741824, 0, 786447, 1073741826, 0, 786448, 536870917, 0, 786449, 536870916, 0, 786456, -536870911, 0, 786463, -1073741823, 0, 786464, -1610612735, 0, 786469, -2147483647, 0, 851978, 1073741829, 0, 851984, 536870917, 0, 851985, 536870916, 0, 851992, -536870911, 0, 851999, 1610612738, 0, 852000, -1610612734, 0, 852005, -2147483647, 0, 983037, -1610612732, 0, 983038, -1610612731, 0, 983039, -1610612731, 0, 917504, -1610612732, 0, 917514, 1073741829, 0, 917520, 536870917, 0, 917528, -536870911, 0, 917535, -536870906, 0, 917536, -536870910, 0, 917541, -2147483647, 0, 1048572, 4, 0, 1048573, 5, 0, 983040, 1610612741, 0, 983045, 1610612740, 0, 983046, 1610612746, 0, 983047, 1610612746, 0, 983048, 1610612740, 0, 983049, 536870916, 0, 983050, 1073741828, 0, 983051, 1, 0, 983052, -2147483645, 0, 983053, 1073741830, 0, 983054, -536870906, 0, 983055, 536870913, 0, 983056, 1073741828, 0, 983064, -536870908, 0, 983065, 536870913, 0, 983066, -536870907, 0, 983067, 1073741830, 0, 983068, -536870906, 0, 983069, -536870907, 0, 983070, -536870907, 0, 983071, -536870908, 0, 983072, -1610612732, 0, 983073, 536870913, 0, 983074, 536870913, 0, 983075, 536870913, 0, 983076, 536870913, 0, 983077, -2147483644, 0, 1114105, 1610612740, 0, 1114106, -1073741821, 0, 1114107, 1073741828, 0, 1114108, -1610612732, 0, 1114109, 6, 0, 1048576, 1610612741, 0, 1048577, 1073741828, 0, 1048578, 536870919, 0, 1048579, 536870919, 0, 1048580, 1610612740, 0, 1048581, 1610612739, 0, 1048584, -536870905, 0, 1048585, 1073741828, 0, 1048586, 536870916, 0, 1048587, -536870908, 0, 1048588, -2147483643, 0, 1048589, -2147483642, 0, 1048590, 536870918, 0, 1048591, -2147483643, 0, 1048592, -2147483643, 0, 1048593, 536870919, 0, 1048594, 1073741828, 0, 1048595, 536870916, 0, 1048596, 536870919, 0, 1048597, -536870909, 0, 1048598, -536870909, 0, 1048599, 536870919, 0, 1048600, 1073741828, 0, 1048601, -2147483644, 0, 1048602, 536870919, 0, 1048603, -2147483642, 0, 1048604, 536870918, 0, 1048605, 536870919, 0, 1048606, 1073741828, 0, 1179641, 1610612739, 0, 1179643, 1610612738, 0, 1179644, -1610612734, 0, 1114112, -536870904, 0, 1114113, -2147483642, 0, 1114116, 1610612741, 0, 1114117, 1610612739, 0, 1114120, -536870905, 0, 1114121, -536870908, 0, 1114122, -536870908, 0, 1114123, -536870911, 0, 1114130, -536870905, 0, 1114131, 536870915, 0, 1114133, 536870914, 0, 1114134, 1073741830, 0, 1114136, -536870904, 0, 1114137, -2147483642, 0, 1114142, 536870917, 0, 1245177, 1610612739, 0, 1179652, 1610612738, 0, 1179653, 1610612736, 0, 1179656, 536870918, 0, 1179657, -536870909, 0, 1179658, 1073741825, 0, 1179659, 1073741826, 0, 1179660, 0, 0, 1179661, 536870913, 0, 1179662, 536870913, 0, 1179663, 536870913, 0, 1179664, -1610612736, 0, 1179666, -2147483646, 0, 1179667, 1073741826, 0, 1179669, 1073741824, 0, 1179670, -536870912, 0, 1179678, 536870917, 0, 1310713, 5, 0, 1310714, 1610612742, 0, 1310715, 1073741830, 0, 1245184, 1073741832, 0, 1245185, 1073741830, 0, 1245187, 9, 0, 1245188, 10, 0, 1245189, 536870922, 0, 1245190, 536870921, 0, 1245196, -1073741824, 0, 1245197, 1610612747, 0, 1245198, 1610612746, 0, 1245199, 1073741835, 0, 1245200, 1610612736, 0, 1245205, -2147483648, 0, 1245206, 536870912, 0, 1245208, 1073741832, 0, 1245209, 1073741830, 0, 1245214, 536870917, 0, 1376249, 1610612739, 0, 1376250, 1610612741, 0, 1376251, 1073741828, 0, 1376252, 1073741831, 0, 1376253, 1073741831, 0, 1376254, 1073741831, 0, 1376255, -1610612736, 0, 1310720, 1610612741, 0, 1310721, 1073741828, 0, 1310722, 1073741831, 0, 1310723, 1610612740, 0, 1310724, 1610612740, 0, 1310725, 1610612740, 0, 1310726, 536870916, 0, 1310727, 1073741831, 0, 1310728, 1073741830, 0, 1310738, 536870914, 0, 1310739, 1073741831, 0, 1310740, 1073741831, 0, 1310741, 1073741828, 0, 1310742, 1073741828, 0, 1310743, 1073741831, 0, 1310744, 1073741828, 0, 1310745, 1073741828, 0, 1310746, 1073741831, 0, 1310747, 1073741831, 0, 1310748, 1073741831, 0, 1310749, 1073741831, 0, 1310750, 1073741828, 0, 1441785, 1610612739, 0, 1441786, -1610612730, 0, 1441787, -1073741821, 0, 1441788, -1610612731, 0, 1441789, -1610612731, 0, 1441790, -1610612731, 0, 1441791, -1610612734, 0, 1376256, 1610612741, 0, 1376257, 1610612740, 0, 1376258, -1073741820, 0, 1376264, 1073741828, 0, 1376265, 536870913, 0, 1376266, 536870913, 0, 1376267, 536870913, 0, 1376268, 536870913, 0, 1376269, 536870913, 0, 1376270, 536870913, 0, 1376271, 536870913, 0, 1376272, 536870913, 0, 1376273, 536870913, 0, 1376274, 1073741828, 0, 1376275, 1073741828, 0, 1507321, -1073741820, 0, 1507322, -1073741819, 0, 1507323, -1073741819, 0, 1507324, -1073741819, 0, 1507325, -1073741818, 0, 1441792, 1610612741, 0, 1441793, 4, 0, 1572861, 4, 0, 1572862, -1073741819, 0, 1572863, -1073741819, 0, 1507328, 4, 0, 1638398, 4, 0, 1638399, 4, 0 )
 
 [node name="billboards" type="Node2D" parent="."]
+position = Vector2( 1280, 2784 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="billboards"]
+position = Vector2( 256, 160 )
+texture = ExtResource( 9 )
+
+[node name="Sprite2" type="Sprite" parent="billboards"]
+position = Vector2( 32, 160 )
+scale = Vector2( 0.468002, 0.468002 )
+texture = ExtResource( 10 )
+
+[node name="Sprite3" type="Sprite" parent="billboards"]
+
+[node name="Control" type="Control" parent="billboards"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boss" type="Label" parent="billboards/Control"]
+margin_left = 4192.0
+margin_top = -416.0
+margin_right = 4416.0
+margin_bottom = -315.0
+custom_fonts/font = SubResource( 12 )
+text = "Mini
+Boss"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Door End" type="Label" parent="billboards/Control"]
+margin_left = 5472.0
+margin_top = -160.0
+margin_right = 5909.0
+margin_bottom = -59.0
+custom_fonts/font = SubResource( 12 )
+text = "Door end "
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pink " type="Label" parent="billboards/Control"]
+margin_left = -480.0
+margin_top = -1120.0
+margin_right = 147.0
+margin_bottom = -1019.0
+custom_fonts/font = SubResource( 12 )
+text = "Hazard Shield"
+align = 1
+
+[node name="Start" type="Label" parent="billboards/Control"]
+margin_left = -1792.0
+margin_top = 224.0
+margin_right = -1165.0
+margin_bottom = 325.0
+custom_fonts/font = SubResource( 12 )
+text = "Start"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boxPzzle" type="Label" parent="billboards/Control"]
+visible = false
+margin_left = 1120.0
+margin_top = -160.0
+margin_right = 1747.0
+margin_bottom = -59.0
+custom_fonts/font = SubResource( 12 )
+text = "Box Puzzle"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boxPzzle2" type="Label" parent="billboards/Control"]
+visible = false
+margin_left = 4000.0
+margin_top = 832.0
+margin_right = 4627.0
+margin_bottom = 933.0
+custom_fonts/font = SubResource( 12 )
+text = "Lock&Key 
+Prescolar 
+figures"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="progesion" type="Path2D" parent="billboards"]
+self_modulate = Color( 0.878431, 1, 0.501961, 0.701961 )
+curve = SubResource( 13 )
+
+[node name="progesion2" type="Path2D" parent="billboards"]
+self_modulate = Color( 1, 0.917647, 0.501961, 0.701961 )
+curve = SubResource( 14 )
+
+[node name="Short cut " type="Path2D" parent="billboards"]
+self_modulate = Color( 1, 0.670588, 0.501961, 0.701961 )
+curve = SubResource( 15 )
 
 [node name="Screens" type="Node2D" parent="."]
 
@@ -69,7 +386,7 @@ tile_data = PoolIntArray( 196610, 1610612740, 0, 196611, 1610612737, 0, 196612, 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Vorticella" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1024, 2016 )
+position = Vector2( 888, 1978 )
 
 [node name="Vorticella2" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 2016, 1632 )
@@ -80,27 +397,201 @@ position = Vector2( 1600, 1632 )
 [node name="boxes" type="Node2D" parent="."]
 
 [node name="Caja" parent="boxes" instance=ExtResource( 7 )]
-position = Vector2( 3008, 1792 )
+position = Vector2( 3969, 1429 )
 
 [node name="Caja2" parent="boxes" instance=ExtResource( 7 )]
-position = Vector2( 2784, 1760 )
+position = Vector2( 4096, 3520 )
 is_key = true
+is_curved = true
 
 [node name="CollisionPolygon2D" parent="boxes/Caja2" index="0"]
 polygon = PoolVector2Array( 71.1108, -101.333, 96, -32, 96, 0, 96, 32, 64, 96, 0, 122.667, -67.5557, 106.667, -113.778, 56.8889, -87.1113, 40.8889, -81.7778, 24.8889, -72.8892, 1.77783, -87.1113, -26.6667, -113.778, -56.8889, -62.2222, -103.111, 0, -108.444 )
 
+[node name="Path2D" parent="boxes/Caja2" index="2"]
+curve = SubResource( 16 )
+
 [node name="Caja3" parent="boxes" instance=ExtResource( 7 )]
-position = Vector2( 2678, 2064 )
-mass = 50.0
+position = Vector2( 65, 2 )
+mode = 2
+mass = 125.0
+linear_damp = 1.0
+is_curved = true
 
 [node name="CollisionPolygon2D" parent="boxes/Caja3" index="0"]
-polygon = PoolVector2Array( 96, -32, 273.777, -17.7776, 284.444, 12.4446, 273.777, 46.2224, 64, 96, -177.778, 104.889, -195.556, 55.1113, -186.667, 10.6667 )
+polygon = PoolVector2Array( 96, 3568, 208, 3567, 309, 3570, 303, 3825, 196, 3831, 93, 3823 )
 
-[node name="Lock&KeyArea" parent="boxes" instance=ExtResource( 8 )]
-position = Vector2( 2934, 1499 )
+[node name="Path2D" parent="boxes/Caja3" index="2"]
+curve = SubResource( 17 )
+
+[node name="Caja8" parent="boxes" instance=ExtResource( 7 )]
+position = Vector2( 2597, -228 )
+mode = 2
+mass = 125.0
+linear_damp = 1.0
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja8" index="0"]
+polygon = PoolVector2Array( 99, 3590, 208, 3567, 307, 3591, 300, 3812, 196, 3828, 92, 3808 )
+
+[node name="Path2D" parent="boxes/Caja8" index="2"]
+curve = SubResource( 17 )
+
+[node name="Caja4" parent="boxes" instance=ExtResource( 7 )]
+position = Vector2( 22, 10 )
+mode = 2
+mass = 10.0
+linear_damp = 0.5
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja4" index="0"]
+polygon = PoolVector2Array( -354, 3191, -312, 3192, -266, 3209, -263, 3254, -315, 3267, -412, 3262, -433, 3236, -425, 3199 )
+
+[node name="Caja5" parent="boxes" instance=ExtResource( 7 )]
+position = Vector2( 139, 5 )
+mode = 2
+mass = 3.0
+linear_damp = 0.5
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja5" index="0"]
+polygon = PoolVector2Array( -174, 3212, -139, 3258, -163, 3314, -235, 3309, -245, 3267, -232, 3226, -206, 3210 )
+
+[node name="Path2D" parent="boxes/Caja5" index="2"]
+curve = SubResource( 18 )
+
+[node name="Caja6" parent="boxes" instance=ExtResource( 7 )]
+position = Vector2( 22, -1 )
+mode = 2
+mass = 3.0
+linear_damp = 0.5
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja6" index="0"]
+polygon = PoolVector2Array( -174, 3212, -159, 3257, -163, 3314, -235, 3309, -232, 3226, -206, 3210 )
+
+[node name="Path2D" parent="boxes/Caja6" index="2"]
+curve = SubResource( 19 )
+
+[node name="Caja7" parent="boxes" instance=ExtResource( 7 )]
+position = Vector2( -975, 534 )
+mode = 2
+mass = 5.0
+linear_damp = 1.0
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja7" index="0"]
+polygon = PoolVector2Array( -157, 3193, -131, 3256, -161, 3310, -254, 3300, -248, 3217, -203, 3197 )
+
+[node name="Path2D" parent="boxes/Caja7" index="2"]
+curve = SubResource( 20 )
+
+[node name="Caja puzzle" parent="boxes" instance=ExtResource( 7 )]
+mode = 2
+mass = 10.0
+linear_damp = 0.5
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja puzzle" index="0"]
+polygon = PoolVector2Array( 2752, 2752, 2752, 2784, 2708, 2802, 2620, 2815, 2599, 2790, 2633, 2745, 2688, 2720 )
+
+[node name="Path2D" parent="boxes/Caja puzzle" index="2"]
+curve = SubResource( 21 )
+
+[node name="Caja puzzle2" parent="boxes" instance=ExtResource( 7 )]
+mode = 2
+mass = 2.0
+linear_damp = 0.5
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja puzzle2" index="0"]
+polygon = PoolVector2Array( 2635, 2952, 2703, 2952, 2705, 2924, 2672, 2916, 2636, 2923 )
+
+[node name="Path2D" parent="boxes/Caja puzzle2" index="2"]
+curve = SubResource( 22 )
+
+[node name="Caja puzzle3" parent="boxes" instance=ExtResource( 7 )]
+position = Vector2( -2, -13 )
+mode = 2
+mass = 2.0
+linear_damp = 0.1
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja puzzle3" index="0"]
+polygon = PoolVector2Array( 2170, 2392, 2219, 2371, 2232, 2400, 2213, 2434, 2172, 2443 )
+
+[node name="Path2D" parent="boxes/Caja puzzle3" index="2"]
+curve = SubResource( 23 )
+
+[node name="Caja puzzle4" parent="boxes" instance=ExtResource( 7 )]
+mode = 2
+mass = 15.0
+linear_damp = 0.5
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja puzzle4" index="0"]
+polygon = PoolVector2Array( 2799, 2388, 2781, 2436, 2703, 2469, 2601, 2481, 2572, 2469, 2571, 2429, 2590, 2385, 2646, 2363, 2773, 2376 )
+
+[node name="Path2D" parent="boxes/Caja puzzle4" index="2"]
+curve = SubResource( 24 )
+
+[node name="Caja puzzle5" parent="boxes" instance=ExtResource( 7 )]
+mode = 2
+mass = 2.0
+linear_damp = 0.5
+is_curved = true
+
+[node name="CollisionPolygon2D" parent="boxes/Caja puzzle5" index="0"]
+polygon = PoolVector2Array( 3174, 2378, 3183, 2298, 3219, 2299, 3229, 2382 )
+
+[node name="Path2D" parent="boxes/Caja puzzle5" index="2"]
+curve = SubResource( 25 )
+
+[node name="Gates" type="Node2D" parent="."]
+
+[editable path="Health/Path Item"]
+
+[editable path="Health/Path Item2"]
 
 [editable path="Hazard/Path Item"]
+
+[editable path="Hazard/Path Item2"]
+
+[editable path="WallsPolygon/Wall_poly"]
+
+[editable path="WallsPolygon/Wall_poly2"]
+
+[editable path="WallsPolygon/Wall_poly3"]
+
+[editable path="WallsPolygon/Wall_poly4"]
+
+[editable path="WallsPolygon/Wall_poly5"]
+
+[editable path="WallsPolygon/Wall_poly6"]
+
+[editable path="WallsPolygon/Wall_poly7"]
+
+[editable path="WallsPolygon/Wall_poly8"]
 
 [editable path="boxes/Caja2"]
 
 [editable path="boxes/Caja3"]
+
+[editable path="boxes/Caja8"]
+
+[editable path="boxes/Caja4"]
+
+[editable path="boxes/Caja5"]
+
+[editable path="boxes/Caja6"]
+
+[editable path="boxes/Caja7"]
+
+[editable path="boxes/Caja puzzle"]
+
+[editable path="boxes/Caja puzzle2"]
+
+[editable path="boxes/Caja puzzle3"]
+
+[editable path="boxes/Caja puzzle4"]
+
+[editable path="boxes/Caja puzzle5"]

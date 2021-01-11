@@ -178,7 +178,7 @@ curve = SubResource( 7 )
 curve = SubResource( 8 )
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 9464.9, 3489.11 )
+position = Vector2( 8306.42, -626.147 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -354,10 +354,10 @@ position = Vector2( 1732.04, 2864.76 )
 
 [node name="Vorticella" parent="." instance=ExtResource( 15 )]
 position = Vector2( 8625.44, 1372.48 )
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran"]
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_intro" flags=6]
-[connection signal="door" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran" flags=6]
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran"]
 [connection signal="door" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_win" flags=6]
+[connection signal="door" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran" flags=6]
 
 [editable path="Node2D/Path Item2"]
 

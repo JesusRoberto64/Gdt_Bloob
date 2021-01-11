@@ -11,6 +11,8 @@ onready var lifeTimer = $lifeTimer
 var time_to_collide = 0.5
 var aplied_force = 800
 
+export(bool) var is_life_infite = false
+
 func _ready():
 	add_to_group("Health")
 	col = Color.aqua
@@ -24,8 +26,9 @@ func _ready():
 	
 	# deafult life time seconds
 	#lifeTime.start(5)
-	lifeTimer.wait_time = life_time
-	lifeTimer.start()
+	if !is_life_infite:
+		lifeTimer.wait_time = life_time
+		lifeTimer.start()
 	pass
 
 func _process(delta):

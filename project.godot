@@ -99,6 +99,7 @@ grow={
 2d_physics/layer_4="Non-grab"
 2d_physics/layer_5="Hazard"
 2d_physics/layer_6="CenterPlanc"
+2d_physics/layer_7="Gatetop"
 
 [physics]
 
