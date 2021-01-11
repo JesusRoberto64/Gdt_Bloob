@@ -103,6 +103,7 @@ grow={
 
 [physics]
 
+common/physics_jitter_fix=2.0
 2d/default_gravity=0
 
 [rendering]

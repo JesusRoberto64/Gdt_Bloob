@@ -213,7 +213,7 @@ func _process(_delta):
 			pass
 		#max_speed = 2500
 		if radius > 15:
-			move_accel = 1800
+			move_accel = 1200#1800
 		else:
 			#move_accel = 900
 			move_accel = lerp(move_accel,900,0.1)
