@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Prefabs/Enemies/Single Enemies/Brachinous.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Enemies/Single Enemies/Enemy_Movement_Area.tscn" type="PackedScene" id=2]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 781.449, -415.356, 774.825, 399.298, -644.078, 390.746, -641.249, -423.842 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -641.249, -423.842, -644.078, 390.746, 774.825, 399.298, 781.449, -415.356 ) ]
+
+[node name="Navigation2D" type="Navigation2D"]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+navpoly = SubResource( 1 )
+
+[node name="Movement_Area" parent="NavigationPolygonInstance" instance=ExtResource( 2 )]
+position = Vector2( 0, 0 )
+
+[node name="Brachinous" parent="NavigationPolygonInstance/Movement_Area/CollisionShape2D" index="1" instance=ExtResource( 1 )]
+
+[editable path="NavigationPolygonInstance/Movement_Area"]
