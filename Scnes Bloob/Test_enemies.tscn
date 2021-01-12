@@ -141,7 +141,7 @@ _data = {
 [node name="ProtoLvl" type="Node2D"]
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 1072.77, 1691.88 )
+position = Vector2( -217.251, 3067.43 )
 __meta__ = {
 "_edit_group_": true
 }

@@ -109,7 +109,9 @@ func _physics_process(delta):
 			
 			pass
 	
-	
+	if planc.cur_state == planc.STATE.DYING:
+		state = CAM_STATE.CINEMATIC
+		return
 	var cam_pos = planc.findCentroid()
 	cam_pos.x = stepify(cam_pos.x,1)
 	cam_pos.y = stepify(cam_pos.y,1)

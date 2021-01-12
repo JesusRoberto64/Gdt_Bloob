@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="GraphicVorti" type="Node2D"]
+rotation = -1.5708
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2( 20, 0 )
+rotation = 1.5708
+color = Color( 0.952941, 0.788235, 0.133333, 0.686275 )
+polygon = PoolVector2Array( 0, 0, 80, -250, -80, -250 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.933333, 0.184314, 0.184314, 1 )
+polygon = PoolVector2Array( -1.01355, -10.6576, 7.11818, -11.3647, 45.1583, -10.3312, 20.5527, 0.499505, 45.688, 10.3283, 8.53239, 11.2627, -0.836773, 10.9091, -11.0898, 10.5556, -18.6911, 5.99959, -20.3263, -1.13566, -18.1609, -6.76853, -8.79172, -11.188 )
