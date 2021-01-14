@@ -348,16 +348,21 @@ func shink():
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
 	
-	emit_signal("hud_sync",radius)
+	emit_signal("hud_sync",radius) # to update hud 
 	
 	var item_expulse_inst = item_pulled.instance()
 	item_expulse_inst.position = findCentroid()
 	item_expulse_inst.can_collide = false
 	item_expulse_inst.direction = item_direct
+	
 	if cur_state == STATE.HURT:
+		item_expulse_inst.life_time = 1.0
+		item_expulse_inst.col = Color.blue
 		get_parent().call_deferred("add_child",item_expulse_inst)
+		#to just expulse once DEPREQUETED
 		return
 		pass
+	item_expulse_inst.is_projectile = true # use to hurt
 	get_parent().add_child(item_expulse_inst)
 	
 	pass

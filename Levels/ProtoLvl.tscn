@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Art/UI & Menus/cpntrolinvert.png" type="Texture" id=10]
 [ext_resource path="res://Art/UI & Menus/Fonts/bahnschrift.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Scripts/EnemyAI/Draw_Enemies.gd" type="Script" id=12]
+[ext_resource path="res://Prefabs/Enemies/Full Enemies/Brachinous_full.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scripts/EnemyAI/Draw_Enemies_2.gd" type="Script" id=14]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -87,20 +89,18 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1888, -1120, 0, 0, 0, 0, 2688, -1088, 0, 0, 0, 0, 2784, 416 )
 }
 
-[sub_resource type="Curve2D" id=16]
-_data = {
-"points": PoolVector2Array(  )
-}
+[sub_resource type="NavigationPolygon" id=16]
+vertices = PoolVector2Array( 229.601, -124.53, 399.958, -110.039, 411.139, 129.089, 242.949, 142.438, -409.776, 120.883, -400.786, -139.822 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
+outlines = [ PoolVector2Array( -400.786, -139.822, -409.776, 120.883, 242.949, 142.438, 411.139, 129.089, 399.958, -110.039, 229.601, -124.53 ) ]
 
-[sub_resource type="Curve2D" id=17]
-_data = {
-"points": PoolVector2Array(  )
-}
+[sub_resource type="CircleShape2D" id=17]
+radius = 124.111
 
-[sub_resource type="Curve2D" id=18]
-_data = {
-"points": PoolVector2Array(  )
-}
+[sub_resource type="NavigationPolygon" id=18]
+vertices = PoolVector2Array( -17.6201, -139.299, 115.864, -254.095, 158.579, 191.741, 83.8276, 207.759, -76.3531, 199.75, -212.507, 90.2932, -327.303, -56.5391, -370.018, 50.248 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 0, 5, 7 ) ]
+outlines = [ PoolVector2Array( -327.303, -56.5391, -370.018, 50.248, -212.507, 90.2932, -76.3531, 199.75, 83.8276, 207.759, 158.579, 191.741, 115.864, -254.095, -17.6201, -139.299 ) ]
 
 [sub_resource type="Curve2D" id=19]
 _data = {
@@ -137,10 +137,25 @@ _data = {
 "points": PoolVector2Array(  )
 }
 
+[sub_resource type="Curve2D" id=26]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=27]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=28]
+_data = {
+"points": PoolVector2Array(  )
+}
+
 [node name="ProtoLvl" type="Node2D"]
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 1478.34, 3914.23 )
+position = Vector2( 3497.98, 4127.42 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -390,7 +405,28 @@ script = ExtResource( 12 )
 position = Vector2( 4710.52, 4018.75 )
 
 [node name="Vorticella6" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 2921.95, 4229.3 )
+position = Vector2( 2921.95, 4227.52 )
+
+[node name="Vorticella7" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 2003.87, 1706.58 )
+
+[node name="Enemies Brachi" type="Node2D" parent="."]
+script = ExtResource( 14 )
+
+[node name="Navigation2D" parent="Enemies Brachi" instance=ExtResource( 13 )]
+position = Vector2( 3209.98, 3496.51 )
+
+[node name="NavigationPolygonInstance" parent="Enemies Brachi/Navigation2D" index="0"]
+navpoly = SubResource( 16 )
+
+[node name="CollisionShape2D" parent="Enemies Brachi/Navigation2D/Movement_Area" index="0"]
+shape = SubResource( 17 )
+
+[node name="Navigation2D2" parent="Enemies Brachi" instance=ExtResource( 13 )]
+position = Vector2( 5392.31, 3718.29 )
+
+[node name="NavigationPolygonInstance" parent="Enemies Brachi/Navigation2D2" index="0"]
+navpoly = SubResource( 18 )
 
 [node name="boxes" type="Node2D" parent="."]
 
@@ -406,10 +442,10 @@ is_curved = true
 polygon = PoolVector2Array( 71.1108, -101.333, 96, -32, 96, 0, 96, 32, 64, 96, 0, 122.667, -67.5557, 106.667, -113.778, 56.8889, -87.1113, 40.8889, -81.7778, 24.8889, -72.8892, 1.77783, -87.1113, -26.6667, -113.778, -56.8889, -62.2222, -103.111, 0, -108.444 )
 
 [node name="Path2D" parent="boxes/Caja2" index="2"]
-curve = SubResource( 16 )
+curve = SubResource( 19 )
 
 [node name="Caja3" parent="boxes" instance=ExtResource( 7 )]
-position = Vector2( 342.183, -194.548 )
+position = Vector2( 50.3429, -1.48453 )
 mode = 2
 mass = 125.0
 sleeping = true
@@ -420,7 +456,7 @@ is_curved = true
 polygon = PoolVector2Array( 117, 3571, 208, 3567, 309, 3570, 303, 3825, 196, 3831, 105, 3818, 101, 3689 )
 
 [node name="Path2D" parent="boxes/Caja3" index="2"]
-curve = SubResource( 17 )
+curve = SubResource( 20 )
 
 [node name="Caja8" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 2597, -228 )
@@ -433,7 +469,7 @@ is_curved = true
 polygon = PoolVector2Array( 99, 3590, 208, 3567, 307, 3591, 300, 3812, 196, 3828, 92, 3808 )
 
 [node name="Path2D" parent="boxes/Caja8" index="2"]
-curve = SubResource( 17 )
+curve = SubResource( 20 )
 
 [node name="Caja4" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 22, 10 )
@@ -456,7 +492,7 @@ is_curved = true
 polygon = PoolVector2Array( -174, 3212, -139, 3258, -163, 3314, -235, 3309, -245, 3267, -232, 3226, -206, 3210 )
 
 [node name="Path2D" parent="boxes/Caja5" index="2"]
-curve = SubResource( 18 )
+curve = SubResource( 21 )
 
 [node name="Caja6" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 22, -1 )
@@ -469,7 +505,7 @@ is_curved = true
 polygon = PoolVector2Array( -174, 3212, -159, 3257, -163, 3314, -235, 3309, -232, 3226, -206, 3210 )
 
 [node name="Path2D" parent="boxes/Caja6" index="2"]
-curve = SubResource( 19 )
+curve = SubResource( 22 )
 
 [node name="Caja7" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( -975, 534 )
@@ -482,7 +518,7 @@ is_curved = true
 polygon = PoolVector2Array( -157, 3193, -131, 3256, -161, 3310, -254, 3300, -248, 3217, -203, 3197 )
 
 [node name="Path2D" parent="boxes/Caja7" index="2"]
-curve = SubResource( 20 )
+curve = SubResource( 23 )
 
 [node name="Caja puzzle" parent="boxes" instance=ExtResource( 7 )]
 mode = 2
@@ -494,7 +530,7 @@ is_curved = true
 polygon = PoolVector2Array( 2752, 2752, 2752, 2784, 2708, 2802, 2620, 2815, 2599, 2790, 2633, 2745, 2688, 2720 )
 
 [node name="Path2D" parent="boxes/Caja puzzle" index="2"]
-curve = SubResource( 21 )
+curve = SubResource( 24 )
 
 [node name="Caja puzzle2" parent="boxes" instance=ExtResource( 7 )]
 mode = 2
@@ -506,7 +542,7 @@ is_curved = true
 polygon = PoolVector2Array( 2635, 2952, 2703, 2952, 2705, 2924, 2672, 2916, 2636, 2923 )
 
 [node name="Path2D" parent="boxes/Caja puzzle2" index="2"]
-curve = SubResource( 22 )
+curve = SubResource( 25 )
 
 [node name="Caja puzzle3" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( -2, -13 )
@@ -519,7 +555,7 @@ is_curved = true
 polygon = PoolVector2Array( 2170, 2392, 2219, 2371, 2232, 2400, 2213, 2434, 2172, 2443 )
 
 [node name="Path2D" parent="boxes/Caja puzzle3" index="2"]
-curve = SubResource( 23 )
+curve = SubResource( 26 )
 
 [node name="Caja puzzle4" parent="boxes" instance=ExtResource( 7 )]
 mode = 2
@@ -531,7 +567,7 @@ is_curved = true
 polygon = PoolVector2Array( 2799, 2388, 2781, 2436, 2703, 2469, 2601, 2481, 2572, 2469, 2571, 2429, 2590, 2385, 2646, 2363, 2773, 2376 )
 
 [node name="Path2D" parent="boxes/Caja puzzle4" index="2"]
-curve = SubResource( 24 )
+curve = SubResource( 27 )
 
 [node name="Caja puzzle5" parent="boxes" instance=ExtResource( 7 )]
 mode = 2
@@ -543,9 +579,11 @@ is_curved = true
 polygon = PoolVector2Array( 3174, 2378, 3183, 2298, 3219, 2299, 3229, 2382 )
 
 [node name="Path2D" parent="boxes/Caja puzzle5" index="2"]
-curve = SubResource( 25 )
+curve = SubResource( 28 )
 
-[node name="Gates" type="Node2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 2676.53, -816.368 )
+zoom = Vector2( 8, 8 )
 
 [editable path="Health/Path Item"]
 
@@ -570,6 +608,12 @@ curve = SubResource( 25 )
 [editable path="WallsPolygon/Wall_poly7"]
 
 [editable path="WallsPolygon/Wall_poly8"]
+
+[editable path="Enemies Brachi/Navigation2D"]
+
+[editable path="Enemies Brachi/Navigation2D/Movement_Area"]
+
+[editable path="Enemies Brachi/Navigation2D2"]
 
 [editable path="boxes/Caja2"]
 

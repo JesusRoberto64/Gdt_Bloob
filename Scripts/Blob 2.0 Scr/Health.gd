@@ -13,6 +13,8 @@ var aplied_force = 800
 
 export(bool) var is_life_infite = false
 
+export(bool) var is_projectile = false
+
 func _ready():
 	add_to_group("Health")
 	col = Color.aqua
@@ -29,6 +31,12 @@ func _ready():
 	if !is_life_infite:
 		lifeTimer.wait_time = life_time
 		lifeTimer.start()
+	
+	if is_projectile:
+		connect("body_entered",self,"attack")
+		contact_monitor = true
+		
+	
 	pass
 
 func _process(delta):
@@ -61,3 +69,10 @@ func _on_Timer_timeout():
 func _on_lifeTimer_timeout():
 	vanish = true
 	pass # Replace with function body.
+
+func attack(body):
+	
+	if body.is_in_group("Voticella"):
+		body.toggle_disable()
+		pass
+

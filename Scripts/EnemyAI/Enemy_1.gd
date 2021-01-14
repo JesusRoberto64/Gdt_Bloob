@@ -9,6 +9,8 @@ var canSeePlayerFlag = false
 
 export var pullForce = 15
 
+var disable = false
+var eating = false
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	#player = get_node("/root/Main/Blob")
@@ -21,6 +23,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(_delta):
+	if disable:
+		return
+	
 	FollowPlayer()
 	RaycastToPlayer()
 #	if(bodyDetected):
@@ -32,6 +37,9 @@ func _process(_delta):
 	pass
 
 func _physics_process(_delta):
+	if disable:
+		return
+	
 	if(bodyDetected and canSeePlayerFlag):
 		var dir = (get_transform().origin - player.get_transform().origin).normalized()
 		
@@ -49,7 +57,6 @@ func _physics_process(_delta):
 	pass
 
 func RaycastToPlayer():
-
 	if player == null:
 		return
 	#var dir = self.get_position().direction_to(Vector2.ZERO)
@@ -95,4 +102,16 @@ func OnBodyExited():
 	#print("Player Outside of vision")
 	#player.set_applied_force(Vector2.ZERO)
 	player.get_parent().gravity = Vector2.ZERO
+	pass
+
+func toggle_disable():
+	if eating:
+		return
+	disable = !disable
+	
+	if disable:
+		OnBodyExited()
+	else:
+		FollowPlayer()
+		RaycastToPlayer()
 	pass
