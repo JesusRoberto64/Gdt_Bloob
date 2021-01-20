@@ -21,7 +21,10 @@ export var currentState = States.IDLE
 export var patrolSpeed = 70
 export var pursueSpeed = 400
 export var idleWaitTime = 1.5
-export var prepareAttackTime = 1
+export var prepareAttackTime = 0.5
+
+var drag_move = Vector2(1.5,1.5)
+var set_disable = false
 
 func _ready():	
 	rng.randomize()
@@ -29,8 +32,9 @@ func _ready():
 	areaShape = get_parent().get_shape()
 	pass # Replace with function body.
 
-func _process(delta):
-	
+func _physics_process(delta):
+	if set_disable:
+		return
 	#raycast.set_cast_to(player.global_transform.origin)
 	#raycast.force_raycast_update ( )
 	RaycastToPlayer()
@@ -105,7 +109,8 @@ func FollowPlayer(_delta):
 		waitAttackTimer += _delta
 		if waitAttackTimer >= prepareAttackTime:
 			if playerLastPosition == null:
-				playerLastPosition = positioner.get_position()
+				
+				playerLastPosition = positioner.get_position()* drag_move
 			AttackPlayer(_delta)
 			pass
 		else:
@@ -128,11 +133,11 @@ func AttackPlayer(var delta):
 	var last_pos = self.get_position()
 	for _i in range(path.size()):
 		
-		var dist_to_end = last_pos.distance_to(path[0])
+		var dist_to_end = last_pos.distance_to(path[0]) 
 		
 		if(dist <= dist_to_end):
+			self.set_position(last_pos.linear_interpolate(path[0], dist/dist_to_end ))
 			
-			self.set_position(last_pos.linear_interpolate(path[0], dist/dist_to_end))
 			break
 		elif (dist <= 0.0):
 			self.set_position(path[0])
@@ -142,7 +147,8 @@ func AttackPlayer(var delta):
 			if(timer.is_stopped()):
 				timer.start(idleWaitTime)
 				
-		dist -= dist_to_end
+		dist -= dist_to_end #+ 100
+		#print(dist_to_end)
 		last_pos = path[0]
 		path.remove(0)
 		pass
@@ -181,3 +187,11 @@ func _on_Timer_timeout():
 	playerLastPosition = null
 	waitAttackTimer = 0.0
 	pass # Replace with function body.
+
+func disable():
+	set_disable = true
+	var graph = find_node("Graph_body")
+	
+	graph.color = Color(1.0,0.0,0.5,1.0)
+	graph.update()
+	

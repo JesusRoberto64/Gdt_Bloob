@@ -1,22 +1,22 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scripts/Hazard.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/EnemyAI/Hazard_food.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
 
-[node name="Hazard" type="RigidBody2D"]
+[node name="Hazard_food" type="RigidBody2D"]
 collision_layer = 16
 collision_mask = 19
-mode = 1
 mass = 2.0
+contacts_reported = 1
+contact_monitor = true
 script = ExtResource( 1 )
-state = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="LifeTimer" type="Timer" parent="."]
 wait_time = 3.0
-[connection signal="body_entered" from="." to="." method="_on_Hazard_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Hazard_food_body_entered"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]

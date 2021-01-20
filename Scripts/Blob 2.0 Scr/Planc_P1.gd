@@ -62,6 +62,9 @@ onready var turbo_Realace = $Turbo
 # Area enies detection 
 onready var area_enemies = $Area2D
 
+# habilities unlocked
+var shield = false
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -84,6 +87,9 @@ func _ready():
 	drag = float(move_accel) / max_speed
 	resetBlob()
 	
+	if shield:
+		Graphics_ctrl.has_shield = true
+	#unlock_ability("Shield")
 	pass 
 
 func findCentroid():
@@ -433,8 +439,12 @@ func _on_Turbo_timeout():
 
 func unlock_ability(abilty: String):
 	# a match logic
-	if abilty == "push_Hazard":
+	if abilty == "Shield":
 		for i in blob.size():
 				blob[i].can_push = true
-		
+		Graphics_ctrl.has_shield = true
 		pass
+	for i in points:
+		blob[i].update()
+		
+	pass

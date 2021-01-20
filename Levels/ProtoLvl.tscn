@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=2]
@@ -13,7 +13,10 @@
 [ext_resource path="res://Art/UI & Menus/Fonts/bahnschrift.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Scripts/EnemyAI/Draw_Enemies.gd" type="Script" id=12]
 [ext_resource path="res://Prefabs/Enemies/Full Enemies/Brachinous_full.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scripts/EnemyAI/Draw_Enemies_2.gd" type="Script" id=14]
+[ext_resource path="res://Prefabs/Items/Unblokable.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Prefabs/Items/Door .tscn" type="PackedScene" id=15]
+[ext_resource path="res://Enviroment/Menus&Screens/MenuScreen.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Art/sound/underwater-breathing_edit.wav" type="AudioStream" id=17]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -22,17 +25,17 @@ _data = {
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 2600, 2331, 0, 0, 0, 0, 2673, 2279, 0, 0, 0, 0, 2767, 2243, 0, 0, 0, 0, 2853, 2226, 0, 0, 0, 0, 2948, 2209, 0, 0, 0, 0, 3126, 2212, 0, 0, 0, 0, 3202, 2242, 0, 0, 0, 0, 3200, 2436, 0, 0, 0, 0, 2573, 2532, 0, 0, 0, 0, 2523, 2633, 0, 0, 0, 0, 2542, 2140, 0, 0, 0, 0, 2724, 2119, 0, 0, 0, 0, 2849, 2111, 0, 0, 0, 0, 2988, 2099, 0, 0, 0, 0, 3136, 2075, 0, 0, 0, 0, 3220, 2056, 0, 0, 0, 0, 3219, 1970 )
+"points": PoolVector2Array( 0, 0, 0, 0, 2600, 2331, 0, 0, 0, 0, 2673, 2279, 0, 0, 0, 0, 2767, 2243, 0, 0, 0, 0, 2853, 2226, 0, 0, 0, 0, 2948, 2209, 0, 0, 0, 0, 3126, 2212, 0, 0, 0, 0, 3202, 2242, 0, 0, 0, 0, 3204.15, 2333.32, 0, 0, 0, 0, 3200, 2436, 0, 0, 0, 0, 2573, 2532, 0, 0, 0, 0, 2523, 2633 )
 }
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 2816, 3136, 0, 0, 0, 0, 2784, 3264, 0, 0, 0, 0, 3712, 3808, 0, 0, 0, 0, 3712, 3896, 0, 0, 0, 0, 3712, 3988, 0, 0, 0, 0, 4928, 3584, 0, 0, 0, 0, 4928, 3616, 0, 0, 0, 0, 4928, 3648, 0, 0, 0, 0, 4928, 3680, 0, 0, 0, 0, 4928, 3712, 0, 0, 0, 0, 4928, 3744, 0, 0, 0, 0, 4928, 3776, 0, 0, 0, 0, 4928, 3808, 0, 0, 0, 0, 5583.19, 3198.38, 0, 0, 0, 0, 5623.19, 3198.38, 0, 0, 0, 0, 6304, 2816, 0, 0, 0, 0, 6304, 2784, 0, 0, 0, 0, 6368, 2784, 0, 0, 0, 0, 6368, 2816 )
+"points": PoolVector2Array( 0, 0, 0, 0, 3712, 3808, 0, 0, 0, 0, 3712, 3896, 0, 0, 0, 0, 3712, 3988, 0, 0, 0, 0, 4928, 3584, 0, 0, 0, 0, 4928, 3616, 0, 0, 0, 0, 4928, 3648, 0, 0, 0, 0, 4928, 3680, 0, 0, 0, 0, 4928, 3712, 0, 0, 0, 0, 4928, 3744, 0, 0, 0, 0, 4928, 3776, 0, 0, 0, 0, 4928, 3808, 0, 0, 0, 0, 5187.85, 3601.02, 0, 0, 0, 0, 5417.7, 3474.51, 0, 0, 0, 0, 5205.67, 3784.54, 0, 0, 0, 0, 5521.05, 3932.43, 0, 0, 0, 0, 5699.23, 3829.09, 0, 0, 0, 0, 5522.83, 3560.04, 0, 0, 0, 0, 5697.44, 3576.07, 0, 0, 0, 0, 5583.19, 3198.38, 0, 0, 0, 0, 5623.19, 3198.38, 0, 0, 0, 0, 6304, 2816, 0, 0, 0, 0, 6304, 2784, 0, 0, 0, 0, 6368, 2784, 0, 0, 0, 0, 6368, 2816 )
 }
 
 [sub_resource type="Curve2D" id=4]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 1920, 3936, 0, 0, 0, 0, 2073.8, 4075.39, 0, 0, 0, 0, 2280.42, 4022.47, 0, 0, 0, 0, 2497.13, 4140.9, 0, 0, 0, 0, 2696.75, 4029.91, 0, 0, 0, 0, 3147.47, 4046.73, 0, 0, 0, 0, 3409.09, 4180.57, 0, 0, 0, 0, 3517.09, 4038.57, 0, 0, 0, 0, 2400, 3680 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1920, 3936, 0, 0, 0, 0, 2073.8, 4075.39, 0, 0, 0, 0, 2280.42, 4022.47, 0, 0, 0, 0, 2497.13, 4140.9, 0, 0, 0, 0, 2696.75, 4029.91, 0, 0, 0, 0, 3147.47, 4046.73, 0, 0, 0, 0, 3409.09, 4180.57, 0, 0, 0, 0, 3517.09, 4038.57, 0, 0, 0, 0, 2400, 3680, 0, 0, 0, 0, 2916.49, 1955.59, 0, 0, 0, 0, 2804.18, 1822.09, 0, 0, 0, 0, 2594.41, 1928.04, 0, 0, 0, 0, 2465.16, 1815.74, 0, 0, 0, 0, 2002.51, 1747.49 )
 }
 
 [sub_resource type="Curve2D" id=5]
@@ -98,14 +101,14 @@ outlines = [ PoolVector2Array( -400.786, -139.822, -409.776, 120.883, 242.949, 1
 radius = 124.111
 
 [sub_resource type="NavigationPolygon" id=18]
-vertices = PoolVector2Array( -17.6201, -139.299, 115.864, -254.095, 158.579, 191.741, 83.8276, 207.759, -76.3531, 199.75, -212.507, 90.2932, -327.303, -56.5391, -370.018, 50.248 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 0, 5, 7 ) ]
-outlines = [ PoolVector2Array( -327.303, -56.5391, -370.018, 50.248, -212.507, 90.2932, -76.3531, 199.75, 83.8276, 207.759, 158.579, 191.741, 115.864, -254.095, -17.6201, -139.299 ) ]
+vertices = PoolVector2Array( -255.59, 106.738, -468.51, 45.1643, -436.418, -130.396, -270.206, -144.198, -178.136, -325.161, 310.784, -325.161, 463.847, -154.123, 437.418, 163.019, 245.858, 237.77, 64.4297, 273.048, -116.999, 293.206 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 3, 4, 5, 6, 7, 8, 9, 10 ) ]
+outlines = [ PoolVector2Array( -436.418, -130.396, -468.51, 45.1643, -255.59, 106.738, -116.999, 293.206, 64.4297, 273.048, 245.858, 237.77, 437.418, 163.019, 463.847, -154.123, 310.784, -325.161, -178.136, -325.161, -270.206, -144.198 ) ]
 
-[sub_resource type="Curve2D" id=19]
-_data = {
-"points": PoolVector2Array(  )
-}
+[sub_resource type="NavigationPolygon" id=19]
+vertices = PoolVector2Array( -255.59, 106.738, -468.51, 45.1643, -436.418, -130.396, -270.206, -144.198, 75.918, 300.13, -116.999, 293.206, -189.805, -271.68, 284.46, -246.453, 333.232, -170.772, 334.914, 167.268, 245.779, 278.267 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 0, 3, 6, 7, 8, 9, 10 ) ]
+outlines = [ PoolVector2Array( -436.418, -130.396, -468.51, 45.1643, -255.59, 106.738, -116.999, 293.206, 75.918, 300.13, 245.779, 278.267, 334.914, 167.268, 333.232, -170.772, 284.46, -246.453, -189.805, -271.68, -270.206, -144.198 ) ]
 
 [sub_resource type="Curve2D" id=20]
 _data = {
@@ -155,7 +158,7 @@ _data = {
 [node name="ProtoLvl" type="Node2D"]
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 3497.98, 4127.42 )
+position = Vector2( 1385.28, 3263.52 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -259,7 +262,7 @@ curve = SubResource( 9 )
 is_curved = true
 
 [node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly7" index="0"]
-polygon = PoolVector2Array( 2298, 2082, 3044, 2005, 3190, 2000, 3194, 2046, 3011, 2050, 2288, 2162 )
+polygon = PoolVector2Array( 2298, 2082, 3044, 2005, 3106.28, 1983.16, 3159.25, 1970.44, 3193.15, 1982.1, 3194, 2046, 3011, 2050, 2281.56, 2153.35 )
 
 [node name="Path2D" parent="WallsPolygon/Wall_poly7" index="2"]
 curve = SubResource( 10 )
@@ -396,7 +399,18 @@ curve = SubResource( 15 )
 
 [node name="SceneManager" parent="Screens" instance=ExtResource( 2 )]
 
-[node name="Enviroment&Cam" type="Node2D" parent="."]
+[node name="MenuScreen" parent="Screens" instance=ExtResource( 16 )]
+
+[node name="Menu controller" parent="Screens/MenuScreen" index="0"]
+layer = 2
+
+[node name="Ublokable" type="Node2D" parent="."]
+
+[node name="Unblokable" parent="Ublokable" instance=ExtResource( 14 )]
+position = Vector2( 1085.98, 1785.54 )
+
+[node name="Door " parent="Ublokable" instance=ExtResource( 15 )]
+position = Vector2( 6985.51, 2743.46 )
 
 [node name="Enemies" type="Node2D" parent="."]
 script = ExtResource( 12 )
@@ -408,10 +422,9 @@ position = Vector2( 4710.52, 4018.75 )
 position = Vector2( 2921.95, 4227.52 )
 
 [node name="Vorticella7" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 2003.87, 1706.58 )
+position = Vector2( 2008.11, 1679.03 )
 
 [node name="Enemies Brachi" type="Node2D" parent="."]
-script = ExtResource( 14 )
 
 [node name="Navigation2D" parent="Enemies Brachi" instance=ExtResource( 13 )]
 position = Vector2( 3209.98, 3496.51 )
@@ -428,6 +441,12 @@ position = Vector2( 5392.31, 3718.29 )
 [node name="NavigationPolygonInstance" parent="Enemies Brachi/Navigation2D2" index="0"]
 navpoly = SubResource( 18 )
 
+[node name="Navigation2D3" parent="Enemies Brachi" instance=ExtResource( 13 )]
+position = Vector2( 5697.96, 3635.75 )
+
+[node name="NavigationPolygonInstance" parent="Enemies Brachi/Navigation2D3" index="0"]
+navpoly = SubResource( 19 )
+
 [node name="boxes" type="Node2D" parent="."]
 
 [node name="Caja" parent="boxes" instance=ExtResource( 7 )]
@@ -442,7 +461,7 @@ is_curved = true
 polygon = PoolVector2Array( 71.1108, -101.333, 96, -32, 96, 0, 96, 32, 64, 96, 0, 122.667, -67.5557, 106.667, -113.778, 56.8889, -87.1113, 40.8889, -81.7778, 24.8889, -72.8892, 1.77783, -87.1113, -26.6667, -113.778, -56.8889, -62.2222, -103.111, 0, -108.444 )
 
 [node name="Path2D" parent="boxes/Caja2" index="2"]
-curve = SubResource( 19 )
+curve = SubResource( 20 )
 
 [node name="Caja3" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 50.3429, -1.48453 )
@@ -456,7 +475,7 @@ is_curved = true
 polygon = PoolVector2Array( 117, 3571, 208, 3567, 309, 3570, 303, 3825, 196, 3831, 105, 3818, 101, 3689 )
 
 [node name="Path2D" parent="boxes/Caja3" index="2"]
-curve = SubResource( 20 )
+curve = SubResource( 21 )
 
 [node name="Caja8" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 2597, -228 )
@@ -469,7 +488,7 @@ is_curved = true
 polygon = PoolVector2Array( 99, 3590, 208, 3567, 307, 3591, 300, 3812, 196, 3828, 92, 3808 )
 
 [node name="Path2D" parent="boxes/Caja8" index="2"]
-curve = SubResource( 20 )
+curve = SubResource( 21 )
 
 [node name="Caja4" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 22, 10 )
@@ -492,7 +511,7 @@ is_curved = true
 polygon = PoolVector2Array( -174, 3212, -139, 3258, -163, 3314, -235, 3309, -245, 3267, -232, 3226, -206, 3210 )
 
 [node name="Path2D" parent="boxes/Caja5" index="2"]
-curve = SubResource( 21 )
+curve = SubResource( 22 )
 
 [node name="Caja6" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 22, -1 )
@@ -505,7 +524,7 @@ is_curved = true
 polygon = PoolVector2Array( -174, 3212, -159, 3257, -163, 3314, -235, 3309, -232, 3226, -206, 3210 )
 
 [node name="Path2D" parent="boxes/Caja6" index="2"]
-curve = SubResource( 22 )
+curve = SubResource( 23 )
 
 [node name="Caja7" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( -975, 534 )
@@ -518,7 +537,7 @@ is_curved = true
 polygon = PoolVector2Array( -157, 3193, -131, 3256, -161, 3310, -254, 3300, -248, 3217, -203, 3197 )
 
 [node name="Path2D" parent="boxes/Caja7" index="2"]
-curve = SubResource( 23 )
+curve = SubResource( 24 )
 
 [node name="Caja puzzle" parent="boxes" instance=ExtResource( 7 )]
 mode = 2
@@ -530,7 +549,7 @@ is_curved = true
 polygon = PoolVector2Array( 2752, 2752, 2752, 2784, 2708, 2802, 2620, 2815, 2599, 2790, 2633, 2745, 2688, 2720 )
 
 [node name="Path2D" parent="boxes/Caja puzzle" index="2"]
-curve = SubResource( 24 )
+curve = SubResource( 25 )
 
 [node name="Caja puzzle2" parent="boxes" instance=ExtResource( 7 )]
 mode = 2
@@ -542,7 +561,7 @@ is_curved = true
 polygon = PoolVector2Array( 2635, 2952, 2703, 2952, 2705, 2924, 2672, 2916, 2636, 2923 )
 
 [node name="Path2D" parent="boxes/Caja puzzle2" index="2"]
-curve = SubResource( 25 )
+curve = SubResource( 26 )
 
 [node name="Caja puzzle3" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( -2, -13 )
@@ -555,7 +574,7 @@ is_curved = true
 polygon = PoolVector2Array( 2170, 2392, 2219, 2371, 2232, 2400, 2213, 2434, 2172, 2443 )
 
 [node name="Path2D" parent="boxes/Caja puzzle3" index="2"]
-curve = SubResource( 26 )
+curve = SubResource( 27 )
 
 [node name="Caja puzzle4" parent="boxes" instance=ExtResource( 7 )]
 mode = 2
@@ -567,23 +586,19 @@ is_curved = true
 polygon = PoolVector2Array( 2799, 2388, 2781, 2436, 2703, 2469, 2601, 2481, 2572, 2469, 2571, 2429, 2590, 2385, 2646, 2363, 2773, 2376 )
 
 [node name="Path2D" parent="boxes/Caja puzzle4" index="2"]
-curve = SubResource( 27 )
-
-[node name="Caja puzzle5" parent="boxes" instance=ExtResource( 7 )]
-mode = 2
-mass = 2.0
-linear_damp = 0.5
-is_curved = true
-
-[node name="CollisionPolygon2D" parent="boxes/Caja puzzle5" index="0"]
-polygon = PoolVector2Array( 3174, 2378, 3183, 2298, 3219, 2299, 3229, 2382 )
-
-[node name="Path2D" parent="boxes/Caja puzzle5" index="2"]
 curve = SubResource( 28 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 2676.53, -816.368 )
+position = Vector2( 2728.49, 2727.15 )
 zoom = Vector2( 8, 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+autoplay = true
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran" flags=6]
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/MenuScreen" method="anim_intro"]
+[connection signal="door" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran" flags=6]
+[connection signal="door" from="PlayerHolder/Planc_P1" to="Screens/MenuScreen" method="anim_win"]
 
 [editable path="Health/Path Item"]
 
@@ -609,11 +624,15 @@ zoom = Vector2( 8, 8 )
 
 [editable path="WallsPolygon/Wall_poly8"]
 
+[editable path="Screens/MenuScreen"]
+
 [editable path="Enemies Brachi/Navigation2D"]
 
 [editable path="Enemies Brachi/Navigation2D/Movement_Area"]
 
 [editable path="Enemies Brachi/Navigation2D2"]
+
+[editable path="Enemies Brachi/Navigation2D3"]
 
 [editable path="boxes/Caja2"]
 
@@ -636,5 +655,3 @@ zoom = Vector2( 8, 8 )
 [editable path="boxes/Caja puzzle3"]
 
 [editable path="boxes/Caja puzzle4"]
-
-[editable path="boxes/Caja puzzle5"]

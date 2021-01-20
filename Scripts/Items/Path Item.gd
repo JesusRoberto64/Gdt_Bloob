@@ -9,7 +9,6 @@ var Hazard = preload("res://Prefabs/Enemies/Hazard.tscn")
 
 export (ITEM) var item_type
 
-
 func _ready():
 	
 	var selected_item 

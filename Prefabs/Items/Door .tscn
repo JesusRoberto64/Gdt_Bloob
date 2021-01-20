@@ -3,11 +3,17 @@
 [ext_resource path="res://Scripts/Items/Door .gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 15.0
+radius = 51.509
 
-[node name="Door " type="StaticBody2D"]
-collision_layer = 2
+[node name="Door " type="Area2D"]
+collision_layer = 0
+collision_mask = 32
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.968627, 0.937255, 0.478431, 1 )
+polygon = PoolVector2Array( -1.35515, -70.0285, -68.1013, -1.16338, -1.35515, 67.172, 69.0991, 0.425812 )
+[connection signal="body_entered" from="." to="." method="_on_Door__body_entered"]

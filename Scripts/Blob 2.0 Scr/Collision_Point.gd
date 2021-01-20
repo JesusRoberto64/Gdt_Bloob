@@ -57,9 +57,13 @@ func _on_Area2D_body_entered(body):
 		update()
 		#body.mode = 0 # kinematic
 		if can_push:
-			body.call_deferred("set_mode",0)
-			body.update()
-			body.life_timer.start()
+			
+			if body.is_in_group("Brachi") or body.is_in_group("Voticella"):
+				pass
+			else:
+				body.call_deferred("set_mode",0)
+				body.update()
+				body.life_timer.start()
 		pass
 	
 	if body.is_in_group("Door"):
@@ -71,9 +75,13 @@ func _on_Area2D_body_entered(body):
 
 func _draw():
 	if !is_hurt:
-		draw_circle(Vector2.ZERO,10.0,Color.greenyellow)
+		if can_push:
+			draw_circle(Vector2.ZERO,10.0,Color.green)
+		else:
+			draw_circle(Vector2.ZERO,10.0,Color.greenyellow)
 	else:
 		draw_circle(Vector2.ZERO,10.0,Color.red)
+		
 	pass
 
 func _on_Timer_timeout():

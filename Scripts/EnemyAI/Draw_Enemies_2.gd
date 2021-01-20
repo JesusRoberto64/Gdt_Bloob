@@ -21,12 +21,12 @@ func _ready():
 	pass
 
 func _process(delta):
-	for i in childs.size():
-		var rot = childs[i].get_child(0).rotation_degrees
-		shapes[i].rotation_degrees = rot
-		shapes[i].position = childs[i].position + bases[i]
-		#print(shapes[i])
-		pass
+#	for i in childs.size():
+#		var rot = childs[i].get_child(0).rotation_degrees
+#		shapes[i].rotation_degrees = rot
+#		shapes[i].position = childs[i].position + bases[i]
+#		#print(shapes[i])
+#		pass
 	pass
 
 

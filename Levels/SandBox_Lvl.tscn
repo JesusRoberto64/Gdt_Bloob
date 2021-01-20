@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/UI & Menus/button_X.png" type="Texture" id=2]
@@ -7,12 +7,9 @@
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Art/sound/underwater-breathing_edit.wav" type="AudioStream" id=6]
 [ext_resource path="res://Art/UI & Menus/cpntrolinvert.png" type="Texture" id=7]
-[ext_resource path="res://Art/UI & Menus/button_Restart.png" type="Texture" id=8]
-[ext_resource path="res://Art/UI & Menus/button_ESC.png" type="Texture" id=9]
-[ext_resource path="res://Scripts/Contoles & UI/Menu controller.gd" type="Script" id=10]
+[ext_resource path="res://Enviroment/Menus&Screens/MenuScreen.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Prefabs/Items/Door .tscn" type="PackedScene" id=12]
-[ext_resource path="res://Art/UI & Menus/youwin.png" type="Texture" id=13]
 [ext_resource path="res://Prefabs/Enemies/Hazard.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Prefabs/Enemies/Vorticella.tscn" type="PackedScene" id=15]
 
@@ -116,20 +113,6 @@ glow_hdr_threshold = 0.16
 glow_hdr_luminance_cap = 8.35
 glow_hdr_scale = 1.57
 
-[sub_resource type="Animation" id=21]
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-
 [node name="SandBox_Lvl" type="Node2D"]
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -178,7 +161,7 @@ curve = SubResource( 7 )
 curve = SubResource( 8 )
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 8306.42, -626.147 )
+position = Vector2( 1484.2, 957.965 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -305,29 +288,7 @@ stream = ExtResource( 6 )
 volume_db = -6.341
 autoplay = true
 
-[node name="MenuScreen" type="CanvasLayer" parent="."]
-
-[node name="Menu controller" type="Node2D" parent="MenuScreen"]
-modulate = Color( 1, 1, 1, 0 )
-script = ExtResource( 10 )
-
-[node name="Sprite" type="Sprite" parent="MenuScreen/Menu controller"]
-position = Vector2( 202.185, 161.979 )
-scale = Vector2( 0.738388, 0.738388 )
-texture = ExtResource( 8 )
-
-[node name="Sprite2" type="Sprite" parent="MenuScreen/Menu controller"]
-position = Vector2( 193.224, 252.688 )
-scale = Vector2( 0.626268, 0.626268 )
-texture = ExtResource( 9 )
-
-[node name="Sprite3" type="Sprite" parent="MenuScreen/Menu controller"]
-position = Vector2( 541.668, 178.688 )
-scale = Vector2( 1.07071, 1.07071 )
-texture = ExtResource( 13 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuScreen/Menu controller"]
-anims/Intro = SubResource( 21 )
+[node name="MenuScreen" parent="." instance=ExtResource( 8 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 4048.22, 2045.85 )
@@ -355,9 +316,7 @@ position = Vector2( 1732.04, 2864.76 )
 [node name="Vorticella" parent="." instance=ExtResource( 15 )]
 position = Vector2( 8625.44, 1372.48 )
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran"]
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_intro" flags=6]
 [connection signal="door" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran" flags=6]
-[connection signal="door" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_win" flags=6]
 
 [editable path="Node2D/Path Item2"]
 
@@ -396,3 +355,9 @@ position = Vector2( 8625.44, 1372.48 )
 [editable path="speedsection/Wall_poly5"]
 
 [editable path="speedsection/Path Item"]
+
+[editable path="SceneManager"]
+
+[editable path="SceneManager/TransitionScreen"]
+
+[editable path="MenuScreen"]
