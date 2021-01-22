@@ -1,9 +1,39 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Health.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float amt:hint_range(0.0,1.0);
+uniform vec3 color = vec3(0.25,0.58,0.51);
+
+float celular_noise(vec2 coord) {
+	vec2 diff = coord - vec2(0.5);
+	return sqrt(diff.x * diff.x + diff.y * diff.y); 
+	}
+
+void fragment(){
+	
+	vec2 coord = UV * 1.15;
+	
+	float value = celular_noise(coord);
+	value *= 1.2;
+	COLOR  = vec4(color,value);
+	
+	if (distance(UV,vec2(0.5,0.5)) > amt/2.0){
+		COLOR = vec4(0.0);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/amt = 0.648
+shader_param/color = Vector3( 0.25, 0.58, 0.51 )
 
 [node name="Health" type="RigidBody2D"]
 collision_layer = 12
@@ -19,5 +49,9 @@ one_shot = true
 
 [node name="lifeTimer" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 3 )
+texture = ExtResource( 2 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="lifeTimer" to="." method="_on_lifeTimer_timeout"]

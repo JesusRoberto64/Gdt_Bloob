@@ -108,8 +108,9 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 9392.54, 367.594, 0, 0, 0, 0, 9576.88, 532.871, 0, 0, 0, 0, 9373.47, 626.104, 0, 0, 0, 0, 9407.62, 698.695, 0, 0, 0, 0, 9547.22, 753.239, 0, 0, 0, 0, 9527.62, 824.695, 0, 0, 0, 0, 9367.11, 979.964, 0, 0, 0, 0, 9384.07, 1077.43, 0, 0, 0, 0, 9422.21, 1145.24, 0, 0, 0, 0, 9530.27, 1306.28, 0, 0, 0, 0, 9534.51, 1395.27, 0, 0, 0, 0, 9362.88, 1448.25, 0, 0, 0, 0, 9358.64, 1509.69, 0, 0, 0, 0, 9538.75, 1619.88, 0, 0, 0, 0, 9542.2, 1699.73, 0, 0, 0, 0, 9364.21, 2093.85, 0, 0, 0, 0, 9474.4, 2339.65, 0, 0, 0, 0, 9330.31, 2687.15, 0, 0, 0, 0, 9474.4, 2784.62 )
 }
 
-[sub_resource type="Environment" id=20]
+[sub_resource type="Environment" id=25]
 background_mode = 4
+background_energy = 2.09
 glow_intensity = 7.15
 glow_strength = 0.67
 glow_hdr_threshold = 0.16
@@ -296,7 +297,7 @@ item_type = 0
 curve = SubResource( 19 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 20 )
+environment = SubResource( 25 )
 
 [node name="SceneManager" parent="." instance=ExtResource( 5 )]
 
