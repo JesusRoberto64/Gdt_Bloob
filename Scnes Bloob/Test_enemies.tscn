@@ -400,10 +400,13 @@ curve = SubResource( 15 )
 position = Vector2( 2001.13, 1616.66 )
 
 [node name="Navigation2D" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1401.11, 3478.88 )
+position = Vector2( 2702.27, 2009.27 )
 
 [node name="Navigation2D2" parent="Enemies" instance=ExtResource( 13 )]
-position = Vector2( 960.975, 1830.53 )
+position = Vector2( 939.038, 1815.85 )
+
+[node name="Brachinous" parent="Enemies/Navigation2D2/Movement_Area" index="1"]
+movementType = 1
 
 [node name="boxes" type="Node2D" parent="."]
 
@@ -584,6 +587,10 @@ curve = SubResource( 25 )
 [editable path="WallsPolygon/Wall_poly7"]
 
 [editable path="WallsPolygon/Wall_poly8"]
+
+[editable path="Enemies/Navigation2D"]
+
+[editable path="Enemies/Navigation2D2"]
 
 [editable path="boxes/Caja2"]
 
