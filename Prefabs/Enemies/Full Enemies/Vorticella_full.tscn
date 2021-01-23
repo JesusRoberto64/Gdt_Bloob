@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/EnemyAI/Enemy_1.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleShape2D" id=1]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 15.0
 
 [node name="Vorticella" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,20 +18,30 @@ rotation = -1.5708
 ]]
 rotation = 1.5708
 collision_layer = 16
-collision_mask = 17
+collision_mask = 21
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Base/KinematicBody2D"]
 position = Vector2( 0, -20 )
 shape = SubResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="Base"]
+[node name="Vision Area" type="Area2D" parent="Base"]
 rotation = 1.5708
 collision_layer = 0
-collision_mask = 32
+collision_mask = 44
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Base/Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Base/Vision Area"]
 position = Vector2( 0, -20 )
 polygon = PoolVector2Array( 0, 0, 80, -250, -80, -250 )
+
+[node name="CollisionArea" type="Area2D" parent="Base"]
+collision_layer = 0
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base/CollisionArea"]
+visible = false
+position = Vector2( 20, 0 )
+rotation = 1.5708
+shape = SubResource( 2 )
 
 [node name="RayCastParent" type="Node2D" parent="."]
 rotation = -1.5708
@@ -36,7 +49,12 @@ rotation = -1.5708
 [node name="RayCast2D" type="RayCast2D" parent="RayCastParent"]
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( 0, 300 )
+cast_to = Vector2( 0, 450 )
 collision_mask = 34
-[connection signal="body_entered" from="Base/Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Base/Area2D" to="." method="_on_Area2D_body_exited"]
+
+[node name="StunedTimer" type="Timer" parent="."]
+wait_time = 5.0
+[connection signal="body_entered" from="Base/Vision Area" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Base/Vision Area" to="." method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Base/CollisionArea" to="." method="_on_CollisionArea_body_entered"]
+[connection signal="timeout" from="StunedTimer" to="." method="_on_StunedTimer_timeout"]

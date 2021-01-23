@@ -61,3 +61,4 @@ func _on_Timer_timeout():
 func _on_lifeTimer_timeout():
 	vanish = true
 	pass # Replace with function body.
+
