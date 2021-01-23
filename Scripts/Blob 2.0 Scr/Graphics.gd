@@ -6,6 +6,8 @@ var cur_state = STATE.PUPPET # defalut movment
 var fill_color: Color
 var line_color: Color
 
+onready var poly = $Polygon2D
+
 func _ready():
 	fill_color = Color(0.0,0.0,0.0,1.0)
 	line_color = Color(0.0,0.0,0.0,1.0)

@@ -71,9 +71,11 @@ func _on_Area2D_body_entered(body):
 
 func _draw():
 	if !is_hurt:
-		draw_circle(Vector2.ZERO,10.0,Color.greenyellow)
+		#draw_circle(Vector2.ZERO,10.0,Color.greenyellow)
+		pass
 	else:
-		draw_circle(Vector2.ZERO,10.0,Color.red)
+		#draw_circle(Vector2.ZERO,10.0,Color.red)
+		pass
 	pass
 
 func _on_Timer_timeout():

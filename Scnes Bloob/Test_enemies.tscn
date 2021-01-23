@@ -410,7 +410,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja2" index="0"]
 polygon = PoolVector2Array( 71.1108, -101.333, 96, -32, 96, 0, 96, 32, 64, 96, 0, 122.667, -67.5557, 106.667, -113.778, 56.8889, -87.1113, 40.8889, -81.7778, 24.8889, -72.8892, 1.77783, -87.1113, -26.6667, -113.778, -56.8889, -62.2222, -103.111, 0, -108.444 )
 
-[node name="Path2D" parent="boxes/Caja2" index="2"]
+[node name="Path2D" parent="boxes/Caja2" index="3"]
 curve = SubResource( 16 )
 
 [node name="Caja3" parent="boxes" instance=ExtResource( 7 )]
@@ -423,7 +423,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja3" index="0"]
 polygon = PoolVector2Array( 117, 3571, 208, 3567, 309, 3570, 303, 3825, 196, 3831, 105, 3818, 101, 3689 )
 
-[node name="Path2D" parent="boxes/Caja3" index="2"]
+[node name="Path2D" parent="boxes/Caja3" index="3"]
 curve = SubResource( 17 )
 
 [node name="Caja8" parent="boxes" instance=ExtResource( 7 )]
@@ -436,7 +436,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja8" index="0"]
 polygon = PoolVector2Array( 99, 3590, 208, 3567, 307, 3591, 300, 3812, 196, 3828, 92, 3808 )
 
-[node name="Path2D" parent="boxes/Caja8" index="2"]
+[node name="Path2D" parent="boxes/Caja8" index="3"]
 curve = SubResource( 17 )
 
 [node name="Caja4" parent="boxes" instance=ExtResource( 7 )]
@@ -459,7 +459,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja5" index="0"]
 polygon = PoolVector2Array( -174, 3212, -139, 3258, -163, 3314, -235, 3309, -245, 3267, -232, 3226, -206, 3210 )
 
-[node name="Path2D" parent="boxes/Caja5" index="2"]
+[node name="Path2D" parent="boxes/Caja5" index="3"]
 curve = SubResource( 18 )
 
 [node name="Caja6" parent="boxes" instance=ExtResource( 7 )]
@@ -472,7 +472,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja6" index="0"]
 polygon = PoolVector2Array( -174, 3212, -159, 3257, -163, 3314, -235, 3309, -232, 3226, -206, 3210 )
 
-[node name="Path2D" parent="boxes/Caja6" index="2"]
+[node name="Path2D" parent="boxes/Caja6" index="3"]
 curve = SubResource( 19 )
 
 [node name="Caja7" parent="boxes" instance=ExtResource( 7 )]
@@ -485,7 +485,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja7" index="0"]
 polygon = PoolVector2Array( -157, 3193, -131, 3256, -161, 3310, -254, 3300, -248, 3217, -203, 3197 )
 
-[node name="Path2D" parent="boxes/Caja7" index="2"]
+[node name="Path2D" parent="boxes/Caja7" index="3"]
 curve = SubResource( 20 )
 
 [node name="Caja puzzle" parent="boxes" instance=ExtResource( 7 )]
@@ -497,7 +497,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja puzzle" index="0"]
 polygon = PoolVector2Array( 2752, 2752, 2752, 2784, 2708, 2802, 2620, 2815, 2599, 2790, 2633, 2745, 2688, 2720 )
 
-[node name="Path2D" parent="boxes/Caja puzzle" index="2"]
+[node name="Path2D" parent="boxes/Caja puzzle" index="3"]
 curve = SubResource( 21 )
 
 [node name="Caja puzzle2" parent="boxes" instance=ExtResource( 7 )]
@@ -509,7 +509,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja puzzle2" index="0"]
 polygon = PoolVector2Array( 2635, 2952, 2703, 2952, 2705, 2924, 2672, 2916, 2636, 2923 )
 
-[node name="Path2D" parent="boxes/Caja puzzle2" index="2"]
+[node name="Path2D" parent="boxes/Caja puzzle2" index="3"]
 curve = SubResource( 22 )
 
 [node name="Caja puzzle3" parent="boxes" instance=ExtResource( 7 )]
@@ -522,7 +522,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja puzzle3" index="0"]
 polygon = PoolVector2Array( 2170, 2392, 2219, 2371, 2232, 2400, 2213, 2434, 2172, 2443 )
 
-[node name="Path2D" parent="boxes/Caja puzzle3" index="2"]
+[node name="Path2D" parent="boxes/Caja puzzle3" index="3"]
 curve = SubResource( 23 )
 
 [node name="Caja puzzle4" parent="boxes" instance=ExtResource( 7 )]
@@ -534,7 +534,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja puzzle4" index="0"]
 polygon = PoolVector2Array( 2799, 2388, 2781, 2436, 2703, 2469, 2601, 2481, 2572, 2469, 2571, 2429, 2590, 2385, 2646, 2363, 2773, 2376 )
 
-[node name="Path2D" parent="boxes/Caja puzzle4" index="2"]
+[node name="Path2D" parent="boxes/Caja puzzle4" index="3"]
 curve = SubResource( 24 )
 
 [node name="Caja puzzle5" parent="boxes" instance=ExtResource( 7 )]
@@ -546,7 +546,7 @@ is_curved = true
 [node name="CollisionPolygon2D" parent="boxes/Caja puzzle5" index="0"]
 polygon = PoolVector2Array( 3174, 2378, 3183, 2298, 3219, 2299, 3229, 2382 )
 
-[node name="Path2D" parent="boxes/Caja puzzle5" index="2"]
+[node name="Path2D" parent="boxes/Caja puzzle5" index="3"]
 curve = SubResource( 25 )
 
 [node name="Gates" type="Node2D" parent="."]

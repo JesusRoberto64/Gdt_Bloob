@@ -42,6 +42,8 @@ script = ExtResource( 3 )
 [node name="Graphics" type="Node2D" parent="."]
 script = ExtResource( 4 )
 
+[node name="Polygon2D" type="Polygon2D" parent="Graphics"]
+
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.5
 

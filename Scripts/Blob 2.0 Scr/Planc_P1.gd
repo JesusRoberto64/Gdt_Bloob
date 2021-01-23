@@ -139,18 +139,20 @@ func getCurArea ():
 	pass
 
 func _draw():
-	var bakedPoints = Array(curve.get_baked_points())
-	var drawPoints = bakedPoints + []
+	var bakedPoints = PoolVector2Array(curve.get_baked_points())
+	var end: PoolVector2Array = []
+	var drawPoints = bakedPoints + end
 	if Geometry.triangulate_polygon(drawPoints).empty():
 		drawPoints = Geometry.convex_hull_2d(bakedPoints)
 		pass
 	
 	# darw line
 	var state_line = Graphics_ctrl.line_color
-	draw_polyline(drawPoints, state_line, 14.0, true)
+	draw_polyline(drawPoints, state_line, 7.0, true)
 	
 	var state_color = Graphics_ctrl.fill_color
-	draw_polygon(drawPoints,[state_color])
+	Graphics_ctrl.poly.polygon = drawPoints
+	#draw_polygon(drawPoints,[state_color])
 	#collison_area.polygon = drawPoints
 	pass
 
