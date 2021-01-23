@@ -15,6 +15,7 @@ pullForce = 10
 [node name="Base" type="Node2D" parent="."]
 
 [node name="Kinematic Body" type="KinematicBody2D" parent="Base" groups=[
+"Enemies",
 "Hazard",
 ]]
 rotation = 1.5708

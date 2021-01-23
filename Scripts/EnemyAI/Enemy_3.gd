@@ -6,6 +6,8 @@ onready var timer = get_node("Base/Timer")
 onready var raycast = get_node("RayCastParent/RayCast2D")
 onready var base = get_node("Base")
 onready var nav2d = get_parent().get_parent().get_parent()
+onready var stunTimer = $Base/StunedTimer
+onready var kBody = get_node("Base/Kinematic Body")
 
 var player = null
 var bodyDetected = false
@@ -16,12 +18,15 @@ var canSeePlayerFlag = true
 var path = []
 var waitAttackTimer =  0.0
 var playerLastPosition
+var stunCount = 0
+var stuned = false
 
 export var currentState = States.IDLE
 export var patrolSpeed = 70
 export var pursueSpeed = 400
 export var idleWaitTime = 2
 export var prepareAttackTime = 3
+export var amounToStun = 1
 
 func _ready():	
 	rng.randomize()
@@ -33,22 +38,24 @@ func _process(delta):
 	
 	#raycast.set_cast_to(player.global_transform.origin)
 	#raycast.force_raycast_update ( )
-	RaycastToPlayer()
-	if(bodyDetected and canSeePlayerFlag):
-		FollowPlayer(delta)
-		pass
-	else:
-		if(target == null):
-			target = RandomPositionInArea()
-			positioner.set_position(target) 
-			base.look_at(positioner.get_global_position())
-			currentState = States.MOVE
-			timer.stop()
+	if !stuned:
+		RaycastToPlayer()
+		if(bodyDetected and canSeePlayerFlag):
+			FollowPlayer(delta)
+			pass
 		else:
-			Patrol(delta)
+			if(target == null):
+				target = RandomPositionInArea()
+				positioner.set_position(target) 
+				base.look_at(positioner.get_global_position())
+				currentState = States.MOVE
+				timer.stop()
+			else:
+				Patrol(delta)
+				pass
 			pass
 		pass
-	pass
+
 
 func RaycastToPlayer():
 	#var dir = self.get_position().direction_to(Vector2.ZERO)
@@ -180,4 +187,23 @@ func _on_Timer_timeout():
 	bodyDetected = false
 	playerLastPosition = null
 	waitAttackTimer = 0.0
+	pass # Replace with function body.
+
+
+func _on_CollisionArea_body_entered(body):
+	if body.is_in_group("Hazard") and !body.is_in_group("Enemies"):
+		stunCount += 1
+		body.queue_free()
+		if stunCount >= amounToStun:
+			stuned = true
+			kBody.remove_from_group("Hazard")
+			#stunTimer.start()
+		
+	pass # Replace with function body.
+
+
+func _on_StunedTimer_timeout():
+	stuned = false
+	stunCount = 0
+	kBody.add_to_group("Hazard")
 	pass # Replace with function body.
