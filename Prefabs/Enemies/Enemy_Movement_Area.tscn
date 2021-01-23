@@ -2,17 +2,17 @@
 
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 200.0
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 118.242, -100.006, 0, 0, 0, 0, 122.737, 105.262, 0, 0, 0, 0, -164.938, 103.764, 0, 0, 0, 0, -163.44, -94.0124 )
+}
 
-[node name="Movement_Area" type="Area2D"]
+[node name="Path2D" type="Path2D"]
 position = Vector2( 498.775, 300.058 )
+curve = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+[node name="Positioner" type="Node2D" parent="."]
 
-[node name="Positioner" type="Node2D" parent="CollisionShape2D"]
-
-[node name="Sprite" type="Sprite" parent="CollisionShape2D/Positioner"]
+[node name="Sprite" type="Sprite" parent="Positioner"]
 visible = false
 texture = ExtResource( 2 )

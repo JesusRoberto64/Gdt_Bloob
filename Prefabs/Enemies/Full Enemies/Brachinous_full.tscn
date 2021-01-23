@@ -16,6 +16,6 @@ navpoly = SubResource( 1 )
 [node name="Movement_Area" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
 
-[node name="Brachinous" parent="Movement_Area/CollisionShape2D" index="1" instance=ExtResource( 2 )]
+[node name="Brachinous" parent="Movement_Area" instance=ExtResource( 2 )]
 
 [editable path="Movement_Area"]

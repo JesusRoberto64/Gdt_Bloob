@@ -1,14 +1,17 @@
 extends Node2D
 enum States {IDLE, MOVE, FOLLOW, RETURN}
+enum Movement{SECUENTIAL, RANDOM}
 onready var rng = RandomNumberGenerator.new()
 onready var positioner = get_node("../Positioner")
 onready var timer = get_node("Base/Timer")
 onready var raycast = get_node("RayCastParent/RayCast2D")
 onready var base = get_node("Base")
-onready var nav2d = get_parent().get_parent().get_parent()
+onready var points: Path2D = get_parent()
+onready var nav2d = get_parent().get_parent()
 onready var stunTimer = $Base/StunedTimer
 
-
+var pathPositionIndex = -1
+var pathPositions = []
 var player = null
 var bodyDetected = false
 var bodyDetectedflag = false
@@ -21,7 +24,8 @@ var health_Orbs = []
 var stunCount = 0
 var stuned = false
 
-export var currentState = States.IDLE
+export (Movement) var movementType = Movement.SECUENTIAL
+export (States) var currentState = States.IDLE
 export var pullForce = 20
 export var patrolSpeed = 70
 export var pursueSpeed = 80
@@ -30,9 +34,15 @@ export var amounToStun = 2
 export var pullOrbForce = 10
 
 func _ready():	
+	if points.curve == null:
+		print_debug("Enemy " + self.name + " has no path2D points established")
+		return
+	for i in points.curve.get_point_count():
+		pathPositions.append(points.curve.get_point_position(i))
+		pass
+	
 	rng.randomize()
 	player = get_tree().get_nodes_in_group("Player")[0]
-	areaShape = get_parent().get_shape()
 	pass # Replace with function body.
 
 func _process(delta):
@@ -46,11 +56,12 @@ func _process(delta):
 			pass
 		else:
 			if(target == null):
-				target = RandomPositionInArea()
+				target = GetNextPosition()
 				positioner.set_position(target) 
 				base.look_at(positioner.get_global_position())
 				currentState = States.MOVE
 				timer.stop()
+				
 			else:
 				Patrol(delta)
 				pass
@@ -102,14 +113,18 @@ func RaycastToPlayer():
 		pass
 	pass
 
-func RandomPositionInArea():
+func GetNextPosition():
+	if( movementType == Movement.SECUENTIAL):
+		pathPositionIndex += 1
+		if pathPositionIndex >= pathPositions.size():
+			pathPositionIndex = 0
+		return Vector2(pathPositions[pathPositionIndex].x, pathPositions[pathPositionIndex].y)
+	else:
+		var _newPos = pathPositionIndex
+		while _newPos == pathPositionIndex:
+			pathPositionIndex = rng.randi() % pathPositions.size()
+		return Vector2(pathPositions[pathPositionIndex].x, pathPositions[pathPositionIndex].y)
 	
-	var a = rng.randf() * 2 * 3.1416
-	var r = areaShape.radius * sqrt(rng.randf ( ))
-	
-	var x = r * cos(a)
-	var y = r * sin(a)
-	return Vector2(floor(x), floor(y))
 	
 func Patrol(delta):
 	
