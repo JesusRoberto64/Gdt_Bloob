@@ -6,6 +6,8 @@ onready var timer = get_node("Base/Timer")
 onready var raycast = get_node("RayCastParent/RayCast2D")
 onready var base = get_node("Base")
 onready var nav2d = get_parent().get_parent().get_parent()
+onready var stunTimer = $Base/StunedTimer
+
 
 var player = null
 var bodyDetected = false
@@ -15,12 +17,17 @@ var target = null
 var waitTimer = 0.0
 var canSeePlayerFlag = true
 var path = []
+var health_Orbs = []
+var stunCount = 0
+var stuned = false
 
 export var currentState = States.IDLE
 export var pullForce = 20
 export var patrolSpeed = 70
 export var pursueSpeed = 80
 export var idleWaitTime = 2
+export var amounToStun = 2 
+export var pullOrbForce = 10
 
 func _ready():	
 	rng.randomize()
@@ -31,27 +38,41 @@ func _ready():
 func _process(delta):
 	#raycast.set_cast_to(player.global_transform.origin)
 	#raycast.force_raycast_update ( )
-	RaycastToPlayer()
-	if(bodyDetected and canSeePlayerFlag):
-		FollowPlayer(delta)
+	if !stuned:
+		RaycastToPlayer()
+		if(bodyDetected and canSeePlayerFlag):
+			FollowPlayer(delta)
 
-		pass
-	else:
-		if(target == null):
-			target = RandomPositionInArea()
-			positioner.set_position(target) 
-			base.look_at(positioner.get_global_position())
-			currentState = States.MOVE
-			timer.stop()
-		else:
-			Patrol(delta)
 			pass
-		pass
+		else:
+			if(target == null):
+				target = RandomPositionInArea()
+				positioner.set_position(target) 
+				base.look_at(positioner.get_global_position())
+				currentState = States.MOVE
+				timer.stop()
+			else:
+				Patrol(delta)
+				pass
+			pass
 	pass
 
 
+func _physics_process(_delta):
+	if !stuned:
+		if ( !health_Orbs.empty() and canSeePlayerFlag):
+			for orb in health_Orbs:
+				var dirToOrb = (get_global_transform().origin - orb.get_global_transform().origin).normalized()
+				orb.add_central_force(dirToOrb*pullOrbForce);
+				pass			
+			pass
+		
+	
+	pass
+
 func pullPlayer():
 	var dir = (get_transform().origin - positioner.get_transform().origin).normalized()
+	player.get_parent().gravity = Vector2(dir*pullForce)
 		# if player.get_global_position().x > get_global_position().x:
 		# 	dir.x *= -1
 		# 	pass
@@ -59,7 +80,7 @@ func pullPlayer():
 		# 	dir.y *= -1
 		# 	pass
 		#print(dir)
-	player.get_parent().gravity = Vector2(dir*pullForce)
+	
 	pass
 
 func RaycastToPlayer():
@@ -68,7 +89,6 @@ func RaycastToPlayer():
 	var detectedObject = raycast.get_collider()
 	
 	if(detectedObject != player):
-		print_debug(detectedObject)	
 		
 		if(canSeePlayerFlag):
 			canSeePlayerFlag = false
@@ -154,7 +174,6 @@ func FollowPlayer(delta):
 	pass
 
 
-
 #Detect when player enters the vision's area
 func _on_Area2D_body_entered(body):
 	
@@ -165,16 +184,21 @@ func _on_Area2D_body_entered(body):
 		currentState = States.FOLLOW
 		target = null
 		timer.stop()
-		
-	pass # Replace with function body.
+	else:
+		if(body.is_in_group("Health")):
+			if body.is_life_infite == false:
+				#Start absorbing orb expulsated by the player
+				health_Orbs.append(body)
 
 #Detect when player leaves vision's area
 func _on_Area2D_body_exited(body):
 	if(player == body):
-		
 		OnBodyExited()
-		pass
-	pass # Replace with function body.
+	else:
+		if(body.is_in_group("Health")):
+			if body.is_life_infite == false:
+				#Stop absorbing helth orb
+				health_Orbs.erase(body)
 
 func OnBodyExited():
 	bodyDetectedflag = false
@@ -188,4 +212,28 @@ func OnBodyExited():
 func _on_Timer_timeout():
 	target = null
 	bodyDetected = false
+	pass # Replace with function body.
+
+
+func _on_CollisionArea_body_entered(body):
+	#Collision Area for Health Orb Detection
+	if(stunCount < amounToStun):
+		if(body.is_in_group("Health")):
+			#Delete orb
+			stunCount += 1
+			health_Orbs.erase(body)
+			body.queue_free()
+			
+			if(stunCount >= amounToStun):
+				#Stun Enemy
+				stuned = true
+				stunTimer.start()
+				player.get_parent().gravity = Vector2.ZERO
+			pass
+	pass # Replace with function body.
+
+
+func _on_StunedTimer_timeout():
+	stuned = false
+	stunCount = 0
 	pass # Replace with function body.

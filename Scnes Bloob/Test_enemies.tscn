@@ -141,7 +141,7 @@ _data = {
 [node name="ProtoLvl" type="Node2D"]
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 1072.77, 1691.88 )
+position = Vector2( 1570.77, 1779.88 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -389,10 +389,10 @@ curve = SubResource( 15 )
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Vorticella" parent="Enemies" instance=ExtResource( 12 )]
-position = Vector2( 670.338, 1967.59 )
+position = Vector2( 2001.13, 1616.66 )
 
 [node name="Navigation2D" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1147.97, 1859.95 )
+position = Vector2( 945.194, 1802.17 )
 
 [node name="Navigation2D2" parent="Enemies" instance=ExtResource( 13 )]
 position = Vector2( 2766.3, 2000.04 )
