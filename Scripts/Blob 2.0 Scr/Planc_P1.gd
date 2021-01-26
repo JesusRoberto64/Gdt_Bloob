@@ -62,6 +62,9 @@ onready var turbo_Realace = $Turbo
 # Area enies detection 
 onready var area_enemies = $Area2D
 
+# UV set
+var is_uv_set = false
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -148,10 +151,12 @@ func _draw():
 	
 	# darw line
 	var state_line = Graphics_ctrl.line_color
-	draw_polyline(drawPoints, state_line, 7.0, true)
+	Graphics_ctrl.line.points = drawPoints
+	#draw_polyline(drawPoints, state_line, 10.0, true)
 	
 	var state_color = Graphics_ctrl.fill_color
 	Graphics_ctrl.poly.polygon = drawPoints
+	
 	#draw_polygon(drawPoints,[state_color])
 	#collison_area.polygon = drawPoints
 	pass
