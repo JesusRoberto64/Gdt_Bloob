@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Planc_P1.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Camera2D.gd" type="Script" id=2]
@@ -6,19 +6,116 @@
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Graphics.gd" type="Script" id=4]
 [ext_resource path="res://Art/UI & Menus/Fonts/bahnschrift.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scripts/Contoles & UI/Health_HUD.gd" type="Script" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec3 body_color = vec3(1,0.10,0.0);
+uniform float volume = 15.0;
+uniform float u_time = 0.5; 
+
+float central_noise(vec2 coord) {
+	vec2 diff = coord - vec2(0.5);
+	return sqrt(diff.x * diff.x + diff.y * diff.y); 
+	}
+
+vec2 rand2( vec2 coord) {
+	coord = mod(coord, 10000.0);
+	return fract(sin( vec2( dot(coord,vec2(127.1,311.7)), dot(coord,vec2(269.5,183.3)) ) ) * 43758.5453);
+}
+
+float celular_noise(vec2 coord, float time) {
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+	
+	float min_dist = 99999.0;
+	// going through the current tile and the tiles surrounding it
+	for(float x = -25.0; x <= 1.0; x++) {
+		for(float y = -5.0; y <= 5.0; y++) {
+			
+			// generate a random point in each tile,
+			// but also account for whether it's a farther, neighbouring tile
+			vec2 node = rand2(i + vec2(x, y)) + vec2(x, y);
+			
+			node = 0.5 + 0.5*sin(time + 6.2831*node);
+			// check for distance to the point in that tile
+			// decide whether it's the minimum
+			float dist = sqrt((f - node).x * (f - node).x + (f - node).y * (f - node).y);
+			min_dist = min(min_dist, dist);
+		}
+	}
+	return min_dist;
+	}
+
+void fragment() {
+	
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	vec4 text =  texture(TEXTURE,UV);
+	
+	if (color.rgb != vec3(0.0,1.0,0.0))discard;
+	color.a = 0.0;
+	vec2 coord = UV * 1.0; //* volume;
+	float value = central_noise(coord);
+	float val = celular_noise(coord,TIME*u_time);
+	
+	vec2 s_coord = UV* 1.0;
+	float sphere = central_noise(s_coord);
+	
+	vec2 c_coord = UV;
+	float cell = celular_noise(c_coord,TIME*u_time);
+	
+	float final = mix(sphere*10.0,cell*10.0,1.4); // ponee 1.5 para efecto si querido
+	COLOR = vec4(body_color,final);
+	
+	if (COLOR.a == 0.0){
+		COLOR.a = 1.0;
+	}
+	
+	//COLOR  = vec4(body_color,val*15.0);
+	//COLOR = vec4(body_color,value*4.5);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/body_color = Vector3( 0.25, 0.58, 0.58 )
+shader_param/volume = 15.0
+shader_param/u_time = 0.5
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec3 color = vec3(0.5,1.0,1.0);
+
+float celular_noise(vec2 coord) {
+	vec2 diff = coord - vec2(0.5);
+	return sqrt( diff.y * diff.y * diff.y * diff.y); 
+	}
+
+void fragment() {
+	
+	vec2 coord = UV * 1.0;
+	float value = celular_noise(coord);
+	COLOR  = vec4(color,value);
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/color = Vector3( 0.5, 1, 1 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 22
 outline_size = 1
 outline_color = Color( 0.0352941, 0.0235294, 0.0235294, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=7]
 radius = 20.0
 
 [node name="Planc_P1" type="Node2D"]
@@ -27,6 +124,7 @@ curve = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.2, 1.2 )
 process_mode = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -41,6 +139,21 @@ script = ExtResource( 3 )
 
 [node name="Graphics" type="Node2D" parent="."]
 script = ExtResource( 4 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Graphics"]
+color = Color( 0, 1, 0, 1 )
+
+[node name="Sprite" type="Sprite" parent="Graphics"]
+material = SubResource( 3 )
+scale = Vector2( 5.5, 5.5 )
+texture = ExtResource( 7 )
+
+[node name="Line2D" type="Line2D" parent="Graphics"]
+material = SubResource( 5 )
+z_index = -1
+width = 16.0
+default_color = Color( 1, 1, 1, 0.196078 )
+texture_mode = 2
 
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -58,7 +171,7 @@ margin_left = 49.0
 margin_top = 149.0
 margin_right = 145.0
 margin_bottom = 178.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 6 )
 text = "Health: "
 script = ExtResource( 6 )
 __meta__ = {
@@ -75,7 +188,7 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 7 )
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="timeout" from="Turbo" to="." method="_on_Turbo_timeout"]

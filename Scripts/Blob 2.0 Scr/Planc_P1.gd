@@ -62,6 +62,9 @@ onready var turbo_Realace = $Turbo
 # Area enies detection 
 onready var area_enemies = $Area2D
 
+# UV set
+var is_uv_set = false
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -139,18 +142,22 @@ func getCurArea ():
 	pass
 
 func _draw():
-	var bakedPoints = Array(curve.get_baked_points())
-	var drawPoints = bakedPoints + []
+	var bakedPoints = PoolVector2Array(curve.get_baked_points())
+	var end: PoolVector2Array = []
+	var drawPoints = bakedPoints + end
 	if Geometry.triangulate_polygon(drawPoints).empty():
 		drawPoints = Geometry.convex_hull_2d(bakedPoints)
 		pass
 	
 	# darw line
 	var state_line = Graphics_ctrl.line_color
-	draw_polyline(drawPoints, state_line, 14.0, true)
+	Graphics_ctrl.line.points = drawPoints
+	#draw_polyline(drawPoints, state_line, 10.0, true)
 	
 	var state_color = Graphics_ctrl.fill_color
-	draw_polygon(drawPoints,[state_color])
+	Graphics_ctrl.poly.polygon = drawPoints
+	
+	#draw_polygon(drawPoints,[state_color])
 	#collison_area.polygon = drawPoints
 	pass
 

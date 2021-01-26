@@ -50,10 +50,8 @@ one_shot = true
 [node name="lifeTimer" type="Timer" parent="."]
 wait_time = 5.0
 
-
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 3 )
 texture = ExtResource( 2 )
-
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="lifeTimer" to="." method="_on_lifeTimer_timeout"]
