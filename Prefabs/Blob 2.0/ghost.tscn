@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Blob 2.0 Scr/ghost.gd" type="Script" id=1]
+
+[node name="ghost" type="Polygon2D"]
+color = Color( 0.0980392, 0.952941, 0.811765, 0.254902 )
+script = ExtResource( 1 )
+timer_end = 0.5

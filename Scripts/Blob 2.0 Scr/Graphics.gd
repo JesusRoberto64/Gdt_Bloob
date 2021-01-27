@@ -15,6 +15,14 @@ var uv_points: PoolVector2Array = []
 
 var cells = 15.0
 var next_cell
+
+# ghost system  
+
+var ghost_time = 0.08
+var ghost_conter: float 
+var ghost = preload("res://Prefabs/Blob 2.0/ghost.tscn")
+onready var particles = $Particles
+
 func _ready():
 	fill_color = Color(0.0,0.0,0.0,1.0)
 	line_color = Color(0.0,0.0,0.0,1.0)
@@ -23,12 +31,17 @@ func _ready():
 	cells = planc.radius*0.2
 	cells = clamp(cells,5.0,15.0)
 	next_cell = planc.radius*0.00002
+
 	pass
 
-func _process(_delta):
+
+func _process(delta):
 	#var color = Color(0.0,0.0,0.0,0.0) # es verde
 	match cur_state:
 		STATE.IDLE:
+			
+			
+			
 			pass
 		STATE.MOVING:
 			fill_color = Color(0.0,1.0,0.0,0.5)
@@ -46,22 +59,40 @@ func _process(_delta):
 		STATE.DYING:
 			pass
 	
-	#poly.uv = uv_points
+	
+	#Ghost effect 
+	if spr.position == planc.findCentroid():
+		#print("igual")
+		
+		pass
+	
+	ghost_conter += delta
+	
+	if ghost_conter >=  ghost_time:
+		spawn_ghost()
+		ghost_conter = 0.0
+		pass
+	
 	
 	spr.position = planc.findCentroid()
 	
-	#cells = lerp(cells,cells*mult,0.5)
+	#=====sistme que maneja la animacion del shaders
+	#usa el radiu y multiplier para modificar el ruido del sahder
 	if past_radius != planc.radius:
 		next_cell = planc.radius*0.002
 		pass
 	
-	cells = lerp(cells,next_cell,0.06)
-	cells = clamp(cells,0.01,10.0)
+	cells = lerp(cells,next_cell,0.06) #descelera la animacion
+	cells = clamp(cells,0.01,10.0) # pone un tope a la velocidad de animacion
 	
-	spr.material.set("shader_param/u_time",cells)
+	spr.material.set("shader_param/u_time",cells) # seteo en shader
 	#print(cells)
 	pass
 
-
-func ghost():
+func spawn_ghost():
+	
+	var inst = ghost.instance()
+	inst.polygon = poly.polygon
+	particles.add_child(inst)
+	
 	pass

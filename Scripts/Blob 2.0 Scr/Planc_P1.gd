@@ -194,6 +194,9 @@ func _process(_delta):
 	Movement_ctrl.cur_state = cur_state
 	Graphics_ctrl.cur_state = cur_state
 	
+#	if cur_move_vec == Vector2.ZERO:
+#		cur_state = STATE.IDLE
+	
 	move_vec = vec_movement(cur_move_vec)
 	
 	#Camera
@@ -302,12 +305,7 @@ func _physics_process(delta):
 			pass
 		pass
 	
-	#Camera
-	#var cam_cent = findCentroid()
-	#cam_cent.x = round(cam_cent.x)
-	#cam_cent.y = round(cam_cent.y)
-	#camera.position = cam_cent
-	#print(cam_cent, " seted")
+	
 	updateSprite()
 	update()
 	pass

@@ -124,7 +124,6 @@ curve = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 1.2, 1.2 )
 process_mode = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -154,6 +153,9 @@ z_index = -1
 width = 16.0
 default_color = Color( 1, 1, 1, 0.196078 )
 texture_mode = 2
+
+[node name="Particles" type="Node2D" parent="Graphics"]
+z_index = -2
 
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.5
