@@ -10,17 +10,23 @@ var canSeePlayerFlag = false
 var health_Orbs = []
 var stunCount = 0
 var stuned = false
-
+var can_follow = false
 
 export var pullForce = 15
 export var pullOrbForce = 10
 export var amounToStun = 2 #This value is the number of health orbs needed to stun the enemy
 # Called when the node enters the scene tree for the first time.
+
+# animation Graphics 
+
+onready var anim = $Base/KinematicBody2D.find_node("AnimationPlayer")
+
 func _ready():	
 	#player = get_node("/root/Main/Blob")
 	player = get_tree().get_nodes_in_group("Player")[0]
 	
 	rotationBase = get_node("Base")
+	
 	pass # Replace with function body.
 
 
@@ -28,13 +34,16 @@ func _ready():
 
 func _process(_delta):
 	if !stuned:
-		FollowPlayer()
+		
 		RaycastToPlayer()
 #	if(bodyDetected):
 #		var dir = (get_transform().origin - player.get_transform().origin).normalized()
 #		#player.add_central_force (dir*pullForce)
 #
 #		pass
+	
+	if can_follow:
+		FollowPlayer()
 	
 	pass
 
@@ -51,8 +60,13 @@ func _physics_process(_delta):
 				pass
 			#print(dir)
 			player.get_parent().gravity = Vector2(dir*pullForce)
+			can_follow = true
+			anim.play("bite ")
 			pass
-		
+		else:
+			can_follow = false
+			rotationBase.rotation = lerp(rotationBase.rotation,-1.5,0.01)
+			anim.play("idle_loop")
 		if ( !health_Orbs.empty() and canSeePlayerFlag):
 			for orb in health_Orbs:
 				var dirToOrb = (get_global_transform().origin - orb.get_global_transform().origin).normalized()
@@ -60,7 +74,8 @@ func _physics_process(_delta):
 				pass			
 			pass
 		
-	
+	else:
+		can_follow = false
 	pass
 
 func RaycastToPlayer():
@@ -130,10 +145,11 @@ func _on_CollisionArea_body_entered(body):
 			body.queue_free()
 			
 			if(stunCount >= amounToStun):
-				#Stun Enemy
-				stuned = true
-				stunTimer.start()
-				player.get_parent().gravity = Vector2.ZERO
+				#Stun Enemy Unable temparally
+				#stuned = true
+				#stunTimer.start()
+				#player.get_parent().gravity = Vector2.ZERO
+				pass
 			pass
 	pass # Replace with function body.
 
