@@ -4,7 +4,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 0.972549, 0, 0, 1 )
+flags_unshaded = true
 albedo_texture = ExtResource( 2 )
 
 [sub_resource type="QuadMesh" id=2]

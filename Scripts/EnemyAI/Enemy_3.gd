@@ -33,6 +33,10 @@ export var idleWaitTime = 2
 export var prepareAttackTime = 3
 export var amounToStun = 1
 
+# animtion integration
+
+onready var anim = $"Base/Kinematic Body".find_node("AnimationPlayer")
+
 func _ready():	
 	if points.curve == null:
 		print_debug("Enemy " + self.name + " has no path2D points established")
@@ -43,6 +47,7 @@ func _ready():
 	
 	rng.randomize()
 	player = get_tree().get_nodes_in_group("Player")[0]
+	
 	
 	pass # Replace with function body.
 
@@ -62,6 +67,7 @@ func _process(delta):
 				base.look_at(positioner.get_global_position())
 				currentState = States.MOVE
 				timer.stop()
+				anim.play("patrol_loop")
 			else:
 				Patrol(delta)
 				pass
@@ -79,6 +85,7 @@ func RaycastToPlayer():
 				canSeePlayerFlag = false
 				OnBodyExited()
 				bodyDetectedflag = false
+				
 	else:
 		canSeePlayerFlag = true
 		pass
@@ -133,7 +140,8 @@ func FollowPlayer(_delta):
 		else:
 			positioner.set_global_position(player.get_global_position()) 	
 			base.look_at(positioner.get_global_position())
-			currentState = States.PREPARE			
+			currentState = States.PREPARE
+			anim.play("prepare")
 			pass
 	else:
 		if(timer.is_stopped()):
@@ -148,6 +156,7 @@ func AttackPlayer(var delta):
 	path.remove(0)
 	var dist = pursueSpeed * delta
 	var last_pos = self.get_position()
+	anim.play("attack_loop")
 	for _i in range(path.size()):
 		
 		var dist_to_end = last_pos.distance_to(path[0])

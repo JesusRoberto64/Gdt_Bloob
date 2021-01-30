@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 uniform float amt:hint_range(0.0,1.0);
 void fragment() {
@@ -18,14 +18,14 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 shader_param/amt = 0.648
 
-[sub_resource type="ViewportTexture" id=2]
+[sub_resource type="ViewportTexture" id=4]
 viewport_path = NodePath("Base/KinematicBody2D/Viewport")
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 15.0
 
 [node name="Vorticella" type="Node2D"]
@@ -47,12 +47,13 @@ position = Vector2( 0, -105.43 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Base/KinematicBody2D/CollisionShape2D"]
-material = SubResource( 5 )
+material = SubResource( 3 )
 z_index = 1
 texture = ExtResource( 3 )
 
 [node name="Viewport" type="Viewport" parent="Base/KinematicBody2D"]
 size = Vector2( 500, 500 )
+own_world = true
 transparent_bg = true
 render_target_v_flip = true
 
@@ -61,7 +62,7 @@ render_target_v_flip = true
 [node name="Texture" type="Sprite" parent="Base/KinematicBody2D"]
 position = Vector2( -16.0543, -74.4377 )
 scale = Vector2( 0.446125, 0.446125 )
-texture = SubResource( 2 )
+texture = SubResource( 4 )
 
 [node name="Vision Area" type="Area2D" parent="Base"]
 position = Vector2( 19.478, 7.05102e-05 )
@@ -81,7 +82,7 @@ collision_mask = 12
 visible = false
 position = Vector2( 106.417, 0.000312805 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="RayCastParent" type="Node2D" parent="."]
 rotation = -1.5708
