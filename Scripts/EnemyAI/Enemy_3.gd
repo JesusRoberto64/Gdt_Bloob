@@ -30,7 +30,7 @@ export var currentState = States.IDLE
 export var patrolSpeed = 70
 export var pursueSpeed = 400
 export var idleWaitTime = 2
-export var prepareAttackTime = 3
+export var prepareAttackTime: float = 3
 export var amounToStun = 1
 
 # animtion integration

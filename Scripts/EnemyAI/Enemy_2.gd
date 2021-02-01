@@ -33,6 +33,9 @@ export var idleWaitTime = 2
 export var amounToStun = 2 
 export var pullOrbForce = 10
 
+# refrence to animation 
+onready var anim = $"Base/Kinematic Body".get_node("Viewport/Stentor/AnimationPlayer")
+
 func _ready():	
 	if points.curve == null:
 		print_debug("Enemy " + self.name + " has no path2D points established")
@@ -43,6 +46,7 @@ func _ready():
 	
 	rng.randomize()
 	player = get_tree().get_nodes_in_group("Player")[0]
+	
 	pass # Replace with function body.
 
 func _process(delta):
@@ -61,7 +65,7 @@ func _process(delta):
 				base.look_at(positioner.get_global_position())
 				currentState = States.MOVE
 				timer.stop()
-				
+				anim.play("patrol_loop")
 			else:
 				Patrol(delta)
 				pass
@@ -199,6 +203,7 @@ func _on_Area2D_body_entered(body):
 		currentState = States.FOLLOW
 		target = null
 		timer.stop()
+		anim.play("absorb_loop")
 	else:
 		if(body.is_in_group("Health")):
 			if body.is_life_infite == false:
