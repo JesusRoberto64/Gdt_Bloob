@@ -146,9 +146,9 @@ func _on_CollisionArea_body_entered(body):
 			
 			if(stunCount >= amounToStun):
 				#Stun Enemy Unable temparally
-				#stuned = true
-				#stunTimer.start()
-				#player.get_parent().gravity = Vector2.ZERO
+				stuned = true
+				stunTimer.start()
+				player.get_parent().gravity = Vector2.ZERO
 				pass
 			pass
 	pass # Replace with function body.

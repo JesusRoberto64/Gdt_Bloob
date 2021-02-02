@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/UI & Menus/button_X.png" type="Texture" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://Prefabs/Items/Door .tscn" type="PackedScene" id=12]
 [ext_resource path="res://Art/UI & Menus/youwin.png" type="Texture" id=13]
 [ext_resource path="res://Prefabs/Enemies/Hazard.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Prefabs/Enemies/Vorticella.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -33,7 +32,7 @@ _data = {
 
 [sub_resource type="Curve2D" id=4]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 1752.25, 1196.3, 0, 0, 0, 0, 1682.84, 1214.95, 0, 0, 0, 0, 1684.98, 1178.64, 0, 0, 0, 0, 2190.67, 1183.22 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1752.25, 1196.3, 0, 0, 0, 0, 1682.84, 1214.95, 0, 0, 0, 0, 1684.98, 1178.64 )
 }
 
 [sub_resource type="Curve2D" id=5]
@@ -108,7 +107,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 9392.54, 367.594, 0, 0, 0, 0, 9576.88, 532.871, 0, 0, 0, 0, 9373.47, 626.104, 0, 0, 0, 0, 9407.62, 698.695, 0, 0, 0, 0, 9547.22, 753.239, 0, 0, 0, 0, 9527.62, 824.695, 0, 0, 0, 0, 9367.11, 979.964, 0, 0, 0, 0, 9384.07, 1077.43, 0, 0, 0, 0, 9422.21, 1145.24, 0, 0, 0, 0, 9530.27, 1306.28, 0, 0, 0, 0, 9534.51, 1395.27, 0, 0, 0, 0, 9362.88, 1448.25, 0, 0, 0, 0, 9358.64, 1509.69, 0, 0, 0, 0, 9538.75, 1619.88, 0, 0, 0, 0, 9542.2, 1699.73, 0, 0, 0, 0, 9364.21, 2093.85, 0, 0, 0, 0, 9474.4, 2339.65, 0, 0, 0, 0, 9330.31, 2687.15, 0, 0, 0, 0, 9474.4, 2784.62 )
 }
 
-[sub_resource type="Environment" id=25]
+[sub_resource type="Environment" id=20]
 background_mode = 4
 background_energy = 2.09
 glow_intensity = 7.15
@@ -179,7 +178,7 @@ curve = SubResource( 7 )
 curve = SubResource( 8 )
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 8306.42, -626.147 )
+position = Vector2( 1499.63, 917.625 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -297,7 +296,7 @@ item_type = 0
 curve = SubResource( 19 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 25 )
+environment = SubResource( 20 )
 
 [node name="SceneManager" parent="." instance=ExtResource( 5 )]
 
@@ -309,7 +308,7 @@ autoplay = true
 [node name="MenuScreen" type="CanvasLayer" parent="."]
 
 [node name="Menu controller" type="Node2D" parent="MenuScreen"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.3 )
 script = ExtResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="MenuScreen/Menu controller"]
@@ -352,9 +351,6 @@ position = Vector2( 7904.5, 2877.04 )
 
 [node name="Hazard" parent="." instance=ExtResource( 14 )]
 position = Vector2( 1732.04, 2864.76 )
-
-[node name="Vorticella" parent="." instance=ExtResource( 15 )]
-position = Vector2( 8625.44, 1372.48 )
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran"]
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="MenuScreen/Menu controller" method="anim_intro" flags=6]
 [connection signal="door" from="PlayerHolder/Planc_P1" to="SceneManager" method="start_tran" flags=6]
@@ -397,3 +393,7 @@ position = Vector2( 8625.44, 1372.48 )
 [editable path="speedsection/Wall_poly5"]
 
 [editable path="speedsection/Path Item"]
+
+[editable path="SceneManager"]
+
+[editable path="SceneManager/TransitionScreen"]

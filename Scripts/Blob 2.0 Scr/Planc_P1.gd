@@ -87,6 +87,9 @@ func _ready():
 	drag = float(move_accel) / max_speed
 	resetBlob()
 	
+	# debugger abilities
+	#unlock_ability("push_Hazard")
+	
 	pass 
 
 func findCentroid():
@@ -205,7 +208,10 @@ func _process(_delta):
 		#cam_cent.x = round(cam_cent.x)
 		#cam_cent.y = round(cam_cent.y)
 		#camera.position = cam_cent
-		
+		#
+	else:
+		camera.state = camera.CAM_STATE.CINEMATIC
+		pass
 	# enemies detection 
 	area_enemies.position = findCentroid()
 	#print(area_enemies.position)
@@ -436,5 +442,5 @@ func unlock_ability(abilty: String):
 	if abilty == "push_Hazard":
 		for i in blob.size():
 				blob[i].can_push = true
-		
+		Graphics_ctrl.line.material.set("shader_param/color",Vector3(1.0,0.8,0.6))
 		pass
