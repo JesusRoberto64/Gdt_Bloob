@@ -23,6 +23,8 @@ var ghost_conter: float
 var ghost = preload("res://Prefabs/Blob 2.0/ghost.tscn")
 onready var particles = $Particles
 
+var Norm_col =  Vector3(0.25,0.58,0.58)
+
 func _ready():
 	fill_color = Color(0.0,0.0,0.0,1.0)
 	line_color = Color(0.0,0.0,0.0,1.0)
@@ -46,7 +48,7 @@ func _process(delta):
 		STATE.MOVING:
 			fill_color = Color(0.0,1.0,0.0,0.5)
 			line_color = Color.greenyellow
-			spr.material.set("shader_param/body_color",Vector3(0.25,0.58,0.58))
+			spr.material.set("shader_param/body_color",Norm_col)
 			
 			pass
 		STATE.HURT:

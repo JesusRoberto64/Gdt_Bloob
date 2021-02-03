@@ -22,6 +22,7 @@ func movement(move_accel,delta,move_vec,velocity,drag,gravity):
 		STATE.PUPPET:
 			pass
 		STATE.DYING:
+			_movement = Vector2.ZERO
 			pass
 	
 	return _movement

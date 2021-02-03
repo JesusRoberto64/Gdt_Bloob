@@ -17,44 +17,6 @@ var can_move = false
 
 func _process(delta):
 	
-#	match state:
-#		CAM_STATE.CENTERED:
-#			#print("centro")
-#			offset_h = lerp(offset_h,0,5*delta)
-#
-#			if !offset_h >= 0.01 and !offset_h <= -0.01:
-#				state = CAM_STATE.STOP
-#
-#				pass 
-#
-#			pass
-#		CAM_STATE.MOVING:
-#			#print("movio")
-#			if direction_x != 0:
-#
-#				offset_h = lerp(offset_h,distance*direction_x,1*delta)
-#				print(offset_h)
-#				pass
-#
-#			direction_facing()
-#			drag_margin_h_enabled = false
-#			pass
-#		CAM_STATE.STOP:
-#			#print("paro")
-#			if direction_facing():
-#				#state = CAM_STATE.MOVING
-#
-#				pass
-#
-#			#timer.start()
-#			#drag_margin_h_enabled = true
-#			pass
-#		CAM_STATE.CINEMATIC:
-#
-#			pass
-	
-	#prev_camera_pos = get_camera_position()
-	
 	##imputs 
 	if Input.is_action_pressed("ui_right") || Input.is_action_pressed("ui_left"):
 		timer.start()
@@ -62,6 +24,14 @@ func _process(delta):
 	else:
 		can_move = false
 	pass
+	
+	if Input.is_action_pressed("ZoomIn"):
+		zoom.x += 1*delta
+		zoom.y += 1*delta
+	elif Input.is_action_pressed("ZoomOut"):
+		zoom.x -= 1*delta
+		zoom.y -= 1*delta
+	
 
 func _physics_process(delta):
 	
@@ -106,7 +76,7 @@ func _physics_process(delta):
 			drag_margin_h_enabled = true
 			pass
 		CAM_STATE.CINEMATIC:
-			
+			return
 			pass
 	
 	

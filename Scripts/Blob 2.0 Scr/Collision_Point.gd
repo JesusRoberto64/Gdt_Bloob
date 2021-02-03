@@ -56,7 +56,7 @@ func _on_Area2D_body_entered(body):
 		timer.start()
 		update()
 		#body.mode = 0 # kinematic
-		if can_push:
+		if can_push and body.is_in_group("Push"):
 			body.call_deferred("set_mode",0)
 			body.update()
 			body.life_timer.start()
@@ -65,6 +65,7 @@ func _on_Area2D_body_entered(body):
 	if body.is_in_group("Door"):
 		
 		emit_signal("enter_door")
+		print("doored")
 		pass
 	
 	pass 
