@@ -214,22 +214,22 @@ void fragment() {
 	vec2 c_coord = UV;
 	float cell = celular_noise(c_coord,TIME*0.2);
 	
-	float final = mix(sphere*3.6,cell*10.0,1.5);
+	float final = mix(sphere,cell*8.0,1.0);
 	COLOR = vec4(color,final);
 	//COLOR  = vec4(color,value*2.0);
 	//COLOR = vec4(vec3(val),value*2.0);
 	//COLOR = vec4(vec3(value),val*2.0);
 	
-	vec4 c = texture(SCREEN_TEXTURE, SCREEN_UV);
-	if (c.rgb == vec3(1.0,1.0,1.0)){
-		COLOR.rgb = color;
-	}
+	//vec4 c = texture(SCREEN_TEXTURE, SCREEN_UV);
+	//if (c.rgb == vec3(1.0,1.0,1.0)){
+	//	COLOR.rgb = color;
+	//}
 	
 }"
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = SubResource( 6 )
-shader_param/color = Vector3( 0.25, 0.58, 0.51 )
+shader_param/color = Vector3( 0.2, 0.29, 0.29 )
 
 [node name="Caja" type="RigidBody2D"]
 collision_layer = 144
@@ -259,7 +259,7 @@ curve = SubResource( 5 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="."]
 visible = false
-position = Vector2( 401.673, 164.836 )
+position = Vector2( 402.38, 161.3 )
 scale = Vector2( 2.25096, 1.40235 )
 color = Color( 0, 1, 0, 1 )
 polygon = PoolVector2Array( 30.1884, -21.1927, 143.029, -21.9058, 145.25, 159.932, 29.2999, 158.506 )

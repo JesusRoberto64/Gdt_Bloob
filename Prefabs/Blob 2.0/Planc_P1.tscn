@@ -165,7 +165,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
+layer = 2
 
 [node name="Health_HUD" type="Label" parent="CanvasLayer"]
 modulate = Color( 1, 1, 1, 0.635294 )
