@@ -1,4 +1,8 @@
 extends Node2D
+##CODE BASE UNDER THE LICENSE
+## MIT Copyright (c) 2020 Lynext
+## 
+
 
 #STATE MACHINE
 enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
