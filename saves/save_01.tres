@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Resourse_Dat.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+player_pos = Vector2( -164.006, 3365.02 )
+hours = 31.0506
+Asteros_limit = 30
+Asteros = 0
+red_Shield = false
+Demo_data = {
+"1_Door_open": false,
+"2_Door_open": false,
+"is_Shield": true,
+"key1_used": false,
+"key2_used": false
+}

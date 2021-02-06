@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://Scripts/Contoles & UI/UIElemts.gd" type="Script" id=20]
 [ext_resource path="res://Art/sound/underwater-breathing_edit.wav" type="AudioStream" id=21]
 [ext_resource path="res://Scripts/Contoles & UI/Pause Ctrl.gd" type="Script" id=22]
+[ext_resource path="res://Scripts/Blob 2.0 Scr/PlayerLoader.gd" type="Script" id=23]
+[ext_resource path="res://Resourse_Dat.gd" type="Script" id=24]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -287,9 +289,11 @@ _data = {
 
 [node name="PlayerHolder" type="Node2D" parent="."]
 position = Vector2( 4193.82, 1003.47 )
+script = ExtResource( 23 )
 __meta__ = {
 "_edit_group_": true
 }
+game_save_class = ExtResource( 24 )
 
 [node name="Planc_P1" parent="PlayerHolder" instance=ExtResource( 1 )]
 
