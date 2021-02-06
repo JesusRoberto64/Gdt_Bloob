@@ -41,6 +41,9 @@ collision_mask = 64
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Gatekine"]
 polygon = PoolVector2Array( 64, 64, 96, 0, 96, -32, 96, -96, -64, -96, -64, 64 )
+
+[node name="Polygon" type="Polygon2D" parent="Gatekine"]
+polygon = PoolVector2Array( -65, -96.5, 95, -95.5, 96, 0, 63.5, 64.5, -64, 64 )
 [connection signal="body_entered" from="Lock&KeyArea" to="Lock&KeyArea" method="_on_LockKeyArea_body_entered"]
 [connection signal="body_entered" from="Gatelimit" to="Gatelimit" method="_on_Gatelimit_body_entered"]
 [connection signal="body_entered" from="Gatelimit2" to="Gatelimit2" method="_on_Gatelimit_body_entered"]

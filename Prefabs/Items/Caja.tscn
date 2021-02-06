@@ -134,7 +134,7 @@ void fragment() {
 shader = SubResource( 1 )
 shader_param/color = Vector3( 0.76, 0.54, 0.92 )
 
-[sub_resource type="Shader" id=7]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 uniform vec3 color = vec3(1.0,1.0,1.0);
@@ -155,37 +155,85 @@ void fragment() {
 	
 }"
 
-[sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 7 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 shader_param/color = Vector3( 1, 1, 1 )
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="Curve2D" id=5]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 ///TEST SPRITE
-float celular_noise(vec2 coord) {
+uniform vec3 color = vec3(1.0,0.58,0.51);
+
+float central_noise(vec2 coord) {
 	vec2 diff = coord - vec2(0.5);
-	return sqrt(diff.x * diff.x + diff.y * diff.y); 
+	return sqrt( diff.x* diff.x  + diff.y * diff.y ); 
+	}
+
+vec2 rand2( vec2 coord) {
+	coord = mod(coord, 10000.0);
+	return fract(sin( vec2( dot(coord,vec2(127.1,311.7)), dot(coord,vec2(269.5,183.3)) ) ) * 43758.5453);
+}
+
+float celular_noise(vec2 coord, float time) {
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+	
+	float min_dist = 99999.0;
+	// going through the current tile and the tiles surrounding it
+	for(float x = -15.0; x <= 1.0; x++) {
+		for(float y = -5.0; y <= 5.0; y++) {
+			
+			// generate a random point in each tile,
+			// but also account for whether it's a farther, neighbouring tile
+			vec2 node = rand2( vec2(x, y)) + vec2(x, y);
+			
+			node = 0.5 + 0.5*sin(time + 6.2831*node);
+			// check for distance to the point in that tile
+			// decide whether it's the minimum
+			float dist = sqrt((f - node).x * (f - node).x + (f - node).y * (f - node).y);
+			min_dist = min(min_dist, dist);
+		}
+	}
+	return min_dist;
 	}
 
 void fragment() {
 	
-	vec2 coord = UV * 1.0;
-	float value = celular_noise(coord);
-	COLOR  = vec4(vec3(value),1.0);
+	vec2 coord = UV*1.1 ;
+	float value = central_noise(coord);
+	float val = celular_noise(coord,TIME*0.2);
+	
+	vec2 s_coord = UV* 1.0;
+	float sphere = central_noise(s_coord);
+	
+	vec2 c_coord = UV;
+	float cell = celular_noise(c_coord,TIME*0.2);
+	
+	float final = mix(sphere,cell*8.0,1.0);
+	COLOR = vec4(color,final);
+	//COLOR  = vec4(color,value*2.0);
+	//COLOR = vec4(vec3(val),value*2.0);
+	//COLOR = vec4(vec3(value),val*2.0);
+	
+	//vec4 c = texture(SCREEN_TEXTURE, SCREEN_UV);
+	//if (c.rgb == vec3(1.0,1.0,1.0)){
+	//	COLOR.rgb = color;
+	//}
 	
 }"
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/color = Vector3( 0.2, 0.29, 0.29 )
 
 [node name="Caja" type="RigidBody2D"]
-collision_layer = 16
-collision_mask = 18
+collision_layer = 144
+collision_mask = 130
 mass = 20.0
 script = ExtResource( 1 )
 __meta__ = {
@@ -201,15 +249,24 @@ position = Vector2( 0, -1 )
 texture = ExtResource( 2 )
 
 [node name="Line2D" type="Line2D" parent="."]
-material = SubResource( 8 )
+material = SubResource( 4 )
 texture_mode = 2
 joint_mode = 2
 
 [node name="Path2D" type="Path2D" parent="."]
 scale = Vector2( 0.5625, 0.5625 )
-curve = SubResource( 3 )
+curve = SubResource( 5 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+visible = false
+position = Vector2( 402.38, 161.3 )
+scale = Vector2( 2.25096, 1.40235 )
+color = Color( 0, 1, 0, 1 )
+polygon = PoolVector2Array( 30.1884, -21.1927, 143.029, -21.9058, 145.25, 159.932, 29.2999, 158.506 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 5 )
-position = Vector2( 173.352, 91.4996 )
+visible = false
+material = SubResource( 7 )
+position = Vector2( 598.377, 261.976 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )

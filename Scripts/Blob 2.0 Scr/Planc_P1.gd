@@ -1,4 +1,8 @@
 extends Node2D
+##CODE BASE UNDER THE LICENSE
+## MIT Copyright (c) 2020 Lynext
+## 
+
 
 #STATE MACHINE
 enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
@@ -62,6 +66,9 @@ onready var turbo_Realace = $Turbo
 # Area enies detection 
 onready var area_enemies = $Area2D
 
+# UV set
+var is_uv_set = false
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -83,6 +90,9 @@ func _ready():
 	camera = $Camera2D
 	drag = float(move_accel) / max_speed
 	resetBlob()
+	
+	# debugger abilities
+	#unlock_ability("push_Hazard")
 	
 	pass 
 
@@ -139,26 +149,30 @@ func getCurArea ():
 	pass
 
 func _draw():
-	var bakedPoints = Array(curve.get_baked_points())
-	var drawPoints = bakedPoints + []
+	var bakedPoints = PoolVector2Array(curve.get_baked_points())
+	var end: PoolVector2Array = []
+	var drawPoints = bakedPoints + end
 	if Geometry.triangulate_polygon(drawPoints).empty():
 		drawPoints = Geometry.convex_hull_2d(bakedPoints)
 		pass
 	
 	# darw line
 	var state_line = Graphics_ctrl.line_color
-	draw_polyline(drawPoints, state_line, 14.0, true)
+	Graphics_ctrl.line.points = drawPoints
+	#draw_polyline(drawPoints, state_line, 10.0, true)
 	
 	var state_color = Graphics_ctrl.fill_color
-	draw_polygon(drawPoints,[state_color])
+	Graphics_ctrl.poly.polygon = drawPoints
+	
+	#draw_polygon(drawPoints,[state_color])
 	#collison_area.polygon = drawPoints
 	pass
 
 func _process(_delta):
-	if Input.is_action_just_pressed("exit"):
-		get_tree().quit()
-	if Input.is_action_just_pressed("restart"):
-		get_tree().reload_current_scene()
+#	if Input.is_action_just_pressed("exit"):
+#		get_tree().quit()
+#	if Input.is_action_just_pressed("restart"):
+#		get_tree().reload_current_scene()
 	
 	is_Stop = true
 	var cur_move_vec = Vector2.ZERO # nbegining
@@ -187,6 +201,9 @@ func _process(_delta):
 	Movement_ctrl.cur_state = cur_state
 	Graphics_ctrl.cur_state = cur_state
 	
+#	if cur_move_vec == Vector2.ZERO:
+#		cur_state = STATE.IDLE
+	
 	move_vec = vec_movement(cur_move_vec)
 	
 	#Camera
@@ -195,7 +212,10 @@ func _process(_delta):
 		#cam_cent.x = round(cam_cent.x)
 		#cam_cent.y = round(cam_cent.y)
 		#camera.position = cam_cent
-		
+		#
+	else:
+		camera.state = camera.CAM_STATE.CINEMATIC
+		pass
 	# enemies detection 
 	area_enemies.position = findCentroid()
 	#print(area_enemies.position)
@@ -295,12 +315,7 @@ func _physics_process(delta):
 			pass
 		pass
 	
-	#Camera
-	#var cam_cent = findCentroid()
-	#cam_cent.x = round(cam_cent.x)
-	#cam_cent.y = round(cam_cent.y)
-	#camera.position = cam_cent
-	#print(cam_cent, " seted")
+	
 	updateSprite()
 	update()
 	pass
@@ -431,5 +446,5 @@ func unlock_ability(abilty: String):
 	if abilty == "push_Hazard":
 		for i in blob.size():
 				blob[i].can_push = true
-		
+		Graphics_ctrl.line.material.set("shader_param/color",Vector3(1.0,0.8,0.6))
 		pass
