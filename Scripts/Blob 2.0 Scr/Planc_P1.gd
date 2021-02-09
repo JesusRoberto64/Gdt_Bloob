@@ -9,10 +9,13 @@ enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
 
 var cur_state = STATE.MOVING
 
-var points = 11 # 12 maximo
-export var radius = 17.0 # 
-var circunferenceMultiplier = 0.2
+## limits for radius 
+var max_asteros = 76.0 # el veradero MAximo
+var min_asteros = 19.0#old 14 
 
+var points = 11 # 12 maximo
+export var radius: float = 19.0 # put the minimun
+var circunferenceMultiplier = 0.2
 var area = radius * radius * PI
 var circunference = radius *2.0* PI * circunferenceMultiplier
 var length =  circunference *1.15 / float(points)
@@ -232,7 +235,7 @@ func _process(_delta):
 			turbo_Realace.start()
 			pass
 		#max_speed = 2500
-		if radius > 15:
+		if radius > min_asteros + 1:
 			move_accel = 1200#1800
 		else:
 			#move_accel = 900
@@ -245,6 +248,8 @@ func _process(_delta):
 		#grow()
 #		for i in blob.size():
 #			blob[i].can_push = true
+		#camera.state = camera.CAM_STATE.CINEMATIC
+		#cur_state = STATE.PUPPET
 		pass
 	
 	pass
@@ -352,13 +357,13 @@ func vec_movement(move_vec):
 
 func shink():
 	
-	if radius < 15:
+	if radius < min_asteros+1:
 		#print("regreso")
 		#print(radius, "en return")
 		return
 	
 	radius -= growth_mult
-	radius = clamp(radius,14,76)
+	radius = clamp(radius,min_asteros,max_asteros)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
@@ -389,7 +394,7 @@ func grow(body):
 		bodies_health.resize(3)
 	
 	radius += growth_mult
-	radius = clamp(radius,14,76)
+	radius = clamp(radius,min_asteros,max_asteros)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
@@ -400,7 +405,7 @@ func grow(body):
 
 func grow_debug():
 	radius += growth_mult
-	radius = clamp(radius,14,76)
+	radius = clamp(radius,min_asteros,max_asteros)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
@@ -413,7 +418,7 @@ func hurt():
 		return
 	
 	cur_state = STATE.HURT
-	if radius <= 14:
+	if radius <= min_asteros:
 		emit_signal("dead")
 		set_visible(false)
 		cur_state = STATE.DYING
@@ -448,3 +453,11 @@ func unlock_ability(abilty: String):
 				blob[i].can_push = true
 		Graphics_ctrl.line.material.set("shader_param/color",Vector3(1.0,0.8,0.6))
 		pass
+	
+	if abilty == "Asteropp":
+		max_asteros += 3
+		health_var.max_asteros = max_asteros
+		health_var.update()
+		pass
+	
+
