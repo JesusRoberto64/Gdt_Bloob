@@ -6,7 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[node name="Gate&Key" type="Node2D"]
+[node name="Gate&Key" type="Node2D" groups=[
+"Gate",
+]]
 script = ExtResource( 2 )
 
 [node name="Lock&KeyArea" type="Area2D" parent="."]
