@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Prefabs/Enemies/Full Enemies/Brachinous_full.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=2]
+
+[node name="Perform" type="Node2D"]
+
+[node name="Planc_P1" parent="." instance=ExtResource( 2 )]
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="Navigation2D" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D2" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D3" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D4" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D5" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D6" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 516.249, 209.475 )
+
+[node name="Navigation2D7" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 1372.29, 582.406 )
+
+[node name="Navigation2D8" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 1058.69, 116.242 )
+
+[node name="Navigation2D9" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D10" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 448.443, 629.023 )
+
+[node name="Navigation2D11" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D12" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D13" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D14" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D15" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D16" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D17" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D18" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D19" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D20" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D21" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D22" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D23" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D24" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D25" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D26" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D27" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Navigation2D28" parent="enemies" instance=ExtResource( 1 )]
+position = Vector2( 808.661, 366.276 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 699.456, 411.131 )
+zoom = Vector2( 2, 2 )
