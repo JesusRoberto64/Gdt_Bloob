@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Prefabs/Enemies/Full Enemies/Brachinous_full.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Enemies/Full Enemies/Vorticella_full.tscn" type="PackedScene" id=4]
+
+[node name="EnemiesDsec1" type="Node2D"]
+
+[node name="Navigation2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 467.961, 3724.87 )
+
+[node name="Vorticella5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 936.238, 4218.17 )

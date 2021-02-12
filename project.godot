@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Vars="*res://Scripts/Blob 2.0 Scr/Vars.gd"
+ResourceQueue="*res://resource_queue.gd"
 
 [debug]
 

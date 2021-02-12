@@ -257,8 +257,3 @@ anims/idle_loop = SubResource( 5 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.935154, 0.354242, 0, -0.354242, 0.935154, -0.420502, 1.9734, 3.1053 )
-
-[node name="OmniLight" type="OmniLight" parent="."]
-light_energy = 9.38
-light_indirect_energy = 4.81
-omni_range = 17.7
