@@ -36,6 +36,7 @@ func intance_enemies():
 	if queue.is_ready(instnaces_path[actual_inst]):
 		var area = queue.get_resource(instnaces_path[actual_inst]).instance()
 		nest.call_deferred("add_child",area)
+		queue.cancel_resource(instnaces_path[actual_inst])
 		actual_inst += 1
 		#actual_inst = clamp(actual_inst,0,instnaces_path.size()-1)
 		can_instantate = true

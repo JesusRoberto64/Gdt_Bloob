@@ -28,9 +28,9 @@ var stuned = false
 export (Movement) var movementType = Movement.SECUENTIAL
 export var currentState = States.IDLE
 export var patrolSpeed = 70
-export var pursueSpeed = 400
+export var pursueSpeed = 500
 export var idleWaitTime = 2
-export var prepareAttackTime: float = 3
+export var prepareAttackTime: float = 0.5
 export var amounToStun = 1
 
 # animtion integration
@@ -154,7 +154,7 @@ func AttackPlayer(var delta):
 	currentState = States.FOLLOW
 	path = nav2d.get_simple_path(self.get_position(), playerLastPosition, true)
 	path.remove(0)
-	var dist = pursueSpeed * delta
+	var dist = pursueSpeed * delta*2.0
 	var last_pos = self.get_position()
 	anim.play("attack_loop")
 	for _i in range(path.size()):
@@ -167,6 +167,7 @@ func AttackPlayer(var delta):
 			break
 		elif (dist <= 0.0):
 			self.set_position(path[0])
+			
 			break
 		if(dist > dist_to_end):
 			currentState = States.IDLE
