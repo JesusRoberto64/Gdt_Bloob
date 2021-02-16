@@ -1,8 +1,5 @@
 extends Node2D
 
-onready var target = $ScenDemo1
-var area 
-
 onready var queue = get_node("/root/ResourceQueue")
 var area_to_load = ""
 var timer: Timer
@@ -22,7 +19,7 @@ func _ready():
 	timer.wait_time = 0.5
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if can_instantate and actual_inst <= instnaces_path.size()-1:
 		var inst_path = instnaces_path[actual_inst]
 		queue.queue_resource(inst_path,true)
@@ -46,12 +43,12 @@ func intance_enemies():
 	pass
 
 
-func _on_Detector_body_entered(body):
+func _on_Detector_body_entered(_body):
 	can_instantate = true
 	pass # Replace with function body.
 
 
-func _on_Detector_body_exited(body):
+func _on_Detector_body_exited(_body):
 	for i in nest.get_children():
 		i.queue_free()
 		pass
