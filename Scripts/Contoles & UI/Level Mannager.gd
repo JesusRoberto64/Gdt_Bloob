@@ -17,6 +17,9 @@ func _ready():
 	timer.connect("timeout",self,"intance_enemies")
 	#timer.one_shot = true
 	timer.wait_time = 0.5
+	for i in instnaces_path:
+		queue.cancel_resource(i)
+		pass
 	pass
 
 func _process(_delta):
@@ -32,6 +35,7 @@ func intance_enemies():
 
 	if queue.is_ready(instnaces_path[actual_inst]):
 		var area = queue.get_resource(instnaces_path[actual_inst]).instance()
+		
 		nest.call_deferred("add_child",area)
 		queue.cancel_resource(instnaces_path[actual_inst])
 		actual_inst += 1

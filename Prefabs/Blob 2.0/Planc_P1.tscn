@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Planc_P1.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Camera2D.gd" type="Script" id=2]
@@ -19,6 +19,9 @@ code = "shader_type canvas_item;
 uniform vec3 body_color = vec3(1,0.10,0.0);
 uniform float volume = 15.0;
 uniform float u_time = 0.5; 
+
+//new shader integration 
+uniform vec3 back_color = vec3(1.0,0.0,0.0);
 
 float central_noise(vec2 coord) {
 	vec2 diff = coord - vec2(0.5);
@@ -58,7 +61,7 @@ void fragment() {
 	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV);
 	vec4 text =  texture(TEXTURE,UV);
 	
-	if (color.rgb != vec3(0.0,1.0,0.0))discard;
+	if (color.rgb != back_color)discard;
 	color.a = 0.0;
 	vec2 coord = UV * 1.0; //* volume;
 	float value = central_noise(coord);
@@ -86,6 +89,7 @@ shader = SubResource( 2 )
 shader_param/body_color = Vector3( 0.25, 0.58, 0.58 )
 shader_param/volume = 15.0
 shader_param/u_time = 0.5
+shader_param/back_color = Vector3( 1, 0, 0 )
 
 [sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
@@ -114,6 +118,31 @@ size = 22
 outline_size = 1
 outline_color = Color( 0.0352941, 0.0235294, 0.0235294, 1 )
 font_data = ExtResource( 5 )
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform float intence = 0.0;
+
+
+float central_noise(vec2 coord) {
+	vec2 diff = coord - vec2(0.5);
+	return sqrt( diff.x* diff.x  + diff.y * diff.y ); 
+	}
+	
+
+void fragment(){
+	vec2 uv_coord = UV *1.0;
+	float value = central_noise(uv_coord);
+	vec2 uv_spot = UV *2.5;
+	float value2 = central_noise(uv_spot);
+	//COLOR.a = -value*3.0 +(value2*0.2);
+	COLOR.a = value*intence; // max value 2.2
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/intence = 0.3
 
 [sub_resource type="CircleShape2D" id=7]
 radius = 20.0
@@ -182,6 +211,16 @@ __meta__ = {
 
 [node name="grafic_health" type="Position2D" parent="CanvasLayer/Health_HUD"]
 position = Vector2( 41, -69 )
+
+[node name="HurtRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource( 9 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Area2D" type="KinematicBody2D" parent="." groups=[
 "Player",

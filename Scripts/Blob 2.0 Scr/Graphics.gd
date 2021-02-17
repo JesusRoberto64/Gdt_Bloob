@@ -25,6 +25,13 @@ onready var particles = $Particles
 
 var Norm_col =  Vector3(0.25,0.58,0.58)
 
+#shader change system
+var can_Shader_Chan = false
+var prev_state
+
+#screen hurt 
+onready var screen_hurt = get_parent().get_node("CanvasLayer/HurtRect")
+
 func _ready():
 	fill_color = Color(0.0,0.0,0.0,1.0)
 	line_color = Color(0.0,0.0,0.0,1.0)
@@ -42,25 +49,26 @@ func _process(delta):
 	match cur_state:
 		STATE.IDLE:
 			
-			
-			
 			pass
 		STATE.MOVING:
-			fill_color = Color(0.0,1.0,0.0,0.5)
-			line_color = Color.greenyellow
-			spr.material.set("shader_param/body_color",Norm_col)
 			
 			pass
 		STATE.HURT:
-			fill_color = Color.red
-			line_color = Color.black
-			spr.material.set("shader_param/body_color",Vector3(1.0,0.4,0.4))
+			
 			pass
 		STATE.PUPPET:
 			pass
 		STATE.DYING:
 			pass
 	
+	if prev_state != cur_state:
+		can_Shader_Chan = true
+	
+	if can_Shader_Chan:
+		shader_change()
+		can_Shader_Chan = false
+	
+	prev_state = cur_state
 	
 	#Ghost effect 
 	if spr.position == planc.findCentroid():
@@ -98,3 +106,24 @@ func spawn_ghost():
 	particles.add_child(inst)
 	
 	pass
+
+func shader_change():
+	match cur_state:
+		STATE.HURT:
+			fill_color = Color.red
+			line_color = Color.black
+			spr.material.set("shader_param/body_color",Vector3(1.0,0.4,0.4))
+			spr.material.set("shader_param/back_color",Vector3(1.0,0.0,0.0)) #Change both to change the sahder body 
+			poly.color = Color.red
+			screen_hurt.show()
+			pass
+		STATE.MOVING:
+			fill_color = Color(0.0,1.0,0.0,0.5)
+			line_color = Color.greenyellow
+			spr.material.set("shader_param/body_color",Norm_col)
+			spr.material.set("shader_param/back_color",Vector3(0.0,1.0,0.0))
+			poly.color = Color.green
+			screen_hurt.hide()
+			pass
+	pass
+

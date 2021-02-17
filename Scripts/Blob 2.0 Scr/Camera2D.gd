@@ -15,6 +15,12 @@ onready var planc = get_parent()
 
 var can_move = false
 
+# shaking camera 
+var is_shaking = false
+var shake_amnt = 0.5
+var time_Shake = 0.0
+var time_Shake_Max = 0.5
+
 func _process(delta):
 	
 	##imputs 
@@ -31,6 +37,9 @@ func _process(delta):
 	elif Input.is_action_pressed("ZoomOut"):
 		zoom.x -= 1*delta
 		zoom.y -= 1*delta
+	
+	if Input.is_action_pressed("grow"):
+		is_shaking = true
 	
 
 func _physics_process(delta):
@@ -74,6 +83,12 @@ func _physics_process(delta):
 			
 			timer.stop()
 			drag_margin_h_enabled = true
+			
+			if is_shaking:
+				#shakig(delta)
+				state = CAM_STATE.MOVING
+			
+			
 			pass
 		CAM_STATE.CINEMATIC:
 			return
@@ -87,7 +102,12 @@ func _physics_process(delta):
 	#print(position, " form planc")
 	
 	prev_camera_center = get_camera_screen_center()
+	
+	if is_shaking:
+		shakig(delta)
+		
 	pass
+	
 
 func direction_facing()-> bool:
 	#var new_direction = sign(position.x - prev_camera_pos.x)
@@ -105,3 +125,16 @@ func _on_Timer_timeout():
 	#print("movend")
 	state = CAM_STATE.CENTERED
 	pass 
+
+func shakig(delta):
+	position.x += rand_range(0,shake_amnt*100)
+	position.y += rand_range(0,shake_amnt*100)
+	
+	time_Shake += delta
+	if time_Shake > time_Shake_Max:
+		is_shaking = false
+		time_Shake = 0.0
+	pass
+
+
+

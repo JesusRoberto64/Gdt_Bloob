@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Enviroment/wall_purple.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Blob 2.0/SavePoint.tscn" type="PackedScene" id=2]
@@ -8,6 +8,11 @@
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 12086, 3987.94, 0, 0, 0, 0, 12012.4, 3897.43, 0, 0, 0, 0, 11921.9, 3716.41, 0, 0, 0, 0, 11972.8, 3529.74, 0, 0, 0, 0, 12102.9, 3416.6, 0, 0, 0, 0, 12244.4, 3478.83, 0, 0, 0, 0, 12238.7, 3727.73, 0, 0, 0, 0, 12165.2, 3903.09 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 11917.6, 3439.24, 0, 0, 0, 0, 11781.7, 3450.56, 0, 0, 0, 0, 11834.5, 3514.75, 0, 0, 0, 0, 11921.4, 3484.54 )
 }
 
 [node name="Demo_terrain02" type="Node2D"]
@@ -34,4 +39,12 @@ position = Vector2( 6401.17, 4894.82 )
 [node name="SavePoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 12082.4, 3715.13 )
 
+[node name="Path Item2" parent="." instance=ExtResource( 3 )]
+item_type = 0
+
+[node name="Path2D" parent="Path Item2" index="0"]
+curve = SubResource( 2 )
+
 [editable path="Path Item"]
+
+[editable path="Path Item2"]

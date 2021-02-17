@@ -376,6 +376,7 @@ func shink():
 	item_expulse_inst.direction = item_direct
 	if cur_state == STATE.HURT:
 		get_parent().call_deferred("add_child",item_expulse_inst)
+		camera.is_shaking = true
 		return
 		pass
 	get_parent().add_child(item_expulse_inst)
