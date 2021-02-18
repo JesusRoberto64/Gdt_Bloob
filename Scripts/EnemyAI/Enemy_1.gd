@@ -21,12 +21,18 @@ export var amounToStun = 2 #This value is the number of health orbs needed to st
 
 onready var anim = $Base/KinematicBody2D.find_node("AnimationPlayer")
 
-func _ready():	
+# Game feel shaking
+var shaking_Node
+
+#Particles
+onready var absorb_part = $Base/Particles_ghost
+
+func _ready():
 	#player = get_node("/root/Main/Blob")
 	player = get_tree().get_nodes_in_group("Player")[0]
-	
+	shaking_Node = player.get_parent().get_node("Camera2D")
 	rotationBase = get_node("Base")
-	
+	absorb_part.emitting = false
 	pass # Replace with function body.
 
 
@@ -47,7 +53,7 @@ func _process(_delta):
 	
 	pass
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if !stuned:
 		if(bodyDetected and canSeePlayerFlag):
 			var dir = (get_transform().origin - player.get_transform().origin).normalized()
@@ -62,11 +68,14 @@ func _physics_process(_delta):
 			player.get_parent().gravity = Vector2(dir*pullForce)
 			can_follow = true
 			anim.play("bite ")
+			shaking_Node.shakig(delta,50)
+			absorb_part.emitting = true
 			pass
 		else:
 			can_follow = false
 			rotationBase.rotation = lerp(rotationBase.rotation,-1.5,0.01)
 			anim.play("idle_loop")
+			absorb_part.emitting = false
 		if ( !health_Orbs.empty() and canSeePlayerFlag):
 			for orb in health_Orbs:
 				var dirToOrb = (get_global_transform().origin - orb.get_global_transform().origin).normalized()
@@ -76,6 +85,7 @@ func _physics_process(_delta):
 		
 	else:
 		can_follow = false
+		absorb_part.emitting = false
 	pass
 
 func RaycastToPlayer():

@@ -5,15 +5,18 @@ onready var anim = $AnimationPlayer
 onready var save_label = $Saving
 
 var is_saving = false
-
+#game Feel 
+var is_hurted = false
+const hurted_time_max = 0.1
+var hurted_time = 0.0
 
 func _ready():
 	anim.play("hide")
 	
 
-func _process(_delta):
+func _process(delta):
 	if !is_saving:
-		if Input.is_action_just_released("Pause"):
+		if Input.is_action_just_released("Pause") and is_hurted == false:
 			if get_tree().paused == false:
 				get_tree().paused = true
 				#vinetta.show()
@@ -34,6 +37,10 @@ func _process(_delta):
 			get_tree().change_scene("res://Levels/GameOver_Reloder.tscn")
 			
 			pass
+	
+	if is_hurted:
+		hurted(delta)
+		pass
 	pass
 
 func saving():
@@ -47,3 +54,16 @@ func stop_saving():
 	is_saving = false
 	save_label.hide()
 	get_tree().paused = false
+
+func hurted(delta):
+	
+	hurted_time += delta
+	get_tree().paused = true
+	if hurted_time > hurted_time_max:
+		get_tree().paused = false
+		hurted_time = 0.0
+		is_hurted = false
+		pass
+	
+	pass
+

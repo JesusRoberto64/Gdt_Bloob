@@ -22,7 +22,7 @@ var ghost_time = 0.08
 var ghost_conter: float 
 var ghost = preload("res://Prefabs/Blob 2.0/ghost.tscn")
 onready var particles = $Particles
-
+#onready var ghosth_particles = $Particles/Particles_ghost
 var Norm_col =  Vector3(0.25,0.58,0.58)
 
 #shader change system
@@ -32,6 +32,10 @@ var prev_state
 #screen hurt 
 onready var screen_hurt = get_parent().get_node("CanvasLayer/HurtRect")
 
+# line width max 16.0
+var width = 10
+var factor = 0.1
+
 func _ready():
 	fill_color = Color(0.0,0.0,0.0,1.0)
 	line_color = Color(0.0,0.0,0.0,1.0)
@@ -40,7 +44,8 @@ func _ready():
 	cells = planc.radius*0.2
 	cells = clamp(cells,5.0,15.0)
 	next_cell = planc.radius*0.00002
-
+	line.width = width
+	
 	pass
 
 
@@ -52,8 +57,22 @@ func _process(delta):
 			pass
 		STATE.MOVING:
 			
+			ghost_conter += delta
+			
+			if ghost_conter >=  ghost_time:
+				spawn_ghost()
+				ghost_conter = 0.0
+			pass
+			
 			pass
 		STATE.HURT:
+			
+			ghost_conter += delta
+			
+			if ghost_conter >=  ghost_time:
+				spawn_ghost()
+				ghost_conter = 0.0
+			pass
 			
 			pass
 		STATE.PUPPET:
@@ -76,12 +95,12 @@ func _process(delta):
 		
 		pass
 	
-	ghost_conter += delta
-	
-	if ghost_conter >=  ghost_time:
-		spawn_ghost()
-		ghost_conter = 0.0
-		pass
+#	ghost_conter += delta
+#
+#	if ghost_conter >=  ghost_time:
+#		spawn_ghost()
+#		ghost_conter = 0.0
+#		pass
 	
 	
 	spr.position = planc.findCentroid()
@@ -97,14 +116,16 @@ func _process(delta):
 	
 	spr.material.set("shader_param/u_time",cells) # seteo en shader
 	#print(cells)
+	var exponential = planc.radius*factor
+	line.width = pow(0.3+1.5,exponential)
+	line.width = clamp(line.width,9,17)
+	
 	pass
 
 func spawn_ghost():
-	
 	var inst = ghost.instance()
 	inst.polygon = poly.polygon
 	particles.add_child(inst)
-	
 	pass
 
 func shader_change():

@@ -72,6 +72,9 @@ onready var area_enemies = $Area2D
 # UV set
 var is_uv_set = false
 
+#Game Feel 
+onready var hurt_pause = get_tree().get_nodes_in_group("Pause")[0]
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -183,21 +186,25 @@ func _process(_delta):
 		cur_move_vec += Vector2.RIGHT
 		item_direct = Vector2.LEFT #the opsite
 		is_Stop = false
+		#cur_state = STATE.MOVING
 		pass
 	elif Input.is_action_pressed("ui_left"):
 		cur_move_vec += Vector2.LEFT
 		item_direct = Vector2.RIGHT #the opsite
 		is_Stop = false
+		#cur_state = STATE.MOVING
 		pass
 	if Input.is_action_pressed("ui_up"):
 		cur_move_vec += Vector2.UP
 		item_direct = Vector2.DOWN #the opsite
 		is_Stop = false
+		#cur_state = STATE.MOVING
 		pass
 	elif Input.is_action_pressed("ui_down"):
 		cur_move_vec += Vector2.DOWN
 		item_direct = Vector2.UP #the opsite
 		is_Stop = false
+		#cur_state = STATE.MOVING
 		pass
 	
 	# State machine logic.
@@ -206,6 +213,7 @@ func _process(_delta):
 	
 #	if cur_move_vec == Vector2.ZERO:
 #		cur_state = STATE.IDLE
+#		pass
 	
 	move_vec = vec_movement(cur_move_vec)
 	
@@ -215,7 +223,6 @@ func _process(_delta):
 		#cam_cent.x = round(cam_cent.x)
 		#cam_cent.y = round(cam_cent.y)
 		#camera.position = cam_cent
-		#
 	else:
 		camera.state = camera.CAM_STATE.CINEMATIC
 		pass
@@ -375,8 +382,10 @@ func shink():
 	item_expulse_inst.can_collide = false
 	item_expulse_inst.direction = item_direct
 	if cur_state == STATE.HURT:
+		hurt_pause.is_hurted = true
 		get_parent().call_deferred("add_child",item_expulse_inst)
 		camera.is_shaking = true
+		
 		return
 		pass
 	get_parent().add_child(item_expulse_inst)
@@ -427,6 +436,7 @@ func hurt():
 	shink()
 	shink()
 	#shink()
+	
 	State_timer.start()
 
 func _on_StateTimer_timeout():
@@ -441,7 +451,6 @@ func enter_door():
 	#print("open the door")
 	set_visible(false)
 	pass
-
 
 func _on_Turbo_timeout():
 	is_Turbo = true

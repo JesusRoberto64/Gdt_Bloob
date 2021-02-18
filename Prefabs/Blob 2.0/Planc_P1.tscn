@@ -119,11 +119,36 @@ outline_size = 1
 outline_color = Color( 0.0352941, 0.0235294, 0.0235294, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="Shader" id=8]
+[sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
 
 uniform float intence = 0.0;
 
+float random (in vec2 st) {
+    return fract(sin(dot(st.xy,vec2(12.9898,78.233)))* 43758.5453123);
+}
+
+float noise (in vec2 st) {
+    vec2 i = floor(st);
+    vec2 f = fract(st);
+
+    // Four corners in 2D of a tile
+    float a = random(i);
+    float b = random(i + vec2(1.0, 0.0));
+    float c = random(i + vec2(0.0, 1.0));
+    float d = random(i + vec2(1.0, 1.0));
+
+    // Smooth Interpolation
+
+    // Cubic Hermine Curve.  Same as SmoothStep()
+    vec2 u = f*f*(3.0-2.0*f);
+    // u = smoothstep(0.,1.,f);
+
+    // Mix 4 coorners percentages
+    return mix(a, b, u.x) +
+            (c - a)* u.y * (1.0 - u.x) +
+            (d - b) * u.x * u.y;
+}
 
 float central_noise(vec2 coord) {
 	vec2 diff = coord - vec2(0.5);
@@ -134,17 +159,19 @@ float central_noise(vec2 coord) {
 void fragment(){
 	vec2 uv_coord = UV *1.0;
 	float value = central_noise(uv_coord);
-	vec2 uv_spot = UV *2.5;
-	float value2 = central_noise(uv_spot);
-	//COLOR.a = -value*3.0 +(value2*0.2);
+	
+	float noise_val = noise(FRAGCOORD.xy*0.1);
+	
 	COLOR.a = value*intence; // max value 2.2
+	//COLOR.a = noise_val;
+	COLOR.a = mix(value*intence,noise_val*2.0,0.02);
 }"
 
-[sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 8 )
-shader_param/intence = 0.3
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/intence = 0.4
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=9]
 radius = 20.0
 
 [node name="Planc_P1" type="Node2D"]
@@ -179,7 +206,6 @@ texture = ExtResource( 7 )
 [node name="Line2D" type="Line2D" parent="Graphics"]
 material = SubResource( 5 )
 z_index = -1
-width = 16.0
 default_color = Color( 0.4, 0.501961, 1, 0.192157 )
 texture_mode = 2
 
@@ -214,7 +240,7 @@ position = Vector2( 41, -69 )
 
 [node name="HurtRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 9 )
+material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 1, 0, 0, 1 )
@@ -229,7 +255,7 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 7 )
+shape = SubResource( 9 )
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="timeout" from="Turbo" to="." method="_on_Turbo_timeout"]

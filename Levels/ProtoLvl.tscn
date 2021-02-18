@@ -78,7 +78,7 @@ _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Shader" id=18]
+[sub_resource type="Shader" id=14]
 code = "shader_type canvas_item;
 
 uniform float intence = 0.0;
@@ -98,15 +98,15 @@ void fragment(){
 	COLOR.a = value*intence; // max value 2.2
 }"
 
-[sub_resource type="ShaderMaterial" id=19]
-shader = SubResource( 18 )
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 14 )
 shader_param/intence = 1.16
 
-[sub_resource type="DynamicFont" id=20]
+[sub_resource type="DynamicFont" id=16]
 size = 25
 font_data = ExtResource( 11 )
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=17]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Saving:modulate")
 tracks/0/interp = 1
@@ -146,7 +146,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=18]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:material:shader_param/intence")
@@ -173,7 +173,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=19]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:material:shader_param/intence")
@@ -200,7 +200,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=20]
 tracks/0/type = "value"
 tracks/0/path = NodePath("UICanvas/Retry:modulate")
 tracks/0/interp = 1
@@ -226,27 +226,27 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Curve2D" id=31]
+[sub_resource type="Curve2D" id=21]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Curve2D" id=32]
+[sub_resource type="Curve2D" id=22]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Curve2D" id=33]
+[sub_resource type="Curve2D" id=23]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Curve2D" id=34]
+[sub_resource type="Curve2D" id=24]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Curve2D" id=35]
+[sub_resource type="Curve2D" id=25]
 _data = {
 "points": PoolVector2Array(  )
 }
@@ -450,7 +450,7 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Screens/Pause /Pause Ctrl"]
-material = SubResource( 19 )
+material = SubResource( 15 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.572549 )
@@ -476,7 +476,7 @@ margin_left = -179.0
 margin_top = 72.0
 margin_right = -74.0
 margin_bottom = 98.0
-custom_fonts/font = SubResource( 20 )
+custom_fonts/font = SubResource( 16 )
 text = "SAVING..."
 align = 1
 __meta__ = {
@@ -484,9 +484,9 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Screens/Pause /Pause Ctrl"]
-anims/Saving = SubResource( 21 )
-anims/hide = SubResource( 22 )
-anims/show = SubResource( 23 )
+anims/Saving = SubResource( 17 )
+anims/hide = SubResource( 18 )
+anims/show = SubResource( 19 )
 
 [node name="SceneManager" parent="Screens" instance=ExtResource( 2 )]
 
@@ -507,7 +507,7 @@ position = Vector2( 241.831, 127.279 )
 texture = ExtResource( 18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Screens/UIGameOver"]
-anims/dead = SubResource( 24 )
+anims/dead = SubResource( 20 )
 
 [node name="EventGame " type="Node2D" parent="."]
 
@@ -526,7 +526,7 @@ is_curved = true
 polygon = PoolVector2Array( 2752, 2752, 2752, 2784, 2708, 2802, 2620, 2815, 2599, 2790, 2633, 2745, 2688, 2720 )
 
 [node name="Path2D" parent="boxes/Caja puzzle" index="3"]
-curve = SubResource( 31 )
+curve = SubResource( 21 )
 
 [node name="Caja puzzle2" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 10.9736, 21.522 )
@@ -539,7 +539,7 @@ is_curved = true
 polygon = PoolVector2Array( 2635, 2952, 2703, 2952, 2705, 2924, 2672, 2916, 2636, 2923 )
 
 [node name="Path2D" parent="boxes/Caja puzzle2" index="3"]
-curve = SubResource( 32 )
+curve = SubResource( 22 )
 
 [node name="Caja puzzle3" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 2.23804, -42.665 )
@@ -552,7 +552,7 @@ is_curved = true
 polygon = PoolVector2Array( 2170, 2392, 2219, 2371, 2232, 2400, 2213, 2434, 2172, 2443 )
 
 [node name="Path2D" parent="boxes/Caja puzzle3" index="3"]
-curve = SubResource( 33 )
+curve = SubResource( 23 )
 
 [node name="Caja puzzle4" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( -336.909, 152.563 )
@@ -565,7 +565,7 @@ is_curved = true
 polygon = PoolVector2Array( 2799, 2388, 2781, 2436, 2703, 2469, 2601, 2481, 2572, 2469, 2571, 2429, 2590, 2385, 2646, 2363, 2773, 2376 )
 
 [node name="Path2D" parent="boxes/Caja puzzle4" index="3"]
-curve = SubResource( 34 )
+curve = SubResource( 24 )
 
 [node name="Caja puzzle5" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( -401.804, 967.907 )
@@ -578,7 +578,7 @@ is_curved = true
 polygon = PoolVector2Array( 3174, 2378, 3183, 2298, 3219, 2299, 3229, 2382 )
 
 [node name="Path2D" parent="boxes/Caja puzzle5" index="3"]
-curve = SubResource( 35 )
+curve = SubResource( 25 )
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -651,8 +651,8 @@ polygon = PoolVector2Array( 51.8341, 195.599, -45.6809, 194.41, -44.4146, -68.75
 stream = ExtResource( 21 )
 volume_db = -31.515
 autoplay = true
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran"]
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
 [connection signal="body_entered" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_entered"]
 [connection signal="body_exited" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_exited"]
 [connection signal="body_entered" from="Zones/Demo_Loader02/Detector" to="Zones/Demo_Loader02" method="_on_Detector_body_entered"]

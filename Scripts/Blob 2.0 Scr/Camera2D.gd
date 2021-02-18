@@ -104,7 +104,7 @@ func _physics_process(delta):
 	prev_camera_center = get_camera_screen_center()
 	
 	if is_shaking:
-		shakig(delta)
+		shakig(delta,100)
 		
 	pass
 	
@@ -126,9 +126,10 @@ func _on_Timer_timeout():
 	state = CAM_STATE.CENTERED
 	pass 
 
-func shakig(delta):
-	position.x += rand_range(0,shake_amnt*100)
-	position.y += rand_range(0,shake_amnt*100)
+func shakig(delta,amnt):
+	var _amnt = amnt
+	position.x += rand_range(0,shake_amnt*_amnt)
+	position.y += rand_range(0,shake_amnt*_amnt)
 	
 	time_Shake += delta
 	if time_Shake > time_Shake_Max:

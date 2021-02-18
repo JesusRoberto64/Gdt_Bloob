@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Enviroment/wall_purple.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Blob 2.0/SavePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Blob 2.0/Astero++.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Items/Fountain.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -44,6 +45,9 @@ item_type = 0
 
 [node name="Path2D" parent="Path Item2" index="0"]
 curve = SubResource( 2 )
+
+[node name="Fountain" parent="." instance=ExtResource( 5 )]
+position = Vector2( 11740.3, 4031.5 )
 
 [editable path="Path Item"]
 
