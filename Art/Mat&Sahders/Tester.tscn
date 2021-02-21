@@ -1,0 +1,204 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Art/Mat&Sahders/Basic_shadermaterial.tres" type="Material" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+const float PI = 3.14159265359;
+
+float plot(vec2 st,float pct){
+	//return smoothstep(0.02,0.0,abs(st.x - st.y)) ;
+	return smoothstep(pct-0.02,pct,st.y) - smoothstep(pct,pct+0.02,st.y);
+}
+
+void fragment() {
+	//COLOR = vec4(UV,0.5,1.0);
+	//vec2 st = FRAGCOORD.xy *SCREEN_PIXEL_SIZE;
+	vec2 st = UV;
+	//float y = st.x; // Interpolaation 
+	//float y = pow(st.x,4.0); //Exponetial growth 
+	//float y = sqrt(st.x); // low curve
+	//float y = step(0.5,st.x); // black and white
+	float y = smoothstep(0.1,1.0,st.x); // smooth trasition 
+	
+	vec3 color = vec3(y);
+	
+	float pct = plot(st,y);
+	color = (1.0-pct)*color+pct*vec3(0.0,1.0,0.0);
+	
+	COLOR = vec4(color,1.0);
+	//COLOR.a = color.r;
+	
+}
+
+void vertex() {
+	 //VERTEX += vec2(10.0, 0.0);
+	//VERTEX += vec2(cos(TIME)*10.0, sin(TIME)*10.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+void fragment(){
+	
+	vec2 uv = UV;
+	float neg = length(uv-0.5);
+	float v = 0.1/length(uv-0.5) + neg*-1.0;
+	
+	float rest = length(UV-0.5);
+	
+	COLOR = vec4(vec3(1.0)*1.0,mix(v*0.8, 0.1/rest,0.56));
+	//COLOR = vec4(vec3(1.0)*1.0,v*0.8);
+	if (COLOR.a < 0.000001){
+		discard;
+		//COLOR.a = 0.001;
+	}
+}
+
+void vertex(){
+	 VERTEX += vec2(cos(TIME)*5.0, sin(TIME)*5.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+
+void fragment(){
+	float rest = length(UV-0.5);
+	
+	COLOR = vec4(vec3(1.0),rest);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+float normpdf(in float x, in float sigma){
+	return 0.39894*exp(-0.5*x*x/(sigma*sigma))/sigma;
+}
+
+void fragment(){
+	
+	const int mSize = 11;
+	const int kSize = (mSize-1)/2;
+	float kernel[11];
+	vec3 final_colour = vec3(0.0);
+	
+	//create the 1-D kernel
+	float sigma = 1.5;
+	float Z = 0.0;
+	for (int j = 0; j <= kSize; ++j)
+	{
+		kernel[kSize+j] = kernel[kSize-j] = normpdf(float(j), sigma);
+	}
+	
+	//get the normalization factor (as the gaussian has been clamped)
+	for (int j = 0; j < mSize; ++j)
+	{
+		Z += kernel[j];
+	}
+	
+	
+	//read out the texels
+	for (int i=-kSize; i <= kSize; ++i)
+	{
+		for (int j=-kSize; j <= kSize; ++j)
+		{
+			//final_colour += kernel[kSize+j]*kernel[kSize+i]*texture(TEXTURE, (UV.xy+vec2(float(i),float(j)))/UV.xy).rgb;
+			final_colour += kernel[kSize+j]*kernel[kSize+i]*texture(TEXTURE, (UV.xy+vec2(float(i),float(j)))/UV.xy).rgb;
+		}
+	}
+	
+	//COLOR =  vec4(final_colour/(Z*Z)*4.0, 1.0);
+	vec4 color = texture(SCREEN_TEXTURE,SCREEN_UV,1.5);
+	COLOR = color;
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+
+[node name="Sprite" type="Sprite"]
+self_modulate = Color( 0.572549, 0.713726, 0.756863, 1 )
+material = ExtResource( 2 )
+position = Vector2( 63.9081, 36.1586 )
+texture = ExtResource( 1 )
+
+[node name="Sprite lines" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 296.239, 18.5963 )
+texture = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 261.658, 11.7063 )
+texture = ExtResource( 1 )
+
+[node name="Glow ligth" type="Sprite" parent="."]
+self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
+material = SubResource( 4 )
+position = Vector2( 151.189, 30.3963 )
+texture = ExtResource( 1 )
+
+[node name="Glow ligth2" type="Sprite" parent="Glow ligth"]
+visible = false
+self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
+material = SubResource( 4 )
+position = Vector2( -39.2001, 6.88651 )
+texture = ExtResource( 1 )
+
+[node name="Glow ligth3" type="Sprite" parent="Glow ligth"]
+visible = false
+self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
+material = SubResource( 4 )
+position = Vector2( -77.5088, 8.6683 )
+texture = ExtResource( 1 )
+
+[node name="Glow ligth4" type="Sprite" parent="Glow ligth"]
+visible = false
+self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
+material = SubResource( 4 )
+position = Vector2( 16.0356, 59.4495 )
+texture = ExtResource( 1 )
+
+[node name="Glow ligth5" type="Sprite" parent="Glow ligth"]
+visible = false
+self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
+material = SubResource( 4 )
+position = Vector2( -96.2177, 41.6316 )
+texture = ExtResource( 1 )
+
+[node name="Glow ligth6" type="Sprite" parent="Glow ligth"]
+visible = false
+self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
+material = SubResource( 4 )
+position = Vector2( -26.7276, 55.8859 )
+texture = ExtResource( 1 )
+
+[node name="Glow ligth7" type="Sprite" parent="Glow ligth"]
+visible = false
+self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
+material = SubResource( 4 )
+position = Vector2( 36.0217, 30.7244 )
+texture = ExtResource( 1 )
+
+[node name="ball basic" type="Sprite" parent="."]
+material = SubResource( 6 )
+position = Vector2( 73.8957, 27.6183 )
+texture = ExtResource( 1 )
+
+[node name="Gaussian" type="Sprite" parent="."]
+visible = false
+material = SubResource( 8 )
+position = Vector2( 199.217, 40.3861 )
+scale = Vector2( 4.55197, 2.41801 )
+texture = ExtResource( 1 )
