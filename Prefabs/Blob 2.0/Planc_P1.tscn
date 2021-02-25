@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Planc_P1.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Camera2D.gd" type="Script" id=2]
@@ -115,13 +115,28 @@ void fragment() {
 shader = SubResource( 4 )
 shader_param/color = Vector3( 0.5, 1, 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="Animation" id=6]
+resource_name = "glow"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Glow_Circle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.603922, 0.929412, 0.964706, 0 ), Color( 0.603922, 0.929412, 0.964706, 1 ), Color( 0.603922, 0.929412, 0.964706, 1 ), Color( 0.603922, 0.929412, 0.964706, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=7]
 size = 22
 outline_size = 1
 outline_color = Color( 0.0352941, 0.0235294, 0.0235294, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=8]
 radius = 20.0
 
 [node name="Planc_P1" type="Node2D"]
@@ -146,6 +161,7 @@ script = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="Glow_Circle" parent="Graphics" instance=ExtResource( 9 )]
+modulate = Color( 0.603922, 0.929412, 0.964706, 0 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Graphics"]
 color = Color( 0, 1, 0, 1 )
@@ -164,6 +180,10 @@ texture_mode = 2
 [node name="Particles" type="Node2D" parent="Graphics"]
 z_index = -2
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+playback_default_blend_time = 0.5
+anims/glow = SubResource( 6 )
+
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.5
 
@@ -180,7 +200,7 @@ margin_left = 49.0
 margin_top = 149.0
 margin_right = 145.0
 margin_bottom = 178.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "Health: "
 script = ExtResource( 6 )
 __meta__ = {
@@ -207,7 +227,7 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="timeout" from="Turbo" to="." method="_on_Turbo_timeout"]

@@ -1,7 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Art/Mat&Sahders/Basic_shadermaterial.tres" type="Material" id=2]
+[ext_resource path="res://Art/Mat&Sahders/Funtain_MAt.tres" type="Material" id=3]
+[ext_resource path="res://Art/Mat&Sahders/glow_Anim_Mat.tres" type="Material" id=4]
+[ext_resource path="res://Scripts/Contoles & UI/Tester_Shader.gd" type="Script" id=5]
+[ext_resource path="res://Art/Mat&Sahders/Teste_bg.tres" type="Material" id=6]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -45,23 +49,7 @@ shader = SubResource( 1 )
 code = "shader_type canvas_item;
 
 void fragment(){
-	
-	vec2 uv = UV;
-	float neg = length(uv-0.5);
-	float v = 0.1/length(uv-0.5) + neg*-1.0;
-	
-	float rest = length(UV-0.5);
-	
-	COLOR = vec4(vec3(1.0)*1.0,mix(v*0.8, 0.1/rest,0.56));
-	//COLOR = vec4(vec3(1.0)*1.0,v*0.8);
-	if (COLOR.a < 0.000001){
-		discard;
-		//COLOR.a = 0.001;
-	}
-}
-
-void vertex(){
-	 VERTEX += vec2(cos(TIME)*5.0, sin(TIME)*5.0);
+	COLOR = vec4(0.0,0.0,0.0,0.5); 
 }"
 
 [sub_resource type="ShaderMaterial" id=4]
@@ -120,7 +108,7 @@ void fragment(){
 	}
 	
 	//COLOR =  vec4(final_colour/(Z*Z)*4.0, 1.0);
-	vec4 color = texture(SCREEN_TEXTURE,SCREEN_UV,1.5);
+	vec4 color = texture(SCREEN_TEXTURE,SCREEN_UV,2.5);
 	COLOR = color;
 	
 }"
@@ -128,77 +116,245 @@ void fragment(){
 [sub_resource type="ShaderMaterial" id=8]
 shader = SubResource( 7 )
 
-[node name="Sprite" type="Sprite"]
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+//render_mode skip_vertex_transform;
+varying vec2 v_uv;
+varying vec2 v_position;
+
+void fragment(){
+	//vec2 st = UV;
+	//float y = smoothstep(0.1,1.0,st.x);
+	//vec3 color = vec3(y);
+	//vec3 color = vec3(v_uv.x,v_uv.y,0.0);
+	vec3 color = vec3(0.0);
+	//color.r = step(0.0,v_position.x );
+	//color.g = step(0.0,v_position.y );
+	//color.r = smoothstep(0.45,0.7,v_uv.x);
+	//color.g = smoothstep(0.45,0.7,v_uv.y);
+	//color.r = 20.0/length(v_position.xy - 0.5);
+	//color.g = 20.0/length(v_position.xy - 0.5);
+	//color.g = 0.1/length(v_uv.xy - 0.5);
+	//if (color.r < 1.0){
+		//color.rgb = vec3(0.0);
+	//}
+	float inCircle = 1.0 - step(0.4,length(v_uv -0.5));
+	color = vec3(1.0,1.0,0.0) * inCircle;
+	COLOR = vec4(color,1.0);
+	//COLOR = vec4(mix(vec3(1.0,0.0,1.0),vec3(0.0,0.0,1.0),UV.y),1.0);
+	//COLOR = vec4(vec3(v_position.x,v_position.y,0.0),1.0);
+	
+}
+
+void vertex(){
+	v_uv = UV;
+	v_position = VERTEX ;
+	//VERTEX = 
+	//POSITION;
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+
+[sub_resource type="Shader" id=11]
+code = "shader_type canvas_item;
+
+uniform sampler2D text;
+varying vec2 v_uv; 
+varying vec2 v_position;
+
+// pt es el vertex mapeado en los vectores de la imagen VERTEX = (-1.0,-1.0)
+// has el vector posritivo de VERTEX = (1.0,1.0), 
+//el centro simpre sera  vec2(0.0)
+
+float rect(vec2 pt,vec2 anchor,vec2 size, vec2 center){
+	vec2 p = pt - center; 
+	vec2 halfsize = size * 0.5;
+	float horz = step(-halfsize.x - anchor.x, p.x) - step(halfsize.x - anchor.x,p.x);
+	float vert = step(-halfsize.y - anchor.y, p.y) - step(halfsize.y - anchor.y,p.y);
+	
+	return horz * vert;
+}
+
+mat2 getRotationMatrix(float theta){
+	// el valor de theta puede see PI para dar rotaciones y revoluciones mas 
+	// precisas 
+	float s = sin(theta);
+	float c = cos(theta);
+	return mat2(vec2(c,-s),vec2(s,c)); 
+}
+
+mat2 getScalarMatrix(float scale){
+	return mat2(vec2(scale,0.0),vec2(0.0, scale));
+}
+
+void vertex(){
+	v_uv = UV;
+	v_position = VERTEX ;
+}
+
+void fragment(){
+	//puting the texure
+	
+	//COLOR = texture(text,v_uv );
+	//COLOR = vec4(vec3(v_uv.x,v_uv.y,0.0),0.0);
+	
+	//the scuare 
+	
+	float radius = 16.5;
+	//=====traslacion
+	//vec2 center = vec2(cos(TIME*2.0)*radius,sin(TIME*2.0)*radius);
+	//float inRect = rect(v_position,vec2(19.0),center);
+	
+	//=======Rotación
+	
+	vec2 centerG = vec2(0.0,0.0);
+	mat2 matr = getRotationMatrix(TIME);
+	
+	// escla de la figura 
+	mat2 mats = getScalarMatrix((sin(TIME)+1.0)/ 1.0 + 0.8);
+	// moving ceter point Tralacion alredor de un punto 
+	vec2 pt = matr * v_position;
+	//dejando el centro en medio de la figura 
+	vec2 ptC = (mats * matr * (v_position-centerG)) + centerG;
+	
+	float inRectG = rect(ptC,vec2(16.0),vec2(32.0),centerG);
+	//vec3 color = vec3(1.0,1.0,0.0) * inRect + vec3(0.0,1.0,0.0) * inRectG;
+	vec3 color = vec3(0.0,1.0,0.0) * inRectG;
+	COLOR = vec4(color,1.0);
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = SubResource( 11 )
+shader_param/text = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=13]
+
+[sub_resource type="Shader" id=14]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform sampler2D normalmap;
+varying vec2 text_position;
+
+varying vec2 v_uv;
+varying vec3 v_position;
+
+
+void vertex(){
+	text_position = -0.25/VERTEX.xy + 0.5;
+	v_uv = UV;
+	v_position = VERTEX +0.0;
+	//v_position = POSITION;
+	//POSITION = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(vec3(POSITION.xyz),1.0);
+	//POSITION = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(VERTEX,1.0);
+}
+
+void fragment(){
+	
+	//ALBEDO = texture(normalmap,text_position).xyz;
+	
+	//ALBEDO -= 0.19;
+	
+	//ALBEDO = vec3(v_uv.x,v_uv.y,0.0);
+	vec3 color = vec3(0.0);
+	//color.r = clamp(v_position.x,0.0,1.0);
+	//color.g = clamp(v_position.y,0.0,1.0);
+	color.r = step(0.0,v_position.x);
+	color.g = step(0.0,v_position.y);
+	
+	ALBEDO = color;
+	//ALBEDO *= 2.5;
+}"
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 14 )
+shader_param/normalmap = ExtResource( 1 )
+
+[node name="Shaders_test" type="Node2D"]
+self_modulate = Color( 0.572549, 0.713726, 0.756863, 1 )
+script = ExtResource( 5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ParallaxBackground"]
+material = ExtResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Basic glow" type="Sprite" parent="."]
 self_modulate = Color( 0.572549, 0.713726, 0.756863, 1 )
 material = ExtResource( 2 )
-position = Vector2( 63.9081, 36.1586 )
+position = Vector2( 35.3026, 42.5154 )
 texture = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Sprite lines" type="Sprite" parent="."]
 material = SubResource( 2 )
-position = Vector2( 296.239, 18.5963 )
+position = Vector2( 179.698, 38.7261 )
 texture = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 261.658, 11.7063 )
+material = SubResource( 4 )
+position = Vector2( 99.4842, 56.6765 )
 texture = ExtResource( 1 )
 
 [node name="Glow ligth" type="Sprite" parent="."]
 self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
-material = SubResource( 4 )
-position = Vector2( 151.189, 30.3963 )
+material = ExtResource( 4 )
+position = Vector2( 151.189, 98.3963 )
 texture = ExtResource( 1 )
 
 [node name="Glow ligth2" type="Sprite" parent="Glow ligth"]
-visible = false
 self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
-material = SubResource( 4 )
-position = Vector2( -39.2001, 6.88651 )
-texture = ExtResource( 1 )
-
-[node name="Glow ligth3" type="Sprite" parent="Glow ligth"]
-visible = false
-self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
-material = SubResource( 4 )
-position = Vector2( -77.5088, 8.6683 )
-texture = ExtResource( 1 )
-
-[node name="Glow ligth4" type="Sprite" parent="Glow ligth"]
-visible = false
-self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
-material = SubResource( 4 )
-position = Vector2( 16.0356, 59.4495 )
-texture = ExtResource( 1 )
-
-[node name="Glow ligth5" type="Sprite" parent="Glow ligth"]
-visible = false
-self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
-material = SubResource( 4 )
-position = Vector2( -96.2177, 41.6316 )
-texture = ExtResource( 1 )
-
-[node name="Glow ligth6" type="Sprite" parent="Glow ligth"]
-visible = false
-self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
-material = SubResource( 4 )
-position = Vector2( -26.7276, 55.8859 )
-texture = ExtResource( 1 )
-
-[node name="Glow ligth7" type="Sprite" parent="Glow ligth"]
-visible = false
-self_modulate = Color( 0.54902, 0.756863, 0.890196, 1 )
-material = SubResource( 4 )
-position = Vector2( 36.0217, 30.7244 )
+material = ExtResource( 4 )
+position = Vector2( 466.994, 191.893 )
+scale = Vector2( 1.28249, 1.28249 )
 texture = ExtResource( 1 )
 
 [node name="ball basic" type="Sprite" parent="."]
 material = SubResource( 6 )
-position = Vector2( 73.8957, 27.6183 )
+position = Vector2( 230.696, 98.6023 )
 texture = ExtResource( 1 )
 
 [node name="Gaussian" type="Sprite" parent="."]
 visible = false
 material = SubResource( 8 )
-position = Vector2( 199.217, 40.3861 )
+position = Vector2( 164.876, 43.6571 )
 scale = Vector2( 4.55197, 2.41801 )
 texture = ExtResource( 1 )
+
+[node name="Bubbles" type="Sprite" parent="."]
+self_modulate = Color( 0.658824, 0.85098, 0.968627, 1 )
+material = ExtResource( 3 )
+position = Vector2( 59.252, 153.632 )
+texture = ExtResource( 1 )
+
+[node name="Circle " type="Sprite" parent="."]
+material = SubResource( 10 )
+position = Vector2( 330.506, 130.279 )
+texture = ExtResource( 1 )
+
+[node name="Test new" type="Sprite" parent="."]
+material = SubResource( 12 )
+position = Vector2( 425.676, 128.724 )
+texture = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.999758, -0.0220116, 0, 0.0220116, 0.999758, 0, 0.508164, 0 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 15 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.491833, 1.03422 )
+projection = 1
+size = 1.04035

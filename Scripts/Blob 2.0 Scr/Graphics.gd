@@ -39,6 +39,7 @@ var factor = 0.1
 # glow sahder 
 onready var glow = $Glow_Circle
 var glow_size = 1.5
+onready var anim_glow = $AnimationPlayer
 
 func _ready():
 	fill_color = Color(0.0,0.0,0.0,1.0)
@@ -134,11 +135,12 @@ func _process(delta):
 	
 	pass
 
-func show_glow(exponential):
+func show_glow():
+	var exponential = planc.radius*factor
 	glow_size = pow(1.3,exponential)
-	glow_size = clamp(glow_size,1.5,5.2)
+	glow_size = clamp(glow_size,2.8,6.2)
 	glow.scale = Vector2(glow_size,glow_size)
-	
+	anim_glow.play("glow")
 
 
 func spawn_ghost():

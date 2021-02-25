@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 214.898, 54.1588 )
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=26]
 0/name = "Foreground.png 0"
 0/texture = ExtResource( 5 )
 0/tex_offset = Vector2( 0, 0 )
@@ -173,8 +173,7 @@ motion_mirroring = Vector2( 2024, 2024 )
 texture = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
-visible = false
 z_index = 1
-tile_set = SubResource( 2 )
+tile_set = SubResource( 26 )
 format = 1
 tile_data = PoolIntArray( -458740, 536870913, 0, -393181, 1610612737, 0, 262136, 0, 0, 458768, 0, 0, 720929, 536870913, 0, 786468, 536870913, 0, 917537, 1, 0, 1441798, 536870912, 0 )

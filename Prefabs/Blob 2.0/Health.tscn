@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
 
-[sub_resource type="Shader" id=6]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 uniform float amt:hint_range(0.0,1.0);
 
@@ -21,11 +21,11 @@ void fragment(){
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 shader_param/amt = 0.426
 
-[sub_resource type="Shader" id=7]
+[sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 uniform float amt:hint_range(0.0,1.0);
 
@@ -39,8 +39,8 @@ void fragment(){
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 7 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 shader_param/amt = 0.458
 
 [node name="Health" type="RigidBody2D"]
@@ -62,15 +62,17 @@ one_shot = true
 wait_time = 5.0
 
 [node name="Glow_Circle" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 1.4143, 1.4143 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 modulate = Color( 0.937255, 0.890196, 0.988235, 1 )
-material = SubResource( 5 )
+material = SubResource( 3 )
 texture = ExtResource( 2 )
 
 [node name="Sprite3" type="Sprite" parent="."]
+visible = false
 modulate = Color( 0.670588, 0.807843, 0.835294, 1 )
-material = SubResource( 8 )
+material = SubResource( 5 )
 texture = ExtResource( 2 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="lifeTimer" to="." method="_on_lifeTimer_timeout"]
