@@ -101,7 +101,6 @@ void fragment(){
 	//COLOR.a = -value*3.0 +(value2*0.2);
 	COLOR.a = value*intence; // max value 2.2
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = SubResource( 14 )
@@ -701,8 +700,8 @@ polygon = PoolVector2Array( 51.8341, 195.599, -45.6809, 194.41, -44.4146, -68.75
 stream = ExtResource( 21 )
 volume_db = -31.515
 autoplay = true
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran"]
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
 [connection signal="body_entered" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_entered"]
 [connection signal="body_exited" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_exited"]
 [connection signal="body_entered" from="Zones/Demo_Loader02/Detector" to="Zones/Demo_Loader02" method="_on_Detector_body_entered"]

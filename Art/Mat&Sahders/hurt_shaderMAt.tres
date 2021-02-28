@@ -47,7 +47,6 @@ void fragment(){
 	//COLOR.a = noise_val;
 	COLOR.a = mix(value*intence,noise_val*2.0,0.02);
 }"
-custom_defines = ""
 
 [resource]
 shader = SubResource( 1 )

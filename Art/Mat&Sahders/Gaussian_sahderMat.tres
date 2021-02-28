@@ -9,7 +9,6 @@ void fragment(){
 	COLOR = color;
 	
 }"
-custom_defines = ""
 
 [resource]
 shader = SubResource( 1 )

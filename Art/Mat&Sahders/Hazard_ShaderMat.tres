@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[sub_resource type="Shader" id=26]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 varying vec2 v_uv; 
@@ -34,7 +34,6 @@ void vertex(){
 	v_uv = UV;
 	v_position = VERTEX ;
 }"
-custom_defines = ""
 
 [resource]
-shader = SubResource( 26 )
+shader = SubResource( 1 )
