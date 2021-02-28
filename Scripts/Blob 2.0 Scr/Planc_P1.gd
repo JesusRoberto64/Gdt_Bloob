@@ -410,7 +410,7 @@ func grow(body):
 	length = circunference * 1.15 / float(points)
 	
 	emit_signal("hud_sync",radius)
-	
+	Graphics_ctrl.show_glow()
 	pass
 
 func grow_debug():

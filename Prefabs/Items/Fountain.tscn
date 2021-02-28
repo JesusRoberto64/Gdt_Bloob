@@ -1,11 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Items/Fountain.gd" type="Script" id=1]
-
-[sub_resource type="Gradient" id=1]
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [node name="Fountain" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,9 +10,13 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -7.62939e-06, -16 )
-scale = Vector2( 0.03125, 32 )
-texture = SubResource( 2 )
+visible = false
+position = Vector2( 0.410967, 0.500248 )
+rotation = -3.14159
+scale = Vector2( 0.457862, 0.457862 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0.879608, -0.0928879, 61.7477, 17.6422 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 0, -64 )

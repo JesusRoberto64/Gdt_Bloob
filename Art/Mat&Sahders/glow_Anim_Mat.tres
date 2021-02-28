@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment(){
+	
+	vec2 uv = UV;
+	float neg = length(uv-0.5);
+	float v = 0.1/length(uv-0.5) + neg*-1.0;
+	
+	float rest = length(UV-0.5);
+	
+	COLOR = vec4(vec3(1.0)*1.0,mix(v*0.8, 0.1/rest,0.56));
+	//COLOR = vec4(vec3(1.0)*1.0,v*0.8);
+	if (COLOR.a < 0.000001){
+		discard;
+		//COLOR.a = 0.001;
+	}
+}
+
+void vertex(){
+	 VERTEX += vec2(cos(TIME)*5.0, sin(TIME)*5.0);
+}"
+custom_defines = ""
+
+[resource]
+shader = SubResource( 1 )

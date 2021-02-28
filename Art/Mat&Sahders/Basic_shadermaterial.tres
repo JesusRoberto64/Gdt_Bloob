@@ -1,0 +1,38 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+
+
+float central_noise(vec2 coord) {
+	vec2 diff = coord - vec2(0.5,0.5);
+	return sqrt(diff.x* diff.x  + diff.y * diff.y); 
+	
+	}
+
+float central_noise_control(vec2 coord) {
+	vec2 diff = coord - vec2(0.5);
+	return sqrt (diff.x * diff.x  + diff.y * diff.y); 
+	
+	}
+void fragment() {
+	vec2 uv_coord = UV;
+	float value = central_noise(uv_coord);
+	float neg = central_noise(uv_coord);
+	
+	COLOR.a = 0.1/value*2.5 + neg*-1.0;
+	//COLOR.rgb = vec3(1.0,1.0,1.0);
+	if (COLOR.a <= 0.0){
+		discard;
+		//COLOR.a = 0.0;
+		//COLOR.a = smoothstep(0.1,1.0,UV.x);
+		//COLOR.a = neg;
+	}
+	
+}
+"
+custom_defines = ""
+
+[resource]
+shader = SubResource( 1 )

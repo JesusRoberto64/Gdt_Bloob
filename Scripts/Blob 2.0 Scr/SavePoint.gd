@@ -13,7 +13,8 @@ func _ready():
 	pass
 
 func _draw():
-	draw_circle(Vector2.ZERO,50,Color.blue)
+	#draw_circle(Vector2.ZERO,50,Color.blue)
+	pass
 
 func _on_SavePoint_body_entered(body): # coenct to loader and UI saving
 	if !init_save:

@@ -36,6 +36,11 @@ onready var screen_hurt = get_parent().get_node("CanvasLayer/HurtRect")
 var width = 10
 var factor = 0.1
 
+# glow sahder 
+onready var glow = $Glow_Circle
+var glow_size = 1.5
+onready var anim_glow = $AnimationPlayer
+
 func _ready():
 	fill_color = Color(0.0,0.0,0.0,1.0)
 	line_color = Color(0.0,0.0,0.0,1.0)
@@ -46,6 +51,10 @@ func _ready():
 	next_cell = planc.radius*0.00002
 	line.width = width
 	
+	#glow 
+	#glow.hide()
+	#glow.material.set("shader_param/glow",-0.045) #maximo 0.3 minomo
+	#glow.scale = Vector2(5.5,5.5)
 	pass
 
 
@@ -104,7 +113,7 @@ func _process(delta):
 	
 	
 	spr.position = planc.findCentroid()
-	
+	glow.position = spr.position
 	#=====sistme que maneja la animacion del shaders
 	#usa el radiu y multiplier para modificar el ruido del sahder
 	if past_radius != planc.radius:
@@ -120,7 +129,20 @@ func _process(delta):
 	line.width = pow(0.3+1.5,exponential)
 	line.width = clamp(line.width,9,17)
 	
+#	glow_size = pow(1.3,exponential)
+#	glow_size = clamp(glow_size,1.5,5.2)
+#	glow.scale = Vector2(glow_size,glow_size)
+	
 	pass
+
+func show_glow():
+	var exponential = planc.radius*factor
+	glow_size = pow(1.3,exponential)
+	glow_size = clamp(glow_size,2.8,6.2)
+	glow.scale = Vector2(glow_size,glow_size)
+	
+	anim_glow.play("glow")
+
 
 func spawn_ghost():
 	var inst = ghost.instance()

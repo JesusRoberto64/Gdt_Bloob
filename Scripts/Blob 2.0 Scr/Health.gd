@@ -13,6 +13,9 @@ var aplied_force = 800
 
 export(bool) var is_life_infite = false
 
+#glow 
+onready var glow = $Glow_Circle
+
 func _ready():
 	add_to_group("Health")
 	col = Color.aqua
@@ -29,6 +32,8 @@ func _ready():
 	if !is_life_infite:
 		lifeTimer.wait_time = life_time
 		lifeTimer.start()
+	
+	glow.material.set("shader_param/glow",0.2)
 	pass
 
 func _process(_delta):
@@ -48,7 +53,7 @@ func _physics_process(delta):
 	pass
 
 func _draw():
-	draw_circle(Vector2.ZERO,15,col)
+	#draw_circle(Vector2.ZERO,15,col)
 	pass
 
 func _on_Timer_timeout():

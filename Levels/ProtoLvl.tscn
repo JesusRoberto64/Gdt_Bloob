@@ -1,11 +1,15 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enviroment/Demo_tileset2.res" type="TileSet" id=3]
 [ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Art/Mat&Sahders/Teste_bg.tres" type="Material" id=5]
+[ext_resource path="res://Art/back.png" type="Texture" id=6]
 [ext_resource path="res://Prefabs/Items/Caja.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Enviroment/Wall_poly.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Art/Foreground.png" type="Texture" id=9]
+[ext_resource path="res://Art/Mat&Sahders/Gaussian_sahderMat.tres" type="Material" id=10]
 [ext_resource path="res://Art/UI & Menus/Fonts/bahnschrift.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Enviroment/wall_purple.tres" type="TileSet" id=12]
 [ext_resource path="res://Prefabs/Items/Gate&Key.tscn" type="PackedScene" id=15]
@@ -100,7 +104,7 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = SubResource( 14 )
-shader_param/intence = 1.16
+shader_param/intence = 0.9
 
 [sub_resource type="DynamicFont" id=16]
 size = 25
@@ -436,6 +440,48 @@ tile_data = PoolIntArray( 65539, 7, 0, 131075, 7, 0, 131079, 10, 0, 131080, 7, 0
 
 [node name="Screens" type="Node2D" parent="."]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Screens"]
+
+[node name="ColorRect" type="ColorRect" parent="Screens/ParallaxBackground"]
+material = ExtResource( 5 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Screens/ParallaxBackground"]
+material = ExtResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nebulla" type="ParallaxLayer" parent="Screens/ParallaxBackground"]
+motion_scale = Vector2( 0.15, 0.15 )
+motion_mirroring = Vector2( 2000, 2000 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite" type="Sprite" parent="Screens/ParallaxBackground/nebulla"]
+self_modulate = Color( 1, 1, 1, 0.678431 )
+texture = ExtResource( 9 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Screens/ParallaxBackground"]
+motion_scale = Vector2( 0.5, 0.5 )
+motion_mirroring = Vector2( 1500, 1500 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CanvasModulate" type="Sprite" parent="Screens/ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="Pause " type="CanvasLayer" parent="Screens"]
 
 [node name="Pause Ctrl" type="Control" parent="Screens/Pause " groups=[
@@ -446,6 +492,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 22 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -469,7 +516,6 @@ texture = ExtResource( 18 )
 
 [node name="Saving" type="Label" parent="Screens/Pause /Pause Ctrl"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -179.0
@@ -489,6 +535,9 @@ anims/hide = SubResource( 18 )
 anims/show = SubResource( 19 )
 
 [node name="SceneManager" parent="Screens" instance=ExtResource( 2 )]
+
+[node name="ColorRect" parent="Screens/SceneManager/TransitionScreen" index="0"]
+visible = false
 
 [node name="UIGameOver" type="Node2D" parent="Screens"]
 script = ExtResource( 20 )

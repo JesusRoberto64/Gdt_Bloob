@@ -5,6 +5,7 @@ signal area_size(body)
 signal hurt
 signal enter_door
 
+
 onready var planc = get_parent()
 var is_hurt = false
 onready var timer = $Timer
