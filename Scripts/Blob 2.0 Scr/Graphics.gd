@@ -140,6 +140,7 @@ func show_glow():
 	glow_size = pow(1.3,exponential)
 	glow_size = clamp(glow_size,2.8,6.2)
 	glow.scale = Vector2(glow_size,glow_size)
+	
 	anim_glow.play("glow")
 
 

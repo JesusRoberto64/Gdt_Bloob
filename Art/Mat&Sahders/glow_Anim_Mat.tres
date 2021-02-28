@@ -22,6 +22,7 @@ void fragment(){
 void vertex(){
 	 VERTEX += vec2(cos(TIME)*5.0, sin(TIME)*5.0);
 }"
+custom_defines = ""
 
 [resource]
 shader = SubResource( 1 )

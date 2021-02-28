@@ -3,6 +3,7 @@ extends Control
 onready var vinetta = $ColorRect
 onready var anim = $AnimationPlayer
 onready var save_label = $Saving
+onready var spr_pause = $Labels
 
 var is_saving = false
 #game Feel 
@@ -12,7 +13,7 @@ var hurted_time = 0.0
 
 func _ready():
 	anim.play("hide")
-	
+	spr_pause.hide()
 
 func _process(delta):
 	if !is_saving:
@@ -20,6 +21,7 @@ func _process(delta):
 			if get_tree().paused == false:
 				get_tree().paused = true
 				#vinetta.show()
+				spr_pause.show()
 				anim.play("show")
 			else :
 				get_tree().paused = false

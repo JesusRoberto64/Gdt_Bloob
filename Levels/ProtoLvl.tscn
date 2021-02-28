@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Art/back.png" type="Texture" id=6]
 [ext_resource path="res://Prefabs/Items/Caja.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Enviroment/Wall_poly.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Art/Foreground.png" type="Texture" id=9]
+[ext_resource path="res://Art/Mat&Sahders/Gaussian_sahderMat.tres" type="Material" id=10]
 [ext_resource path="res://Art/UI & Menus/Fonts/bahnschrift.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Enviroment/wall_purple.tres" type="TileSet" id=12]
 [ext_resource path="res://Prefabs/Items/Gate&Key.tscn" type="PackedScene" id=15]
@@ -99,6 +101,7 @@ void fragment(){
 	//COLOR.a = -value*3.0 +(value2*0.2);
 	COLOR.a = value*intence; // max value 2.2
 }"
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = SubResource( 14 )
@@ -448,6 +451,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect2" type="ColorRect" parent="Screens/ParallaxBackground"]
+material = ExtResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nebulla" type="ParallaxLayer" parent="Screens/ParallaxBackground"]
+motion_scale = Vector2( 0.15, 0.15 )
+motion_mirroring = Vector2( 2000, 2000 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite" type="Sprite" parent="Screens/ParallaxBackground/nebulla"]
+self_modulate = Color( 1, 1, 1, 0.678431 )
+texture = ExtResource( 9 )
+
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Screens/ParallaxBackground"]
 motion_scale = Vector2( 0.5, 0.5 )
 motion_mirroring = Vector2( 1500, 1500 )
@@ -514,6 +536,9 @@ anims/hide = SubResource( 18 )
 anims/show = SubResource( 19 )
 
 [node name="SceneManager" parent="Screens" instance=ExtResource( 2 )]
+
+[node name="ColorRect" parent="Screens/SceneManager/TransitionScreen" index="0"]
+visible = false
 
 [node name="UIGameOver" type="Node2D" parent="Screens"]
 script = ExtResource( 20 )

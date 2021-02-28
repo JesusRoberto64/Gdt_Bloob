@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[sub_resource type="Shader" id=16]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 
@@ -75,9 +75,10 @@ void vertex(){
 }
 
 "
+custom_defines = ""
 
 [resource]
-shader = SubResource( 16 )
+shader = SubResource( 1 )
 shader_param/color = Vector3( 0, 2, 3 )
 shader_param/twinkleSpeed = 10.0
 shader_param/speed = 0.001

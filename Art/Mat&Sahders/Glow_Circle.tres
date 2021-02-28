@@ -17,6 +17,7 @@ void fragment(){
 		discard;
 	}
 } "
+custom_defines = ""
 
 [resource]
 shader = SubResource( 1 )
