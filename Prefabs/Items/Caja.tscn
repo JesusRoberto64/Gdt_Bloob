@@ -129,6 +129,7 @@ void fragment() {
 	
 	
 }"
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
@@ -154,6 +155,7 @@ void fragment() {
 	COLOR  = vec4(color,value);
 	
 }"
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
@@ -226,6 +228,7 @@ void fragment() {
 	//}
 	
 }"
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = SubResource( 6 )

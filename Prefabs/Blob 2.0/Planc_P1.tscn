@@ -80,6 +80,7 @@ void fragment() {
 	//COLOR  = vec4(body_color,val*15.0);
 	//COLOR = vec4(body_color,value*4.5);
 }"
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
@@ -104,6 +105,7 @@ void fragment() {
 	COLOR  = vec4(color,value);
 	
 }"
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 4 )
