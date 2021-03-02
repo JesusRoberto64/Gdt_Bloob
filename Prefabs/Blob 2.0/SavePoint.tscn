@@ -29,3 +29,4 @@ material = ExtResource( 3 )
 position = Vector2( -0.366552, -8.79711 )
 texture = ExtResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_SavePoint_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_SavePoint_body_exited"]

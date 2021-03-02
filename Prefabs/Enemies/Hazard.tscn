@@ -22,5 +22,6 @@ wait_time = 3.0
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 2 )
+scale = Vector2( 1.02196, 1 )
 texture = ExtResource( 3 )
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]

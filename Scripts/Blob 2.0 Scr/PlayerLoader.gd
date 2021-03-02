@@ -29,6 +29,8 @@ func save_status():
 	new_save.hours = play_time
 	new_save.Asteros_limit = Plank_status.max_asteros
 	new_save.red_Shield = Plank_status.blob[0].can_push 
+	new_save.first_Time = false
+	
 	#gaurdia 
 	var dir = Directory.new()
 	if not dir.dir_exists("res://saves/"):
@@ -52,7 +54,12 @@ func load_status():
 	if not verify_save(status_save):
 		return false
 	
-	position = status_save.player_pos
+	
+	if !status_save.first_Time:
+		position = status_save.player_pos
+		Vars.can_save = false
+	else:
+		Vars.can_save = true
 	play_time = status_save.hours
 	Plank_status.max_asteros = status_save.Asteros_limit
 	Plank_Hud.max_asteros = status_save.Asteros_limit

@@ -1,9 +1,8 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enviroment/Demo_tileset2.res" type="TileSet" id=3]
-[ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Art/Mat&Sahders/Teste_bg.tres" type="Material" id=5]
 [ext_resource path="res://Art/back.png" type="Texture" id=6]
 [ext_resource path="res://Prefabs/Items/Caja.tscn" type="PackedScene" id=7]
@@ -25,27 +24,80 @@
 [ext_resource path="res://Scripts/Items/Lock&kKey Loader.gd" type="Script" id=27]
 [ext_resource path="res://Scripts/Contoles & UI/Level Mannager.gd" type="Script" id=28]
 
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -780, 3570, 0, 0, 0, 0, -510, 3510, 0, 0, 0, 0, -270, 3480, 0, 0, 0, 0, -210, 3660, 0, 0, 0, 0, -570, 3720, 0, 0, 0, 0, -1050, 3660, 0, 0, 0, 0, -990, 3480, 0, 0, 0, 0, -540, 3630, 0, 0, 0, 0, -120, 3510, 0, 0, 0, 0, -810, 3780, 0, 0, 0, 0, -900, 3780, 0, 0, 0, 0, -930, 3720, 0, 0, 0, 0, 1290, 2940, 0, 0, 0, 0, 1470, 2970, 0, 0, 0, 0, 1260, 2730, 0, 0, 0, 0, 1410, 2730 )
+[sub_resource type="Animation" id=1]
+resource_name = "Intro_Demo"
+length = 20.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -1250.17, -0.754412, 188.202, 0.911242, -226.644, -1856.18, -0.25, 0, 0.25, 0, -1856.18, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.7, 8.6, 11.2, 14.8, 18.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -4.23785, -0.25, 0, 0.382338, -215.808, -1008.61, -0.25, 0, 0.25, 0, -1008.61, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.7, 8.6, 11.2, 14.8, 18.7 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:zoom:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.8, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 1.1, 6.3, 7.8, 15.8, 18.2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:zoom:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.8, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 1.1, 6.3, 7.8, 15.8, 18.2 )
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 20 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "cinematic_off"
+} ]
 }
 
-[sub_resource type="Curve2D" id=2]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 570, 6990, 0, 0, 0, 0, 600, 6990, 0, 0, 0, 0, 630, 6990, 0, 0, 0, 0, 660, 6990, 0, 0, 0, 0, 690, 6990, 0, 0, 0, 0, 720, 6990, 0, 0, 0, 0, 750, 6990, 0, 0, 0, 0, 780, 6990, 0, 0, 0, 0, 810, 6990, 0, 0, 0, 0, 840, 6990, 0, 0, 0, 0, 870, 6990, 0, 0, 0, 0, 900, 6990, 0, 0, 0, 0, 930, 6990, 0, 0, 0, 0, 960, 6990, 0, 0, 0, 0, 990, 6990, 0, 0, 0, 0, 1020, 6990, 0, 0, 0, 0, 1050, 6990, 0, 0, 0, 0, 1080, 6990, 0, 0, 0, 0, 1110, 6990 )
-}
-
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4431.6, 2213.07 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 3386.73, 1568.25 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 3220.25, 4979.5 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 3948.84, 1080.91 )
+
+[sub_resource type="Curve2D" id=6]
+_data = {
+"points": PoolVector2Array(  )
+}
 
 [sub_resource type="Curve2D" id=7]
 _data = {
@@ -57,32 +109,7 @@ _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Curve2D" id=9]
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Curve2D" id=10]
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Curve2D" id=11]
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Curve2D" id=12]
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Curve2D" id=13]
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Shader" id=14]
+[sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 
 uniform float intence = 0.0;
@@ -102,15 +129,15 @@ void fragment(){
 	COLOR.a = value*intence; // max value 2.2
 }"
 
-[sub_resource type="ShaderMaterial" id=15]
-shader = SubResource( 14 )
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
 shader_param/intence = 0.9
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=11]
 size = 25
 font_data = ExtResource( 11 )
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=12]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Saving:modulate")
 tracks/0/interp = 1
@@ -150,7 +177,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=13]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:material:shader_param/intence")
@@ -177,7 +204,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=14]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:material:shader_param/intence")
@@ -204,7 +231,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=15]
 tracks/0/type = "value"
 tracks/0/path = NodePath("UICanvas/Retry:modulate")
 tracks/0/interp = 1
@@ -230,27 +257,17 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Curve2D" id=21]
+[sub_resource type="Curve2D" id=16]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Curve2D" id=22]
+[sub_resource type="Curve2D" id=17]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Curve2D" id=23]
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Curve2D" id=24]
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="Curve2D" id=25]
+[sub_resource type="Curve2D" id=18]
 _data = {
 "points": PoolVector2Array(  )
 }
@@ -258,7 +275,7 @@ _data = {
 [node name="ProtoLvl" type="Node2D"]
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 14164.3, 1373.61 )
+position = Vector2( 13487.2, 1672.95 )
 script = ExtResource( 23 )
 __meta__ = {
 "_edit_group_": true
@@ -267,19 +284,13 @@ game_save_class = ExtResource( 24 )
 
 [node name="Planc_P1" parent="PlayerHolder" instance=ExtResource( 1 )]
 
+[node name="Camera2D" parent="PlayerHolder/Planc_P1" index="0"]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="AnimationPlayer" parent="PlayerHolder/Planc_P1/Camera2D" index="1"]
+anims/Intro_Demo = SubResource( 1 )
+
 [node name="Hazard" type="Node2D" parent="."]
-
-[node name="Path Item3" parent="Hazard" instance=ExtResource( 4 )]
-item_type = 0
-
-[node name="Path2D" parent="Hazard/Path Item3" index="0"]
-curve = SubResource( 1 )
-
-[node name="Path Item4" parent="Hazard" instance=ExtResource( 4 )]
-item_type = 0
-
-[node name="Path2D" parent="Hazard/Path Item4" index="0"]
-curve = SubResource( 2 )
 
 [node name="Zones" type="Node2D" parent="."]
 
@@ -293,7 +304,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/Demo_Loader/Detector"]
 position = Vector2( 10419.3, 1257.75 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Nest" type="Node2D" parent="Zones/Demo_Loader"]
 
@@ -307,7 +318,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/Demo_Loader02/Detector"]
 position = Vector2( 9147.56, 3647.55 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Nest" type="Node2D" parent="Zones/Demo_Loader02"]
 
@@ -321,7 +332,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/Demo_Loader03/Detector"]
 position = Vector2( 8255.65, 7983.29 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Nest" type="Node2D" parent="Zones/Demo_Loader03"]
 
@@ -335,32 +346,11 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/Demo_Loader04/Detector"]
 position = Vector2( 12795.7, 10073.4 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="Nest" type="Node2D" parent="Zones/Demo_Loader04"]
 
 [node name="WallsPolygon" type="Node2D" parent="."]
-
-[node name="Wall_poly" parent="WallsPolygon" instance=ExtResource( 8 )]
-is_curved = true
-
-[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly" index="0"]
-polygon = PoolVector2Array( 1664, 3968, 1728, 3936, 1728, 3776, 1728, 3712, 1696, 3680, 1664, 3680 )
-
-[node name="Polygon2D" parent="WallsPolygon/Wall_poly" index="1"]
-color = Color( 0.0588235, 0.0980392, 0.223529, 1 )
-
-[node name="Wall_poly2" parent="WallsPolygon" instance=ExtResource( 8 )]
-is_curved = true
-
-[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly2" index="0"]
-polygon = PoolVector2Array( 1664, 4000, 1728, 4032, 1728, 4160, 1664, 4160 )
-
-[node name="Polygon2D" parent="WallsPolygon/Wall_poly2" index="1"]
-color = Color( 0.0588235, 0.0980392, 0.223529, 1 )
-
-[node name="Path2D" parent="WallsPolygon/Wall_poly2" index="2"]
-curve = SubResource( 7 )
 
 [node name="Wall_poly3" parent="WallsPolygon" instance=ExtResource( 8 )]
 position = Vector2( -1, 0 )
@@ -370,7 +360,7 @@ is_curved = true
 polygon = PoolVector2Array( 2625, 2816, 2624, 2912, 2112, 2912, 2144, 2816 )
 
 [node name="Path2D" parent="WallsPolygon/Wall_poly3" index="2"]
-curve = SubResource( 8 )
+curve = SubResource( 6 )
 
 [node name="Wall_poly4" parent="WallsPolygon" instance=ExtResource( 8 )]
 is_curved = true
@@ -379,7 +369,7 @@ is_curved = true
 polygon = PoolVector2Array( 2720, 2816, 3296, 2816, 3296, 2912, 2720, 2912 )
 
 [node name="Path2D" parent="WallsPolygon/Wall_poly4" index="2"]
-curve = SubResource( 9 )
+curve = SubResource( 7 )
 
 [node name="Wall_poly5" parent="WallsPolygon" instance=ExtResource( 8 )]
 position = Vector2( 0, 1 )
@@ -389,36 +379,7 @@ is_curved = true
 polygon = PoolVector2Array( 2656, 2656, 3296, 2688, 3295, 2824, 3058, 2822, 2970, 2825, 2968.44, 2758.56, 2655, 2700 )
 
 [node name="Path2D" parent="WallsPolygon/Wall_poly5" index="2"]
-curve = SubResource( 10 )
-
-[node name="Wall_poly6" parent="WallsPolygon" instance=ExtResource( 8 )]
-position = Vector2( -370.812, -180.109 )
-is_curved = true
-
-[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly6" index="0"]
-polygon = PoolVector2Array( 2611, 2513, 2773, 2461, 2868, 2433, 2917, 2493, 2726, 2544, 2606, 2547 )
-
-[node name="Path2D" parent="WallsPolygon/Wall_poly6" index="2"]
-curve = SubResource( 11 )
-
-[node name="Wall_poly7" parent="WallsPolygon" instance=ExtResource( 8 )]
-is_curved = true
-
-[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly7" index="0"]
-polygon = PoolVector2Array( 2298, 2082, 3044, 2005, 3190, 2000, 3194, 2046, 3011, 2050, 2288, 2162 )
-
-[node name="Path2D" parent="WallsPolygon/Wall_poly7" index="2"]
-curve = SubResource( 12 )
-
-[node name="Wall_poly8" parent="WallsPolygon" instance=ExtResource( 8 )]
-position = Vector2( 112, 102 )
-is_curved = true
-
-[node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly8" index="0"]
-polygon = PoolVector2Array( 2298, 2082, 3044, 2005, 3190, 2000, 3194, 2046, 3011, 2050, 2288, 2162 )
-
-[node name="Path2D" parent="WallsPolygon/Wall_poly8" index="2"]
-curve = SubResource( 13 )
+curve = SubResource( 8 )
 
 [node name="tilesLayers" type="Node2D" parent="."]
 
@@ -471,7 +432,7 @@ texture = ExtResource( 9 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Screens/ParallaxBackground"]
 motion_scale = Vector2( 0.5, 0.5 )
-motion_mirroring = Vector2( 1500, 1500 )
+motion_mirroring = Vector2( 1600, 1600 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -497,7 +458,7 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Screens/Pause /Pause Ctrl"]
-material = SubResource( 15 )
+material = SubResource( 10 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.572549 )
@@ -522,7 +483,7 @@ margin_left = -179.0
 margin_top = 72.0
 margin_right = -74.0
 margin_bottom = 98.0
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 11 )
 text = "SAVING..."
 align = 1
 __meta__ = {
@@ -530,9 +491,9 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Screens/Pause /Pause Ctrl"]
-anims/Saving = SubResource( 17 )
-anims/hide = SubResource( 18 )
-anims/show = SubResource( 19 )
+anims/Saving = SubResource( 12 )
+anims/hide = SubResource( 13 )
+anims/show = SubResource( 14 )
 
 [node name="SceneManager" parent="Screens" instance=ExtResource( 2 )]
 
@@ -556,7 +517,7 @@ position = Vector2( 241.831, 127.279 )
 texture = ExtResource( 18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Screens/UIGameOver"]
-anims/dead = SubResource( 20 )
+anims/dead = SubResource( 15 )
 
 [node name="EventGame " type="Node2D" parent="."]
 
@@ -575,7 +536,7 @@ is_curved = true
 polygon = PoolVector2Array( 2752, 2752, 2752, 2784, 2708, 2802, 2620, 2815, 2599, 2790, 2633, 2745, 2688, 2720 )
 
 [node name="Path2D" parent="boxes/Caja puzzle" index="3"]
-curve = SubResource( 21 )
+curve = SubResource( 16 )
 
 [node name="Caja puzzle2" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( 10.9736, 21.522 )
@@ -588,33 +549,7 @@ is_curved = true
 polygon = PoolVector2Array( 2635, 2952, 2703, 2952, 2705, 2924, 2672, 2916, 2636, 2923 )
 
 [node name="Path2D" parent="boxes/Caja puzzle2" index="3"]
-curve = SubResource( 22 )
-
-[node name="Caja puzzle3" parent="boxes" instance=ExtResource( 7 )]
-position = Vector2( 2.23804, -42.665 )
-mode = 2
-mass = 2.0
-linear_damp = 0.1
-is_curved = true
-
-[node name="CollisionPolygon2D" parent="boxes/Caja puzzle3" index="0"]
-polygon = PoolVector2Array( 2170, 2392, 2219, 2371, 2232, 2400, 2213, 2434, 2172, 2443 )
-
-[node name="Path2D" parent="boxes/Caja puzzle3" index="3"]
-curve = SubResource( 23 )
-
-[node name="Caja puzzle4" parent="boxes" instance=ExtResource( 7 )]
-position = Vector2( -336.909, 152.563 )
-mode = 2
-mass = 15.0
-linear_damp = 0.5
-is_curved = true
-
-[node name="CollisionPolygon2D" parent="boxes/Caja puzzle4" index="0"]
-polygon = PoolVector2Array( 2799, 2388, 2781, 2436, 2703, 2469, 2601, 2481, 2572, 2469, 2571, 2429, 2590, 2385, 2646, 2363, 2773, 2376 )
-
-[node name="Path2D" parent="boxes/Caja puzzle4" index="3"]
-curve = SubResource( 24 )
+curve = SubResource( 17 )
 
 [node name="Caja puzzle5" parent="boxes" instance=ExtResource( 7 )]
 position = Vector2( -401.804, 967.907 )
@@ -627,7 +562,7 @@ is_curved = true
 polygon = PoolVector2Array( 3174, 2378, 3183, 2298, 3219, 2299, 3229, 2382 )
 
 [node name="Path2D" parent="boxes/Caja puzzle5" index="3"]
-curve = SubResource( 25 )
+curve = SubResource( 18 )
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -712,25 +647,13 @@ autoplay = true
 [connection signal="body_exited" from="Zones/Demo_Loader04/Detector" to="Zones/Demo_Loader04" method="_on_Detector_body_exited"]
 [connection signal="Transition" from="EventGame /Door " to="Screens/SceneManager" method="start_tran"]
 
-[editable path="Hazard/Path Item3"]
-
-[editable path="Hazard/Path Item4"]
-
-[editable path="WallsPolygon/Wall_poly"]
-
-[editable path="WallsPolygon/Wall_poly2"]
+[editable path="PlayerHolder/Planc_P1"]
 
 [editable path="WallsPolygon/Wall_poly3"]
 
 [editable path="WallsPolygon/Wall_poly4"]
 
 [editable path="WallsPolygon/Wall_poly5"]
-
-[editable path="WallsPolygon/Wall_poly6"]
-
-[editable path="WallsPolygon/Wall_poly7"]
-
-[editable path="WallsPolygon/Wall_poly8"]
 
 [editable path="Screens/SceneManager"]
 
@@ -739,10 +662,6 @@ autoplay = true
 [editable path="boxes/Caja puzzle"]
 
 [editable path="boxes/Caja puzzle2"]
-
-[editable path="boxes/Caja puzzle3"]
-
-[editable path="boxes/Caja puzzle4"]
 
 [editable path="boxes/Caja puzzle5"]
 

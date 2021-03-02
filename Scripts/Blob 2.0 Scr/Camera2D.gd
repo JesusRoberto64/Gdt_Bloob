@@ -10,9 +10,7 @@ var is_stoped = false
 onready var prev_camera_center = get_camera_screen_center()
 
 onready var timer = $Timer
-
 onready var planc = get_parent()
-
 var can_move = false
 
 # shaking camera 
@@ -21,10 +19,25 @@ var shake_amnt = 0.5
 var time_Shake = 0.0
 var time_Shake_Max = 0.5
 
+# Animation camera 
+onready var anim_cam 
+var cinematic = false # the firts time you play a game
+
+func _ready():
+	anim_cam = $AnimationPlayer
+	
+	if cinematic: # only use for the first time play a game 
+		anim_cam.play("Intro_Demo")
+		state = CAM_STATE.CINEMATIC
+		planc.cur_state = planc.STATE.PUPPET
+		
+
 func _process(delta):
 	
 	##imputs 
 	if Input.is_action_pressed("ui_right") || Input.is_action_pressed("ui_left"):
+		if state == CAM_STATE.CINEMATIC:
+			return
 		timer.start()
 		can_move = true
 	else:
@@ -105,7 +118,7 @@ func _physics_process(delta):
 	
 	if is_shaking:
 		shakig(delta,100)
-		
+	
 	pass
 	
 
@@ -137,5 +150,13 @@ func shakig(delta,amnt):
 		time_Shake = 0.0
 	pass
 
+func cinematic_off():
+	state = CAM_STATE.STOP
+	planc.cur_state = planc.STATE.MOVING
 
-
+func cinematic(play_anim: String):
+	state = CAM_STATE.CINEMATIC
+	planc.cur_state = planc.STATE.PUPPET
+	anim_cam.play(play_anim)
+	
+	pass

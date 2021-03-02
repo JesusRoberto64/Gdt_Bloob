@@ -5,6 +5,7 @@ export (Vector2) var player_pos = Vector2.ZERO #position of planc
 export(float) var hours = 0.0
 export (int) var Asteros_limit = 35.0 # 35.0 minimo 76.0 el maximo
 export (bool) var red_Shield = false
+export (bool) var first_Time = true
 
 ## zone doors oopen 
 export(Dictionary) var Demo_data = {

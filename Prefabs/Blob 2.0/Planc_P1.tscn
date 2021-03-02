@@ -154,6 +154,8 @@ script = ExtResource( 2 )
 [node name="Timer" type="Timer" parent="Camera2D"]
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource( 3 )
 

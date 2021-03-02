@@ -100,6 +100,8 @@ func _ready():
 	# debugger abilities
 	#unlock_ability("push_Hazard")
 	
+	
+	
 	pass 
 
 func findCentroid():
