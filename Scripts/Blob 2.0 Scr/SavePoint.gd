@@ -13,8 +13,7 @@ func _ready():
 	connect("save",player,"save_status")
 	pass
 
-func _on_SavePoint_body_entered(_body): # coenct to loader and UI saving
-	
+func _on_SavePoint_body_entered(_body): 
 	if Vars.can_save:
 		emit_signal("save")
 	

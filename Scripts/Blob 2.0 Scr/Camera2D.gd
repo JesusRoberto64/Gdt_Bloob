@@ -34,7 +34,7 @@ func _ready():
 	
 	var dir = Directory.new()
 	if not dir.dir_exists("res://saves/"):
-		print("ERROR loading")
+		print("ERROR loading in camera")
 		pass
 	
 	var status_save = load("res://saves/save_01.tres")
@@ -42,7 +42,7 @@ func _ready():
 	if status_save.get("first_Time") == true:
 		#is_cinematic = true
 		#anim_cam.play("LevelsIntro_Demo")
-		#state = CAM_STATE.CINEMATIC
+		state = CAM_STATE.CENTERED
 		planc.cur_state = planc.STATE.PUPPET
 		pass
 	else:
@@ -208,9 +208,6 @@ func move_cam(pos: Vector2):
 	move_Point = pos
 	timer.stop()
 	pass
-
-
-
 
 
 

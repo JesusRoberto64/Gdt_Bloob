@@ -10,7 +10,7 @@ signal is_saving # this should be connceted to the Puase CTRL to see animationa
 
 func _ready():
 	if not load_status():
-		print("error loading")
+		print("error loading in player loader")
 	
 	pass
 
@@ -46,7 +46,7 @@ func save_status():
 func load_status():
 	var dir = Directory.new()
 	if not dir.dir_exists("res://saves/"):
-		print("ERROR loading")
+		print("ERROR loading in player loader func")
 		return false
 		pass
 	

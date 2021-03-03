@@ -4,14 +4,20 @@
 
 [resource]
 script = ExtResource( 1 )
-player_pos = Vector2( 7045.23, 1405.59 )
-hours = 3833.45
+player_pos = Vector2( 7050.34, 1395.81 )
+hours = 4150.76
 Asteros_limit = 76
 red_Shield = false
 first_Time = false
 Demo_data = {
 "1_Door_open": false,
 "2_Door_open": false,
+"Astero++_00": true,
+"Astero++_01": true,
+"Boss_defeated": false,
+"cinema_boss": true,
+"cinema_boss_defeted": true,
+"cinema_intro": false,
 "is_Shield": true,
 "key1_used": false,
 "key2_used": false

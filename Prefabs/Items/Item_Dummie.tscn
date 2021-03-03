@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Items/Item_Dummie.gd" type="Script" id=1]
+[ext_resource path="res://Resourse_Dat.gd" type="Script" id=2]
+
+[node name="Item_Dummie" type="Node2D"]
+script = ExtResource( 1 )
+game_save_class = ExtResource( 2 )
