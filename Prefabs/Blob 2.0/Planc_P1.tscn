@@ -39,6 +39,20 @@ tracks/1/keys = {
 "points": PoolRealArray( 0.2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0.5, 4 )
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "cinematic_off"
+} ]
+}
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -160,7 +174,7 @@ outline_size = 1
 outline_color = Color( 0.0352941, 0.0235294, 0.0235294, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="Shader" id=10]
+[sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 
 uniform float intence = 0.0;
@@ -208,11 +222,11 @@ void fragment(){
 	COLOR.a = mix(value*intence,noise_val*2.0,0.02);
 }"
 
-[sub_resource type="ShaderMaterial" id=11]
-shader = SubResource( 10 )
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
 shader_param/intence = 2.0
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=11]
 radius = 20.0
 
 [node name="Planc_P1" type="Node2D"]
@@ -221,6 +235,7 @@ curve = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 0.2, 0.2 )
 process_mode = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -301,7 +316,7 @@ __meta__ = {
 }
 
 [node name="HurtRect2" type="ColorRect" parent="CanvasLayer"]
-material = SubResource( 11 )
+material = SubResource( 10 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
@@ -332,7 +347,7 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="timeout" from="Turbo" to="." method="_on_Turbo_timeout"]

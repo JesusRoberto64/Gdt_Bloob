@@ -26,6 +26,9 @@ var is_cinematic = false
 # move camera 
 var move_Point = Vector2.ZERO
 
+# focus brute force
+var can_focus = false
+
 func _ready():
 	anim_cam = $AnimationPlayer
 	
@@ -36,11 +39,15 @@ func _ready():
 	
 	var status_save = load("res://saves/save_01.tres")
 	
-	if status_save.get("first_Time") != null:
+	if status_save.get("first_Time") == true:
 		#is_cinematic = true
 		#anim_cam.play("LevelsIntro_Demo")
 		#state = CAM_STATE.CINEMATIC
-		#planc.cur_state = planc.STATE.PUPPET
+		planc.cur_state = planc.STATE.PUPPET
+		pass
+	else:
+		can_focus = true # FUERZA BRUTA 
+		get_parent().find_node("HurtRect2").hide()
 		pass
 	
 #	if is_cinematic:
@@ -51,6 +58,10 @@ func _ready():
 	
 
 func _process(delta):
+	##FUERZA BRUTA
+	if can_focus:
+		planc.emit_signal("focus_Cam")
+		can_focus = false
 	
 	##imputs 
 	if Input.is_action_pressed("ui_right") || Input.is_action_pressed("ui_left"):
@@ -125,12 +136,14 @@ func _physics_process(delta):
 			
 			global_position = lerp(global_position,move_Point,0.1)
 			timer.start()
+			
 			if global_position.distance_to(move_Point) <= 0.01:
 				#is_cinematic = false
 				#state = CAM_STATE.STOP
 				#planc.cur_state = planc.STATE.MOVING
 				cinematic("LevelsIntro_Demo")
-				pass
+			else:
+				planc.emit_signal("focus_Cam")
 			
 			pass
 	
