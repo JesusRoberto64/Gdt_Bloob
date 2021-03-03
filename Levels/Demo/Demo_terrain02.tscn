@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Enviroment/wall_purple.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Blob 2.0/SavePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Blob 2.0/Astero++.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Items/Fountain.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Items/Item_Dummie.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -34,9 +35,6 @@ __meta__ = {
 [node name="Path2D" parent="Path Item" index="0"]
 curve = SubResource( 1 )
 
-[node name="Astero++" parent="." instance=ExtResource( 4 )]
-position = Vector2( 6401.17, 4894.82 )
-
 [node name="SavePoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 12082.4, 3715.13 )
 
@@ -48,6 +46,12 @@ curve = SubResource( 2 )
 
 [node name="Fountain" parent="." instance=ExtResource( 5 )]
 position = Vector2( 11740.3, 4031.5 )
+
+[node name="Item_Dummie" parent="." instance=ExtResource( 6 )]
+item = "Astero++_01"
+
+[node name="Astero++" parent="Item_Dummie" instance=ExtResource( 4 )]
+position = Vector2( 6401.17, 4894.82 )
 
 [editable path="Path Item"]
 

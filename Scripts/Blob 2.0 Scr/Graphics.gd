@@ -55,6 +55,7 @@ func _ready():
 	#glow.hide()
 	#glow.material.set("shader_param/glow",-0.045) #maximo 0.3 minomo
 	#glow.scale = Vector2(5.5,5.5)
+	shader_change()
 	pass
 
 
@@ -167,6 +168,13 @@ func shader_change():
 			spr.material.set("shader_param/back_color",Vector3(0.0,1.0,0.0))
 			poly.color = Color.green
 			screen_hurt.hide()
+			pass
+		STATE.PUPPET:
+			fill_color = Color(0.0,1.0,0.0,0.5)
+			line_color = Color.greenyellow
+			spr.material.set("shader_param/body_color",Norm_col)
+			spr.material.set("shader_param/back_color",Vector3(0.0,1.0,0.0))
+			poly.color = Color.green
 			pass
 	pass
 

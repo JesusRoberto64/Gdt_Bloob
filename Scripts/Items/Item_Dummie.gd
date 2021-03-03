@@ -1,38 +1,31 @@
 extends Node2D
 
-enum LEVELS{DEMO,EDEN}
-export(LEVELS) var level
+enum ITEMS{Astero,Shield}
+export(ITEMS) var cur_item
 
 export(Script) var game_save_class
 var save_vars = ["Demo_data"]
-var gates = []
 signal is_saving
 
+#key element 
+export var item = "" 
+
 func _ready():
-	for i in get_children():
-		if i.is_in_group("Gate"):
-			gates.append(i)
-			pass
-		pass
 	
 	if not load_status():
-		print("error loading lock and key")
-	
-	pass
-
-func _process(_delta):
-	if Input.is_action_just_released("Save"):
-		#save_status()
-		pass
+		print("error loading ITEM")
 	
 	pass
 
 func save_status():
 	var new_save = game_save_class.new()
 	
-	new_save.Demo_data["1_Door_open"] = gates[0].is_opening
-	new_save.Demo_data["2_Door_open"] = gates[1].is_opening
-	
+	#guardia 
+	if !new_save.Demo_data.has(item):
+		print("no data found item")
+		return
+		pass
+	new_save.Demo_data[item] = false
 	
 	#gaurdia 
 	var dir = Directory.new()
@@ -47,23 +40,23 @@ func save_status():
 func load_status():
 	var dir = Directory.new()
 	if not dir.dir_exists("res://saves/"):
-		print("ERROR loading lock and key")
+		print("ERROR loading item")
 		return false
 		pass
 	
 	var status_save = load("res://saves/save_level_01.tres")
 	if not verify_save(status_save):
 		return false
+	#Guardia 
 	
-#	position = status_save.player_pos
-#	play_time = status_save.hours
-#	Plank_status.max_asteros = status_save.Asteros_limit
-#	Plank_Hud.max_asteros = status_save.Asteros_limit
+	if !status_save.Demo_data.has(item):
+		print("no found load data item")
+		return false
+		pass
 	
-	gates[0].is_opening = status_save.Demo_data["1_Door_open"]
-	gates[1].is_opening = status_save.Demo_data["2_Door_open"]
-	
-	#print (status_save.Demo_data["1_Door_open"])
+	if !status_save.Demo_data[item]:
+		queue_free()
+		pass
 	
 	return true
 	pass
@@ -74,3 +67,4 @@ func verify_save(status_save):
 			return false
 	return true
 	pass
+

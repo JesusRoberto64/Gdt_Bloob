@@ -18,7 +18,7 @@ __meta__ = {
 }
 
 [node name="SavePoint" parent="." instance=ExtResource( 2 )]
-position = Vector2( 8601.24, 9394.27 )
+position = Vector2( 8595.9, 8993.82 )
 
 [node name="Fountain" parent="." instance=ExtResource( 3 )]
 position = Vector2( 8600.72, 9429.22 )

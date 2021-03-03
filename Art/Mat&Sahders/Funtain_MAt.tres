@@ -105,7 +105,6 @@ void fragment(){
 	//COLOR = vec4(vec3(everything_combined),egg_s);
 }
  "
-custom_defines = ""
 
 [resource]
 shader = SubResource( 1 )

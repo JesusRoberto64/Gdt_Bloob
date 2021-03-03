@@ -34,10 +34,10 @@ func _process(delta):
 			pass
 		
 		if Input.is_action_just_pressed("restart"):
+			Vars.reload_vars()
 			get_tree().paused = false
 			#get_tree().reload_current_scene()
 			get_tree().change_scene("res://Levels/GameOver_Reloder.tscn")
-			
 			pass
 	
 	if is_hurted:

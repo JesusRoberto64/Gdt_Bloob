@@ -75,6 +75,9 @@ var is_uv_set = false
 #Game Feel 
 onready var hurt_pause = get_tree().get_nodes_in_group("Pause")[0]
 
+# focus cam 
+signal focus_Cam
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -99,6 +102,8 @@ func _ready():
 	
 	# debugger abilities
 	#unlock_ability("push_Hazard")
+	
+	
 	
 	pass 
 
