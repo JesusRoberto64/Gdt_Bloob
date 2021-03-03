@@ -21,16 +21,34 @@ var time_Shake_Max = 0.5
 
 # Animation camera 
 onready var anim_cam 
-var cinematic = false # the firts time you play a game
+var is_cinematic = false 
+
+# move camera 
+var move_Point = Vector2.ZERO
 
 func _ready():
 	anim_cam = $AnimationPlayer
 	
-	if cinematic: # only use for the first time play a game 
-		anim_cam.play("Intro_Demo")
-		state = CAM_STATE.CINEMATIC
-		planc.cur_state = planc.STATE.PUPPET
-		
+	var dir = Directory.new()
+	if not dir.dir_exists("res://saves/"):
+		print("ERROR loading")
+		pass
+	
+	var status_save = load("res://saves/save_01.tres")
+	
+	if status_save.get("first_Time") != null:
+		#is_cinematic = true
+		#anim_cam.play("LevelsIntro_Demo")
+		#state = CAM_STATE.CINEMATIC
+		#planc.cur_state = planc.STATE.PUPPET
+		pass
+	
+#	if is_cinematic:
+#		anim_cam.play("LevelsIntro_Demo")
+#		state = CAM_STATE.CINEMATIC
+#		planc.cur_state = planc.STATE.PUPPET
+#		pass
+	
 
 func _process(delta):
 	
@@ -104,15 +122,24 @@ func _physics_process(delta):
 			
 			pass
 		CAM_STATE.CINEMATIC:
-			return
+			
+			global_position = lerp(global_position,move_Point,0.1)
+			timer.start()
+			if global_position.distance_to(move_Point) <= 0.01:
+				#is_cinematic = false
+				#state = CAM_STATE.STOP
+				#planc.cur_state = planc.STATE.MOVING
+				cinematic("LevelsIntro_Demo")
+				pass
+			
 			pass
 	
-	
-	var cam_pos = planc.findCentroid()
-	cam_pos.x = stepify(cam_pos.x,1)
-	cam_pos.y = stepify(cam_pos.y,1)
-	position = cam_pos 
-	#print(position, " form planc")
+	if !is_cinematic:
+		var cam_pos = planc.findCentroid()
+		cam_pos.x = stepify(cam_pos.x,1)
+		cam_pos.y = stepify(cam_pos.y,1)
+		position = cam_pos 
+		#print(position, " form planc")
 	
 	prev_camera_center = get_camera_screen_center()
 	
@@ -120,7 +147,7 @@ func _physics_process(delta):
 		shakig(delta,100)
 	
 	pass
-	
+
 
 func direction_facing()-> bool:
 	#var new_direction = sign(position.x - prev_camera_pos.x)
@@ -151,12 +178,27 @@ func shakig(delta,amnt):
 	pass
 
 func cinematic_off():
-	state = CAM_STATE.STOP
+	state = CAM_STATE.MOVING
 	planc.cur_state = planc.STATE.MOVING
+	is_cinematic = false
 
 func cinematic(play_anim: String):
 	state = CAM_STATE.CINEMATIC
 	planc.cur_state = planc.STATE.PUPPET
 	anim_cam.play(play_anim)
-	
 	pass
+
+func move_cam(pos: Vector2):
+	state = CAM_STATE.CINEMATIC
+	is_cinematic =  true
+	planc.cur_state = planc.STATE.PUPPET
+	move_Point = pos
+	timer.stop()
+	pass
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[sub_resource type="Shader" id=24]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 const float K = 0.142857142857;
@@ -98,5 +98,5 @@ void vertex(){
 "
 
 [resource]
-shader = SubResource( 24 )
+shader = SubResource( 1 )
 shader_param/amt = 0.366

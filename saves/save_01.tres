@@ -8,7 +8,7 @@ player_pos = Vector2( 12032.9, 3730.44 )
 hours = 3774.15
 Asteros_limit = 76
 red_Shield = false
-first_Time = false
+first_Time = true
 Demo_data = {
 "1_Door_open": false,
 "2_Door_open": false,
