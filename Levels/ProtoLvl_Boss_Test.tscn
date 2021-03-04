@@ -123,7 +123,6 @@ void fragment(){
 	//COLOR.a = -value*3.0 +(value2*0.2);
 	COLOR.a = value*intence; // max value 2.2
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=18]
 shader = SubResource( 17 )
@@ -555,7 +554,9 @@ curve = SubResource( 16 )
 
 [node name="Pause" type="CanvasLayer" parent="Screens"]
 
-[node name="Pause Ctrl" type="Control" parent="Screens/Pause"]
+[node name="Pause Ctrl" type="Control" parent="Screens/Pause" groups=[
+"Pause",
+]]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -585,6 +586,8 @@ texture = ExtResource( 18 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Screens/Pause/Pause Ctrl"]
 anims/hide = SubResource( 19 )
 anims/show = SubResource( 20 )
+
+[node name="Saving" type="Node2D" parent="Screens/Pause/Pause Ctrl"]
 
 [node name="SceneManager" parent="Screens" instance=ExtResource( 2 )]
 
@@ -911,6 +914,7 @@ polygon = PoolVector2Array( 51.8341, 195.599, -45.6809, 194.41, -44.4146, -68.75
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 21 )
+volume_db = -25.161
 autoplay = true
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran"]
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]

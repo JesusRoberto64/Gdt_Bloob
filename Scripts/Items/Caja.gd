@@ -8,8 +8,10 @@ var health = preload("res://Prefabs/Blob 2.0/Health.tscn")
 var orb
 var orbParent
 
-onready var hazardParent = get_node("../../../Hazard")
-onready var healthParent = get_node("../../../Health")
+#onready var hazardParent = get_node("../../../Hazard")
+#onready var healthParent = get_node("../../../Health")
+onready var hazardParent = get_node("/root/ProtoLvl").get_node("Hazard")
+onready var healthParent = get_node("/root/ProtoLvl").get_node("Health")
 onready var collision_pol = $CollisionPolygon2D
 onready var graphic_pol = $Polygon2D
 onready var path = $Path2D
@@ -113,8 +115,8 @@ func destroyOnCollision():
 			h.explosion = true
 			h.is_life_infite = true
 		h.apply_central_impulse(Vector2( rng.randf_range(-1,1),rng.randf_range(-1,1) ) * 1200 )
-		orbParent.add_child(h)
-		
+		#orbParent.add_child(h) #old system
+		orbParent.call_deferred("add_child",h)
 		pass
 	get_parent().hasBox = false;
 	queue_free()

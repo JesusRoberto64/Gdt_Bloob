@@ -19,7 +19,8 @@ func _on_Area2D_body_entered(body):
 			var b = box.instance()
 			b.set_position(Vector2.ZERO)
 			hasBox = true
-			self.add_child(b)
-
+			#self.add_child(b) # old system
+			self.call_deferred("add_child",b)
+			
 		pass
 	pass # Replace with function body.

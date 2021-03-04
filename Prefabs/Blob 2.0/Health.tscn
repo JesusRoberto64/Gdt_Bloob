@@ -39,10 +39,6 @@ void fragment(){
 	}
 
 } "
-custom_defines = ""
-=======
-}"
-
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 4 )

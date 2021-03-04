@@ -73,6 +73,7 @@ onready var area_enemies = $Area2D
 var is_uv_set = false
 
 #Game Feel 
+
 onready var hurt_pause = get_tree().get_nodes_in_group("Pause")[0]
 
 # focus cam 

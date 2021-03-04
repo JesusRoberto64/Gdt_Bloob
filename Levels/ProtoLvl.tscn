@@ -87,7 +87,6 @@ void fragment(){
 	//COLOR.a = -value*3.0 +(value2*0.2);
 	COLOR.a = value*intence; // max value 2.2
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = SubResource( 9 )
@@ -243,8 +242,6 @@ __meta__ = {
 game_save_class = ExtResource( 24 )
 
 [node name="Planc_P1" parent="PlayerHolder" instance=ExtResource( 1 )]
-
-[node name="Hazard" type="Node2D" parent="."]
 
 [node name="Zones" type="Node2D" parent="."]
 
@@ -589,14 +586,14 @@ position = Vector2( 1813.74, 4727.53 )
 [node name="CollisionPolygon2D" parent="Lock&kKey/Wall_poly2" index="0"]
 polygon = PoolVector2Array( 51.8341, 195.599, -45.6809, 194.41, -44.4146, -68.751, 61.3478, -64.8374, 49.5327, 24.0068, -6.35999, 22.8179, -12.3059, 92.981, 51.9111, 89.4136 )
 
+[node name="Hazard" type="Node2D" parent="."]
+
+[node name="Health" type="Node2D" parent="."]
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 21 )
 volume_db = -31.515
 autoplay = true
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran"]
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
-
-[connection signal="focus_Cam" from="PlayerHolder/Planc_P1" to="Screens/ParallaxBackground/Gaussian" method="focus"]
 [connection signal="body_entered" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_entered"]
 [connection signal="body_exited" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_exited"]
 [connection signal="body_entered" from="Zones/Demo_Loader02/Detector" to="Zones/Demo_Loader02" method="_on_Detector_body_entered"]
@@ -605,7 +602,6 @@ autoplay = true
 [connection signal="body_exited" from="Zones/Demo_Loader03/Detector" to="Zones/Demo_Loader03" method="_on_Detector_body_exited"]
 [connection signal="body_entered" from="Zones/Demo_Loader04/Detector" to="Zones/Demo_Loader04" method="_on_Detector_body_entered"]
 [connection signal="body_exited" from="Zones/Demo_Loader04/Detector" to="Zones/Demo_Loader04" method="_on_Detector_body_exited"]
-
 [connection signal="Transition" from="EventGame /Door " to="Screens/SceneManager" method="start_tran"]
 
 [editable path="WallsPolygon/Wall_poly3"]
