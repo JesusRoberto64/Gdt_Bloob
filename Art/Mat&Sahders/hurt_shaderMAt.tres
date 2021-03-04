@@ -1,0 +1,53 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float intence = 0.0;
+
+float random (in vec2 st) {
+    return fract(sin(dot(st.xy,vec2(12.9898,78.233)))* 43758.5453123);
+}
+
+float noise (in vec2 st) {
+    vec2 i = floor(st);
+    vec2 f = fract(st);
+
+    // Four corners in 2D of a tile
+    float a = random(i);
+    float b = random(i + vec2(1.0, 0.0));
+    float c = random(i + vec2(0.0, 1.0));
+    float d = random(i + vec2(1.0, 1.0));
+
+    // Smooth Interpolation
+
+    // Cubic Hermine Curve.  Same as SmoothStep()
+    vec2 u = f*f*(3.0-2.0*f);
+    // u = smoothstep(0.,1.,f);
+
+    // Mix 4 coorners percentages
+    return mix(a, b, u.x) +
+            (c - a)* u.y * (1.0 - u.x) +
+            (d - b) * u.x * u.y;
+}
+
+float central_noise(vec2 coord) {
+	vec2 diff = coord - vec2(0.5);
+	return sqrt( diff.x* diff.x  + diff.y * diff.y ); 
+	}
+	
+
+void fragment(){
+	vec2 uv_coord = UV *1.0;
+	float value = central_noise(uv_coord);
+	
+	float noise_val = noise(FRAGCOORD.xy*0.1);
+	
+	COLOR.a = value*intence; // max value 2.2
+	//COLOR.a = noise_val;
+	COLOR.a = mix(value*intence,noise_val*2.0,0.02);
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/intence = 0.4

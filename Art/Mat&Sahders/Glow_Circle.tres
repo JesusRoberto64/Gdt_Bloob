@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform float glow : hint_range(-1.0,0.5);
+
+void fragment(){
+	vec2 uv = UV;
+	float neg = length(uv-0.5);
+	float v = glow/length(uv-0.5) + neg*-3.0; // aqui ´pas al intensidad 
+	
+	float rest = length(UV-0.5);
+	
+	COLOR = vec4(vec3(1.0),mix(v*0.8, 0.1/rest,0.46));
+	
+	if (COLOR.a < 0.000001){
+		discard;
+	}
+} "
+
+[resource]
+shader = SubResource( 1 )
+shader_param/glow = 0.5

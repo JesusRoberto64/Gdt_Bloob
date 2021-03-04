@@ -10,15 +10,63 @@ var is_stoped = false
 onready var prev_camera_center = get_camera_screen_center()
 
 onready var timer = $Timer
-
 onready var planc = get_parent()
-
 var can_move = false
 
+# shaking camera 
+var is_shaking = false
+var shake_amnt = 0.5
+var time_Shake = 0.0
+var time_Shake_Max = 0.5
+
+# Animation camera 
+onready var anim_cam 
+var is_cinematic = false 
+
+# move camera 
+var move_Point = Vector2.ZERO
+var cur_anim: String = ""
+# focus brute force
+var can_focus = false
+
+func _ready():
+	anim_cam = $AnimationPlayer
+	
+	var dir = Directory.new()
+	if not dir.dir_exists("res://saves/"):
+		print("ERROR loading in camera")
+		pass
+	
+	var status_save = load("res://saves/save_01.tres")
+	
+	if status_save.get("first_Time") == true:
+		#is_cinematic = true
+		#anim_cam.play("LevelsIntro_Demo")
+		state = CAM_STATE.CENTERED
+		planc.cur_state = planc.STATE.PUPPET
+		pass
+	else:
+		can_focus = true # FUERZA BRUTA 
+		get_parent().find_node("HurtRect2").hide()
+		pass
+	
+#	if is_cinematic:
+#		anim_cam.play("LevelsIntro_Demo")
+#		state = CAM_STATE.CINEMATIC
+#		planc.cur_state = planc.STATE.PUPPET
+#		pass
+	
+
 func _process(delta):
+	##FUERZA BRUTA
+	if can_focus:
+		planc.emit_signal("focus_Cam")
+		can_focus = false
 	
 	##imputs 
 	if Input.is_action_pressed("ui_right") || Input.is_action_pressed("ui_left"):
+		if state == CAM_STATE.CINEMATIC:
+			return
 		timer.start()
 		can_move = true
 	else:
@@ -31,6 +79,10 @@ func _process(delta):
 	elif Input.is_action_pressed("ZoomOut"):
 		zoom.x -= 1*delta
 		zoom.y -= 1*delta
+	
+	if Input.is_action_pressed("grow"):
+		#is_shaking = true
+		pass
 	
 
 func _physics_process(delta):
@@ -74,20 +126,44 @@ func _physics_process(delta):
 			
 			timer.stop()
 			drag_margin_h_enabled = true
+			
+			if is_shaking:
+				#shakig(delta)
+				state = CAM_STATE.MOVING
+			
+			
 			pass
 		CAM_STATE.CINEMATIC:
-			return
+			
+			global_position = lerp(global_position,move_Point,0.1)
+			timer.start()
+			
+			if global_position.distance_to(move_Point) <= 0.01:
+				#is_cinematic = false
+				#state = CAM_STATE.STOP
+				#planc.cur_state = planc.STATE.MOVING
+				#"LevelsIntro_Demo"
+				
+				cinematic(cur_anim)
+			else:
+				planc.emit_signal("focus_Cam")
+			
 			pass
 	
-	
-	var cam_pos = planc.findCentroid()
-	cam_pos.x = stepify(cam_pos.x,1)
-	cam_pos.y = stepify(cam_pos.y,1)
-	position = cam_pos 
-	#print(position, " form planc")
+	if !is_cinematic:
+		var cam_pos = planc.findCentroid()
+		cam_pos.x = stepify(cam_pos.x,1)
+		cam_pos.y = stepify(cam_pos.y,1)
+		position = cam_pos 
+		#print(position, " form planc")
 	
 	prev_camera_center = get_camera_screen_center()
+	
+	if is_shaking:
+		shakig(delta,100)
+	
 	pass
+
 
 func direction_facing()-> bool:
 	#var new_direction = sign(position.x - prev_camera_pos.x)
@@ -105,3 +181,37 @@ func _on_Timer_timeout():
 	#print("movend")
 	state = CAM_STATE.CENTERED
 	pass 
+
+func shakig(delta,amnt):
+	var _amnt = amnt
+	position.x += rand_range(0,shake_amnt*_amnt)
+	position.y += rand_range(0,shake_amnt*_amnt)
+	
+	time_Shake += delta
+	if time_Shake > time_Shake_Max:
+		is_shaking = false
+		time_Shake = 0.0
+	pass
+
+func cinematic_off():
+	state = CAM_STATE.MOVING
+	planc.cur_state = planc.STATE.MOVING
+	is_cinematic = false
+
+func cinematic(play_anim: String):
+	state = CAM_STATE.CINEMATIC
+	planc.cur_state = planc.STATE.PUPPET
+	anim_cam.play(play_anim)
+	pass
+
+func move_cam(pos: Vector2):
+	state = CAM_STATE.CINEMATIC
+	is_cinematic =  true
+	planc.cur_state = planc.STATE.PUPPET
+	move_Point = pos
+	timer.stop()
+	pass
+
+
+
+

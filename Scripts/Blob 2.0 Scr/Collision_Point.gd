@@ -5,6 +5,7 @@ signal area_size(body)
 signal hurt
 signal enter_door
 
+
 onready var planc = get_parent()
 var is_hurt = false
 onready var timer = $Timer
@@ -21,11 +22,9 @@ func _ready():
 	add_to_group("Collision")
 	pass
 
-func _process(delta):
+func _process(_delta):
 	#print(planc.radius)
 	var exponrntial = planc.radius*factor 
-	
-	
 	if planc.radius <= 25:
 		push = 0.5
 	else:
@@ -33,7 +32,7 @@ func _process(delta):
 	#print(push)
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		#collision.collider.apply_central_impulse(-collision.normal*push)

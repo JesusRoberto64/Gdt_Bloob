@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Resourse_Dat.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+player_pos = Vector2( 13141.1, 10196.1 )
+hours = 196.385
+Asteros_limit = 41
+red_Shield = false
+first_Time = false
+Demo_data = {
+"1_Door_open": false,
+"2_Door_open": false,
+"Astero++_00": false,
+"Astero++_01": true,
+"Boss_defeated": false,
+"cinema_boss": true,
+"cinema_boss_defeted": true,
+"cinema_intro": false,
+"is_Shield": true,
+"key1_used": false,
+"key2_used": false
+}

@@ -15,7 +15,7 @@ func _ready():
 	
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if one_shot:
 		if !deactivate:
 			life_instance()

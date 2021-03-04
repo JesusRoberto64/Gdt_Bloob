@@ -9,10 +9,13 @@ enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
 
 var cur_state = STATE.MOVING
 
-var points = 11 # 12 maximo
-export var radius = 17.0 # 
-var circunferenceMultiplier = 0.2
+## limits for radius 
+var max_asteros = 76.0 # el veradero MAximo
+var min_asteros = 19.0#old 14 
 
+var points = 11 # 12 maximo
+export var radius: float = 19.0 # put the minimun
+var circunferenceMultiplier = 0.2
 var area = radius * radius * PI
 var circunference = radius *2.0* PI * circunferenceMultiplier
 var length =  circunference *1.15 / float(points)
@@ -69,6 +72,12 @@ onready var area_enemies = $Area2D
 # UV set
 var is_uv_set = false
 
+#Game Feel 
+onready var hurt_pause = get_tree().get_nodes_in_group("Pause")[0]
+
+# focus cam 
+signal focus_Cam
+
 func verletIntegrate(i):
 	var temp = blob[i].position
 	#var vel =  (blob[i].position - blobOld[i])
@@ -93,6 +102,8 @@ func _ready():
 	
 	# debugger abilities
 	#unlock_ability("push_Hazard")
+	
+	
 	
 	pass 
 
@@ -180,21 +191,25 @@ func _process(_delta):
 		cur_move_vec += Vector2.RIGHT
 		item_direct = Vector2.LEFT #the opsite
 		is_Stop = false
+		#cur_state = STATE.MOVING
 		pass
 	elif Input.is_action_pressed("ui_left"):
 		cur_move_vec += Vector2.LEFT
 		item_direct = Vector2.RIGHT #the opsite
 		is_Stop = false
+		#cur_state = STATE.MOVING
 		pass
 	if Input.is_action_pressed("ui_up"):
 		cur_move_vec += Vector2.UP
 		item_direct = Vector2.DOWN #the opsite
 		is_Stop = false
+		#cur_state = STATE.MOVING
 		pass
 	elif Input.is_action_pressed("ui_down"):
 		cur_move_vec += Vector2.DOWN
 		item_direct = Vector2.UP #the opsite
 		is_Stop = false
+		#cur_state = STATE.MOVING
 		pass
 	
 	# State machine logic.
@@ -203,6 +218,7 @@ func _process(_delta):
 	
 #	if cur_move_vec == Vector2.ZERO:
 #		cur_state = STATE.IDLE
+#		pass
 	
 	move_vec = vec_movement(cur_move_vec)
 	
@@ -212,7 +228,6 @@ func _process(_delta):
 		#cam_cent.x = round(cam_cent.x)
 		#cam_cent.y = round(cam_cent.y)
 		#camera.position = cam_cent
-		#
 	else:
 		camera.state = camera.CAM_STATE.CINEMATIC
 		pass
@@ -232,7 +247,7 @@ func _process(_delta):
 			turbo_Realace.start()
 			pass
 		#max_speed = 2500
-		if radius > 15:
+		if radius > min_asteros + 1:
 			move_accel = 1200#1800
 		else:
 			#move_accel = 900
@@ -245,6 +260,8 @@ func _process(_delta):
 		#grow()
 #		for i in blob.size():
 #			blob[i].can_push = true
+		#camera.state = camera.CAM_STATE.CINEMATIC
+		#cur_state = STATE.PUPPET
 		pass
 	
 	pass
@@ -352,13 +369,13 @@ func vec_movement(move_vec):
 
 func shink():
 	
-	if radius < 15:
+	if radius < min_asteros+1:
 		#print("regreso")
 		#print(radius, "en return")
 		return
 	
 	radius -= growth_mult
-	radius = clamp(radius,14,76)
+	radius = clamp(radius,min_asteros,max_asteros)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
@@ -370,7 +387,10 @@ func shink():
 	item_expulse_inst.can_collide = false
 	item_expulse_inst.direction = item_direct
 	if cur_state == STATE.HURT:
+		hurt_pause.is_hurted = true
 		get_parent().call_deferred("add_child",item_expulse_inst)
+		camera.is_shaking = true
+		
 		return
 		pass
 	get_parent().add_child(item_expulse_inst)
@@ -389,18 +409,18 @@ func grow(body):
 		bodies_health.resize(3)
 	
 	radius += growth_mult
-	radius = clamp(radius,14,76)
+	radius = clamp(radius,min_asteros,max_asteros)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
 	
 	emit_signal("hud_sync",radius)
-	
+	Graphics_ctrl.show_glow()
 	pass
 
 func grow_debug():
 	radius += growth_mult
-	radius = clamp(radius,14,76)
+	radius = clamp(radius,min_asteros,max_asteros)
 	area = radius * radius * PI
 	circunference = radius * 2.0 * PI * circunferenceMultiplier
 	length = circunference * 1.15 / float(points)
@@ -413,7 +433,7 @@ func hurt():
 		return
 	
 	cur_state = STATE.HURT
-	if radius <= 14:
+	if radius <= min_asteros:
 		emit_signal("dead")
 		set_visible(false)
 		cur_state = STATE.DYING
@@ -421,6 +441,7 @@ func hurt():
 	shink()
 	shink()
 	#shink()
+	
 	State_timer.start()
 
 func _on_StateTimer_timeout():
@@ -436,7 +457,6 @@ func enter_door():
 	set_visible(false)
 	pass
 
-
 func _on_Turbo_timeout():
 	is_Turbo = true
 	pass # Replace with function body.
@@ -448,3 +468,11 @@ func unlock_ability(abilty: String):
 				blob[i].can_push = true
 		Graphics_ctrl.line.material.set("shader_param/color",Vector3(1.0,0.8,0.6))
 		pass
+	
+	if abilty == "Asteropp":
+		max_asteros += 3
+		health_var.max_asteros = max_asteros
+		health_var.update()
+		pass
+	
+

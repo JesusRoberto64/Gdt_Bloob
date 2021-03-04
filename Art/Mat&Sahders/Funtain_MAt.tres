@@ -1,0 +1,115 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 trasparent : hint_color;
+uniform vec4 inner_color : hint_color;
+
+uniform vec2 center = vec2(0.5,0.4);
+uniform float outer_trehshold = 0.15;
+
+uniform int OCTAVES = 2;
+
+float rand(vec2 coord){
+	return fract(sin(dot(coord, vec2(12.9898, 78.233)))* 43758.5453123);
+}
+
+vec2 rand2( vec2 coord ) {
+	// prevents randomness decreasing from coordinates too large
+	coord = mod(coord, 10000.0);
+	// returns \"random\" vec2 with x and y between 0 and 1
+    return fract(sin( vec2( dot(coord,vec2(127.1,311.7)), dot(coord,vec2(269.5,183.3)) ) ) * 43758.5453);
+}
+
+float noise(vec2 coord){
+	
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+	
+	float min_dist = 99999.0;
+	// going through the current tile and the tiles surrounding it
+	for(float x = -25.0; x <= 1.0; x++) {
+		for(float y = -5.0; y <= 5.0; y++) {
+			
+			// generate a random point in each tile,
+			// but also account for whether it's a farther, neighbouring tile
+			vec2 node = rand2(i + vec2(x, y)) + vec2(x, y);
+			
+			// check for distance to the point in that tile
+			// decide whether it's the minimum
+			float dist = sqrt((f - node).x * (f - node).x + (f - node).y * (f - node).y);
+			min_dist = min(min_dist, dist);
+		}
+	}
+	return min_dist;
+}
+
+float fbm(vec2 coord){
+	float value = 0.0;
+	float scale = 0.5;
+
+	for(int i = 0; i < OCTAVES; i++){
+		value += noise(coord) * scale;
+		coord *= 5.0;
+		scale *= 0.6;
+	}
+	return value;
+}
+
+float overlay(float base, float top) {
+	if (base < 0.5) {
+		return 2.0 * base * top;
+	} else {
+		return 1.0 - 2.0 * (1.0 - base) * (1.0 - top);
+	}
+}
+
+float egg_shape(vec2 coord, float radius){
+	vec2 diff = abs(coord - center);
+	
+	// strecht like an egg logic here...
+	
+	float dist = sqrt(diff.x * diff.x + diff.y * diff.y)/ radius;
+	float value = sqrt(1.0 - dist*dist);
+	return clamp(value,0.0,1.0);
+}
+
+void fragment(){
+	
+	//COLOR = vec4(vec3(rand(UV + 1.0)),1.0);
+	// coodenates custom 
+	vec2 coord = UV *8.0;
+	vec2 fbmcoord = coord / 6.0;
+	
+	float egg_s = egg_shape(UV,0.40);
+	
+	//noises 
+	float noise1 = 1.1/noise(coord + vec2(TIME *-0.1 , TIME*-2.0));
+	float noise2 = noise(coord + vec2(TIME *-0.3 , TIME*-4.0));
+	float conbined_noise = (noise1 + noise2)/3.0;
+	
+	float fbm_noise = fbm(fbmcoord + vec2(0.0,TIME*-0.3)); 
+	fbm_noise = 0.5/overlay(fbm_noise,UV.y);
+	
+	float everything_combined = conbined_noise * fbm_noise * egg_s;
+	
+	if (everything_combined < outer_trehshold + 1.0){
+		COLOR = trasparent;
+	}
+	
+	COLOR.a = egg_s*1.0;
+	if (COLOR.r < 0.05){
+		discard;
+	}
+	//COLOR = vec4(vec3(everything_combined),egg_s);
+}
+ "
+
+[resource]
+shader = SubResource( 1 )
+shader_param/trasparent = null
+shader_param/inner_color = null
+shader_param/center = Vector2( 0.5, 0.4 )
+shader_param/outer_trehshold = 0.15
+shader_param/OCTAVES = 2

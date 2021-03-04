@@ -14,7 +14,7 @@ func _draw():
 		col = Color(1.0,0.0,0.5,1.0)
 		#print("eta arigid")
 		pass
-	draw_circle(Vector2.ZERO,15,col)
+	draw_circle(Vector2.ZERO,6,col)
 	
 	pass
 

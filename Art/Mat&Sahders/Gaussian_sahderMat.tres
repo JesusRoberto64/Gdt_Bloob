@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float amt:hint_range(0.0, 3.5);
+
+void fragment(){
+	
+	vec4 color = texture(SCREEN_TEXTURE,SCREEN_UV,amt);
+	COLOR = color;
+	
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/amt = 3.054
