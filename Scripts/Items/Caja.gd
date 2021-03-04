@@ -2,15 +2,35 @@ extends RigidBody2D
 
 export(bool) var is_key = false
 
+
+var hazard = preload("res://Prefabs/Enemies/Hazard.tscn")
+var health = preload("res://Prefabs/Blob 2.0/Health.tscn")
+var orb
+var orbParent
+
+onready var hazardParent = get_node("../../../Hazard")
+onready var healthParent = get_node("../../../Health")
 onready var collision_pol = $CollisionPolygon2D
 onready var graphic_pol = $Polygon2D
 onready var path = $Path2D
 onready var line = $Line2D
 export(bool) var is_curved
+var rng
 
 export(float) var splineLength = 15#12.0
+export var amountOfOrbsToExpulse = 5
 
 func _ready():
+	rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var r = rng.randi_range(0,1)
+	if r == 0:
+		orb = hazard
+		orbParent = hazardParent
+	else:
+		orb = health
+		orbParent = healthParent
+
 	add_to_group("Push")
 	if is_key:
 		add_to_group("keyes")
@@ -77,4 +97,25 @@ func _draw():
 	draw_polygon(drawPoints,[Color(0.5,0.5,1.0,1.0)])
 	pass
 
-
+func destroyOnCollision():
+	#This function gets called when the boss 1 hits the box.
+	#It destroys the box and generates hazards
+	
+	
+	for _i in range(amountOfOrbsToExpulse):
+		rng.randomize()
+		var h = orb.instance()
+		h.mode = MODE_RIGID
+		h.set_global_position(self.get_global_position())
+		h.linear_damp = 2
+		h.mass = 2
+		if orb == health:
+			h.explosion = true
+			h.is_life_infite = true
+		h.apply_central_impulse(Vector2( rng.randf_range(-1,1),rng.randf_range(-1,1) ) * 1200 )
+		orbParent.add_child(h)
+		
+		pass
+	get_parent().hasBox = false;
+	queue_free()
+	pass

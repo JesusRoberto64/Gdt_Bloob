@@ -60,7 +60,8 @@ func _on_Area2D_body_entered(body):
 			body.update()
 			body.life_timer.start()
 		pass
-	
+	if body.is_in_group("InstaKill"):
+		emit_signal("dead")
 	if body.is_in_group("Door"):
 		
 		emit_signal("enter_door")

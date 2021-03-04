@@ -7,6 +7,7 @@ export var direction = Vector2.ZERO
 var vanish = false 
 var life_time = 5.0
 onready var lifeTimer = $lifeTimer
+var explosion = false
 
 var time_to_collide = 0.5
 var aplied_force = 800
@@ -45,7 +46,8 @@ func _physics_process(delta):
 		apply_central_impulse(direction.normalized()*aplied_force*delta)
 		pass
 	else:
-		linear_velocity = lerp(linear_velocity,Vector2.ZERO,0.1)
+		if !explosion:
+			linear_velocity = lerp(linear_velocity,Vector2.ZERO,0.1)
 		pass
 	
 	if vanish:
