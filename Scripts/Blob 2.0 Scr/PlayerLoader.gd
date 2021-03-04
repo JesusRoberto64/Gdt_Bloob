@@ -16,7 +16,7 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_released("Save"):
-		#save_status()
+		save_status()
 		pass
 	
 	play_time += delta
@@ -25,6 +25,14 @@ func _process(delta):
 
 func save_status():
 	var new_save = game_save_class.new()
+	# checking varibles form previus save
+	var previous_save = load("res://saves/save_01.tres")
+	if not verify_save(previous_save):
+		print("Error checking previous saved")
+		return false
+	
+	new_save = previous_save
+	
 	new_save.player_pos = Plank_pos.global_position
 	new_save.hours = play_time
 	new_save.Asteros_limit = Plank_status.max_asteros

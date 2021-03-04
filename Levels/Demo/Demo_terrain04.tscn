@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Enviroment/wall_purple.tres" type="TileSet" id=1]
+[ext_resource path="res://Prefabs/Blob 2.0/SavePoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Items/Item_Dummie.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Blob 2.0/Cam_control.tscn" type="PackedScene" id=4]
 
 [node name="Demo_terrain04" type="Node2D"]
 
@@ -14,3 +17,11 @@ tile_data = PoolIntArray( 2752585, 0, 0, 2752586, 1, 0, 2752587, 1, 0, 2752588, 
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="SavePoint" parent="." instance=ExtResource( 2 )]
+position = Vector2( 13192.8, 10176.5 )
+
+[node name="Item_Dummie" parent="." instance=ExtResource( 3 )]
+position = Vector2( 14639.3, 10005.6 )
+
+[node name="Cam_control" parent="Item_Dummie" instance=ExtResource( 4 )]

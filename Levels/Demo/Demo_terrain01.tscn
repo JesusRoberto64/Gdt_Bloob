@@ -67,6 +67,7 @@ item = "cinema_intro"
 
 [node name="Cam_control" parent="Item_Dummie2" instance=ExtResource( 1 )]
 position = Vector2( 13258.8, 1630.12 )
+anim_string = "LevelsIntro_Demo"
 
 [node name="Item_Dummie" parent="." instance=ExtResource( 7 )]
 item = "Astero++_00"

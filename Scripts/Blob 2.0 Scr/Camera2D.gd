@@ -25,7 +25,7 @@ var is_cinematic = false
 
 # move camera 
 var move_Point = Vector2.ZERO
-
+var cur_anim: String = ""
 # focus brute force
 var can_focus = false
 
@@ -81,7 +81,8 @@ func _process(delta):
 		zoom.y -= 1*delta
 	
 	if Input.is_action_pressed("grow"):
-		is_shaking = true
+		#is_shaking = true
+		pass
 	
 
 func _physics_process(delta):
@@ -141,7 +142,9 @@ func _physics_process(delta):
 				#is_cinematic = false
 				#state = CAM_STATE.STOP
 				#planc.cur_state = planc.STATE.MOVING
-				cinematic("LevelsIntro_Demo")
+				#"LevelsIntro_Demo"
+				
+				cinematic(cur_anim)
 			else:
 				planc.emit_signal("focus_Cam")
 			

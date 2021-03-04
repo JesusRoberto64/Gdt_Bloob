@@ -19,7 +19,14 @@ func _ready():
 
 func save_status():
 	var new_save = game_save_class.new()
+	#Checking previous save
+	var previous_save = load("res://saves/save_01.tres")
+	if not verify_save(previous_save):
+		print("Error checking previous saved")
+		return false
 	
+	new_save = previous_save
+	new_save.first_Time = false
 	#guardia 
 	if !new_save.Demo_data.has(item):
 		print("no data found item")
@@ -32,7 +39,7 @@ func save_status():
 	if not dir.dir_exists("res://saves/"):
 		dir.make_dir_recursive("res://saves/")
 	
-	ResourceSaver.save("res://saves/save_level_01.tres",new_save)
+	ResourceSaver.save("res://saves/save_01.tres",new_save)
 	print("salvo ")
 	emit_signal("is_saving")
 	pass
@@ -44,7 +51,7 @@ func load_status():
 		return false
 		pass
 	
-	var status_save = load("res://saves/save_level_01.tres")
+	var status_save = load("res://saves/save_01.tres")
 	if not verify_save(status_save):
 		return false
 	#Guardia 
