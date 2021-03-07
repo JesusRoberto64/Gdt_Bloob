@@ -17,7 +17,7 @@ Demo_data = {
 "Boss_defeated": false,
 "cinema_boss": true,
 "cinema_boss_defeted": true,
-"cinema_intro": false,
+"cinema_intro": true,
 "is_Shield": true,
 "key1_used": false,
 "key2_used": false

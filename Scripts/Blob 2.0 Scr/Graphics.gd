@@ -137,6 +137,7 @@ func _process(delta):
 	pass
 
 func show_glow():
+	glow.show()
 	var exponential = planc.radius*factor
 	glow_size = pow(1.3,exponential)
 	glow_size = clamp(glow_size,2.8,6.2)

@@ -234,7 +234,7 @@ _data = {
 [node name="ProtoLvl" type="Node2D"]
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 17658.9, 2086.31 )
+position = Vector2( 17654.1, 2092.79 )
 script = ExtResource( 23 )
 __meta__ = {
 "_edit_group_": true
@@ -594,6 +594,9 @@ polygon = PoolVector2Array( 51.8341, 195.599, -45.6809, 194.41, -44.4146, -68.75
 stream = ExtResource( 21 )
 volume_db = -31.515
 autoplay = true
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran"]
+[connection signal="focus_Cam" from="PlayerHolder/Planc_P1" to="Screens/ParallaxBackground/Gaussian" method="focus"]
 [connection signal="body_entered" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_entered"]
 [connection signal="body_exited" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_exited"]
 [connection signal="body_entered" from="Zones/Demo_Loader02/Detector" to="Zones/Demo_Loader02" method="_on_Detector_body_entered"]

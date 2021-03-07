@@ -13,13 +13,13 @@ void fragment(){
 	COLOR = texture(TEXTURE,UV);
 	
 	
-	COLOR *= 1.8;
+	COLOR *= 1.2;
 }"
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
 
-[sub_resource type="ViewportTexture" id=4]
+[sub_resource type="ViewportTexture" id=6]
 viewport_path = NodePath("Base/Kinematic Body/Viewport")
 
 [sub_resource type="CapsuleShape2D" id=5]
@@ -55,7 +55,7 @@ render_target_v_flip = true
 material = SubResource( 3 )
 position = Vector2( 0.667604, 50.9555 )
 scale = Vector2( 0.753489, 0.753489 )
-texture = SubResource( 4 )
+texture = SubResource( 6 )
 
 [node name="Area2D" type="Area2D" parent="Base"]
 rotation = 1.5708

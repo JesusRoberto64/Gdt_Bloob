@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Enviroment/wall_purple.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Blob 2.0/SavePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Items/Item_Dummie.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Blob 2.0/Cam_control.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Enemies/Full Enemies/Rotifera_full.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 12422.4, 9863.26, 0, 0, 0, 0, 12736, 9752.79, 0, 0, 0, 0, 12903.5, 9745.66, 0, 0, 0, 0, 12982.4, 9744.16, 0, 0, 0, 0, 13092.7, 9739.92, 0, 0, 0, 0, 13402.4, 9731.4 )
+}
 
 [node name="Demo_terrain04" type="Node2D"]
 
@@ -23,5 +30,19 @@ position = Vector2( 13192.8, 10176.5 )
 
 [node name="Item_Dummie" parent="." instance=ExtResource( 3 )]
 position = Vector2( 14639.3, 10005.6 )
+item = "cinema_boss"
 
 [node name="Cam_control" parent="Item_Dummie" instance=ExtResource( 4 )]
+anim_string = "LevelsDemo_boss_intro"
+
+[node name="Path Item" parent="." instance=ExtResource( 5 )]
+
+[node name="Path2D" parent="Path Item" index="0"]
+curve = SubResource( 1 )
+
+[node name="Boss" type="Node2D" parent="."]
+position = Vector2( 15606.3, 10074.5 )
+
+[node name="Path2D" parent="Boss" instance=ExtResource( 6 )]
+
+[editable path="Path Item"]

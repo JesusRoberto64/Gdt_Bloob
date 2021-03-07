@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Planc_P1.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Camera2D.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Art/Mat&Sahders/hurt_shaderMAt.tres" type="Material" id=8]
 [ext_resource path="res://Art/Mat&Sahders/Glow_Circle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Levels/Demo/Cam_anim/LevelsIntro_Demo.tres" type="Animation" id=10]
+[ext_resource path="res://Levels/Demo/Cam_anim/LevelsDemo_boss_intro.tres" type="Animation" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -124,7 +125,6 @@ void fragment() {
 	//COLOR  = vec4(body_color,val*15.0);
 	//COLOR = vec4(body_color,value*4.5);
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
@@ -150,7 +150,6 @@ void fragment() {
 	COLOR  = vec4(color,value);
 	
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = SubResource( 5 )
@@ -168,6 +167,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 0.603922, 0.929412, 0.964706, 0 ), Color( 0.603922, 0.929412, 0.964706, 1 ), Color( 0.603922, 0.929412, 0.964706, 1 ), Color( 0.603922, 0.929412, 0.964706, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Glow_Circle")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
 }
 
 [sub_resource type="DynamicFont" id=8]
@@ -237,7 +250,6 @@ curve = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.2, 0.2 )
 process_mode = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -249,6 +261,7 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
 autoplay = "Normal"
+anims/LevelsDemo_boss_intro = ExtResource( 11 )
 anims/LevelsIntro_Demo = ExtResource( 10 )
 anims/Normal = SubResource( 2 )
 
@@ -259,6 +272,8 @@ script = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="Glow_Circle" parent="Graphics" instance=ExtResource( 9 )]
+visible = false
+modulate = Color( 0.603922, 0.929412, 0.964706, 0 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Graphics"]
 color = Color( 0, 1, 0, 1 )
