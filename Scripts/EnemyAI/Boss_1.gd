@@ -1,5 +1,5 @@
 extends Node2D
-enum Movement_Type{CLOCKWISE, ANTICLOCKWISE, INSIDE, OUTSIDE}
+enum Movement_Type{CLOCKWISE, ANTICLOCKWISE, INSIDE, OUTSIDE,PUPPET}
 
 onready var points = get_parent().get_parent()
 onready var follow = self.get_parent() #pathfollow2D
@@ -28,6 +28,15 @@ export var orbsPullForce = 20
 export var health = 100
 export var damagePerOrb = 5
 
+# intro animation boss
+onready var anim = $"Base/Kinematic Body/AnimationPlayer"
+
+# system when animation intro is ended 
+var is_ready = false
+var is_defeated = false
+signal defeated 
+
+
 func _ready():
 	
 	if points.curve == null:
@@ -41,14 +50,21 @@ func _ready():
 	moveTimer.set_wait_time(moveTime)
 	pullTimer.set_wait_time(pullTime)
 	stunTimer.set_wait_time(stunedTime)
-	moveTimer.start()
+	#moveTimer.start()
 	pass
 
 func _process(delta):
+	if Input.is_action_just_pressed("grow"):
+		is_defeated = true
+		puppet_mode()
+		pass
 	
-	Move(delta)
 	pass
-	
+
+func _physics_process(delta):
+	if is_ready:
+		Move(delta)
+	pass
 
 func Move(delta):
 	if movement_Type == Movement_Type.CLOCKWISE or movement_Type == Movement_Type.ANTICLOCKWISE:
@@ -60,7 +76,6 @@ func Move(delta):
 		if movement_Type == Movement_Type.INSIDE:
 			#Move to Inside
 			pos = centerPosition
-
 		elif movement_Type == Movement_Type.OUTSIDE:
 			#Move to Outside
 			pos = startPosition
@@ -132,7 +147,9 @@ func _on_CollisionArea_body_entered(body):
 		if health <= 0:
 			#Derrota boss
 			body.set_applied_force(Vector2.ZERO)
-			self.queue_free()
+			is_defeated = true
+			puppet_mode()
+			#self.queue_free()
 
 	pass # Replace with function body.
 
@@ -178,8 +195,34 @@ func ChangeDirection(var moveType):
 			kBody.remove_from_group("InstaKill")
 			pass
 
+func puppet_mode():
+	# aimation dead 
+	is_ready = false
+	if is_defeated:
+		emit_signal("defeated")
+		#disable all cossions 
+		kBody.set_collision_mask_bit ( 7, false ) 
+		colArea.set_collision_mask_bit ( 7, false )
+		kBody.set_collision_mask_bit ( 4, false ) 
+		colArea.set_collision_mask_bit ( 4, false )
+		# play animation defeated
+		
+		pass
+	
+	pass
 
+func puppet_mode_off():
+	is_ready = true
+	moveTimer.start()
+	pass
 
+func taunt():
+	#play animation taunt
+	pass
+
+func patrol():
+	#play animation patrol
+	pass
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Player"):
@@ -198,3 +241,5 @@ func _on_Area2D_body_exited(body):
 		body.set_applied_force(Vector2.ZERO)
 		hazardOrbs.erase(body)
 	pass # Replace with function body.
+
+

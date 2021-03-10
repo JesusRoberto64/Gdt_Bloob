@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Planc_P1.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Camera2D.gd" type="Script" id=2]
@@ -15,6 +15,33 @@
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array(  )
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Hide_Bars"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../CanvasLayer/ColorRect:anchor_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.1, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../CanvasLayer/ColorRect2:anchor_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.9, 1.0 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -47,15 +74,57 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 3.8 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 3.8 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "get_focus"
+}, {
 "args": [  ],
 "method": "cinematic_off"
 } ]
 }
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Animation" id=3]
+resource_name = "Zoom_Norm_Bars"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../CanvasLayer/ColorRect:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../CanvasLayer/ColorRect2:anchor_top")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.9 ]
+}
+
+[sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
 uniform vec3 body_color = vec3(1,0.10,0.0);
@@ -126,14 +195,14 @@ void fragment() {
 	//COLOR = vec4(body_color,value*4.5);
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 shader_param/body_color = Vector3( 0.25, 0.58, 0.58 )
 shader_param/volume = 15.0
 shader_param/u_time = 0.5
 shader_param/back_color = Vector3( 1, 0, 0 )
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 
 uniform vec3 color = vec3(0.5,1.0,1.0);
@@ -151,11 +220,11 @@ void fragment() {
 	
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
 shader_param/color = Vector3( 0.5, 1, 1 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Glow_Circle:modulate")
 tracks/0/interp = 1
@@ -183,13 +252,13 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=9]
 size = 22
 outline_size = 1
 outline_color = Color( 0.0352941, 0.0235294, 0.0235294, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="Shader" id=9]
+[sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
 
 uniform float intence = 0.0;
@@ -237,11 +306,11 @@ void fragment(){
 	COLOR.a = mix(value*intence,noise_val*2.0,0.02);
 }"
 
-[sub_resource type="ShaderMaterial" id=10]
-shader = SubResource( 9 )
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
 shader_param/intence = 2.0
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=12]
 radius = 20.0
 
 [node name="Planc_P1" type="Node2D"]
@@ -261,9 +330,11 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
 autoplay = "Normal"
+anims/Hide_Bars = SubResource( 13 )
 anims/LevelsDemo_boss_intro = ExtResource( 11 )
 anims/LevelsIntro_Demo = ExtResource( 10 )
 anims/Normal = SubResource( 2 )
+anims/Zoom_Norm_Bars = SubResource( 3 )
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource( 3 )
@@ -279,12 +350,12 @@ modulate = Color( 0.603922, 0.929412, 0.964706, 0 )
 color = Color( 0, 1, 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="Graphics"]
-material = SubResource( 4 )
+material = SubResource( 5 )
 scale = Vector2( 5.5, 5.5 )
 texture = ExtResource( 7 )
 
 [node name="Line2D" type="Line2D" parent="Graphics"]
-material = SubResource( 6 )
+material = SubResource( 7 )
 z_index = -1
 default_color = Color( 0.4, 0.501961, 1, 0.192157 )
 texture_mode = 2
@@ -294,7 +365,7 @@ z_index = -2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
 playback_default_blend_time = 0.8
-anims/glow = SubResource( 7 )
+anims/glow = SubResource( 8 )
 
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -312,7 +383,7 @@ margin_left = 49.0
 margin_top = 149.0
 margin_right = 145.0
 margin_bottom = 178.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "Health: "
 script = ExtResource( 6 )
 __meta__ = {
@@ -333,7 +404,7 @@ __meta__ = {
 }
 
 [node name="HurtRect2" type="ColorRect" parent="CanvasLayer"]
-material = SubResource( 10 )
+material = SubResource( 11 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
@@ -364,7 +435,7 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="timeout" from="Turbo" to="." method="_on_Turbo_timeout"]

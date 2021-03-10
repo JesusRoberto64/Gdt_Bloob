@@ -1,8 +1,6 @@
 extends Node2D
 ##CODE BASE UNDER THE LICENSE
 ## MIT Copyright (c) 2020 Lynext
-## 
-
 
 #STATE MACHINE
 enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
@@ -73,7 +71,6 @@ onready var area_enemies = $Area2D
 var is_uv_set = false
 
 #Game Feel 
-
 onready var hurt_pause = get_tree().get_nodes_in_group("Pause")[0]
 
 # focus cam 
@@ -103,9 +100,6 @@ func _ready():
 	
 	# debugger abilities
 	#unlock_ability("push_Hazard")
-	
-	
-	
 	pass 
 
 func findCentroid():
@@ -234,10 +228,8 @@ func _process(_delta):
 		pass
 	# enemies detection 
 	area_enemies.position = findCentroid()
-	#print(area_enemies.position)
-	#print(position, "deberia")
-	#SHIRNK MECNIC  ================
 	
+	#SHIRNK MECNIC  ================
 	move_accel = 900
 	if Input.is_action_pressed("shrink"):
 		if is_Turbo:
@@ -332,8 +324,6 @@ func _physics_process(delta):
 			acumulatedDisplacements[i] = 0
 			pass
 		pass
-	
-	
 	updateSprite()
 	update()
 	pass
@@ -369,7 +359,6 @@ func vec_movement(move_vec):
 	pass
 
 func shink():
-	
 	if radius < min_asteros+1:
 		#print("regreso")
 		#print(radius, "en return")

@@ -1,6 +1,6 @@
 extends Area2D
 
-export var anim_string = "none anim" 
+export var anim_string = "" 
 
 onready var dummie = get_parent()
 

@@ -1,6 +1,6 @@
 extends Camera2D
 
-enum CAM_STATE {MOVING,CENTERED,STOP,CINEMATIC}
+enum CAM_STATE {MOVING,CENTERED,STOP,CINEMATIC,ONFRAME,START}
 var state = CAM_STATE.STOP
 var direction_x = 0
 var distance = 1.5#15
@@ -29,6 +29,9 @@ var cur_anim: String = ""
 # focus brute force
 var can_focus = false
 
+# Return to frame Planc
+var frame_Planc = true
+
 func _ready():
 	anim_cam = $AnimationPlayer
 	
@@ -48,6 +51,8 @@ func _ready():
 	else:
 		can_focus = true # FUERZA BRUTA 
 		get_parent().find_node("HurtRect2").hide()
+		state = CAM_STATE.START
+		planc.cur_state = planc.STATE.PUPPET
 		pass
 	
 #	if is_cinematic:
@@ -65,7 +70,7 @@ func _process(delta):
 	
 	##imputs 
 	if Input.is_action_pressed("ui_right") || Input.is_action_pressed("ui_left"):
-		if state == CAM_STATE.CINEMATIC:
+		if state == CAM_STATE.CINEMATIC or state == CAM_STATE.ONFRAME or state == CAM_STATE.START:
 			return
 		timer.start()
 		can_move = true
@@ -80,9 +85,6 @@ func _process(delta):
 		zoom.x -= 1*delta
 		zoom.y -= 1*delta
 	
-	if Input.is_action_pressed("grow"):
-		#is_shaking = true
-		pass
 	
 
 func _physics_process(delta):
@@ -139,16 +141,22 @@ func _physics_process(delta):
 			timer.start()
 			
 			if global_position.distance_to(move_Point) <= 0.01:
-				#is_cinematic = false
-				#state = CAM_STATE.STOP
-				#planc.cur_state = planc.STATE.MOVING
-				#"LevelsIntro_Demo"
 				
 				cinematic(cur_anim)
-			else:
-				planc.emit_signal("focus_Cam")
 			
 			pass
+		CAM_STATE.ONFRAME:
+			offset_h = 0.0
+			
+			timer.start()
+			if frame_Planc:
+				position = lerp(position,planc.findCentroid(),0.1)
+				if position.distance_to(planc.findCentroid()) <= 0.1:
+					frame_Planc = false
+					cinematic_off()
+			else:
+				global_position = lerp(global_position,move_Point,0.1)
+			
 	
 	if !is_cinematic:
 		var cam_pos = planc.findCentroid()
@@ -161,7 +169,6 @@ func _physics_process(delta):
 	
 	if is_shaking:
 		shakig(delta,100)
-	
 	pass
 
 
@@ -212,6 +219,20 @@ func move_cam(pos: Vector2):
 	timer.stop()
 	pass
 
+func frame_cam(pos: Vector2):
+	state = CAM_STATE.ONFRAME
+	is_cinematic =  true
+	planc.cur_state = planc.STATE.PUPPET
+	move_Point = pos
+	frame_Planc = false
+	timer.stop()
+	pass
 
+func get_focus():
+	planc.emit_signal("focus_Cam")
+	pass
 
+func zoom_ctrl():
+	
+	pass
 

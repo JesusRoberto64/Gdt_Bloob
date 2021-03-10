@@ -49,17 +49,18 @@ func _on_Area2D_body_entered(body):
 		emit_signal("area_size",body)
 	
 	if body.is_in_group("Hazard"):
-		#print("Touched Hazard")
-		emit_signal("hurt")
-		is_hurt = true
-		timer.start()
-		update()
-		#body.mode = 0 # kinematic
+		
 		if can_push and body.is_in_group("Push"):
 			body.call_deferred("set_mode",0)
 			body.update()
 			body.life_timer.start()
-		pass
+			return
+		
+		emit_signal("hurt")
+		is_hurt = true
+		timer.start()
+		update()
+		
 	if body.is_in_group("InstaKill"):
 		emit_signal("dead")
 	if body.is_in_group("Door"):

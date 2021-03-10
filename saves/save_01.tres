@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource( 1 )
-player_pos = Vector2( 13220, 10125.6 )
-hours = 332.711
+player_pos = Vector2( 15017.7, 10487.8 )
+hours = 355.327
 Asteros_limit = 41
 red_Shield = false
 first_Time = false
