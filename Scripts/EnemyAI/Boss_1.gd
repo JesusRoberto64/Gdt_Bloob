@@ -36,6 +36,8 @@ var is_ready = false
 var is_defeated = false
 signal defeated 
 
+# Animations Mesh
+onready var anim_mesh = $"Base/Kinematic Body/Viewport".find_node("AnimationPlayer")
 
 func _ready():
 	
@@ -105,7 +107,7 @@ func MoveInsideOutside(var pos, delta):
 			follow.set_offset(0)
 			base.set_rotation_degrees(0)
 			self.set_position(Vector2(100,0))
-			
+			anim_mesh.play("patrol_loop")
 			if moveTimer.is_stopped():
 				moveTimer.start()
 				pass
@@ -118,6 +120,7 @@ func PullActtion():
 		for orb in hazardOrbs:
 			var d = (get_global_transform().origin - orb.get_global_transform().origin).normalized()
 			orb.add_central_force(d*orbsPullForce) 
+	anim_mesh.play("prepare")
 	pass
 
 func _on_MoveTimer_timeout():
@@ -201,6 +204,9 @@ func puppet_mode():
 	if is_defeated:
 		emit_signal("defeated")
 		#disable all cossions 
+		playerPull = false
+		player.get_parent().gravity = Vector2.ZERO
+		kBody.set_collision_mask_bit ( 0, false ) 
 		kBody.set_collision_mask_bit ( 7, false ) 
 		colArea.set_collision_mask_bit ( 7, false )
 		kBody.set_collision_mask_bit ( 4, false ) 
@@ -216,13 +222,16 @@ func puppet_mode_off():
 	moveTimer.start()
 	pass
 
-func taunt():
-	#play animation taunt
+
+func taunt_anim():
+	anim_mesh.play("attack_loop")
 	pass
 
-func patrol():
-	#play animation patrol
+func patrol_anim():
+	anim_mesh.play("patrol_loop")
 	pass
+
+
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Player"):

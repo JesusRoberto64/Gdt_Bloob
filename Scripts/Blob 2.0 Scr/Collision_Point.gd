@@ -62,7 +62,9 @@ func _on_Area2D_body_entered(body):
 		update()
 		
 	if body.is_in_group("InstaKill"):
-		emit_signal("dead")
+		#print("dead")
+		#emit_signal("dead")
+		pass
 	if body.is_in_group("Door"):
 		
 		emit_signal("enter_door")

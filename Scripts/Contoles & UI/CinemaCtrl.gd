@@ -25,6 +25,7 @@ func boss_defeated():
 	camera.anim_cam.play("Zoom_Norm_Bars")
 	shield.position = center_pos.position
 	shield.appear_item()
+	boss.play("Defeated")
 	timer.start()
 	pass
 

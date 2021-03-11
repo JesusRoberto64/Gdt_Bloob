@@ -151,7 +151,8 @@ func _physics_process(delta):
 			timer.start()
 			if frame_Planc:
 				position = lerp(position,planc.findCentroid(),0.1)
-				if position.distance_to(planc.findCentroid()) <= 0.1:
+				print(position.distance_to(planc.findCentroid()))
+				if position.distance_to(planc.findCentroid()) <= 0.15:
 					frame_Planc = false
 					cinematic_off()
 			else:

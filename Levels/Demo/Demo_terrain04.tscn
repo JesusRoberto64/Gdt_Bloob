@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Enviroment/wall_purple.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Blob 2.0/SavePoint.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Prefabs/Items/Item_Dummie.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Prefabs/Blob 2.0/Cam_control.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Items/Box Spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Items/Path Item.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/Enemies/Full Enemies/Rotifera_full.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Contoles & UI/CinemaCtrl.gd" type="Script" id=7]
@@ -62,7 +61,7 @@ collision_mask = 32
 shape = SubResource( 1 )
 
 [node name="Position2D" type="Position2D" parent="CinemaCtrl"]
-position = Vector2( 1008, 8 )
+position = Vector2( 1006.94, 88.7764 )
 
 [node name="PushHazard_Ablt" parent="CinemaCtrl" instance=ExtResource( 8 )]
 position = Vector2( 2840.54, -662.08 )
@@ -79,6 +78,7 @@ curve = SubResource( 2 )
 anims/close = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="CinemaCtrl"]
+wait_time = 3.0
 one_shot = true
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -95,13 +95,6 @@ __meta__ = {
 [node name="SavePoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 13192.8, 10176.5 )
 
-[node name="Item_Dummie" parent="." instance=ExtResource( 3 )]
-position = Vector2( 17218.4, 9814.5 )
-item = "cinema_boss"
-
-[node name="Cam_control" parent="Item_Dummie" instance=ExtResource( 4 )]
-anim_string = "LevelsDemo_boss_intro"
-
 [node name="Path Item" parent="." instance=ExtResource( 5 )]
 
 [node name="Path2D" parent="Path Item" index="0"]
@@ -113,7 +106,14 @@ position = Vector2( 15606.3, 10074.5 )
 [node name="Path2D" parent="Boss" instance=ExtResource( 6 )]
 
 [node name="PathFollow2D" parent="Boss/Path2D" index="2"]
-position = Vector2( 726.485, 26.0274 )
+position = Vector2( 726.485, 26.0269 )
+offset = 0.0
+
+[node name="Rotifera" parent="Boss/Path2D/PathFollow2D" index="0"]
+health = 1
+
+[node name="Box Spawner" parent="." instance=ExtResource( 3 )]
+position = Vector2( 15200.2, 10856.9 )
 [connection signal="body_entered" from="CinemaCtrl/Area2D" to="CinemaCtrl" method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="CinemaCtrl/Timer" to="CinemaCtrl" method="back_control"]
 [connection signal="defeated" from="Boss/Path2D/PathFollow2D/Rotifera" to="CinemaCtrl" method="boss_defeated"]

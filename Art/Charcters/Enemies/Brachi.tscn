@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Art/Charcters/Enemies/Raw assets/centermat.material" type="Material" id=1]
 [ext_resource path="res://Art/Charcters/Enemies/Raw assets/bodymat.material" type="Material" id=2]
@@ -250,6 +250,9 @@ tracks/6/imported = true
 tracks/6/enabled = true
 tracks/6/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 2.93874e-39, 8.95163e-17, 1, 1, 1, 1, 1.25, 1, 0, 0, 0, 0, 2.93874e-39, 8.95163e-17, 1, 1, 1, 1 )
 
+[sub_resource type="Animation" id=9]
+resource_name = "taunt"
+
 [node name="Brachi" type="Spatial"]
 
 [node name="Armature" type="Spatial" parent="."]
@@ -317,6 +320,7 @@ playback_default_blend_time = 0.1
 anims/attack_loop = SubResource( 6 )
 anims/patrol_loop = SubResource( 7 )
 anims/prepare = SubResource( 8 )
+anims/taunt = SubResource( 9 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.997445, 0.0714452, 0, -0.0714452, 0.997445, 0, 1.28215, 2.43557 )

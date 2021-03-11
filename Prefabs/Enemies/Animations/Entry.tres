@@ -40,9 +40,15 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 10.1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 4.3, 6.3, 10.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "taunt_anim"
+}, {
+"args": [  ],
+"method": "patrol_anim"
+}, {
 "args": [  ],
 "method": "puppet_mode_off"
 } ]
