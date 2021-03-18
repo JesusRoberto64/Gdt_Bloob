@@ -88,16 +88,12 @@ func Move(delta):
 		elif movement_Type == Movement_Type.OUTSIDE:
 			#Move to Outside
 			pos = startPosition
-			
-		
-		if !is_rotating:
-			MoveInsideOutside(pos, delta)
-		else:
-			rotating(to_rotate)
-			print("is rotating")
 			pass
 		
-
+		
+		MoveInsideOutside(pos, delta)
+		
+	
 func MoveInsideOutside(var pos, delta):
 	#If it hasn't reached its destination, move towards it
 	if self.global_position.distance_to(pos.get_global_position()) > 5:
@@ -128,13 +124,13 @@ func MoveInsideOutside(var pos, delta):
 			#facing = Vector2.ZERO
 			#base.set_rotation_degrees(lerp(base.rotation_degrees,0.0,delta))
 			dummie.position = Vector2.ZERO
-			#base.set_rotation_degrees(0.0)
+			base.set_rotation_degrees(0.0)
 			self.set_position(Vector2(100,0))
 			anim_mesh.play("patrol_loop")
 			
-			#if moveTimer.is_stopped():
-			#	moveTimer.start()
-			#	pass
+			if moveTimer.is_stopped():
+				moveTimer.start()
+				pass
 
 func PullActtion():
 	#This function is done when the boss enemy is on the center of the stage and starts pulling the player and hazards towards it
@@ -195,24 +191,16 @@ func ChangeDirection(var moveType):
 	movement_Type = moveType
 	match movement_Type:
 		Movement_Type.CLOCKWISE:
-			is_rotating =true
-			to_rotate = 0.0
-			#base.rotation_degrees = 0.0 
-			#self.set_scale(Vector2(1,1))
+			base.rotation_degrees = 0.0 
+			
 			kBody.set_collision_mask_bit ( 7, true ) 
 			colArea.set_collision_mask_bit ( 7, true ) 
 			kBody.set_collision_mask_bit ( 4, false ) #Cannot detect nor hit hazards 
 			colArea.set_collision_mask_bit ( 4, false )
 			moveSpeed = abs(moveSpeed)
-			
-			
 		Movement_Type.ANTICLOCKWISE:
+			base.rotation_degrees = -180
 			
-			is_rotating =true
-			to_rotate = -180.0
-			
-			#base.rotation_degrees = -180
-			#self.set_scale(Vector2(-1,1))
 			kBody.set_collision_mask_bit ( 7, true ) 
 			colArea.set_collision_mask_bit ( 7, true )
 			kBody.set_collision_mask_bit ( 4, false ) 
@@ -221,9 +209,6 @@ func ChangeDirection(var moveType):
 			
 			
 		Movement_Type.INSIDE:
-			
-			
-			
 			moveSpeed = abs(moveSpeed)
 			kBody.set_collision_mask_bit ( 7, false ) #The enemy cannot hit the boxes
 			colArea.set_collision_mask_bit ( 7, false ) #The enemy cannot detect the boxes
