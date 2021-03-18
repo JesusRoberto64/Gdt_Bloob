@@ -72,6 +72,7 @@ func _process(delta):
 	if Input.is_action_pressed("ui_right") || Input.is_action_pressed("ui_left"):
 		if state == CAM_STATE.CINEMATIC or state == CAM_STATE.ONFRAME or state == CAM_STATE.START:
 			return
+		
 		timer.start()
 		can_move = true
 	else:
@@ -147,14 +148,17 @@ func _physics_process(delta):
 			pass
 		CAM_STATE.ONFRAME:
 			offset_h = 0.0
+			planc.cur_state = planc.STATE.PUPPET
 			
 			timer.start()
 			if frame_Planc:
 				position = lerp(position,planc.findCentroid(),0.1)
-				print(position.distance_to(planc.findCentroid()))
+				#print(position.distance_to(planc.findCentroid()))
+				
 				if position.distance_to(planc.findCentroid()) <= 0.15:
 					frame_Planc = false
 					cinematic_off()
+					
 			else:
 				global_position = lerp(global_position,move_Point,0.1)
 			

@@ -18,7 +18,8 @@ func movement(move_accel,delta,move_vec,velocity,drag,gravity):
 			_movement = move_accel*delta*move_vec - velocity * Vector2(drag,drag) + gravity
 			pass
 		STATE.HURT:
-			_movement = Vector2.ZERO
+			_movement = Vector2.ZERO - velocity * Vector2(drag,drag) + gravity
+			
 			pass
 		STATE.PUPPET:
 			_movement = move_accel*delta*Vector2.ZERO - velocity * Vector2(drag,drag) + gravity
@@ -27,6 +28,5 @@ func movement(move_accel,delta,move_vec,velocity,drag,gravity):
 		STATE.DYING:
 			_movement = move_accel*delta*Vector2.ZERO - velocity * Vector2(drag,drag) + gravity
 			pass
-	
 	return _movement
 	pass

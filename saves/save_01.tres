@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource( 1 )
-player_pos = Vector2( 13141.7, 10191.8 )
-hours = 385.401
+player_pos = Vector2( 13139.7, 10173.7 )
+hours = 453.578
 Asteros_limit = 41
-red_Shield = true
+red_Shield = false
 first_Time = false
 Demo_data = {
 "1_Door_open": false,

@@ -15,9 +15,9 @@ func _ready():
 	pass
 
 func _process(delta):
-	if Input.is_action_just_released("Save"):
-		save_status()
-		pass
+#	if Input.is_action_just_released("Save"):
+#		save_status()
+#		pass
 	
 	play_time += delta
 	

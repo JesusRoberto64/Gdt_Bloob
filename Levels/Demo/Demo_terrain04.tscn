@@ -13,7 +13,7 @@ radius = 163.0
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -199.6, 4.33008, 0, 0, 0, 0, -199.6, 34.3301 )
+"points": PoolVector2Array( 0, 0, 0, 0, -199.6, 4.33008, 0, 0, 0, 0, -199.6, 34.3301, 0, 0, 0, 0, 475.664, -207.924 )
 }
 
 [sub_resource type="Animation" id=3]
@@ -110,6 +110,9 @@ position = Vector2( 726.485, 26.0269 )
 offset = 0.0
 
 [node name="Rotifera" parent="Boss/Path2D/PathFollow2D" index="0"]
+moveTime = 5
+pullTime = 5
+playerPullForce = 5
 health = 1
 
 [node name="Box Spawner" parent="." instance=ExtResource( 3 )]

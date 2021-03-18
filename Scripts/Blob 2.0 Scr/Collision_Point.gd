@@ -59,7 +59,8 @@ func _on_Area2D_body_entered(body):
 		emit_signal("hurt")
 		is_hurt = true
 		timer.start()
-		update()
+		
+		#update()
 		
 	if body.is_in_group("InstaKill"):
 		#print("dead")
@@ -84,5 +85,18 @@ func _draw():
 
 func _on_Timer_timeout():
 	is_hurt = false
-	update()
+	#update()
 	pass # Replace with function body.
+
+func disable_Coll():
+	area.set_collision_mask_bit(4, false)
+	area.set_collision_mask_bit(9, false)
+	set_collision_mask_bit(4, false)
+	set_collision_mask_bit(9, false)
+	pass
+
+func enable_Coll():
+	set_collision_mask_bit(4, true)
+	set_collision_mask_bit(9, true)
+	pass
+

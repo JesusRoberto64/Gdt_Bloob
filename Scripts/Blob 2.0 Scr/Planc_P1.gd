@@ -428,18 +428,19 @@ func hurt():
 		set_visible(false)
 		cur_state = STATE.DYING
 	shink()
-	shink()
-	shink()
 	#shink()
-	
+	#shink()
+	#shink()
+	#for i in blob:
+	#	i.disable_Coll()
+	#	pass
 	State_timer.start()
 
 func _on_StateTimer_timeout():
 	if cur_state == STATE.DYING:
 		return
 	cur_state = STATE.MOVING
-	
-	pass # Replace with function body.
+	pass 
 
 func enter_door():
 	emit_signal("door")

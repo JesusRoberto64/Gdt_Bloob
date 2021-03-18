@@ -8,7 +8,7 @@ onready var spr_pause = $Labels
 var is_saving = false
 #game Feel 
 var is_hurted = false
-const hurted_time_max = 0.1
+const hurted_time_max = 0.15
 var hurted_time = 0.0
 
 func _ready():

@@ -27,6 +27,7 @@ func boss_defeated():
 	shield.appear_item()
 	boss.play("Defeated")
 	timer.start()
+	
 	pass
 
 func back_control():
