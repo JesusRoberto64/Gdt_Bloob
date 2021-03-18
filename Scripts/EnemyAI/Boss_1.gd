@@ -40,7 +40,7 @@ signal defeated
 onready var anim_mesh = $"Base/Kinematic Body/Viewport".find_node("AnimationPlayer")
 
 # brute force facing 
-var facing = Vector2.ZERO
+
 onready var dummie: Position2D = $Dummie
 var is_rotating: bool = false
 var to_rotate: float = 0.0
@@ -53,7 +53,7 @@ func _ready():
 	else:
 		startPosition.set_position( points.curve.get_point_position(0))
 	
-	ChangeDirection(movement_Type)
+	#ChangeDirection(movement_Type)
 	player = get_tree().get_nodes_in_group("Player")[0]
 	moveTimer.set_wait_time(moveTime)
 	pullTimer.set_wait_time(pullTime)
@@ -78,8 +78,15 @@ func Move(delta):
 	if movement_Type == Movement_Type.CLOCKWISE or movement_Type == Movement_Type.ANTICLOCKWISE:
 		#Circular Movement
 		if !isStuned:
-			
 			follow.set_offset(follow.get_offset() + moveSpeed*delta)
+		else:
+			base.rotation_degrees = lerp(base.rotation_degrees,to_rotate,delta*3.5)
+			
+			if abs(base.rotation_degrees - to_rotate) <= 0.01:
+				isStuned = false
+				moveTimer.set_paused(false)
+			pass
+		
 	else:
 		var pos
 		if movement_Type == Movement_Type.INSIDE:
@@ -95,12 +102,15 @@ func Move(delta):
 		
 	
 func MoveInsideOutside(var pos, delta):
+	
+	
 	#If it hasn't reached its destination, move towards it
 	if self.global_position.distance_to(pos.get_global_position()) > 5:
 		
 		dummie.global_position = lerp(dummie.global_position,pos.get_global_position(),delta)#implented facing brute force
 		base.look_at(dummie.global_position)
 		#base.look_at(pos.get_global_position())
+		
 		var direction = self.global_position.direction_to(pos.get_global_position())
 		self.global_translate(direction * moveSpeed/2*delta)
 	else: #If it has reached
@@ -109,8 +119,8 @@ func MoveInsideOutside(var pos, delta):
 			colArea.set_collision_mask_bit ( 4, true )
 			
 			dummie.global_position = lerp(dummie.global_position,player.get_global_position(),delta)#implented facing brute force
-			
 			base.look_at(dummie.global_position)
+			
 			PullActtion()
 			if pullTimer.is_stopped():
 				kBody.add_to_group("InstaKill")
@@ -118,19 +128,18 @@ func MoveInsideOutside(var pos, delta):
 				pass
 		elif movement_Type == Movement_Type.OUTSIDE: #Orbit
 			
-			
 			ChangeDirection(Movement_Type.CLOCKWISE)
 			follow.set_offset(0)
-			#facing = Vector2.ZERO
-			#base.set_rotation_degrees(lerp(base.rotation_degrees,0.0,delta))
-			dummie.position = Vector2.ZERO
+			#dummie.position = Vector2(160,0)
 			base.set_rotation_degrees(0.0)
 			self.set_position(Vector2(100,0))
-			anim_mesh.play("patrol_loop")
+			
 			
 			if moveTimer.is_stopped():
 				moveTimer.start()
+				anim_mesh.play("patrol_loop")
 				pass
+			
 
 func PullActtion():
 	#This function is done when the boss enemy is on the center of the stage and starts pulling the player and hazards towards it
@@ -146,6 +155,7 @@ func PullActtion():
 func _on_MoveTimer_timeout():
 	#Move time has finished and the boss enemy returns to center
 	ChangeDirection(Movement_Type.INSIDE)
+	#is_rotating = true
 	moveTimer.stop()
 	pass # Replace with function body.
 
@@ -161,8 +171,11 @@ func _on_CollisionArea_body_entered(body):
 		#Si choca con la caja, destruirla y cambiar de direccion
 		body.destroyOnCollision()
 		isStuned = true
-		if stunTimer.is_stopped():
-			stunTimer.start()
+		moveTimer.set_paused(true)
+		rotating()
+		#if stunTimer.is_stopped():
+			#stunTimer.start()
+		#	pass
 	if body.is_in_group("Hazard"):
 		hazardOrbs.erase(body)
 		body.queue_free()
@@ -183,31 +196,43 @@ func _on_StunedTimer_timeout():
 	elif movement_Type == Movement_Type.ANTICLOCKWISE:
 		ChangeDirection(Movement_Type.CLOCKWISE)
 	
-	isStuned = false
-	stunTimer.stop()
+	#isStuned = false
+	#stunTimer.stop()
 	pass # Replace with function body.
+
+func rotating():
+	
+	if movement_Type == Movement_Type.CLOCKWISE:
+		ChangeDirection(Movement_Type.ANTICLOCKWISE)
+	elif movement_Type == Movement_Type.ANTICLOCKWISE:
+		ChangeDirection(Movement_Type.CLOCKWISE)
+	
+	
+	pass
 
 func ChangeDirection(var moveType):
 	movement_Type = moveType
 	match movement_Type:
 		Movement_Type.CLOCKWISE:
-			base.rotation_degrees = 0.0 
-			
+			#base.rotation_degrees = 0.0 
+			to_rotate = 0.0
+			#is_rotating = true
+			dummie.position = Vector2(160,0)
 			kBody.set_collision_mask_bit ( 7, true ) 
 			colArea.set_collision_mask_bit ( 7, true ) 
 			kBody.set_collision_mask_bit ( 4, false ) #Cannot detect nor hit hazards 
 			colArea.set_collision_mask_bit ( 4, false )
 			moveSpeed = abs(moveSpeed)
 		Movement_Type.ANTICLOCKWISE:
-			base.rotation_degrees = -180
-			
+			#base.rotation_degrees = -180
+			to_rotate = -180
+			#is_rotating = true
+			dummie.position = Vector2(-160,0)
 			kBody.set_collision_mask_bit ( 7, true ) 
 			colArea.set_collision_mask_bit ( 7, true )
 			kBody.set_collision_mask_bit ( 4, false ) 
 			colArea.set_collision_mask_bit ( 4, false ) 
 			moveSpeed  = abs(moveSpeed) * -1
-			
-			
 		Movement_Type.INSIDE:
 			moveSpeed = abs(moveSpeed)
 			kBody.set_collision_mask_bit ( 7, false ) #The enemy cannot hit the boxes
@@ -215,22 +240,11 @@ func ChangeDirection(var moveType):
 			self.set_scale(Vector2(1,1))
 			pass
 		Movement_Type.OUTSIDE:
+			anim_mesh.play("patrol_loop")
 			kBody.set_collision_mask_bit ( 4, false ) 
 			colArea.set_collision_mask_bit ( 4, false )
 			kBody.remove_from_group("InstaKill")
 			pass
-
-func rotating(degres: float):
-	base.rotation_degrees = lerp(base.rotation_degrees,degres,0.1)
-	print(base.rotation_degrees," base ", degres, " rot")
-	if abs(base.rotation_degrees - degres) <= 0.01:
-		
-		if moveTimer.is_stopped():
-			moveTimer.start()
-			pass
-		is_rotating = false
-		pass
-	pass
 
 func puppet_mode():
 	# aimation dead 
