@@ -1,5 +1,5 @@
 extends Node2D
-enum Movement_Type{CLOCKWISE, ANTICLOCKWISE, INSIDE, OUTSIDE,PUPPET}
+enum Movement_Type{CLOCKWISE, ANTICLOCKWISE, INSIDE, OUTSIDE,PUPPET,FROMCENTER}
 
 onready var points = get_parent().get_parent()
 onready var follow = self.get_parent() #pathfollow2D
@@ -42,7 +42,6 @@ onready var anim_mesh = $"Base/Kinematic Body/Viewport".find_node("AnimationPlay
 # brute force facing 
 
 onready var dummie: Position2D = $Dummie
-var is_rotating: bool = false
 var to_rotate: float = 0.0
 
 func _ready():
@@ -75,14 +74,19 @@ func _physics_process(delta):
 	pass
 
 func Move(delta):
-	if movement_Type == Movement_Type.CLOCKWISE or movement_Type == Movement_Type.ANTICLOCKWISE:
+	if movement_Type == Movement_Type.CLOCKWISE or movement_Type == Movement_Type.ANTICLOCKWISE or  movement_Type == Movement_Type.FROMCENTER:
 		#Circular Movement
 		if !isStuned:
 			follow.set_offset(follow.get_offset() + moveSpeed*delta)
+			
 		else:
 			base.rotation_degrees = lerp(base.rotation_degrees,to_rotate,delta*3.5)
 			
 			if abs(base.rotation_degrees - to_rotate) <= 0.01:
+				if movement_Type == Movement_Type.FROMCENTER:
+					self.set_position(Vector2(100,0)) #====================
+					follow.set_offset(0)
+					base.rotation_degrees = 0.0
 				isStuned = false
 				moveTimer.set_paused(false)
 			pass
@@ -109,7 +113,6 @@ func MoveInsideOutside(var pos, delta):
 		
 		dummie.global_position = lerp(dummie.global_position,pos.get_global_position(),delta)#implented facing brute force
 		base.look_at(dummie.global_position)
-		#base.look_at(pos.get_global_position())
 		
 		var direction = self.global_position.direction_to(pos.get_global_position())
 		self.global_translate(direction * moveSpeed/2*delta)
@@ -128,12 +131,11 @@ func MoveInsideOutside(var pos, delta):
 				pass
 		elif movement_Type == Movement_Type.OUTSIDE: #Orbit
 			
-			ChangeDirection(Movement_Type.CLOCKWISE)
-			follow.set_offset(0)
-			#dummie.position = Vector2(160,0)
-			base.set_rotation_degrees(0.0)
-			self.set_position(Vector2(100,0))
+			ChangeDirection(Movement_Type.FROMCENTER)
 			
+			isStuned = true
+			#follow.set_offset(0)
+			#self.set_position(Vector2(100,0))
 			
 			if moveTimer.is_stopped():
 				moveTimer.start()
@@ -155,7 +157,6 @@ func PullActtion():
 func _on_MoveTimer_timeout():
 	#Move time has finished and the boss enemy returns to center
 	ChangeDirection(Movement_Type.INSIDE)
-	#is_rotating = true
 	moveTimer.stop()
 	pass # Replace with function body.
 
@@ -215,18 +216,17 @@ func ChangeDirection(var moveType):
 	match movement_Type:
 		Movement_Type.CLOCKWISE:
 			#base.rotation_degrees = 0.0 
-			to_rotate = 0.0
-			#is_rotating = true
+			
+			to_rotate = base.rotation_degrees + rad2deg(1.5708) # 180
 			dummie.position = Vector2(160,0)
 			kBody.set_collision_mask_bit ( 7, true ) 
 			colArea.set_collision_mask_bit ( 7, true ) 
 			kBody.set_collision_mask_bit ( 4, false ) #Cannot detect nor hit hazards 
 			colArea.set_collision_mask_bit ( 4, false )
-			moveSpeed = abs(moveSpeed)
+			moveSpeed = abs(moveSpeed) 
 		Movement_Type.ANTICLOCKWISE:
 			#base.rotation_degrees = -180
 			to_rotate = -180
-			#is_rotating = true
 			dummie.position = Vector2(-160,0)
 			kBody.set_collision_mask_bit ( 7, true ) 
 			colArea.set_collision_mask_bit ( 7, true )
@@ -244,6 +244,14 @@ func ChangeDirection(var moveType):
 			kBody.set_collision_mask_bit ( 4, false ) 
 			colArea.set_collision_mask_bit ( 4, false )
 			kBody.remove_from_group("InstaKill")
+			pass
+		Movement_Type.FROMCENTER:
+			to_rotate = base.rotation_degrees + rad2deg(1.5708) # 180
+			dummie.position = Vector2(160,0)
+			kBody.set_collision_mask_bit ( 7, true ) 
+			colArea.set_collision_mask_bit ( 7, true ) 
+			kBody.set_collision_mask_bit ( 4, false ) #Cannot detect nor hit hazards 
+			colArea.set_collision_mask_bit ( 4, false )
 			pass
 
 func puppet_mode():

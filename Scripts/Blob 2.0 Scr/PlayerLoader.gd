@@ -11,7 +11,7 @@ signal is_saving # this should be connceted to the Puase CTRL to see animationa
 func _ready():
 	if not load_status():
 		print("error loading in player loader")
-	
+	print(position)
 	pass
 
 func _process(delta):

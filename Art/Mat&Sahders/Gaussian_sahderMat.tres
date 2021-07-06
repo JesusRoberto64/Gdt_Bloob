@@ -3,11 +3,11 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-uniform float amt:hint_range(0.0, 3.5);
+uniform float amt:hint_range(0.0, 1.0);
 
 void fragment(){
 	
-	vec4 color = texture(SCREEN_TEXTURE,SCREEN_UV,amt);
+	vec4 color = texture(SCREEN_TEXTURE,SCREEN_UV,0.7);
 	COLOR = color;
 	
 }"

@@ -105,18 +105,17 @@ position = Vector2( 15606.3, 10074.5 )
 
 [node name="Path2D" parent="Boss" instance=ExtResource( 6 )]
 
-[node name="PathFollow2D" parent="Boss/Path2D" index="2"]
-position = Vector2( 726.485, 26.0269 )
-offset = 0.0
-
 [node name="Rotifera" parent="Boss/Path2D/PathFollow2D" index="0"]
 moveTime = 5
 pullTime = 5
 playerPullForce = 5
-health = 1
+health = 10
 
 [node name="Box Spawner" parent="." instance=ExtResource( 3 )]
 position = Vector2( 15200.2, 10856.9 )
+
+[node name="Box Spawner2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 15970.8, 10856.9 )
 [connection signal="body_entered" from="CinemaCtrl/Area2D" to="CinemaCtrl" method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="CinemaCtrl/Timer" to="CinemaCtrl" method="back_control"]
 [connection signal="defeated" from="Boss/Path2D/PathFollow2D/Rotifera" to="CinemaCtrl" method="boss_defeated"]
