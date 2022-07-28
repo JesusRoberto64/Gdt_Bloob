@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Cam_control.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/Items/Fountain.tscn" type="PackedScene" id=2]
@@ -14,7 +14,12 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 7200, 600, 0, 0, 0, 0, 7200, 210, 0, 0, 0, 0, 8010, 990, 0, 0, 0, 0, 8400, 990, 0, 0, 0, 0, 7999.51, 199.887, 0, 0, 0, 0, 9601.15, 797.204, 0, 0, 0, 0, 10199, -4.38995, 0, 0, 0, 0, 11050.4, 325.151, 0, 0, 0, 0, 12231.1, 319.158, 0, 0, 0, 0, 11284.1, 912.487, 0, 0, 0, 0, 11937.4, 972.419, 0, 0, 0, 0, 11775.6, 1200.16, 0, 0, 0, 0, 11248.2, 1451.88, 0, 0, 0, 0, 11715.7, 1529.79, 0, 0, 0, 0, 12249.1, 1529.79, 0, 0, 0, 0, 12500.8, 1529.79, 0, 0, 0, 0, 12753.8, 1686.73, 0, 0, 0, 0, 15196, 1799.97, 0, 0, 0, 0, 15605.8, 1394.18, 0, 0, 0, 0, 15597.8, 1792.4, 0, 0, 0, 0, 15807.3, 2199.34 )
 }
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 17520, 2160, 0, 0, 0, 0, 17370, 2220 )
+}
+
+[sub_resource type="DynamicFont" id=3]
 size = 100
 extra_spacing_char = 18
 font_data = ExtResource( 6 )
@@ -43,6 +48,11 @@ position = Vector2( 7000.05, 1385.83 )
 [node name="Path2D" parent="Path Item" index="0"]
 curve = SubResource( 1 )
 
+[node name="Path Item2" parent="." instance=ExtResource( 4 )]
+
+[node name="Path2D" parent="Path Item2" index="0"]
+curve = SubResource( 2 )
+
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -55,7 +65,7 @@ margin_left = 11493.2
 margin_top = 593.759
 margin_right = 11749.2
 margin_bottom = 798.759
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "EDEN"
 align = 1
 __meta__ = {
@@ -76,3 +86,4 @@ item = "Astero++_00"
 position = Vector2( 9499.26, 1893.97 )
 
 [editable path="Path Item"]
+[editable path="Path Item2"]

@@ -402,9 +402,7 @@ __meta__ = {
 
 [node name="Pause " type="CanvasLayer" parent="Screens"]
 
-[node name="Pause Ctrl" type="Control" parent="Screens/Pause " groups=[
-"Pause",
-]]
+[node name="Pause Ctrl" type="Control" parent="Screens/Pause " groups=["Pause"]]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -594,8 +592,8 @@ stream = ExtResource( 21 )
 volume_db = -31.515
 autoplay = true
 
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran"]
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
 [connection signal="focus_Cam" from="PlayerHolder/Planc_P1" to="Screens/ParallaxBackground/Gaussian" method="focus"]
 [connection signal="body_entered" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_entered"]
 [connection signal="body_exited" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_exited"]

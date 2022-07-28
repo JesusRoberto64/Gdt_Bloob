@@ -44,12 +44,12 @@ func _physics_process(_delta):
 	pass
 
 func _on_Area2D_body_entered(body):
+	
 	if body.is_in_group("Health"):
 		body.queue_free()
 		emit_signal("area_size",body)
 	
 	if body.is_in_group("Hazard"):
-		
 		if can_push and body.is_in_group("Push"):
 			body.call_deferred("set_mode",0)
 			body.update()

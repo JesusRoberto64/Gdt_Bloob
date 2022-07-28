@@ -13,7 +13,7 @@ Demo_data = {
 "1_Door_open": false,
 "2_Door_open": false,
 "Astero++_00": false,
-"Astero++_01": true,
+"Astero++_01": false,
 "Boss_defeated": false,
 "cinema_boss": false,
 "cinema_boss_defeted": true,

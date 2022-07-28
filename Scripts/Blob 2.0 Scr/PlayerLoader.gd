@@ -62,7 +62,6 @@ func load_status():
 	if not verify_save(status_save):
 		return false
 	
-	
 	if !status_save.first_Time:
 		position = status_save.player_pos
 		Vars.can_save = false

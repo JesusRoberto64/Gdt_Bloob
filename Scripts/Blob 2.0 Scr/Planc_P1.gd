@@ -1,6 +1,8 @@
 extends Node2D
 ##CODE BASE UNDER THE LICENSE
 ## MIT Copyright (c) 2020 Lynext
+##You can check out the original code on https://github.com/Lynext/GodotSoftBody2D/blob/master/Scripts/Slime.gd
+
 
 #STATE MACHINE
 enum STATE {IDLE, MOVING, PUPPET, HURT, DYING}
