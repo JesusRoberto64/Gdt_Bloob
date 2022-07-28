@@ -1,7 +1,7 @@
 extends Node2D
 ##CODE BASE UNDER THE LICENSE
 ## MIT Copyright (c) 2020 Lynext
-## 
+##You can check out the original code on https://github.com/Lynext/GodotSoftBody2D/blob/master/Scripts/Slime.gd
 
 
 #STATE MACHINE
@@ -73,7 +73,6 @@ onready var area_enemies = $Area2D
 var is_uv_set = false
 
 #Game Feel 
-
 onready var hurt_pause = get_tree().get_nodes_in_group("Pause")[0]
 
 # focus cam 
@@ -103,9 +102,6 @@ func _ready():
 	
 	# debugger abilities
 	#unlock_ability("push_Hazard")
-	
-	
-	
 	pass 
 
 func findCentroid():
@@ -234,10 +230,8 @@ func _process(_delta):
 		pass
 	# enemies detection 
 	area_enemies.position = findCentroid()
-	#print(area_enemies.position)
-	#print(position, "deberia")
-	#SHIRNK MECNIC  ================
 	
+	#SHIRNK MECNIC  ================
 	move_accel = 900
 	if Input.is_action_pressed("shrink"):
 		if is_Turbo:
@@ -332,8 +326,6 @@ func _physics_process(delta):
 			acumulatedDisplacements[i] = 0
 			pass
 		pass
-	
-	
 	updateSprite()
 	update()
 	pass
@@ -369,7 +361,6 @@ func vec_movement(move_vec):
 	pass
 
 func shink():
-	
 	if radius < min_asteros+1:
 		#print("regreso")
 		#print(radius, "en return")
@@ -439,18 +430,19 @@ func hurt():
 		set_visible(false)
 		cur_state = STATE.DYING
 	shink()
-	shink()
-	shink()
 	#shink()
-	
+	#shink()
+	#shink()
+	#for i in blob:
+	#	i.disable_Coll()
+	#	pass
 	State_timer.start()
 
 func _on_StateTimer_timeout():
 	if cur_state == STATE.DYING:
 		return
 	cur_state = STATE.MOVING
-	
-	pass # Replace with function body.
+	pass 
 
 func enter_door():
 	emit_signal("door")

@@ -75,5 +75,6 @@ visible = false
 modulate = Color( 0.670588, 0.807843, 0.835294, 1 )
 material = SubResource( 5 )
 texture = ExtResource( 2 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="lifeTimer" to="." method="_on_lifeTimer_timeout"]

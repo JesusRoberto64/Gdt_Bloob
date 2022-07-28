@@ -44,24 +44,28 @@ func _physics_process(_delta):
 	pass
 
 func _on_Area2D_body_entered(body):
+	
 	if body.is_in_group("Health"):
 		body.queue_free()
 		emit_signal("area_size",body)
 	
 	if body.is_in_group("Hazard"):
-		#print("Touched Hazard")
-		emit_signal("hurt")
-		is_hurt = true
-		timer.start()
-		update()
-		#body.mode = 0 # kinematic
 		if can_push and body.is_in_group("Push"):
 			body.call_deferred("set_mode",0)
 			body.update()
 			body.life_timer.start()
-		pass
+			return
+		
+		emit_signal("hurt")
+		is_hurt = true
+		timer.start()
+		
+		#update()
+		
 	if body.is_in_group("InstaKill"):
-		emit_signal("dead")
+		#print("dead")
+		#emit_signal("dead")
+		pass
 	if body.is_in_group("Door"):
 		
 		emit_signal("enter_door")
@@ -81,5 +85,18 @@ func _draw():
 
 func _on_Timer_timeout():
 	is_hurt = false
-	update()
+	#update()
 	pass # Replace with function body.
+
+func disable_Coll():
+	area.set_collision_mask_bit(4, false)
+	area.set_collision_mask_bit(9, false)
+	set_collision_mask_bit(4, false)
+	set_collision_mask_bit(9, false)
+	pass
+
+func enable_Coll():
+	set_collision_mask_bit(4, true)
+	set_collision_mask_bit(9, true)
+	pass
+

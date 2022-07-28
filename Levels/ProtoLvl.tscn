@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Prefabs/Blob 2.0/Planc_P1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enviroment/SceneManager.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://Enviroment/wall_purple.tres" type="TileSet" id=12]
 [ext_resource path="res://Scripts/Blob 2.0 Scr/Gaussian.gd" type="Script" id=14]
 [ext_resource path="res://Prefabs/Items/Gate&Key.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Prefabs/Blob 2.0/PushHazard_Ablt.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Prefabs/Items/Door .tscn" type="PackedScene" id=17]
 [ext_resource path="res://Art/UI & Menus/button_ESC.png" type="Texture" id=18]
 [ext_resource path="res://Art/UI & Menus/button_Restart.png" type="Texture" id=19]
@@ -234,7 +233,7 @@ _data = {
 [node name="ProtoLvl" type="Node2D"]
 
 [node name="PlayerHolder" type="Node2D" parent="."]
-position = Vector2( 17654.1, 2092.79 )
+position = Vector2( 17669.1, 1905 )
 script = ExtResource( 23 )
 __meta__ = {
 "_edit_group_": true
@@ -314,6 +313,7 @@ polygon = PoolVector2Array( 2625, 2816, 2624, 2912, 2112, 2912, 2144, 2816 )
 curve = SubResource( 5 )
 
 [node name="Wall_poly4" parent="WallsPolygon" instance=ExtResource( 8 )]
+position = Vector2( 0, 16.9514 )
 is_curved = true
 
 [node name="CollisionPolygon2D" parent="WallsPolygon/Wall_poly4" index="0"]
@@ -335,6 +335,7 @@ curve = SubResource( 7 )
 [node name="tilesLayers" type="Node2D" parent="."]
 
 [node name="Walls" type="TileMap" parent="tilesLayers"]
+visible = false
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 200, 200 )
 compatibility_mode = true
@@ -343,6 +344,7 @@ format = 1
 tile_data = PoolIntArray( 65539, 7, 0, 131075, 7, 0, 2424842, 1, 0, 2424843, 1, 0, 2490378, 7, 0, 2490379, 7, 0, 2555914, 12, 0, 2555915, -1610612724, 0, 2621450, -1073741812, 0, 2621451, 1610612748, 0 )
 
 [node name="Walls2" type="TileMap" parent="tilesLayers"]
+visible = false
 tile_set = ExtResource( 12 )
 cell_size = Vector2( 200, 200 )
 compatibility_mode = true
@@ -400,9 +402,7 @@ __meta__ = {
 
 [node name="Pause " type="CanvasLayer" parent="Screens"]
 
-[node name="Pause Ctrl" type="Control" parent="Screens/Pause " groups=[
-"Pause",
-]]
+[node name="Pause Ctrl" type="Control" parent="Screens/Pause " groups=["Pause"]]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -521,9 +521,6 @@ curve = SubResource( 18 )
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="PushHazard_Ablt" parent="Items" instance=ExtResource( 16 )]
-position = Vector2( 1406, 2436 )
-
 [node name="Lock&kKey" type="Node2D" parent="."]
 script = ExtResource( 27 )
 game_save_class = ExtResource( 24 )
@@ -594,8 +591,9 @@ polygon = PoolVector2Array( 51.8341, 195.599, -45.6809, 194.41, -44.4146, -68.75
 stream = ExtResource( 21 )
 volume_db = -31.515
 autoplay = true
-[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
+
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran"]
+[connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
 [connection signal="focus_Cam" from="PlayerHolder/Planc_P1" to="Screens/ParallaxBackground/Gaussian" method="focus"]
 [connection signal="body_entered" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_entered"]
 [connection signal="body_exited" from="Zones/Demo_Loader/Detector" to="Zones/Demo_Loader" method="_on_Detector_body_exited"]
@@ -608,29 +606,16 @@ autoplay = true
 [connection signal="Transition" from="EventGame /Door " to="Screens/SceneManager" method="start_tran"]
 
 [editable path="WallsPolygon/Wall_poly3"]
-
 [editable path="WallsPolygon/Wall_poly4"]
-
 [editable path="WallsPolygon/Wall_poly5"]
-
 [editable path="Screens/SceneManager"]
-
 [editable path="Screens/SceneManager/TransitionScreen"]
-
 [editable path="boxes/Caja puzzle"]
-
 [editable path="boxes/Caja puzzle2"]
-
 [editable path="boxes/Caja puzzle5"]
-
 [editable path="Lock&kKey/KeyDown"]
-
 [editable path="Lock&kKey/Gate&Key"]
-
 [editable path="Lock&kKey/Wall_poly"]
-
 [editable path="Lock&kKey/KeyUp"]
-
 [editable path="Lock&kKey/Gate&Key2"]
-
 [editable path="Lock&kKey/Wall_poly2"]

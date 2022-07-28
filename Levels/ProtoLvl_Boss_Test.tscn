@@ -613,7 +613,7 @@ anims/dead = SubResource( 21 )
 [node name="EventGame " type="Node2D" parent="."]
 
 [node name="Door " parent="EventGame " instance=ExtResource( 17 )]
-position = Vector2( 3620.04, 6695.53 )
+position = Vector2( 3620.04, 6687.53 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -671,10 +671,6 @@ position = Vector2( 7041.66, 6694.3 )
 
 [node name="Center_Position" parent="Enemies/Path2D" index="0"]
 position = Vector2( -42.876, 5.40381 )
-
-[node name="PathFollow2D" parent="Enemies/Path2D" index="2"]
-position = Vector2( 726.485, 26.0269 )
-offset = 0.0
 
 [node name="Rotifera" parent="Enemies/Path2D/PathFollow2D" index="0"]
 position = Vector2( 0, 0 )
@@ -916,80 +912,47 @@ polygon = PoolVector2Array( 51.8341, 195.599, -45.6809, 194.41, -44.4146, -68.75
 stream = ExtResource( 21 )
 volume_db = -25.161
 autoplay = true
+
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/SceneManager" method="start_tran"]
 [connection signal="dead" from="PlayerHolder/Planc_P1" to="Screens/UIGameOver" method="show_ui"]
 [connection signal="Transition" from="EventGame /Door " to="Screens/SceneManager" method="start_tran"]
 
 [editable path="Health/Path Item"]
-
 [editable path="Health/Path Item2"]
-
 [editable path="Health/Path Item3"]
-
 [editable path="Hazard/Path Item3"]
-
 [editable path="Hazard/Path Item4"]
-
 [editable path="WallsPolygon/Wall_poly"]
-
 [editable path="WallsPolygon/Wall_poly2"]
-
 [editable path="WallsPolygon/Wall_poly3"]
-
 [editable path="WallsPolygon/Wall_poly4"]
-
 [editable path="WallsPolygon/Wall_poly5"]
-
 [editable path="WallsPolygon/Wall_poly6"]
-
 [editable path="WallsPolygon/Wall_poly7"]
-
 [editable path="WallsPolygon/Wall_poly8"]
-
 [editable path="Screens/SceneManager"]
-
 [editable path="Screens/SceneManager/TransitionScreen"]
-
 [editable path="Enemies/Navigation2D"]
-
+[editable path="Enemies/Navigation2D/Movement_Area"]
 [editable path="Enemies/Navigation2D2"]
-
 [editable path="Enemies/Navigation2D3"]
-
+[editable path="Enemies/Navigation2D3/Movement_Area"]
 [editable path="Enemies/Path2D"]
-
 [editable path="boxes/Caja2"]
-
 [editable path="boxes/Caja3"]
-
 [editable path="boxes/Caja8"]
-
 [editable path="boxes/Caja4"]
-
 [editable path="boxes/Caja5"]
-
 [editable path="boxes/Caja6"]
-
 [editable path="boxes/Caja7"]
-
 [editable path="boxes/Caja puzzle"]
-
 [editable path="boxes/Caja puzzle2"]
-
 [editable path="boxes/Caja puzzle3"]
-
 [editable path="boxes/Caja puzzle4"]
-
 [editable path="boxes/Caja puzzle5"]
-
 [editable path="Lock&kKey/KeyDown"]
-
 [editable path="Lock&kKey/Gate&Key"]
-
 [editable path="Lock&kKey/Wall_poly"]
-
 [editable path="Lock&kKey/KeyUp"]
-
 [editable path="Lock&kKey/Gate&Key2"]
-
 [editable path="Lock&kKey/Wall_poly2"]

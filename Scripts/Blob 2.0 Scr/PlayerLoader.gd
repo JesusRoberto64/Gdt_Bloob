@@ -11,13 +11,13 @@ signal is_saving # this should be connceted to the Puase CTRL to see animationa
 func _ready():
 	if not load_status():
 		print("error loading in player loader")
-	
+	print(position)
 	pass
 
 func _process(delta):
-	if Input.is_action_just_released("Save"):
-		save_status()
-		pass
+#	if Input.is_action_just_released("Save"):
+#		save_status()
+#		pass
 	
 	play_time += delta
 	
@@ -61,7 +61,6 @@ func load_status():
 	var status_save = load("res://saves/save_01.tres")
 	if not verify_save(status_save):
 		return false
-	
 	
 	if !status_save.first_Time:
 		position = status_save.player_pos

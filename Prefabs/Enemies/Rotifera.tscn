@@ -1,15 +1,73 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/EnemyAI/Boss_1.gd" type="Script" id=1]
 [ext_resource path="res://Art/Charcters/Enemies/Brachi.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Enemies/Animations/Entry.tres" type="Animation" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 30.0
+radius = 31.5321
+height = 15.7857
 
 [sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("Base/Kinematic Body/Viewport")
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="Animation" id=3]
+resource_name = "Defeated"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 348.7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.753489, 0.753489 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Texture:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 63.2396
 height = 36.5702
 
@@ -26,12 +84,16 @@ scale = Vector2( 3, 3 )
 ]]
 rotation = 1.5708
 collision_layer = 256
-collision_mask = 131
+collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Base/Kinematic Body"]
 position = Vector2( 0, 30 )
 scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Base/Kinematic Body/CollisionShape2D"]
+color = Color( 1, 0, 0, 0.623529 )
+polygon = PoolVector2Array( -25.0126, 26.7066, -31.4595, 7.36603, -30.3384, -19.2624, -16.8841, -36.9212, 2.73679, -41.1258, 23.4789, -29.9139, 31.888, -3.84616, 26.5624, 27.267, 14.2293, 38.479, 0.214394, 40.7215, -18.2853, 35.9565 )
 
 [node name="Viewport" type="Viewport" parent="Base/Kinematic Body"]
 size = Vector2( 300, 300 )
@@ -46,6 +108,13 @@ position = Vector2( 0.667604, 50.9555 )
 scale = Vector2( 0.753489, 0.753489 )
 texture = SubResource( 2 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Base/Kinematic Body" groups=[
+"AnimBoss",
+]]
+anims/Defeated = SubResource( 3 )
+anims/Entry = ExtResource( 3 )
+anims/Normal = SubResource( 4 )
+
 [node name="Area2D" type="Area2D" parent="Base"]
 rotation = 1.5708
 collision_layer = 0
@@ -55,11 +124,13 @@ collision_mask = 48
 polygon = PoolVector2Array( 0, 0, 150, -400, -150, -400 )
 
 [node name="MoveTimer" type="Timer" parent="Base"]
+one_shot = true
 
 [node name="PullTimer" type="Timer" parent="Base"]
 
 [node name="StunedTimer" type="Timer" parent="Base"]
 wait_time = 4.0
+one_shot = true
 
 [node name="CollisionArea" type="Area2D" parent="Base"]
 collision_layer = 0
@@ -68,7 +139,7 @@ collision_mask = 128
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Base/CollisionArea"]
 position = Vector2( -30, 0 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="RayCastParent" type="Node2D" parent="."]
 
@@ -77,6 +148,13 @@ rotation = -1.5708
 enabled = true
 cast_to = Vector2( 0, 600 )
 collision_mask = 34
+
+[node name="Dummie" type="Position2D" parent="."]
+position = Vector2( 160, 0 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Dummie"]
+color = Color( 0.0470588, 0.933333, 0.0196078, 1 )
+polygon = PoolVector2Array( -7, -27, 40, -5, 4, 34, -41, 24 )
 [connection signal="body_entered" from="Base/Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Base/Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="Base/MoveTimer" to="." method="_on_MoveTimer_timeout"]
